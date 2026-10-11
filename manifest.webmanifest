@@ -1,0 +1,19 @@
+{
+  "name": "KDN Social Studio",
+  "short_name": "KDN Studio",
+  "description": "Khalsa Digital World mobile control room",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#120f0c",
+  "theme_color": "#24180f",
+  "lang": "hi",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
