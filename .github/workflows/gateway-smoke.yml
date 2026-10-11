@@ -1,0 +1,51 @@
+name: KDN Gateway Smoke Tests
+on:
+  push:
+    paths:
+      - 'docs/**'
+      - '.github/workflows/gateway-smoke.yml'
+  pull_request:
+    paths:
+      - 'docs/**'
+      - '.github/workflows/gateway-smoke.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify public gateway files and essential links
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from html.parser import HTMLParser
+
+          required = ["docs/index.html", "docs/gateway.html"]
+          class Check(HTMLParser):
+              def __init__(self):
+                  super().__init__()
+                  self.links = []
+              def handle_starttag(self, tag, attrs):
+                  if tag == "a":
+                      self.links.extend(value for key, value in attrs if key == "href" and value)
+          for filename in required:
+              path = Path(filename)
+              assert path.is_file(), f"Missing {filename}"
+              data = path.read_text(encoding="utf-8")
+              assert "<html" in data.lower() and "</html>" in data.lower(), f"Invalid HTML shell: {filename}"
+              parser = Check()
+              parser.feed(data)
+              assert parser.links, f"No navigation links in {filename}"
+              print(f"PASS: {filename} ({len(parser.links)} links)")
+          gateway = Path("docs/gateway.html").read_text(encoding="utf-8")
+          for marker in ["GitHub Work Queue", "issuestatus", "buildstatus", "issues/new"]:
+              assert marker in gateway, f"Gateway feature missing: {marker}"
+          assert "Closedfalse" not in gateway, "Regression: issue count display"
+          print("PASS: Gateway core features")
+          PY
