@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - 'scripts/generate_pwa_icons.py'
+      - 'manifest.webmanifest'
 permissions:
   contents: write
 jobs:
