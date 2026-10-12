@@ -23,5 +23,7 @@ jobs:
         run: |
           node --check assets/creator.js
           node --check assets/creator-core.js
+          node --check assets/poster.js
+          node --check assets/poster-core.js
           node --check sw.js
-          node --test tests/creator.test.cjs
+          node --test tests/*.test.cjs

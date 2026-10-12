@@ -1,0 +1,14 @@
+@font-face{font-family:"KDN Devanagari";src:url("./fonts/NotoSansDevanagari.woff2") format("woff2");font-weight:100 900;font-style:normal;font-display:swap}
+@font-face{font-family:"KDN Gurmukhi";src:url("./fonts/NotoSansGurmukhi.woff2") format("woff2");font-weight:100 900;font-style:normal;font-display:swap}
+body{font-family:"KDN Devanagari","KDN Gurmukhi",system-ui,sans-serif}
+.poster-workspace{grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr)}
+.poster-controls textarea{min-height:100px}.poster-controls #headline{min-height:95px}
+.poster-preview{position:sticky;top:20px}.canvas-frame{padding:10px;background:#090807;border:1px solid #655030;border-radius:12px}
+canvas{display:block;width:100%;height:auto;border-radius:4px}.size-note{font-variant-numeric:tabular-nums}
+.photo-controls{border-top:1px solid var(--line);margin-top:22px;padding-top:3px}
+input[type="range"]{padding:0;accent-color:var(--gold);height:32px;cursor:pointer}
+input[type="file"]{font-size:13px;padding:12px 8px}#poster-status{margin:20px 0 0;min-height:46px}
+.draft-picker{border-bottom:1px solid var(--line);padding-bottom:22px;margin-bottom:22px}.draft-picker label{margin-top:0}
+.counter{display:block;text-align:right;font-size:11px;color:var(--muted);margin-top:5px}.counter.error{color:#ffcfbf}
+.quiet-link{font-size:13px}.poster-controls .two label{margin-top:18px}.poster-controls .actions{margin-top:12px}
+@media(max-width:800px){.poster-workspace{grid-template-columns:1fr}.poster-preview{position:relative;top:auto}}

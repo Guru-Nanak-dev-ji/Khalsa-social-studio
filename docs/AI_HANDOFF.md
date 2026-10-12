@@ -3,6 +3,14 @@
 Updated: 2026-10-12
 Repository: https://github.com/Guru-Nanak-dev-ji/Khalsa-social-studio
 
+## Latest milestone — v0.6 Poster Creator and app-wide Mehrab design
+- User confirms the app opens and asks to move on from the unchanged phone launcher icon. Do not troubleshoot that icon unless asked again.
+- User requests varied mehrab arches, chess pieces and playing cards across the app. Shared decorative styling now covers all ten HTML screens.
+- `poster.html` adds local photo + headline/message/credit composition, three styles, square/portrait PNG and supported manual file sharing. Copied text drafts stay intact; poster edits are temporary and must be downloaded before leaving.
+- Bundled Hindi/Punjabi fonts and text-overflow guards protect PNG output. No photo upload, cloud account or automatic publication is added.
+- Branch `feature/poster-creator-v06`, baseline `3c2a69265ba25cfa90e65adba7386c75fe806c0e`, cache v0.6.0. See `docs/POSTER_V06_HANDOFF.md` for the implemented scope, validation and phone check. Verify PR/Pages state before asserting production deployment.
+- Automated tests and canvas rendering are checked locally; Android browser layout/download/share still need device verification. Existing tools' inline scripts, FAQ data, storage keys, PWA identity/icons and native Android sources are preserved.
+
 ## Latest milestone — integrated KHALSA app icon
 - User authorized applying the English KHALSA knight/globe emblem as the app icon and blending its lettering with the logo.
 - Versioned PWA icons, favicons and app header artwork are updated; SW cache is v0.5.1. App identity and draft storage are preserved.

@@ -1,0 +1,22 @@
+/* Shared Royal Gold mehrab system. Decorative SVGs have no interactive role. */
+body[data-heritage]{--heritage-arch:url('./motifs/gateway.svg');background:radial-gradient(ellipse at 8% 0,#45321c 0,transparent 52%),radial-gradient(ellipse at 100% 55%,#281d30 0,transparent 46%),#100f0d}
+body[data-heritage="court"]{--heritage-arch:url('./motifs/court.svg')}
+body[data-heritage="gallery"],body[data-heritage="reader"]{--heritage-arch:url('./motifs/gallery.svg')}
+.heritage-banner{height:112px;width:min(100%,480px);margin:20px auto 8px;background:var(--heritage-arch) center/contain no-repeat;pointer-events:none}
+body[data-heritage] :is(.panel,.card),body[data-heritage="gateway"] main>section{border-color:#957343;border-radius:65px 65px 18px 18px;padding-top:56px;padding-bottom:58px;background:linear-gradient(145deg,#2b2217,#1b1714 55%,#251c29)}
+body[data-heritage] :is(.panel,.card):not(.poster-preview),body[data-heritage="gateway"] main>section{position:relative}
+body[data-heritage] :is(.panel,.card)::before,body[data-heritage="gateway"] main>section::before{content:"";position:absolute;top:9px;left:50%;transform:translateX(-50%);width:146px;height:36px;background:var(--heritage-arch) center/contain no-repeat;pointer-events:none}
+body[data-heritage] :is(.panel,.card)::after,body[data-heritage="gateway"] main>section::after{content:"";position:absolute;right:26px;bottom:13px;width:80px;height:31px;background:url('./motifs/chess-cards.svg') center/contain no-repeat;opacity:.75;pointer-events:none}
+body[data-heritage="court"] :is(.panel,.card){border-radius:38px 80px 18px 18px}
+body[data-heritage="gallery"] :is(.panel,.card){border-radius:80px 38px 18px 18px}
+body[data-heritage] .grid>.card:nth-child(even){border-radius:34px 70px 16px 16px;background:linear-gradient(150deg,#302039,#1b1714 70%)}
+body[data-heritage] main>header{border-radius:85px 85px 18px 18px;border-color:#bd9555;background:linear-gradient(145deg,#352617,#211928);padding-top:36px}
+body[data-heritage="reader"] .item{border-radius:28px 28px 10px 10px;border-color:#8e6c3d}
+body[data-heritage] .post-card{border-radius:90px 90px 14px 14px;border-color:#bb914c}
+.poster-nav{font-size:13px;text-align:center;margin:10px 0 22px}
+/* Compact nested FAQ cards keep their text and disclosure controls unobstructed. */
+body[data-heritage] :is(#faq-topics,#faq-real-answers) .card{padding:16px;border-radius:24px 24px 10px 10px}
+body[data-heritage] :is(#faq-topics,#faq-real-answers) .card::before,body[data-heritage] :is(#faq-topics,#faq-real-answers) .card::after{content:none}
+body[data-heritage] details.card:not([open]){padding:18px 22px;border-radius:28px}
+body[data-heritage] details.card:not([open])::before,body[data-heritage] details.card:not([open])::after{content:none}
+@media(max-width:520px){.heritage-banner{height:88px;margin-top:14px}body[data-heritage] :is(.panel,.card),body[data-heritage="gateway"] main>section{border-top-left-radius:48px;border-top-right-radius:48px;padding-top:51px;padding-bottom:54px}body[data-heritage] main>header{border-radius:60px 60px 16px 16px}.poster-nav{font-size:12px}}
