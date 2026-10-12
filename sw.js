@@ -1,8 +1,21 @@
-const CACHE="kdn-studio-v2";
-const ASSETS=["./","./index.html","./manifest.webmanifest","./icon.svg","./icon-192.png","./icon-512.png"];
-self.addEventListener("install",event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS)).then(()=>self.skipWaiting())));
-self.addEventListener("activate",event=>event.waitUntil(Promise.all([caches.keys().then(keys=>Promise.all(keys.filter(key=>key!==CACHE).map(key=>caches.delete(key)))),self.clients.claim()])));
-self.addEventListener("fetch",event=>{
-  if(event.request.method!=="GET"||new URL(event.request.url).origin!==self.location.origin)return;
-  event.respondWith(fetch(event.request).catch(()=>caches.match(event.request)));
+'use strict';
+// Scope-specific caches avoid touching other PWAs on this GitHub origin.
+const PREFIX='kdn-studio-'+new URL(self.registration.scope).pathname+'-';
+const CACHE=PREFIX+'v0.5.0';
+const ASSETS=['./','./index.html','./creator.html','./assets/creator.css','./assets/creator-core.js','./assets/creator.js','./manifest.webmanifest','./icon.svg','./icon-192.png','./icon-512.png','./icon-maskable-512.png','./docs/index.html','./docs/newsdesk.html','./docs/post-studio.html','./docs/social-connections.html'];
+const assetURLs=new Set(ASSETS.map(path=>new URL(path,self.registration.scope).href));
+self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS)).then(()=>self.skipWaiting())));
+self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key.startsWith(PREFIX)&&key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim())));
+self.addEventListener('fetch',event=>{
+  const url=new URL(event.request.url);
+  if(event.request.method!=='GET'||url.origin!==self.location.origin||!url.href.startsWith(self.registration.scope))return;
+  url.search='';url.hash='';
+  // Cache only bundled app resources, never drafts or outside/API requests.
+  if(!assetURLs.has(url.href))return;
+  event.respondWith((async()=>{
+    const cache=await caches.open(CACHE);
+    // A versioned shell keeps HTML and scripts consistent, including offline.
+    const cached=await cache.match(url.href);
+    return cached||fetch(event.request);
+  })());
 });

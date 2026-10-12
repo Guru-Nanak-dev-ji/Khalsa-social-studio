@@ -1,7 +1,20 @@
 # KDN AI HANDOFF — CONTINUE WORK
 
-Updated: 2026-10-11
+Updated: 2026-10-12
 Repository: https://github.com/Guru-Nanak-dev-ji/Khalsa-social-studio
+
+## Latest milestone — v0.5 Creator feature branch
+- Source baseline verified: `b0cfa8bcc6d731891caa44cb8cc89ee87a8002c9` (PR #4 merged).
+- User's 12 October handoff reports that the v0.4 PWA is installed and opens on Android. This is distinct from the older native Android Java app described below.
+- Existing public root, manifest, service worker and all three manifest PNG icons returned HTTP 200 during this work.
+- Added `creator.html`: Hindi/Punjabi/English text editor, local draft save/edit/search, TXT and JSON exports, additive backup restore, manual share and copy-only import of previous text drafts.
+- Root and previous tools link to the Creator. Legacy tool scripts, legacy storage keys, manifest, icons and native Android source are unchanged.
+- Offline app assets use a scope-specific versioned cache. Old unscoped v2 cache is deliberately not deleted; it can be shared with another app on the origin. Future shell edits require a version bump.
+- Development is on `feature/news-social-creator-20261012`, through a PR. Do not infer production deployment from this file. See `docs/CREATOR_V05_HANDOFF.md` and the PR status.
+- Automated data/cache/markup checks pass. Actual Android touch layout, native download/share and service-worker update behavior still require device verification.
+- A separate icon PR #5 was already open during this work; this change does not merge it or change icons.
+
+The technical notes below dated 11 October remain historical context; use the latest milestone and current repository/Pages state for new work.
 
 ## Mission
 KDN Social Studio is a free community-oriented project for Sangat participation and Khalsa Panth seva: Saath, Seva, Sahyog, Sarbat da Bhala. It is not a personal ownership claim. Formal legal stewardship and community governance are NOT yet established.
