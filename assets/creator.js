@@ -3,6 +3,7 @@
   const C=window.KDNCreator,$=id=>document.getElementById(id);
   // Every row: Hindi | Punjabi | English. Content is never auto-translated.
   const copy={
+    poster:['फोटो से PNG पोस्टर बनाएँ →','ਫੋਟੋ ਤੋਂ PNG ਪੋਸਟਰ ਬਣਾਓ →','Make a PNG photo poster →'],
     skip:['लेखक पर जाएँ','ਲੇਖਕ ਵੱਲ ਜਾਓ','Skip to editor'],home:['← Control Room','← ਕੰਟਰੋਲ ਰੂਮ','← Control Room'],
     title:['आपकी आवाज़, आपकी कलम।','ਤੁਹਾਡੀ ਆਵਾਜ਼, ਤੁਹਾਡੀ ਕਲਮ।','Your voice. Your words.'],
     subtitle:['खबर या संदेश लिखें। ड्राफ्ट सँभालें। तैयार पोस्ट साथ ले जाएँ।','ਖ਼ਬਰ ਜਾਂ ਸੁਨੇਹਾ ਲਿਖੋ। ਡਰਾਫਟ ਸੰਭਾਲੋ। ਤਿਆਰ ਪੋਸਟ ਨਾਲ ਲੈ ਜਾਓ।','Write a story or a message. Save your drafts. Take your post with you.'],

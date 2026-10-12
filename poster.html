@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="hi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#24180f">
+  <meta name="description" content="Make a Royal Gold news or social poster with your photo. Export PNG on your device.">
+  <title>Poster Creator · KDN Studio</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./icons/khalsa-v1-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="./icons/khalsa-v1-180.png" sizes="180x180">
+  <link rel="stylesheet" href="./assets/creator.css">
+  <link rel="stylesheet" href="./assets/poster.css">
+  <script defer src="./assets/creator-core.js"></script>
+  <script defer src="./assets/poster-core.js"></script>
+  <script defer src="./assets/poster.js"></script>
+<link rel="stylesheet" href="./assets/heritage.css"></head>
+<body data-heritage="gallery">
+<a class="skip" href="#poster-editor" data-i18n="skip">पोस्टर पर जाएँ</a>
+<div class="wrap">
+  <header class="masthead">
+    <a class="brand" href="./index.html"><img src="./icons/khalsa-v1-192.png" alt="KHALSA" width="52" height="52"><span>KDN STUDIO<small>KHALSA DIGITAL WORLD</small></span></a>
+    <a href="./creator.html" data-i18n="writer">← टेक्स्ट Creator</a>
+  </header>
+  <main><div class="heritage-banner" aria-hidden="true"></div>
+    <div class="intro">
+      <div><p class="eyebrow">POSTER CREATOR · v0.6</p><h1 data-i18n="title">शब्दों को तस्वीर बनाइए।</h1><p class="sub" data-i18n="subtitle">आपकी फोटो, आपकी खबर — Royal Gold पोस्टर में।</p></div>
+      <div class="language"><label for="language" data-i18n="language">भाषा / Language</label><select id="language"><option value="hi">हिंदी</option><option value="pa">ਪੰਜਾਬੀ</option><option value="en">English</option></select><small data-i18n="languageNote">भाषा बदलने से आपका लिखा अनुवाद नहीं होता।</small></div>
+    </div>
+    <p class="notice" id="notice" role="status" aria-live="polite"></p>
+    <div class="workspace poster-workspace">
+      <section class="panel poster-controls" id="poster-editor" aria-labelledby="editor-title">
+        <div class="section-head"><h2 id="editor-title" data-i18n="editor">01 · पोस्टर तैयार करें</h2><span class="badge">ROYAL GOLD</span></div>
+        <div class="draft-picker">
+          <label for="draft-select" data-i18n="draftLabel">सेव किए टेक्स्ट ड्राफ्ट से शुरू करें</label><select id="draft-select"></select>
+          <div class="actions"><button type="button" id="use-draft" data-i18n="useDraft">ड्राफ्ट की कॉपी लें</button><button type="button" id="refresh-drafts" data-i18n="refresh">सूची अपडेट करें</button></div>
+          <small data-i18n="draftNote">या नीचे सीधे लिखें। मूल ड्राफ्ट में बदलाव नहीं होगा।</small>
+        </div>
+        <label for="format" data-i18n="format">पोस्टर का आकार</label><select id="format"><option value="square" data-i18n="square">Square · 1080 × 1080</option><option value="portrait" data-i18n="portrait">Portrait · 1080 × 1350</option></select>
+        <label for="style" data-i18n="style">मेहराब का अंदाज़</label><select id="style"><option value="royal" data-i18n="royal">शाही मेहराब</option><option value="court" data-i18n="court">शतरंज दरबार</option><option value="cards" data-i18n="cards">पत्तों की मेहराब</option></select>
+        <label for="headline" data-i18n="headline">शीर्षक</label><textarea id="headline" rows="2" maxlength="140" aria-describedby="headline-count" required></textarea><span class="counter" id="headline-count"></span>
+        <label for="detail" data-i18n="detail">छोटा संदेश (वैकल्पिक)</label><textarea id="detail" rows="4" maxlength="420" aria-describedby="detail-count"></textarea><span class="counter" id="detail-count"></span>
+        <label for="credit" data-i18n="credit">स्रोत / फोटो क्रेडिट (वैकल्पिक)</label><input id="credit" maxlength="100" autocomplete="off" aria-describedby="credit-count"><span class="counter" id="credit-count"></span>
+        <div class="photo-controls">
+          <label for="photo" data-i18n="photo">अपनी फोटो चुनें (वैकल्पिक)</label><input id="photo" type="file" accept="image/jpeg,image/png,image/webp" aria-describedby="photo-note">
+          <small id="photo-note" data-i18n="photoNote">JPG, PNG या WebP · अधिकतम 12 MB। फोटो आपके डिवाइस पर ही रहती है।</small>
+          <div id="crop-controls" hidden><label for="focus-x" data-i18n="horizontal">फोटो में जगह चुनें — बाएँ / दाएँ</label><input id="focus-x" type="range" min="0" max="100" value="50"><label for="focus-y" data-i18n="vertical">फोटो में जगह चुनें — ऊपर / नीचे</label><input id="focus-y" type="range" min="0" max="100" value="50"><button type="button" id="remove-photo" data-i18n="removePhoto">फोटो हटाएँ</button></div>
+        </div>
+        <p class="fine" data-i18n="temporary">पोस्टर इस खुली स्क्रीन तक रहता है। जाने से पहले PNG डाउनलोड करें। सेव किए टेक्स्ट ड्राफ्ट Creator में रहते हैं।</p>
+      </section>
+      <section class="panel poster-preview" aria-labelledby="preview-title">
+        <div class="section-head"><h2 id="preview-title" data-i18n="preview">02 · पोस्टर देखें</h2><span class="badge size-note" id="dimensions">1080 × 1080</span></div>
+        <div class="canvas-frame"><canvas id="poster-canvas" width="1080" height="1080" role="img" aria-label="Poster preview"></canvas></div>
+        <p class="notice" id="poster-status" role="status" aria-live="polite"></p>
+        <div class="actions"><button type="button" class="primary" id="download-png" disabled data-i18n="download">PNG डाउनलोड करें</button><button type="button" id="share-png" disabled data-i18n="share">PNG Share</button></div>
+        <small data-i18n="previewNote">प्रिव्यू और डाउनलोड में एक ही डिज़ाइन है। Share menu में अगला कदम आप चुनते हैं।</small>
+        <div id="download-fallback" hidden><a id="open-png" target="_blank" rel="noopener" data-i18n="openImage">PNG खोलें / सेव करें →</a><p class="fine" data-i18n="downloadHelp">डाउनलोड न दिखे तो चित्र खोलकर उसे दबाएँ और Save image चुनें।</p></div>
+        <div class="actions"><button type="button" id="reset" data-i18n="reset">नया पोस्टर</button><button type="button" id="retry-fonts" hidden data-i18n="retry">फ़ॉन्ट फिर लोड करें</button></div>
+      </section>
+    </div>
+  </main>
+  <footer>KDN Social Studio · <span data-i18n="footer">साथ • सेवा • सहयोग</span></footer>
+</div>
+<noscript>पोस्टर बनाने के लिए JavaScript चालू करें। Enable JavaScript to create a poster.</noscript>
+</body>
+</html>
