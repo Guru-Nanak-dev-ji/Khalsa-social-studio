@@ -20,3 +20,7 @@ body[data-heritage] :is(#faq-topics,#faq-real-answers) .card::before,body[data-h
 body[data-heritage] details.card:not([open]){padding:18px 22px;border-radius:28px}
 body[data-heritage] details.card:not([open])::before,body[data-heritage] details.card:not([open])::after{content:none}
 @media(max-width:520px){.heritage-banner{height:88px;margin-top:14px}body[data-heritage] :is(.panel,.card),body[data-heritage="gateway"] main>section{border-top-left-radius:48px;border-top-right-radius:48px;padding-top:51px;padding-bottom:54px}body[data-heritage] main>header{border-radius:60px 60px 16px 16px}.poster-nav{font-size:12px}}
+/* A light decorative baaz crosses every reading/tool screen; never covers controls. */
+body[data-heritage]:not([data-heritage="immersive"])::after{content:'';position:fixed;top:15%;left:-120px;width:100px;height:45px;background:url('./motifs/baaz.svg') center/contain no-repeat;pointer-events:none;z-index:1;opacity:.35;animation:heritage-baaz 38s linear infinite}
+@keyframes heritage-baaz{0%{transform:translateX(-120px) translateY(10px)}45%{transform:translateX(50vw) translateY(-25px)}100%{transform:translateX(120vw) translateY(20px)}}
+@media(prefers-reduced-motion:reduce){body[data-heritage]:not([data-heritage="immersive"])::after{animation:none;left:auto;right:14px;top:14px;opacity:.2;width:55px}}

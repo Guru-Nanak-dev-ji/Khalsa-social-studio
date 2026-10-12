@@ -47,3 +47,9 @@ These additions do not activate public accounts, authentication, a multiuser fee
 ## Duality opening — v0.9
 
 The root now opens a slow rotating yin–yang and two internal, symbolic mehrab doors: **4you.world** and **not4you.world**. Twenty-five Hindi reflection questions branch by answer, with transparent practice points, six-answer breaks, undo, restart, reduced motion and direct access to Studio. Both paths encourage constructive reflection and equal participation. Responses stay in page memory only. These are authored questions and local game rules, not live AI evaluation, an honesty test, money or My Neta votes. [Behavior and release handoff](docs/DUALITY_V09_HANDOFF.md).
+
+## Immersive opening — v0.10
+
+[Enter the five-gate world](world.html). One viewport contains a large animated yin–yang, two perspective doors, camera-like entry, flying baaz and an illuminated KDN start. Four-choice reflection gates lead through the full voluntary pledge, a five-part introduction and a minimal profile into a local Game of Takhats demo.
+
+Fifteen knowledge/practice questions include a pauseable 30-second timer, opt-in sounds, 50:50, clearly labeled prepared hints and demo audience votes. Positive/negative quiz points and accuracy percentages are separate from equal participation. Step events and visible active-hour events introduce more questions. A ₹125/hour demo calculation is not earnings. Optional consented aliases, self-ratings, work intentions and opt-in local progress are included. [Scope, validation and pending work](docs/WORLD_V010_HANDOFF.md).
