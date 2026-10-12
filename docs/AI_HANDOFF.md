@@ -3,6 +3,13 @@
 Updated: 2026-10-12
 Repository: https://github.com/Guru-Nanak-dev-ji/Khalsa-social-studio
 
+## Latest milestone — integrated KHALSA app icon
+- User authorized applying the English KHALSA knight/globe emblem as the app icon and blending its lettering with the logo.
+- Versioned PWA icons, favicons and app header artwork are updated; SW cache is v0.5.1. App identity and draft storage are preserved.
+- The old icon-generator workflow is now read-only validation to prevent overwriting the selected artwork.
+- See `docs/KHALSA_ICON_HANDOFF.md`. Check the PR/Pages run for deployment status; phone launcher refresh is not remotely verified.
+- The Creator PR #6 was merged and deployed as `10b4aba57876ec6d9b25f0325a8f68726e5bffb6`; root, Creator, scripts, stylesheet and SW returned HTTP 200 and matched the merged source.
+
 ## Latest milestone — v0.5 Creator feature branch
 - Source baseline verified: `b0cfa8bcc6d731891caa44cb8cc89ee87a8002c9` (PR #4 merged).
 - User's 12 October handoff reports that the v0.4 PWA is installed and opens on Android. This is distinct from the older native Android Java app described below.

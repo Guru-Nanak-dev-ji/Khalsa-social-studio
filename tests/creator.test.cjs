@@ -78,7 +78,7 @@ test('legacy import is copy-only and repeatable with all three old storage keys'
 function swHarness(){
   const scope='https://example.org/Khalsa-social-studio/',events={},deleted=[],cached=new Map();
   let claimed=false,skipped=false,network=0;
-  const caches={keys:async()=>['other-app','kdn-studio-v2','kdn-studio-/Khalsa-social-studio/-v0.4','kdn-studio-/Khalsa-social-studio/-v0.5.0'],delete:async key=>{deleted.push(key);return true;},open:async()=>({addAll:async paths=>{for(const path of paths){assert.ok(existsSync(resolve(__dirname,'..',path==='./'?'index.html':path)));cached.set(new URL(path,scope).href,{ok:true,body:path});}},match:async url=>cached.get(url)})};
+  const caches={keys:async()=>['other-app','kdn-studio-v2','kdn-studio-/Khalsa-social-studio/-v0.4','kdn-studio-/Khalsa-social-studio/-v0.5.1'],delete:async key=>{deleted.push(key);return true;},open:async()=>({addAll:async paths=>{for(const path of paths){assert.ok(existsSync(resolve(__dirname,'..',path==='./'?'index.html':path)));cached.set(new URL(path,scope).href,{ok:true,body:path});}},match:async url=>cached.get(url)})};
   const self={registration:{scope},location:{origin:'https://example.org'},addEventListener:(name,fn)=>events[name]=fn,skipWaiting:async()=>{skipped=true;},clients:{claim:async()=>{claimed=true;}}};
   vm.runInNewContext(readFileSync(resolve(__dirname,'../sw.js'),'utf8'),{URL,Set,Promise,self,caches,fetch:async()=>{network++;throw new Error('offline');}});
   return {events,deleted,get claimed(){return claimed;},get skipped(){return skipped;},get network(){return network;}};

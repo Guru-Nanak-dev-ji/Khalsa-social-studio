@@ -1,12 +1,24 @@
-name: Generate Android PWA icons
+name: Validate KHALSA app icons
 on:
   workflow_dispatch:
   push:
     paths:
-      - 'scripts/generate_pwa_icons.py'
+      - 'scripts/*pwa_icons.py'
       - 'manifest.webmanifest'
+      - 'icons/**'
+      - 'icon-*.png'
+      - 'assets/branding/**'
+      - '.github/workflows/pwa-icons.yml'
+  pull_request:
+    paths:
+      - 'scripts/*pwa_icons.py'
+      - 'manifest.webmanifest'
+      - 'icons/**'
+      - 'icon-*.png'
+      - 'assets/branding/**'
+      - '.github/workflows/pwa-icons.yml'
 permissions:
-  contents: write
+  contents: read
 jobs:
   icons:
     runs-on: ubuntu-latest
@@ -15,12 +27,5 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Generate PNG icons
-        run: python scripts/generate_pwa_icons.py
-      - name: Commit generated icons
-        run: |
-          git add icon-192.png icon-512.png
-          if ! git diff --cached --quiet; then
-            git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Generate installable PWA PNG icons'
-            git push
-          fi
+      - name: Verify committed artwork without overwriting icons
+        run: python scripts/check_pwa_icons.py
