@@ -62,5 +62,4 @@
   window.addEventListener('pagehide',()=>{state=D.create();render(false);});
   window.addEventListener('pageshow',()=>updateMotion());
   render(false);updateMotion();
-  if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
 })();
