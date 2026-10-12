@@ -1,32 +1,21 @@
-{
-  "name": "KDN Social Studio",
-  "short_name": "KDN Studio",
-  "description": "Khalsa Digital World mobile control room",
-  "start_url": "./",
-  "scope": "./",
-  "display": "standalone",
-  "background_color": "#120f0c",
-  "theme_color": "#24180f",
-  "lang": "hi",
-  "icons": [
-    {
-      "src": "./icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "./icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "./icon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "any"
-    }
-  ],
-  "id": "./"
-}
+
+"icons": [
+  {
+    "src": "./icon-192.png",
+    "sizes": "192x192",
+    "type": "image/png",
+    "purpose": "any"
+  },
+  {
+    "src": "./icon-512.png",
+    "sizes": "512x512",
+    "type": "image/png",
+    "purpose": "any"
+  },
+  {
+    "src": "./icon-maskable-512.png",
+    "sizes": "512x512",
+    "type": "image/png",
+    "purpose": "maskable"
+  }
+]
