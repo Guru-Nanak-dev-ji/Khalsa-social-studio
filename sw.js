@@ -1,8 +1,8 @@
 'use strict';
 // Scope-specific caches avoid touching other PWAs on this GitHub origin.
 const PREFIX='kdn-studio-'+new URL(self.registration.scope).pathname+'-';
-const CACHE=PREFIX+'v0.5.0';
-const ASSETS=['./','./index.html','./creator.html','./assets/creator.css','./assets/creator-core.js','./assets/creator.js','./manifest.webmanifest','./icon.svg','./icon-192.png','./icon-512.png','./icon-maskable-512.png','./docs/index.html','./docs/newsdesk.html','./docs/post-studio.html','./docs/social-connections.html'];
+const CACHE=PREFIX+'v0.5.1';
+const ASSETS=['./','./index.html','./creator.html','./assets/creator.css','./assets/creator-core.js','./assets/creator.js','./manifest.webmanifest','./icon-192.png','./icon-512.png','./icon-maskable-512.png','./icons/khalsa-v1-32.png','./icons/khalsa-v1-48.png','./icons/khalsa-v1-180.png','./icons/khalsa-v1-192.png','./icons/khalsa-v1-512.png','./icons/khalsa-v1-maskable-512.png','./docs/index.html','./docs/newsdesk.html','./docs/post-studio.html','./docs/social-connections.html'];
 const assetURLs=new Set(ASSETS.map(path=>new URL(path,self.registration.scope).href));
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key.startsWith(PREFIX)&&key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim())));
