@@ -1,0 +1,7 @@
+KDN Nihang greeters v1 — 2026-10-12
+Method: built-in imagegen, transparent_background=true.
+App copy: nihang-greeters-v1.webp, alpha retained; resized/encoded for the PWA.
+Static fictional character cutouts, not real-person photos or rigged meshes.
+
+Prompt:
+Use case: stylized-concept. Asset type: one transparent-background paired host cutout for the Khalsa Digital World Royal Gold chess-and-mehrab community app. Create two full-body, dignified fictional adult Sikh greeters standing side by side, equal visual importance: Bhai Nihang Singh, an adult man with full beard and traditional deep blue Nihang dumalla and chola; Bibi Nihang Kaur, an adult woman with traditional deep blue Sikh turban and modest blue chola. Respectful, welcoming expressions, naturally relaxed hands with one open hand in greeting, authentic fabric drape, brass/gold traditional details, kara bracelets. Polished high-quality 3D character render with rich cobalt blue, subtle purple accents and royal gold rim light, realistic proportions with a gently stylized friendly finish. Both entire figures including headwear and footwear visible, separated by generous transparent space so each silhouette is distinct. Balanced eye-level front three-quarter view. Actual alpha transparency around and between the figures, no scenic background, no pedestal, no floor, no lettering or logo, no watermark. No crowns, no chess heads, no drawn weapons or threatening poses. This is a static 3D-look cutout, not a photograph of real people.

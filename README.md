@@ -33,3 +33,9 @@ Before each deployed app-shell change, bump the cache version in `sw.js` and inc
 
 ## Vision
 सब कुछ सबका है — साथ, सेवा, सहयोग से।
+
+## Community tools — v0.7
+
+Open [Sangat Darbar](community.html) for Daljit’s selected writing excerpts, an adjustable/pauseable slider, personal seva records with multiple activities/dates, backup/restore, and a fictional five-choice/25-point My Neta demo. Hindi, Punjabi and English controls are included. The Nihang greeters are generated static cutouts; optional Fateh speech uses an available device voice.
+
+These additions do not activate public accounts, authentication, a multiuser feed, automatic posting, live streaming, team admin access, delegation, payments or withdrawable coins. The ₹125/hour calculator is explicitly a non-cash proposal demo. [Full handoff and request status](docs/COMMUNITY_V07_HANDOFF.md) · [Agreement review draft](docs/COMMUNITY_AGREEMENT_DRAFT.txt).
