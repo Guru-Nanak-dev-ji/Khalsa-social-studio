@@ -3,6 +3,14 @@
 Updated: 2026-10-12
 Repository: https://github.com/Guru-Nanak-dev-ji/Khalsa-social-studio
 
+## Latest milestone — v0.9 Duality opening
+- Root `index.html` is now the requested voluntary yin–yang / two-door reflection experience. The complete previous control room lives at `studio.html`; Creator/community Control Room links point there.
+- Slow CSS/SVG rotation (48/100 seconds), Pause, hidden-tab suspension and reduced-motion support. Royal Gold/purple mehrab doors and chess motifs; no flash or forced audio.
+- 25 authored Hindi questions; route- and depth-aware random selection without repeats, manual next, a break every six answers, undo/restart and a finite completion screen.
+- Each answer earns 3 transparent local game points across five practice categories. No AI endpoint, honesty diagnosis, human-worth ranking, money or voting connection. Both routes retain equal standing.
+- Answers exist in page memory only and clear on page exit/reload. No response collection, storage writes or external door-domain navigation.
+- Cache v0.9.0. See `docs/DUALITY_V09_HANDOFF.md` for behavior, validation and pending work. Verify PR/Pages before claiming live deployment. Physical Android rendering remains to be checked.
+
 ## Latest milestone — v0.8 Gyan Mandal
 - User authorized building Dwars/Mandals/Takht-themed reading spaces from new Punjabi writing. `gyan.html` and `dwar.html?chapter=...` provide three themed entrances and twelve reader routes (nine reflections, personal journey, parenting proposal and dedication).
 - Public text is an explicitly edited version with checked scripture references, author interpretations, Hindi summaries and source links. Original manuscript/family detail stays in a separate private handoff, not public code.

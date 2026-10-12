@@ -19,7 +19,7 @@ Knowledge • Seva • Collaboration • Technology
 - Royal Gold interface and a versioned offline PWA shell.
 - Existing News Desk, media preview and personal post calendar remain available.
 
-The public Control Room is at https://guru-nanak-dev-ji.github.io/Khalsa-social-studio/.
+The public opening is at https://guru-nanak-dev-ji.github.io/Khalsa-social-studio/; the Control Room is at `studio.html`.
 The text Creator is at `creator.html`; the Poster Creator is at `poster.html` after this change is merged and Pages deploys it.
 See [v0.6 handoff and validation](docs/POSTER_V06_HANDOFF.md) and the PR/Pages status for release verification.
 
@@ -43,3 +43,7 @@ These additions do not activate public accounts, authentication, a multiuser fee
 ## Gyan Mandal — v0.8
 
 [Open Gyan Mandal](gyan.html): three thematic Dwars, nine spiritual reflections, a personal journey, a parenting/service discussion proposal and family dedication. Twelve reader routes provide Punjabi text, Hindi summaries, source references, adjustable type, reflection questions, TXT and explicit Creator copies. This is the edited reading edition; original text is preserved separately. [Editorial and development handoff](docs/GYAN_V08_HANDOFF.md).
+
+## Duality opening — v0.9
+
+The root now opens a slow rotating yin–yang and two internal, symbolic mehrab doors: **4you.world** and **not4you.world**. Twenty-five Hindi reflection questions branch by answer, with transparent practice points, six-answer breaks, undo, restart, reduced motion and direct access to Studio. Both paths encourage constructive reflection and equal participation. Responses stay in page memory only. These are authored questions and local game rules, not live AI evaluation, an honesty test, money or My Neta votes. [Behavior and release handoff](docs/DUALITY_V09_HANDOFF.md).
