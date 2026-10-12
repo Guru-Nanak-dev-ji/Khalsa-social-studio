@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="hi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#24180f">
+  <meta name="description" content="KDN News & Social Post Creator — write, save and export on your device.">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./icon-192.png" type="image/png">
+  <link rel="stylesheet" href="./assets/creator.css">
+  <title>News & Social Creator · KDN Studio</title>
+  <script defer src="./assets/creator-core.js"></script>
+  <script defer src="./assets/creator.js"></script>
+</head>
+<body>
+<a class="skip" href="#editor" data-i18n="skip">लेखक पर जाएँ</a>
+<div class="wrap">
+  <header class="masthead">
+    <a class="brand" href="./index.html"><img src="./icon-maskable-512.png" alt="KDN" width="52" height="52"><span>KDN STUDIO<small>KHALSA DIGITAL WORLD</small></span></a>
+    <a href="./index.html" data-i18n="home">← Control Room</a>
+  </header>
+  <main>
+    <div class="intro">
+      <div><p class="eyebrow">NEWS & SOCIAL · v0.5</p><h1 data-i18n="title">आपकी आवाज़, आपकी कलम।</h1><p class="sub" data-i18n="subtitle">खबर या संदेश लिखें। ड्राफ्ट सँभालें। तैयार पोस्ट साथ ले जाएँ।</p></div>
+      <div class="language"><label for="language" data-i18n="language">भाषा / Language</label><select id="language"><option value="hi">हिंदी</option><option value="pa">ਪੰਜਾਬੀ</option><option value="en">English</option></select><small data-i18n="languageNote">भाषा बदलने से आपका लिखा अनुवाद नहीं होता।</small></div>
+    </div>
+    <p class="notice" id="notice" role="status" aria-live="polite"></p>
+    <div class="workspace">
+      <section class="panel editor" id="editor" aria-labelledby="editor-title">
+        <div class="section-head"><h2 id="editor-title" data-i18n="editor">01 · लिखें</h2><span class="badge" id="save-state"></span></div>
+        <form id="creator-form">
+          <div class="two"><div><label for="kind" data-i18n="kind">प्रकार</label><select id="kind"><option value="news" data-i18n="news">समाचार</option><option value="social" data-i18n="social">सोशल पोस्ट</option></select></div><div><label for="platform" data-i18n="platform">प्लेटफ़ॉर्म</label><select id="platform"><option value="general" data-i18n="general">सभी प्लेटफ़ॉर्म</option><option value="facebook">Facebook</option><option value="instagram">Instagram</option><option value="youtube">YouTube</option><option value="whatsapp">WhatsApp</option></select></div></div>
+          <label for="heading" data-i18n="heading">शीर्षक</label><input id="heading" maxlength="200" autocomplete="off">
+          <label for="body" data-i18n="body">खबर / संदेश</label><textarea id="body" rows="10" maxlength="30000" required></textarea>
+          <div class="field-meta"><button class="text-button" id="starter" type="button" data-i18n="starter">लिखने का ढाँचा डालें</button><span id="char-count"></span></div>
+          <label for="source" data-i18n="source">सार्वजनिक स्रोत का लिंक (वैकल्पिक)</label><input id="source" type="url" maxlength="2048" placeholder="https://…" aria-describedby="source-note"><small id="source-note" data-i18n="sourceNote">खबर साझा करने से पहले तथ्यों और स्रोत की जाँच करें।</small>
+          <label for="tags" data-i18n="tags">Hashtags (वैकल्पिक)</label><input id="tags" maxlength="1000" placeholder="#KhalsaDigitalWorld #Sangat" autocomplete="off">
+          <div class="actions"><button class="primary" type="submit" data-i18n="save">ड्राफ्ट सेव करें</button><button type="button" id="new" data-i18n="new">नई पोस्ट</button></div>
+          <p class="fine" data-i18n="localNote">ड्राफ्ट इसी ब्राउज़र में रहते हैं। दूसरे फ़ोन पर ले जाने या browser data हटाने से पहले JSON backup डाउनलोड करें।</p>
+        </form>
+      </section>
+      <aside class="preview-column">
+        <section class="panel" aria-labelledby="preview-title"><div class="section-head"><h2 id="preview-title" data-i18n="preview">02 · पोस्ट देखें</h2><span class="badge" data-i18n="draft">ड्राफ्ट</span></div><article class="post-card"><div class="card-brand"><span class="monogram">KDN</span><div><strong>Khalsa Digital World</strong><small id="preview-meta"></small></div></div><h3 id="preview-heading"></h3><p id="preview-body" class="post-body"></p><a id="preview-source" target="_blank" rel="noopener noreferrer" hidden></a><p id="preview-tags"></p><div class="card-footer">ਸਾਥ · ਸੇਵਾ · ਸਹਿਯੋਗ</div></article><p class="fine" data-i18n="previewNote">यह टेक्स्ट प्रीव्यू है। हर सोशल ऐप पर रूप अलग हो सकता है।</p><div class="actions"><button type="button" id="copy" data-i18n="copy">कॉपी करें</button><button type="button" id="export-text" data-i18n="exportText">TXT डाउनलोड</button><button type="button" id="share" data-i18n="share">Share menu खोलें</button></div><p class="fine" data-i18n="shareNote">पोस्ट अपने-आप प्रकाशित नहीं होती। Share menu में अगला कदम आप चुनते हैं।</p><textarea id="copy-fallback" readonly hidden aria-label="Post text for manual copy"></textarea></section>
+        <section class="panel compact"><h2 data-i18n="existing">आपके अन्य औज़ार</h2><nav class="tool-links"><a href="./docs/newsdesk.html" data-i18n="oldNews">पुराना News Desk →</a><a href="./docs/post-studio.html" data-i18n="oldPost">फोटो, वीडियो और पोस्ट कैलेंडर →</a><a href="./docs/social-connections.html" data-i18n="connections">Social Connections →</a></nav></section>
+      </aside>
+    </div>
+    <section class="panel library" aria-labelledby="library-title"><div class="section-head"><div><p class="eyebrow" data-i18n="onDevice">ON THIS DEVICE</p><h2 id="library-title" data-i18n="library">03 · मेरे ड्राफ्ट</h2></div><span class="badge" id="draft-count">0</span></div><div class="library-tools"><div><label for="search" data-i18n="search">ड्राफ्ट खोजें</label><input type="search" id="search" maxlength="200"></div><div class="actions"><button type="button" id="backup" data-i18n="backup">JSON backup</button><button type="button" id="restore" data-i18n="restore">Backup लाएँ</button><button type="button" id="legacy" data-i18n="legacy">पुराने ड्राफ्ट की कॉपी लाएँ</button></div></div><input id="import-file" type="file" accept=".json,application/json" hidden><div id="draft-list"></div><p class="fine" data-i18n="legacyNote">पुराने News Desk और Post Studio के text drafts कॉपी होंगे। उनकी मूल फ़ाइलें, मीडिया और कैलेंडर नहीं बदलेंगे।</p></section>
+  </main>
+  <footer>KDN Social Studio · <span data-i18n="footer">साथ • सेवा • सहयोग</span></footer>
+</div>
+<noscript>इस Creator को चलाने के लिए JavaScript चालू करें। Enable JavaScript to use the Creator.</noscript>
+</body>
+</html>

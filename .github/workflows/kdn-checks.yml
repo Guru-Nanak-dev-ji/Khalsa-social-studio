@@ -16,3 +16,12 @@ jobs:
           python-version: '3.12'
       - name: Run local UI smoke tests
         run: python -m unittest discover -s tests -v
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check Creator scripts and draft/offline behavior
+        run: |
+          node --check assets/creator.js
+          node --check assets/creator-core.js
+          node --check sw.js
+          node --test tests/creator.test.cjs
