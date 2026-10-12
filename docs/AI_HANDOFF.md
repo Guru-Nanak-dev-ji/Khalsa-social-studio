@@ -3,6 +3,14 @@
 Updated: 2026-10-12
 Repository: https://github.com/Guru-Nanak-dev-ji/Khalsa-social-studio
 
+## Latest milestone — v0.7 local community tools
+- Added `community.html`: multilingual writing slider, personal multi-date/multi-activity seva, five-choice/25-point My Neta sandbox, requested guide names, generated transparent 3D-look cutout, manual Fateh speech, contact/app/directory links and sample time calculator.
+- Actual social signup/OAuth/feed/admin/live/payments/coins/referrals/delegation are NOT implemented. User reports of X login elsewhere do not establish a login here. No real member names or celebrity accounts were imported.
+- Latest Pran rule is first signup only, not every opening. Current review draft does not collect signatures or pretend signup exists.
+- `docs/COMMUNITY_V07_HANDOFF.md` tracks every new request, dependencies, unresolved rules, sources and QA; `docs/COMMUNITY_AGREEMENT_DRAFT.txt` is review-only.
+- Development branch `feature/community-v07`, baseline `bf1c696a8b07b8b6d3f2d5bfeb470b6bcfab5282`, cache v0.7.0. Check the PR and Pages before asserting deployment.
+- Local validation: 22 Node tests, 13 Python checks and a jsdom UI simulation. Android rendering, downloads, sharing, installed voice and SW refresh remain device checks. The full social-network launch date is not committed.
+
 ## Latest milestone — v0.6 Poster Creator and app-wide Mehrab design
 - User confirms the app opens and asks to move on from the unchanged phone launcher icon. Do not troubleshoot that icon unless asked again.
 - User requests varied mehrab arches, chess pieces and playing cards across the app. Shared decorative styling now covers all ten HTML screens.

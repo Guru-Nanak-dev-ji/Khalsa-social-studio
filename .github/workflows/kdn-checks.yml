@@ -25,5 +25,7 @@ jobs:
           node --check assets/creator-core.js
           node --check assets/poster.js
           node --check assets/poster-core.js
+          node --check assets/community.js
+          node --check assets/community-core.js
           node --check sw.js
           node --test tests/*.test.cjs
