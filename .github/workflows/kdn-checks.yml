@@ -32,5 +32,8 @@ jobs:
           node --check assets/duality-core.js
           node --check assets/duality.js
           node --check assets/app-update.js
+          node --check assets/world-content.js
+          node --check assets/world-core.js
+          node --check assets/world.js
           node --check sw.js
           node --test tests/*.test.cjs

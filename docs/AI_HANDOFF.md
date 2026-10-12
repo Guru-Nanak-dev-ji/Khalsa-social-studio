@@ -3,6 +3,16 @@
 Updated: 2026-10-12
 Repository: https://github.com/Guru-Nanak-dev-ji/Khalsa-social-studio
 
+## Latest milestone — v0.10 immersive five-gate world
+- User requests one fixed screen, large background yin–yang, two opening doors with camera movement, baaz on every page, illuminated KDN start, five Pran gates then full pledge/intro/profile, KBC-style quiz and a demo time meter.
+- `index.html`, `enter.html`, `world.html` are byte-identical new entry points. New world-content/core/controller/CSS and baaz.svg provide a CSS perspective scene (not a full WebGL city/map).
+- Five four-choice voluntary reflection gates → complete user-supplied pledge → five intro slides → minimal alias/language/interest profile → Game of Takhats rooms. Either route stays open. Family details never become a compulsory truth test.
+- 15 authored factual/practice questions, 30-second pauseable timer, opt-in bell/buzzer, explicit offline Ask AI hint, 50:50 and simulated Audience Poll. Objective correct +10, wrong −3, timeout 0; separate participation +1. JK/IQ/Study/Work/Seva percentages are quiz accuracy, not psychological or human-worth metrics.
+- Quiz triggers on world entry and doors, randomly during step-button movement, and after each 60 visible active minutes. No closed-app background job. Timer pauses when hidden; no repeat rewards after pool exhaustion.
+- ₹125/hour is a visible DEMO estimate. Partnership/training/payment narrative is a proposal, not income, a contract or a registered cooperative claim. No wallet/withdrawal.
+- Optional minimal profiles, consented alias avatars (local symbols, not AI faces), 30 voluntary self-ratings, self-reported action checklist. Progress uses new `kdn-immersive-world-v1` only after save consent; existing drafts untouched. Saved progress resumes beyond completed gates. No backend/profile upload.
+- Cache v0.10.0, keeping network-refresh installation from v0.9.1. See `docs/WORLD_V010_HANDOFF.md` and PR/Pages for validation and deployment. Android visual/touch/audio verification remains outstanding.
+
 ## Opening refresh fix — v0.9.1
 - User screenshot shows Mobile Control Room v0.6 after v0.9 deployment. Fresh server requests returned the new opening; an old client cache/display is suspected, not remotely proven.
 - `enter.html` is an exact alias of the current opening at a path absent from old workers' cache lists. Use it as the direct recovery link; keep it byte-identical to index.html when editing the opening.
