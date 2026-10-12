@@ -3,6 +3,12 @@
 Updated: 2026-10-12
 Repository: https://github.com/Guru-Nanak-dev-ji/Khalsa-social-studio
 
+## Opening refresh fix — v0.9.1
+- User screenshot shows Mobile Control Room v0.6 after v0.9 deployment. Fresh server requests returned the new opening; an old client cache/display is suspected, not remotely proven.
+- `enter.html` is an exact alias of the current opening at a path absent from old workers' cache lists. Use it as the direct recovery link; keep it byte-identical to index.html when editing the opening.
+- New cache installation uses Request(cache=reload), avoiding old HTTP cache entries. New app-update.js explicitly checks worker updates without consulting HTTP cache and offers a reload after controller change; it never forces navigation or clears drafts.
+- Cache v0.9.1. No uninstall, localStorage clearing, worker unregistration or cross-app cache deletion. Device verification remains outstanding.
+
 ## Latest milestone — v0.9 Duality opening
 - Root `index.html` is now the requested voluntary yin–yang / two-door reflection experience. The complete previous control room lives at `studio.html`; Creator/community Control Room links point there.
 - Slow CSS/SVG rotation (48/100 seconds), Pause, hidden-tab suspension and reduced-motion support. Royal Gold/purple mehrab doors and chess motifs; no flash or forced audio.

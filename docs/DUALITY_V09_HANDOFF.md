@@ -24,3 +24,8 @@ Requested 12 October 2026. Baseline `4be531a0657916d75c80a8174a18752412472491`. 
 
 ## Continue
 Read this file plus `AI_HANDOFF.md`; inspect current main, PR and Pages. Preserve local drafts and the direct Studio entrance. Expand questions with equally respectful paths, explicit rewards and no diagnosis or worth ranking. Add actual AI only with a clear purpose, consent and response-data handling—not by renaming the rule engine. Keep original author writings separate from game content.
+
+## v0.9.1 — old opening recovery
+User screenshot shows the v0.6 control room while fresh public URLs return v0.9. Added `enter.html`, byte-identical to root, to bypass old workers' enumerated root cache. Keep both files synchronized. Cache v0.9.1 installs all assets with explicit HTTP-cache reload; the opening registers with updateViaCache=none and offers a user-triggered check/reload without discarding active answers automatically. No persistent draft or record storage is touched. Tests cover old-worker pass-through, fresh install requests, manual refresh lifecycle and entry equality. Do not claim the actual user's device has refreshed until they verify it.
+
+Implementation references: https://developer.mozilla.org/en-US/docs/Web/API/Cache/addAll · https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerRegistration/updateViaCache

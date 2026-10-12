@@ -31,5 +31,6 @@ jobs:
           node --check assets/gyan.js
           node --check assets/duality-core.js
           node --check assets/duality.js
+          node --check assets/app-update.js
           node --check sw.js
           node --test tests/*.test.cjs
