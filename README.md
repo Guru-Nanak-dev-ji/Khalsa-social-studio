@@ -39,3 +39,7 @@ Before each deployed app-shell change, bump the cache version in `sw.js` and inc
 Open [Sangat Darbar](community.html) for Daljit’s selected writing excerpts, an adjustable/pauseable slider, personal seva records with multiple activities/dates, backup/restore, and a fictional five-choice/25-point My Neta demo. Hindi, Punjabi and English controls are included. The Nihang greeters are generated static cutouts; optional Fateh speech uses an available device voice.
 
 These additions do not activate public accounts, authentication, a multiuser feed, automatic posting, live streaming, team admin access, delegation, payments or withdrawable coins. The ₹125/hour calculator is explicitly a non-cash proposal demo. [Full handoff and request status](docs/COMMUNITY_V07_HANDOFF.md) · [Agreement review draft](docs/COMMUNITY_AGREEMENT_DRAFT.txt).
+
+## Gyan Mandal — v0.8
+
+[Open Gyan Mandal](gyan.html): three thematic Dwars, nine spiritual reflections, a personal journey, a parenting/service discussion proposal and family dedication. Twelve reader routes provide Punjabi text, Hindi summaries, source references, adjustable type, reflection questions, TXT and explicit Creator copies. This is the edited reading edition; original text is preserved separately. [Editorial and development handoff](docs/GYAN_V08_HANDOFF.md).

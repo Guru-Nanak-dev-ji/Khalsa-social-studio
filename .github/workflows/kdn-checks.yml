@@ -27,5 +27,7 @@ jobs:
           node --check assets/poster-core.js
           node --check assets/community.js
           node --check assets/community-core.js
+          node --check assets/gyan-content.js
+          node --check assets/gyan.js
           node --check sw.js
           node --test tests/*.test.cjs

@@ -3,6 +3,12 @@
 Updated: 2026-10-12
 Repository: https://github.com/Guru-Nanak-dev-ji/Khalsa-social-studio
 
+## Latest milestone — v0.8 Gyan Mandal
+- User authorized building Dwars/Mandals/Takht-themed reading spaces from new Punjabi writing. `gyan.html` and `dwar.html?chapter=...` provide three themed entrances and twelve reader routes (nine reflections, personal journey, parenting proposal and dedication).
+- Public text is an explicitly edited version with checked scripture references, author interpretations, Hindi summaries and source links. Original manuscript/family detail stays in a separate private handoff, not public code.
+- Added text-size control, contents, reflection reveal, TXT download and explicit Creator copy. No belief score, response collection, login gate or new external app link.
+- Cache v0.8.0. `docs/GYAN_V08_HANDOFF.md` records editorial corrections, remaining references and QA. Branch `feature/gyan-dwar-v08`, baseline `c2ad0f8582c3309621311cb9ce7bdd449f1a2f34`. Check PR/Pages for live status.
+
 ## Latest milestone — v0.7 local community tools
 - Added `community.html`: multilingual writing slider, personal multi-date/multi-activity seva, five-choice/25-point My Neta sandbox, requested guide names, generated transparent 3D-look cutout, manual Fateh speech, contact/app/directory links and sample time calculator.
 - Actual social signup/OAuth/feed/admin/live/payments/coins/referrals/delegation are NOT implemented. User reports of X login elsewhere do not establish a login here. No real member names or celebrity accounts were imported.
