@@ -1,0 +1,12 @@
+const test=require('node:test'),assert=require('node:assert'),V=require('../assets/virsa/virsa-core.js'),Z=require('../assets/khazana/khazana-core.js'),N=require('../assets/naksha/naksha-core.js'),fs=require('fs'),path=require('path');
+const R=f=>fs.readFileSync(path.join(__dirname,'..',f),'utf8');
+test('artists: Manak 10–12, Chamkila 8–10 devotional, valid unique ids',()=>{const m=V.ARTISTS.find(a=>a.id==='manak'),c=V.ARTISTS.find(a=>a.id==='chamkila');
+ assert.ok(m.songs.length>=10&&m.songs.length<=12);assert.ok(c.songs.length>=8&&c.songs.length<=10);assert.strictEqual(new Set(V.ALL).size,V.ALL.length);
+ for(const a of V.ARTISTS){assert.ok(a.more);for(const s of a.songs)assert.ok(V.valid(s),s.id)}});
+test('badge after 5 distinct plays, junk safe',()=>{let s=V.fresh();for(const id of V.ALL.slice(0,4)){s=V.play(s,id).state}assert.equal(s.badge,false);
+ assert.equal(V.play(s,V.ALL[0]).state.played.length,4);const r=V.play(s,V.ALL[4]);assert.ok(r.badgeNew&&r.state.badge);assert.deepStrictEqual(V.validate('x'),V.fresh());});
+test('wiring: page, nocookie, credit, links, khazana, naksha, sw',()=>{const h=R('virsa.html'),j=R('assets/virsa/virsa.js');
+ assert.ok(h.includes('🎙️ पंजाब दा विरसा')&&h.includes('अधिकार उनके पास')&&!/<iframe|ytimg|<img/.test(h+j));assert.match(V.PLATFORMS.yt.embed('aaaaaaaaaaa'),/^https:\/\/www\.youtube-nocookie\.com\/embed\//);
+ for(const f of ['dwar.html','funnybook.html','assets/fx/fx.js'])assert.ok(R(f).includes('./virsa.html'),f);assert.ok(N.IDS.includes('virsa'));
+ const g=Z.GAMES.find(x=>x.id==='virsa');assert.equal(g.badge,V.BADGE);assert.equal(g.key,V.KEY);
+ assert.ok(JSON.parse(R('assets/i18n/en.json')).t['विरसा सुनने वाला']);assert.match(R('sw.js'),/const CACHE=PREFIX\+'v0\.(6[5-9]|[7-9]\d)\./);});

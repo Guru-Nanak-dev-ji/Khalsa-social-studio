@@ -10,7 +10,7 @@ const NODES=[
  {id:'patta',icon:'🍃',name:'पत्ता उड़ाओ'},{id:'scroll-dwar',icon:'🚪',name:'Scroll से खुलता द्वार'},{id:'newsroom',icon:'🎙',name:'KNN न्यूज़ स्टूडियो'},
  {id:'news-channels',icon:'📡',name:'न्यूज़ चैनल'},{id:'ai-tools',icon:'🤖',name:'Free AI Tools'},{id:'reels',icon:'🎞️',name:'Reel Studio'},
  {id:'avatar',icon:'😀',name:'मेरा अवतार'},{id:'creator',icon:'✍️',name:'Creator'},{id:'audiobook',icon:'📖',name:'ऑडियोबुक'},
- {id:'takht3d',icon:'🏛️',name:'3D तख़्त दरबार'},{id:'baaz',icon:'🦅',name:'बाज़'}
+ {id:'takht3d',icon:'🏛️',name:'3D तख़्त दरबार'},{id:'baaz',icon:'🦅',name:'बाज़'},{id:'virsa',icon:'🎙️',name:'पंजाब दा विरसा'}
 ].map((n,i)=>({...n,href:'./'+n.id+'.html',x:[26,74,50][i%3],y:80+i*120}));
 const IDS=NODES.map(n=>n.id);
 const fresh=()=>({v:1,seen:[],badge:false});
