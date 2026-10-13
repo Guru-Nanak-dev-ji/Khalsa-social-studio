@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#1a0e05">
+<meta name="description" content="🎓 ऑडियो-वीडियो स्टडी स्टूडियो — ग्रंथ और गुरबाणी की पंक्तियों से छोटी study reel बनाइए, सुनिए और quiz खेलिए। सब free, phone में।">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icons/khalsa-v1-32.png" sizes="32x32" type="image/png">
+<link rel="stylesheet" href="./assets/heritage.css">
+<link rel="stylesheet" href="./assets/hindi-fonts.css">
+<link rel="stylesheet" href="./assets/study/study.css">
+<title>🎓 ऑडियो-वीडियो स्टडी स्टूडियो · KDN</title>
+<script defer src="./assets/koins-core.js"></script>
+<script defer src="./assets/study/study-core.js"></script>
+<script defer src="./assets/study/study.js"></script>
+<script defer src="./assets/goldtv/goldtv.js"></script></head>
+<body class="kdn-hindi" data-heritage="gallery">
+<div class="heritage-banner" aria-hidden="true"></div>
+<main class="st">
+<p class="eyebrow">🎓 KDN · AI और ज्ञान द्वार</p>
+<h1>ऑडियो-वीडियो स्टडी स्टूडियो</h1>
+<div class="reelbox"><canvas id="reel" aria-label="study reel का preview"></canvas></div>
+<p id="now" aria-live="polite"></p>
+<div class="btns"><button class="btn" id="play" type="button">▶ Preview (आवाज़ के साथ)</button><button class="btn ghost" id="stop" type="button">⏹ रोकें</button></div>
+<label class="chk"><input type="checkbox" id="tts" checked> 🔊 phone की आवाज़ में पढ़कर सुनाए (hi-IN)</label>
+<div class="tabs" role="tablist"><button type="button" data-p="pLesson" aria-selected="true">📜 पाठ</button><button type="button" data-p="pOwn" aria-selected="false">✍️ अपना</button><button type="button" data-p="pCult" aria-selected="false">🗺️ संस्कृति</button><button type="button" data-p="pList" aria-selected="false">🔁 Playlist</button></div>
+<section class="pane" id="pLesson"><label for="lesson">पाठ चुनिए (ग्रंथ और गुरबाणी की सत्यापित पंक्तियाँ)</label><select id="lesson"></select>
+<label for="world">पीछे का संसार</label><select id="world"></select>
+<label class="chk"><input type="checkbox" id="mic"> 🎙️ अपनी आवाज़ (mic) से पढ़कर रिकॉर्ड करें</label>
+<div class="btns"><button class="btn" id="record" type="button">⏺ Reel रिकॉर्ड करें (24 सेकंड)</button><a class="btn ghost" id="dl" hidden>⬇️ Download</a><button class="btn ghost" id="shareV" type="button" hidden>📤 Share</button></div>
+<p class="disc">ध्यान दें: कई browsers में phone की आवाज़ (TTS) video में रिकॉर्ड नहीं होती। आवाज़ चाहिए तो 🎙️ mic चुनकर खुद पढ़िए। Video WebM में बनता है।</p></section>
+<section class="pane" id="pOwn" hidden><label for="ownTitle">शीर्षक</label><input type="text" id="ownTitle" maxlength="40" placeholder="जैसे: आज की सीख">
+<label for="ownText">अपना पाठ (पहली पंक्ति मुख्य, "।" के बाद अर्थ)</label><textarea id="ownText" rows="4" maxlength="400" placeholder="किरत करो, नाम जपो, वंड छको। मेहनत से कमाओ, नाम याद रखो और बाँटकर खाओ।"></textarea>
+<div class="btns"><button class="btn" id="ownGo" type="button">✨ Reel बनाइए</button></div></section>
+<section class="pane" id="pCult" hidden><p>भारत की अलग-अलग संस्कृतियों की छोटी कहानियाँ। <b>🤖 कहानी AI द्वारा लिखी (काल्पनिक) है</b>, पर हर पंक्ति सत्यापित ग्रंथ से है।</p><div id="cult"></div></section>
+<section class="pane" id="pList" hidden><p>5 पाठ अपने आप हर कुछ सेकंड में चलेंगे, फिर 3 सवाल का quiz: सही पर +10, गलत पर −3।</p>
+<div class="btns"><button class="btn" id="plGo" type="button">🔁 Playlist शुरू करें</button></div><p id="plInfo" aria-live="polite"></p><div id="quiz"></div></section>
+<p id="msg" aria-live="polite"></p>
+<p class="disc">🤖 यह AI और browser से चलने वाला औज़ार है, गुरु या ग्रंथ नहीं। पंक्तियाँ ग्रंथ से मिलाई गई हैं, अर्थ सरल हिंदी में KDN ने लिखे हैं। सब आपके phone में बनता है, कोई paid सेवा नहीं। Koins game के हैं, असली पैसा नहीं।<br><a href="./saathi.html">🎙️ AI साथी</a> · <a href="./studio.html">🏰 महल में वापस</a></p>
+</main>
+</body></html>
