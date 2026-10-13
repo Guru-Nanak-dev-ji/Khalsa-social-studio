@@ -33,6 +33,7 @@ const TREE={id:'root',icon:'🏰',title:'द्वार महल · ਦਰਵ�
   {icon:'🧡',title:'सेहत Control Room',sub:'दवाई · नींद · anxiety · निजी',href:'./sehat.html'},
   {icon:'🪔',title:'आज का संकल्प',sub:'सुबह संकल्प · शाम ✅ · दीप',href:'./sankalp.html'},
   {icon:'🏰',title:'My Kingdom Lands',sub:'मेरा राज्य · खोई हुई ज़मीनें · छिपी चीज़ें खोजो',href:'./kingdom-lands.html'},
+  {icon:'📚',title:'क्यों? सत्ता, समाज और साझा संसार',sub:'16 अध्यायों की सचित्र पुस्तक · पढ़ें, सुनें, PDF',href:'./kyon.html'},
   {icon:'🤝',title:'Khatri Aid',sub:'न छोटा न बड़ा · मदद माँगो · मदद करो',href:'./khatri-aid.html'},
   {icon:'⚖️',title:'कानूनी साथी',sub:'वकील सूची · मुफ़्त कानूनी मदद · फ़ॉर्म',href:'./vakil.html'},
   {icon:'🧲',title:'आकर्षण का नियम',sub:'जैसी भावना वैसा फल · 3 कदम · koins',href:'./akarshan.html'},
