@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#1a0d06">
+<meta name="description" content="🧊 तख़्त Cube — सुनहरे नक्काशीदार घन को उँगली से घुमाइए, हर तरफ़ KDN का एक द्वार।">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icons/khalsa-v1-32.png" sizes="32x32" type="image/png">
+<link rel="stylesheet" href="./assets/heritage.css">
+<link rel="stylesheet" href="./assets/hindi-fonts.css">
+<link rel="stylesheet" href="./assets/takht/takht.css">
+<title>🧊 तख़्त Cube · KDN</title>
+<script defer src="./assets/koins-core.js"></script>
+<script defer src="./assets/takht/takht-core.js"></script>
+<script defer src="./assets/takht/takht.js"></script>
+<script defer src="./assets/goldtv/goldtv.js"></script></head>
+<body class="kdn-hindi" data-heritage="immersive">
+<div class="heritage-banner" aria-hidden="true"></div>
+<header class="hud" role="status" aria-live="polite">
+<a href="./studio.html#door=games">← द्वार</a>
+<div class="big">💰 <span id="h-koins">0</span><small>game koins, असली पैसा नहीं</small></div>
+</header>
+<section class="head"><h1>🧊 तख़्त Cube</h1><p>उँगली से घुमाइए — हर तरफ़ एक द्वार। हर नया द्वार देखने पर +5 koins।</p><p id="seen">0 / 6 द्वार देखे</p></section>
+<div id="scene" aria-label="घूमता सुनहरा तख़्त"><div id="cube"></div></div>
+<p id="now" aria-live="polite"></p>
+<div class="ctl"><button type="button" data-turn="y,90" aria-label="बाएँ घुमाएँ">◀</button><button type="button" data-turn="x,-90" aria-label="ऊपर घुमाएँ">▲</button><button type="button" data-turn="x,90" aria-label="नीचे घुमाएँ">▼</button><button type="button" data-turn="y,-90" aria-label="दाएँ घुमाएँ">▶</button></div>
+<button type="button" id="to-grid">▦ सब द्वार एक साथ देखें</button>
+<main id="grid" aria-label="छह द्वार"></main>
+<p id="badge" hidden>🏅 तख़्त परिक्रमा — आपने छहों द्वार देख लिए!</p>
+<p class="note">हल्का 3D: सिर्फ़ CSS, कोई भारी library नहीं। धीमी हलचल चाहें तो phone की "Reduce motion" setting से सीधा 6 द्वारों का grid दिखेगा।</p>
+</body>
+</html>
