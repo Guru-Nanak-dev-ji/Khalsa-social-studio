@@ -22,7 +22,7 @@
     tgSending:['भेज रहे हैं…','ਭੇਜ ਰਹੇ ਹਾਂ…','Sending…'],tgOK:['Telegram में मंज़ूरी का संदेश भेजा गया। वहाँ ✅ दबाएँ।','Telegram ਵਿੱਚ ਮਨਜ਼ੂਰੀ ਦਾ ਸੁਨੇਹਾ ਭੇਜਿਆ। ਉੱਥੇ ✅ ਦਬਾਓ।','Approval request sent to Telegram. Tap ✅ there.'],
     tgBadKey:['App key गलत है।','App key ਗਲਤ ਹੈ।','The app key is wrong.'],tgRate:['बहुत जल्दी-जल्दी भेजा। एक मिनट बाद फिर कोशिश करें।','ਬਹੁਤ ਛੇਤੀ ਭੇਜਿਆ। ਇੱਕ ਮਿੰਟ ਬਾਅਦ ਫਿਰ ਕੋਸ਼ਿਸ਼ ਕਰੋ।','Too many requests. Try again in a minute.'],tgLong:['Post बहुत लंबी है (3500 अक्षर तक)।','Post ਬਹੁਤ ਲੰਮੀ ਹੈ (3500 ਅੱਖਰ ਤੱਕ)।','Post is too long (max 3500 characters).'],tgFail:['Telegram पर नहीं भेज पाए। Internet जाँचें।','Telegram ਉੱਤੇ ਨਹੀਂ ਭੇਜ ਸਕੇ। Internet ਜਾਂਚੋ।','Could not send to Telegram. Check your internet.'],
     oneTapNote:['ऐप खुलेगा; पोस्ट भेजने से पहले आप देखकर खुद भेजें।','ਐਪ ਖੁੱਲ੍ਹੇਗੀ; ਪੋਸਟ ਭੇਜਣ ਤੋਂ ਪਹਿਲਾਂ ਵੇਖ ਕੇ ਆਪ ਭੇਜੋ।','The app opens; review and send the post yourself.'],
-    waSend:['🟢 WhatsApp पर भेजो','🟢 WhatsApp ਤੇ ਭੇਜੋ','🟢 Send on WhatsApp'],whatsapp:['WhatsApp पर भेजें','WhatsApp ਤੇ ਭੇਜੋ','Send on WhatsApp'],telegram:['Telegram पर भेजें','Telegram ਤੇ ਭੇਜੋ','Send on Telegram'],x:['X पर पोस्ट','X ਤੇ ਪੋਸਟ','Post on X'],facebook:['Facebook पर शेयर','Facebook ਤੇ ਸ਼ੇਅਰ','Share on Facebook'],instagram:['Instagram के लिए','Instagram ਲਈ','For Instagram'],
+    igSend:['📸 Instagram पर भेजो','📸 Instagram ਤੇ ਭੇਜੋ','📸 Send on Instagram'],igToast:['कैप्शन copy हो गया, Instagram में photo चुनकर paste करें','ਕੈਪਸ਼ਨ copy ਹੋ ਗਿਆ, Instagram ਵਿੱਚ photo ਚੁਣ ਕੇ paste ਕਰੋ','Caption copied — pick the photo in Instagram and paste'],waSend:['🟢 WhatsApp पर भेजो','🟢 WhatsApp ਤੇ ਭੇਜੋ','🟢 Send on WhatsApp'],whatsapp:['WhatsApp पर भेजें','WhatsApp ਤੇ ਭੇਜੋ','Send on WhatsApp'],telegram:['Telegram पर भेजें','Telegram ਤੇ ਭੇਜੋ','Send on Telegram'],x:['X पर पोस्ट','X ਤੇ ਪੋਸਟ','Post on X'],facebook:['Facebook पर शेयर','Facebook ਤੇ ਸ਼ੇਅਰ','Share on Facebook'],instagram:['Instagram के लिए','Instagram ਲਈ','For Instagram'],
     fbCopied:['टेक्स्ट कॉपी हो गया, Facebook में paste करें','ਟੈਕਸਟ ਕਾਪੀ ਹੋ ਗਿਆ, Facebook ਵਿੱਚ paste ਕਰੋ','Text copied — paste it in Facebook'],
     igCopied:['टेक्स्ट कॉपी हो गया, Instagram में paste करें','ਟੈਕਸਟ ਕਾਪੀ ਹੋ ਗਿਆ, Instagram ਵਿੱਚ paste ਕਰੋ','Text copied — paste it in Instagram'],
     opened:['ऐप/पेज खोला गया। भेजने से पहले जाँच लें।','ਐਪ/ਪੇਜ ਖੋਲ੍ਹਿਆ ਗਿਆ। ਭੇਜਣ ਤੋਂ ਪਹਿਲਾਂ ਜਾਂਚ ਲਓ।','App/page opened. Review before sending.']
@@ -81,6 +81,24 @@
     openLink(links[k]);status(t('opened'));
   });
   // Green WhatsApp button: wa.me opens WhatsApp with the post; if blocked, fall back to the phone share menu.
+
+  function igPoster(){return new Promise(res=>{const W=1080,H=1350,c=document.createElement('canvas');c.width=W;c.height=H;const g=c.getContext('2d');
+    const bg=g.createLinearGradient(0,0,0,H);bg.addColorStop(0,'#1a1209');bg.addColorStop(1,'#0b0805');g.fillStyle=bg;g.fillRect(0,0,W,H);
+    g.strokeStyle='#d4af37';g.lineWidth=10;g.strokeRect(30,30,W-60,H-60);g.lineWidth=2;g.strokeRect(52,52,W-104,H-104);
+    g.fillStyle='#d4af37';g.textAlign='center';g.font='bold 44px "Noto Sans Gurmukhi","Noto Sans Devanagari",sans-serif';g.fillText('Khalsa Digital World',W/2,140);
+    g.font='bold 64px "Noto Sans Devanagari","Noto Sans Gurmukhi",sans-serif';g.fillStyle='#f5e6b8';let y=280;
+    for(const l of C.wrapLines($('heading').value,22).slice(0,4)){g.fillText(l,W/2,y);y+=82;}
+    g.font='38px "Noto Sans Devanagari","Noto Sans Gurmukhi",sans-serif';g.fillStyle='#efe3c4';y+=30;
+    for(const l of C.wrapLines($('body').value,36).slice(0,14)){if(y>H-170)break;g.fillText(l,W/2,y);y+=54;}
+    g.fillStyle='#d4af37';g.font='34px "Noto Sans Gurmukhi",sans-serif';g.fillText('ਸਾਥ · ਸੇਵਾ · ਸਹਿਯੋਗ',W/2,H-100);
+    if(c.toBlob)c.toBlob(b=>res(b),'image/png');else res(null);});}
+  $('ig-send').onclick=async()=>{const value=post();if(!value)return;await quietCopy(value);let blob=null;try{blob=await igPoster();}catch{}
+    const name='kdn-instagram-'+new Date().toISOString().slice(0,10)+'.png';
+    if(blob&&navigator.share&&window.File){const file=new File([blob],name,{type:'image/png'});const data={files:[file],text:value};
+      if(!navigator.canShare||navigator.canShare(data)){try{await navigator.share(data);status(t('shareOK'));return;}catch(e){if(e.name==='AbortError')return;}}}
+    if(blob){const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),4000);}
+    status(t('igToast'));const [first,web]=C.igTargets(/Android|iPhone|iPad/i.test(navigator.userAgent));
+    if(web){location.href=first;setTimeout(()=>{if(!document.hidden)window.open(web,'_blank','noopener');},1500);}else window.open(first,'_blank','noopener');};
   $('wa-send').onclick=async()=>{const value=post();if(!value)return;const u=C.waLink(value);const w=window.open(u,'_blank','noopener');
     if(w){status(t('opened'));return;}
     if(navigator.share){try{await navigator.share({text:value});status(t('shareOK'));}catch(e){if(e.name!=='AbortError')location.href=u;}return;}
