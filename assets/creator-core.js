@@ -59,6 +59,17 @@
     }
     return {drafts,skipped};
   }
-  const api={KEY,uid,safeUrl,validate,parse,serialize,compose,Store,legacy};
+  // One-tap share links: free public intent URLs, no login or server.
+  function shareLinks(text,link){
+    const e=encodeURIComponent,u=safeUrl(link||'')||'';
+    return {
+      whatsapp:'https://wa.me/?text='+e(text),
+      telegram:'https://t.me/share/url?url='+e(u)+'&text='+e(text),
+      x:'https://twitter.com/intent/tweet?text='+e(Array.from(text).length>280?Array.from(text).slice(0,279).join('')+'…':text),
+      facebook:'https://www.facebook.com/sharer/sharer.php?u='+e(u)+'&quote='+e(text),
+      instagram:'https://www.instagram.com/'
+    };
+  }
+  const api={KEY,uid,safeUrl,validate,parse,serialize,compose,Store,legacy,shareLinks};
   if(typeof module==='object'&&module.exports)module.exports=api;else root.KDNCreator=api;
 })(typeof globalThis!=='undefined'?globalThis:this);
