@@ -1,0 +1,6 @@
+const test=require('node:test');const assert=require('node:assert');const fs=require('fs');const path=require('path');
+const root=path.join(__dirname,'..');const r=f=>fs.readFileSync(path.join(root,f),'utf8');
+test('every page includes the jaan layer once',()=>{for(const f of fs.readdirSync(root).filter(f=>f.endsWith('.html'))){const s=r(f);assert.equal((s.match(/assets\/jaan\.js/g)||[]).length,1,f);assert.match(s,/assets\/jaan\.css/,f);}});
+test('jaan respects reduced motion and is cached',()=>{assert.match(r('assets/jaan.css'),/prefers-reduced-motion/);assert.match(r('assets/jaan.js'),/prefers-reduced-motion/);const sw=r('sw.js');assert.ok(sw.includes('./assets/jaan.js')&&sw.includes('./assets/jaan.css'));});
+test('upgraded pages have slider and games with existing images',()=>{for(const f of ['ai','poster','creator','promo','dwar']){const s=r(f+'.html');assert.match(s,/class="jaan-slider"/,f);assert.match(s,/data-jaan-games/,f);for(const m of s.matchAll(/class="jaan-slider"[\s\S]*?<\/div>/g))for(const i of m[0].matchAll(/src="\.\/([^"]+)"/g))assert.ok(fs.existsSync(path.join(root,i[1])),i[1]);}});
+test('no khanda in jaan layer',()=>{assert.doesNotMatch(r('assets/jaan.js')+r('assets/jaan.css'),/khanda|☬/i);});
