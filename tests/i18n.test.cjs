@@ -1,0 +1,12 @@
+const test=require('node:test'),assert=require('node:assert'),fs=require('fs'),path=require('path');
+const R=f=>fs.readFileSync(path.join(__dirname,'..',f),'utf8');
+test('i18n dictionaries pa/en share keys and are non-empty',()=>{const pa=JSON.parse(R('assets/i18n/pa.json')),en=JSON.parse(R('assets/i18n/en.json'));
+ assert.deepStrictEqual(Object.keys(pa.t).sort(),Object.keys(en.t).sort());assert.ok(Object.keys(pa.t).length>80);
+ for(const v of Object.values(pa.t))assert.match(v,/[\u0A00-\u0A7F]|^[\x00-\x7F\p{Emoji}\s·→←↗]+$/u);
+ for(const k of Object.keys(pa.t))assert.ok(k===k.trim()&&k.length);});
+test('every page loads the switcher',()=>{for(const f of fs.readdirSync(path.join(__dirname,'..')).filter(f=>f.endsWith('.html'))){const s=R(f);if(s.includes('</head>'))assert.ok(s.includes('assets/i18n/i18n.js'),f)}});
+test('switcher: 3 langs, localStorage, html lang, active 🔘, Hindi default',()=>{const s=R('assets/i18n/i18n.js');
+ for(const x of ['🧡 हिंदी','🎯 ਪੰਜਾਬੀ','✅ English','🔘','localStorage','documentElement.lang',"'kdn-lang-v1'","return 'hi'"])assert.ok(s.includes(x),x);});
+test('gurmukhi font self-hosted OFL subset + pill left of ✨ fab',()=>{const c=R('assets/i18n/i18n.css');assert.ok(c.includes('NotoSansGurmukhi-sub.woff2'));
+ assert.ok(fs.existsSync(path.join(__dirname,'../assets/i18n/OFL-NotoSansGurmukhi.txt')));assert.match(c,/\.kdn-lang\{position:fixed;left:/);
+ const sw=R('sw.js');assert.ok(sw.includes('./assets/i18n/pa.json'));assert.match(sw,/const CACHE=PREFIX\+'v0\.(6[3-9]|[7-9]\d)\./);});
