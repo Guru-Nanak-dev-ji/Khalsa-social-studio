@@ -577,6 +577,36 @@
 "status": "published"
 },
 {
+"id": "kshetra-majha",
+"icon": "🛕",
+"name": "माझा यात्रा",
+"sub": "KDN-S-041 (अस्थायी कोड)",
+"cat": "g",
+"href": "./kshetra-majha.html",
+"group": "region",
+"status": "published"
+},
+{
+"id": "kshetra-doaba",
+"icon": "✈️",
+"name": "दोआबा यात्रा",
+"sub": "KDN-S-050 (अस्थायी कोड)",
+"cat": "g",
+"href": "./kshetra-doaba.html",
+"group": "region",
+"status": "published"
+},
+{
+"id": "kshetra-puadh",
+"icon": "🌄",
+"name": "पुआध यात्रा",
+"sub": "KDN-S-059 (अस्थायी कोड)",
+"cat": "g",
+"href": "./kshetra-puadh.html",
+"group": "region",
+"status": "published"
+},
+{
 "id": "kingdom-lands",
 "icon": "🏰",
 "name": "My Kingdom Lands",
