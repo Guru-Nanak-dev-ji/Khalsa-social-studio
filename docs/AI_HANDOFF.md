@@ -3,6 +3,13 @@
 Updated: 2026-10-12
 Repository: https://github.com/Guru-Nanak-dev-ji/Khalsa-social-studio
 
+## Latest milestone — v0.11 maze / Golden TV
+- Latest correction: no front-screen questions. Touch a door -> camera entry -> four options on Golden TV -> signed points and 0–100 impact -> TV slides away -> next pair of doors.
+- Recovered the user's original golden/silver raster falcons and flying/perching behavior from their older Site, without importing legacy Site links. New imagegen Yin–Yang medallion follows the uploaded reference theme. Original reference Site remains untouched.
+- Five gates -> full voluntary pledge -> work/skills/goals/time form -> transparent work/training suggestions. 96 crore jobs is a future goal, not existing vacancies. No automatic job placement.
+- Previous reflection records are not rescored under the new rubric. Opt-in local state and existing drafts preserved.
+- Photo-based avatars of deceased relatives are explicitly deferred. Phone rendering/audio still unverified. See docs/MAZE_V011_HANDOFF.md and current PR/Pages status.
+
 ## Latest milestone — v0.10 immersive five-gate world
 - User requests one fixed screen, large background yin–yang, two opening doors with camera movement, baaz on every page, illuminated KDN start, five Pran gates then full pledge/intro/profile, KBC-style quiz and a demo time meter.
 - `index.html`, `enter.html`, `world.html` are byte-identical new entry points. New world-content/core/controller/CSS and baaz.svg provide a CSS perspective scene (not a full WebGL city/map).

@@ -24,3 +24,6 @@ body[data-heritage] details.card:not([open])::before,body[data-heritage] details
 body[data-heritage]:not([data-heritage="immersive"])::after{content:'';position:fixed;top:15%;left:-120px;width:100px;height:45px;background:url('./motifs/baaz.svg') center/contain no-repeat;pointer-events:none;z-index:1;opacity:.35;animation:heritage-baaz 38s linear infinite}
 @keyframes heritage-baaz{0%{transform:translateX(-120px) translateY(10px)}45%{transform:translateX(50vw) translateY(-25px)}100%{transform:translateX(120vw) translateY(20px)}}
 @media(prefers-reduced-motion:reduce){body[data-heritage]:not([data-heritage="immersive"])::after{animation:none;left:auto;right:14px;top:14px;opacity:.2;width:55px}}
+
+/* v0.11: the recovered raster falcons replace the old decorative silhouette. */
+body:not([data-heritage="immersive"])::after{content:none!important}

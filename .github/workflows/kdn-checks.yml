@@ -35,5 +35,6 @@ jobs:
           node --check assets/world-content.js
           node --check assets/world-core.js
           node --check assets/world.js
+          node --check assets/falcons.js
           node --check sw.js
           node --test tests/*.test.cjs
