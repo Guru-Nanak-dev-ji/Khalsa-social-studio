@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#1a0e05">
-<meta name="description" content="📺 Golden TV — हर 3 second नई कहानी, ख़बर और नारा।">
+<meta name="description" content="📺 Golden TV — हर 3 second नई कहानी, ख़बर, नारा और 📜 ग्रंथ से एक वचन।">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="icon" href="./icons/khalsa-v1-32.png" sizes="32x32" type="image/png">
 <link rel="stylesheet" href="./assets/heritage.css">
@@ -37,13 +37,15 @@ html,body{margin:0;height:100%;background:#0d0703;color:#fff1c8;font-family:Mukt
 <div class="ctl"><a href="./studio.html">🏰 महल</a><button id="pp" aria-label="रोकें">⏸ रोकें</button></div>
 <div class="tv"><div class="frame"><div class="screen" id="screen" aria-live="polite"><span class="count" id="count"></span><a id="story" class="slide"><div class="tag" id="tag">📺 Golden TV</div><div class="text" id="text">कहानियाँ आ रही हैं…</div><span class="go">खोलें →</span></a><div class="bar" id="bar"></div></div></div></div>
 <script>
-addEventListener('DOMContentLoaded',async()=>{const C=GoldTVCore;let items=[],i=0,paused=matchMedia('(prefers-reduced-motion: reduce)').matches,t;
+addEventListener('DOMContentLoaded',async()=>{const C=GoldTVCore;let items=[],feed=[],granth=[],chans=[],cyc=Math.floor(Math.random()*20),i=0,paused=matchMedia('(prefers-reduced-motion: reduce)').matches,t;
 const $=id=>document.getElementById(id);
-try{items=C.clean((await (await fetch('./assets/goldtv/feed.json',{cache:'no-cache'})).json()).items);}catch(e){}
-try{const r=await fetch(C.API+'/news/channels');if(r.ok)items=items.concat(C.fromChannels((await r.json()).channels));}catch(e){}
+try{feed=(await (await fetch('./assets/goldtv/feed.json',{cache:'no-cache'})).json()).items||[];}catch(e){}
+try{granth=(await (await fetch('./assets/gyan/granth.json')).json()).quotes||[];}catch(e){}
+const rebuild=()=>{items=C.build(feed,granth,cyc).concat(chans);};rebuild();
+try{const r=await fetch(C.API+'/news/channels');if(r.ok){chans=C.fromChannels((await r.json()).channels);rebuild();}}catch(e){}
 if(!items.length)items=[{tag:'🧬 नारा',text:'एक click और बदल जाए ज़िंदगी 🧬',href:'./studio.html'}];
 function show(){const it=items[i],a=$('story');a.href=it.href;$('tag').textContent=it.tag;$('text').textContent=it.text;$('count').textContent=(i+1)+'/'+items.length;a.classList.remove('slide');void a.offsetWidth;a.classList.add('slide');const b=$('bar');b.classList.remove('run');void b.offsetWidth;if(!paused)b.classList.add('run');}
-function loop(){clearTimeout(t);if(paused)return;t=setTimeout(()=>{i=C.next(i,items.length);show();loop();},C.INTERVAL);}
+function loop(){clearTimeout(t);if(paused)return;t=setTimeout(()=>{i=C.next(i,items.length);if(i===0&&granth.length){cyc++;rebuild();}show();loop();},C.INTERVAL);}
 $('pp').onclick=()=>{paused=!paused;$('pp').textContent=paused?'▶ चलाएँ':'⏸ रोकें';show();loop();};
 if(paused)$('pp').textContent='▶ चलाएँ';
 let y0=null;addEventListener('touchstart',e=>y0=e.touches[0].clientY,{passive:true});addEventListener('touchend',e=>{if(y0==null)return;const d=y0-e.changedTouches[0].clientY;if(Math.abs(d)>40){i=d>0?C.next(i,items.length):(i-1+items.length)%items.length;show();loop();}y0=null;});

@@ -1,5 +1,5 @@
 (function(){const C=window.SaathiCore,$=s=>document.querySelector(s);let who='tark',sel=new Set(),quotes=[];
-fetch('./assets/saathi/bani.json').then(r=>r.json()).then(j=>quotes=j.quotes).catch(()=>{});
+const J=u=>fetch(u).then(r=>r.json()).catch(()=>({}));Promise.all([J('./assets/saathi/bani.json'),J('./assets/gyan/granth.json')]).then(([b,g])=>{quotes=C.merge(b.quotes||[],g.quotes||[]);});
 document.querySelectorAll('.pick button').forEach(b=>b.onclick=()=>{who=b.dataset.who;document.querySelectorAll('.pick button').forEach(x=>x.setAttribute('aria-pressed',x===b));});
 const chips=$('#chips');C.MOODS.forEach(([id,label])=>{const b=document.createElement('button');b.type='button';b.textContent=label;b.dataset.m=id;b.setAttribute('aria-pressed','false');b.onclick=()=>{sel.has(id)?sel.delete(id):sel.add(id);b.setAttribute('aria-pressed',sel.has(id));};chips.appendChild(b);});
 function mark(ids){ids.forEach(id=>{sel.add(id);const b=chips.querySelector('[data-m='+id+']');b&&b.setAttribute('aria-pressed','true');});}
