@@ -269,6 +269,54 @@
 "href": "./guru-10.html"
 },
 {
+"id": "panj-takht",
+"icon": "🏛️",
+"name": "पंज तख़्त",
+"sub": "पाँच तख़्त, दर्शन गाइड",
+"cat": "j",
+"href": "./panj-takht.html"
+},
+{
+"id": "takht-1",
+"icon": "🏛️",
+"name": "श्री अकाल तख़्त साहिब",
+"sub": "तख़्त 1 / 5",
+"cat": "j",
+"href": "./takht-1.html"
+},
+{
+"id": "takht-2",
+"icon": "🌅",
+"name": "तख़्त श्री केसगढ़ साहिब",
+"sub": "तख़्त 2 / 5",
+"cat": "j",
+"href": "./takht-2.html"
+},
+{
+"id": "takht-3",
+"icon": "📖",
+"name": "तख़्त श्री दमदमा साहिब",
+"sub": "तख़्त 3 / 5",
+"cat": "j",
+"href": "./takht-3.html"
+},
+{
+"id": "takht-4",
+"icon": "👶",
+"name": "तख़्त श्री पटना साहिब",
+"sub": "तख़्त 4 / 5",
+"cat": "j",
+"href": "./takht-4.html"
+},
+{
+"id": "takht-5",
+"icon": "🌊",
+"name": "तख़्त श्री हज़ूर साहिब",
+"sub": "तख़्त 5 / 5",
+"cat": "j",
+"href": "./takht-5.html"
+},
+{
 "id": "kahani",
 "icon": "📖",
 "name": "कहानी घर",
