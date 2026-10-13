@@ -1,7 +1,15 @@
 # KDN AI HANDOFF — CONTINUE WORK
 
-Updated: 2026-10-12
+Updated: 2026-10-13
 Repository: https://github.com/Guru-Nanak-dev-ji/Khalsa-social-studio
+
+## Latest milestone — v0.12 shared living kingdom
+- Preserve all old functions while redesigning every page. Shared kingdom/device layer covers 17 retained HTML pages plus the cache-safe kingdom.html entry alias; 13 catalog destinations, not 500 completed pages.
+- Gold arches, two recovered flying/perching falcons, moving chess/cards, phone/TV/laptop/pager/LED/book frames, two-door cross-page navigation and room search.
+- Six named game coin collections, six one-time gifts per catalog destination, three secret learning keys, local persistence/export/reset with corrupt/quota protection. Key: kdn-kingdom-collection-v1. Not currency, wages or ownership.
+- Five gates -> full voluntary pledge -> Tark Singh / Bhavana Kaur welcome with distinct generated male/female MP3s -> introduction -> existing work form and matching. Old saved users still resume. Authored helper topics; no live AI endpoint.
+- Cache v0.12.0; new shared assets in assets/kingdom/v012 and active world controller copies in assets/world/v012. Freeze older versioned assets. Keep index/enter/world/maze/kingdom HTML aliases equal.
+- Next: phone screenshots and one-page-at-a-time refinement, real AI/backend/social/auth/jobs/ownership only when implemented. Memorial photo avatars remain deferred. See docs/KINGDOM_V012_HANDOFF.md.
 
 ## Latest milestone — v0.11 maze / Golden TV
 - Latest correction: no front-screen questions. Touch a door -> camera entry -> four options on Golden TV -> signed points and 0–100 impact -> TV slides away -> next pair of doors.

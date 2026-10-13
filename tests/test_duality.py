@@ -9,10 +9,11 @@ class DualityTests(unittest.TestCase):
         self.assertEqual((ROOT/'enter.html').read_bytes(), (ROOT/'index.html').read_bytes())
         self.assertEqual((ROOT/'world.html').read_bytes(), (ROOT/'index.html').read_bytes())
         self.assertEqual((ROOT/'maze.html').read_bytes(), (ROOT/'index.html').read_bytes())
+        self.assertEqual((ROOT/'kingdom.html').read_bytes(), (ROOT/'index.html').read_bytes())
         self.assertIn('assets/app-update.js', (ROOT/'enter.html').read_text())
         for name in ['world.js','world-core.js','world-content.js']:
-            self.assertEqual((ROOT/'assets'/name).read_bytes(),(ROOT/'assets/world/v011'/name).read_bytes())
-            self.assertIn('assets/world/v011/'+name,(ROOT/'maze.html').read_text())
+            self.assertEqual((ROOT/'assets'/name).read_bytes(),(ROOT/'assets/world/v012'/name).read_bytes())
+            self.assertIn('assets/world/v012/'+name,(ROOT/'maze.html').read_text())
 
     def test_all_controller_targets_and_local_links_exist(self):
         markup = (ROOT/'index.html').read_text()

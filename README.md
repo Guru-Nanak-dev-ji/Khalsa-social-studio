@@ -4,6 +4,14 @@ A free and open-source social media management platform.
 
 Part of Khalsa Digital World (KDN).
 
+## Living kingdom — v0.12
+
+[Open the current kingdom](https://guru-nanak-dev-ji.github.io/Khalsa-social-studio/kingdom.html). All retained tools share the same animated gold/purple world, two falcons, arches, chess/cards and device frames. A shared two-door map connects the existing tools; blank-background discoveries and the accessible “खोजो” control reveal game gifts.
+
+Baba Nanak, Ram, Jesus, रविदास, वाल्मीकि and Khalsa coins are **local game collectibles only**. Unique discoveries unlock three learning keys. There is no currency exchange, payment or ownership entitlement. The post-pledge introduction now welcomes Tark Singh and Bhavana Kaur with separate generated male/female audio. Helpers have authored topics, not live AI chat.
+
+17 original HTML pages remain; a fresh entry alias makes 18 served pages and 13 catalog destinations. The shared registry/layout supports future 500+ room development; those rooms are not all built. [Implementation and continuation](docs/KINGDOM_V012_HANDOFF.md).
+
 ## Our Mission
 Knowledge • Seva • Collaboration • Technology
 
