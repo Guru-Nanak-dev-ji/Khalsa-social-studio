@@ -4,6 +4,7 @@ const TREE={id:'root',icon:'🏰',title:'द्वार महल · ਦਰਵ�
   {icon:'📺',title:'KNN News Studio',sub:'न्यूज़ स्टूडियो · ਨਿਊਜ਼',href:'./newsroom.html'},
   {icon:'📡',title:'न्यूज़ चैनल',sub:'अपना News चैनल बनाइए',href:'./news-channels.html'},
   {icon:'🎞️',title:'Reel Studio',sub:'Instagram Reels',href:'./reels.html'},
+  {icon:'😀',title:'मेरा अवतार',sub:'अवतार · स्टिकर · GIF',href:'./avatar.html'},
   {icon:'✍️',title:'Creator',sub:'ख़बर · ਪੋਸਟ · Post',href:'./creator.html'},
   {icon:'🖼️',title:'Poster',sub:'फोटो पोस्टर',href:'./poster.html'},
   {icon:'📖',title:'Book Bar Audiobook',sub:'ਆਡੀਓਬੁੱਕ',href:'./audiobook.html'}]},
