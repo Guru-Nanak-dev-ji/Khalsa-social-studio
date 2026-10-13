@@ -22,7 +22,7 @@
     tgSending:['भेज रहे हैं…','ਭੇਜ ਰਹੇ ਹਾਂ…','Sending…'],tgOK:['Telegram में मंज़ूरी का संदेश भेजा गया। वहाँ ✅ दबाएँ।','Telegram ਵਿੱਚ ਮਨਜ਼ੂਰੀ ਦਾ ਸੁਨੇਹਾ ਭੇਜਿਆ। ਉੱਥੇ ✅ ਦਬਾਓ।','Approval request sent to Telegram. Tap ✅ there.'],
     tgBadKey:['App key गलत है।','App key ਗਲਤ ਹੈ।','The app key is wrong.'],tgRate:['बहुत जल्दी-जल्दी भेजा। एक मिनट बाद फिर कोशिश करें।','ਬਹੁਤ ਛੇਤੀ ਭੇਜਿਆ। ਇੱਕ ਮਿੰਟ ਬਾਅਦ ਫਿਰ ਕੋਸ਼ਿਸ਼ ਕਰੋ।','Too many requests. Try again in a minute.'],tgLong:['Post बहुत लंबी है (3500 अक्षर तक)।','Post ਬਹੁਤ ਲੰਮੀ ਹੈ (3500 ਅੱਖਰ ਤੱਕ)।','Post is too long (max 3500 characters).'],tgFail:['Telegram पर नहीं भेज पाए। Internet जाँचें।','Telegram ਉੱਤੇ ਨਹੀਂ ਭੇਜ ਸਕੇ। Internet ਜਾਂਚੋ।','Could not send to Telegram. Check your internet.'],
     oneTapNote:['ऐप खुलेगा; पोस्ट भेजने से पहले आप देखकर खुद भेजें।','ਐਪ ਖੁੱਲ੍ਹੇਗੀ; ਪੋਸਟ ਭੇਜਣ ਤੋਂ ਪਹਿਲਾਂ ਵੇਖ ਕੇ ਆਪ ਭੇਜੋ।','The app opens; review and send the post yourself.'],
-    whatsapp:['WhatsApp पर भेजें','WhatsApp ਤੇ ਭੇਜੋ','Send on WhatsApp'],telegram:['Telegram पर भेजें','Telegram ਤੇ ਭੇਜੋ','Send on Telegram'],x:['X पर पोस्ट','X ਤੇ ਪੋਸਟ','Post on X'],facebook:['Facebook पर शेयर','Facebook ਤੇ ਸ਼ੇਅਰ','Share on Facebook'],instagram:['Instagram के लिए','Instagram ਲਈ','For Instagram'],
+    waSend:['🟢 WhatsApp पर भेजो','🟢 WhatsApp ਤੇ ਭੇਜੋ','🟢 Send on WhatsApp'],whatsapp:['WhatsApp पर भेजें','WhatsApp ਤੇ ਭੇਜੋ','Send on WhatsApp'],telegram:['Telegram पर भेजें','Telegram ਤੇ ਭੇਜੋ','Send on Telegram'],x:['X पर पोस्ट','X ਤੇ ਪੋਸਟ','Post on X'],facebook:['Facebook पर शेयर','Facebook ਤੇ ਸ਼ੇਅਰ','Share on Facebook'],instagram:['Instagram के लिए','Instagram ਲਈ','For Instagram'],
     fbCopied:['टेक्स्ट कॉपी हो गया, Facebook में paste करें','ਟੈਕਸਟ ਕਾਪੀ ਹੋ ਗਿਆ, Facebook ਵਿੱਚ paste ਕਰੋ','Text copied — paste it in Facebook'],
     igCopied:['टेक्स्ट कॉपी हो गया, Instagram में paste करें','ਟੈਕਸਟ ਕਾਪੀ ਹੋ ਗਿਆ, Instagram ਵਿੱਚ paste ਕਰੋ','Text copied — paste it in Instagram'],
     opened:['ऐप/पेज खोला गया। भेजने से पहले जाँच लें।','ਐਪ/ਪੇਜ ਖੋਲ੍ਹਿਆ ਗਿਆ। ਭੇਜਣ ਤੋਂ ਪਹਿਲਾਂ ਜਾਂਚ ਲਓ।','App/page opened. Review before sending.']
@@ -80,6 +80,11 @@
     if(k==='instagram'){await quietCopy(value);if(navigator.share){try{await navigator.share({text:value});status(t('shareOK'));}catch(e){if(e.name!=='AbortError')status(t('shareFailed'),true);}return;}status(t('igCopied'));openLink(links.instagram);return;}
     openLink(links[k]);status(t('opened'));
   });
+  // Green WhatsApp button: wa.me opens WhatsApp with the post; if blocked, fall back to the phone share menu.
+  $('wa-send').onclick=async()=>{const value=post();if(!value)return;const u=C.waLink(value);const w=window.open(u,'_blank','noopener');
+    if(w){status(t('opened'));return;}
+    if(navigator.share){try{await navigator.share({text:value});status(t('shareOK'));}catch(e){if(e.name!=='AbortError')location.href=u;}return;}
+    location.href=u;};
   // Telegram approval: the worker only sends the owner a ✅/✏️/❌ popup; nothing is posted without ✅.
   const TG_URL='https://kdn-telegram-bot.khatrinewsnetwork.workers.dev/draft',TG_KEY='kdn-telegram-app-key';
   const tgKey=()=>{try{return localStorage.getItem(TG_KEY)||'';}catch{return '';}};

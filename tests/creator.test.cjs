@@ -106,3 +106,9 @@ test('one-tap share links encode Devanagari and Gurmukhi text',()=>{
   assert.ok(l.facebook.includes('sharer.php?u='));
   assert.equal(Array.from(new URL(C.shareLinks('ਸ'.repeat(400)).x).searchParams.get('text')).length,280);
 });
+test('green WhatsApp button and safe wa.me link',()=>{
+  const html=readFileSync(resolve(__dirname,'../creator.html'),'utf8');assert.match(html,/id="wa-send"/);
+  assert.equal(C.waLink('ਸੇਵਾ'),'https://wa.me/?text='+encodeURIComponent('ਸੇਵਾ'));
+  const u=C.waLink('ਸ'.repeat(3000));assert.ok(u.length<=1800&&u.startsWith('https://wa.me/?text='));
+  assert.equal(C.shareLinks('a').whatsapp,'https://wa.me/?text=a');
+});

@@ -73,3 +73,7 @@ test('/channels lists with buttons; owner-only; set default and remove',async()=
   [c,s]=rec();assert.equal(await handleUpdate(cb(7812291108,'ytdel:UC2'),e,s),'ytdel');assert.equal(d['yt_ch:UC2'],undefined);assert.equal(d.yt_default,'UC1');assert.equal(d.yt_refresh_token,'r1');
   await handleUpdate(cb(7812291108,'ytdel:UC1'),e,s);assert.equal(d.yt_refresh_token,undefined);assert.deepEqual(JSON.parse(d.yt_channels),[]);
   [c,s]=rec();await handleUpdate(msg('/channels'),e,s);assert.match(c[0][1].text,/कोई YouTube channel नहीं/);});
+import {waUrl} from '../bot/worker.js';
+test('approval popup has WhatsApp URL button with the post',async()=>{const [c,s]=rec();await handleUpdate(msg('ਸਤ ਸ੍ਰੀ ਅਕਾਲ'),env,s);const rows=c[0][1].reply_markup.inline_keyboard;const wa=rows.flat().find(b=>b.url);assert.equal(wa.text,'🟢 WhatsApp पर भेजो');assert.equal(wa.url,'https://wa.me/?text='+encodeURIComponent('ਸਤ ਸ੍ਰੀ ਅਕਾਲ'));assert.ok(rows.flat().some(b=>b.callback_data==='post_yes'));});
+test('test-group button kept alongside WhatsApp',()=>{const k=keyboardFor({TEST_GROUP_ID:'-1'},'hi').inline_keyboard.flat();assert.ok(k.some(b=>b.callback_data==='post_test'));assert.ok(k.some(b=>b.url));});
+test('waUrl trims long text to safe length',()=>{const u=waUrl('ਸ'.repeat(3000));assert.ok(u.length<=1800);assert.ok(decodeURIComponent(u.split('=')[1]).endsWith('…'));});
