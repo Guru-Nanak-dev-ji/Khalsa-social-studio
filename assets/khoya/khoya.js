@@ -14,8 +14,8 @@ function drawScene(){const sc=C.SCENES[cur],box=$('scene');box.textContent='';bo
  for(let i=0;i<14;i++){const f=el('i','fly');f.style.left=(r()*100)+'%';f.style.top=(r()*100)+'%';f.style.animationDelay=(-r()*8).toFixed(1)+'s';box.append(f);}
  box.append(el('div','fog'),el('div','fog f2'));}
 function paint(){$('h-koins').textContent=K.fmt(K.total(kst));const sc=C.SCENES[cur];
- const T=$('tabs');T.textContent='';C.SCENES.forEach((s,i)=>{const b=el('button','tab'+(i===cur?' on':'')+(st.cleared.includes(i)?' done':''),(st.cleared.includes(i)?'✅ ':C.unlocked(st,i)?'':'🔒 ')+(i+1));b.type='button';b.setAttribute('aria-label',s.name);b.disabled=!C.unlocked(st,i);b.onclick=()=>{cur=i;st.scene=i;save(C.KEY,st);drawScene();paint();};T.append(b);});
- $('s-name').textContent=(cur+1)+'. '+sc.name;$('s-story').textContent='🧭 '+sc.guide+': '+sc.story;
+ const T=$('tabs');T.textContent='';C.SCENES.forEach((s,i)=>{if(i===0||i===C.CH1)T.append(el('span','chap','📜 अध्याय '+s.ch));const b=el('button','tab'+(i===cur?' on':'')+(st.cleared.includes(i)?' done':''),(st.cleared.includes(i)?'✅ ':C.unlocked(st,i)?'':'🔒 ')+(i<C.CH1?i+1:i-C.CH1+1));b.type='button';b.setAttribute('aria-label',s.name);b.disabled=!C.unlocked(st,i);b.onclick=()=>{cur=i;st.scene=i;save(C.KEY,st);drawScene();paint();};T.append(b);});
+ $('s-name').textContent='अध्याय '+sc.ch+' · '+(cur+1)+'. '+sc.name;$('s-story').textContent='🧭 '+sc.guide+': '+sc.story;
  const L=$('list');L.textContent='';sc.objs.forEach(o=>{const li=el('li',st.found[cur].includes(o.id)?'got':'',o.name);L.append(li);});
  $('count').textContent=`${st.found[cur].length}/${sc.objs.length} मिलीं`;
  const I=$('inv');I.textContent='';C.SCENES.forEach(s=>{if(st.inv.includes(s.item.id))I.append(el('span','it',s.item.e+' '+s.item.name));});if(!st.inv.length)I.textContent='अभी खाली — दृश्य पूरा करो तो चीज़ मिलेगी';
@@ -23,11 +23,11 @@ function paint(){$('h-koins').textContent=K.fmt(K.total(kst));const sc=C.SCENES[
  if(needP){const G=$('tiles');G.textContent='';st.tiles[cur].forEach((v,t)=>{const b=el('button','tile','⬆️');b.type='button';b.setAttribute('aria-label','टाइल '+(t+1));b.style.transform=`rotate(${v*90}deg)`;
    b.onclick=()=>{const r=C.rotate(st,cur,t);st=r.state;save(C.KEY,st);if(r.solved){toast('🚪 '+sc.item.e+' से अगला दरवाज़ा खुला!');setTimeout(()=>{cur++;st.scene=cur;save(C.KEY,st);drawScene();paint();},900);}paint();};G.append(b);});$('puz-item').textContent=sc.item.e+' '+sc.item.name;}
  $('next').hidden=!(st.cleared.includes(cur)&&st.puzzles.includes(cur)&&cur<C.SCENES.length-1);
- $('badge').hidden=!st.badge;$('city').classList.toggle('lit',st.badge);const pr=C.progress(st);$('prog').textContent=`🌟 नगर की रोशनी: ${pr.pct}% (${pr.got}/${pr.tot})`;$('bar').style.width=pr.pct+'%';}
+ $('badge').hidden=!st.badge;$('badge2').hidden=!st.badge2;$('city').classList.toggle('lit',st.badge);const pr=C.progress(st);$('prog').textContent=`🌟 नगर की रोशनी: ${pr.pct}% (${pr.got}/${pr.tot})`;$('bar').style.width=pr.pct+'%';}
 function pick(id,b){const r=C.tap(st,cur,id);if(!r.ok)return;st=r.state;save(C.KEY,st);b.classList.add('got','pop');
  const o=C.SCENES[cur].objs.find(x=>x.id===id);toast('✨ '+o.name+' मिला!');
  if(r.clearedNew){const g=K.claimSpot(kst,'khoya:'+C.SCENES[cur].id);kst=g.state;save(K.KEY,kst);
-  setTimeout(()=>toast(r.item.e+' '+r.item.name+' मिली'+(g.added?' · +'+g.added+' 💰':'')),1700);if(r.badgeNew)setTimeout(()=>toast('🏅 '+C.BADGE+' — बेगमपुरा रोशन!'),3400);}
+  setTimeout(()=>toast(r.item.e+' '+r.item.name+' मिली'+(g.added?' · +'+g.added+' 💰':'')),1700);if(r.badge2New)setTimeout(()=>toast('👑 '+C.BADGE2+' — पूरा राज्य रोशन!'),3400);if(r.badgeNew)setTimeout(()=>toast('🏅 '+C.BADGE+' — बेगमपुरा रोशन! अध्याय 2 खुला'),3400);}
  paint();}
 $('scene').onclick=()=>{penalty=C.WRONG_MS;$('scene').classList.remove('shake');void $('scene').offsetWidth;$('scene').classList.add('shake');toast('❌ यहाँ नहीं · संकेत 4 सेकंड देर से');};
 $('hint').onclick=()=>{const now=Date.now();const wait=lastHint?C.HINT_MS+penalty-(now-lastHint):penalty;if(wait>0)return toast('⏳ संकेत '+Math.ceil(wait/1000)+' सेकंड में');
