@@ -1,0 +1,16 @@
+const test=require('node:test'),assert=require('node:assert'),S=require('../assets/sakhi/sakhi-core.js'),K=require('../assets/koins-core.js'),Dr=require('../assets/doors-core.js'),Z=require('../assets/khazana/khazana-core.js'),N=require('../assets/naksha/naksha-core.js'),fs=require('fs'),path=require('path');
+const R=f=>fs.readFileSync(path.join(__dirname,'..',f),'utf8');const D=JSON.parse(R('assets/sakhi/sakhi.json'));
+test('12 valid sakhis, unique ids, 4-6 lines, 2 quiz, source + seekh',()=>{assert.equal(D.items.length,12);assert.equal(new Set(D.items.map(i=>i.id)).size,12);for(const i of D.items)assert.ok(S.valid(i),i.id);
+ const src=D.items.map(i=>i.source).join(' ');for(const t of['जनमसाखी','रामायण','महाभारत'])assert.ok(src.includes(t),t);});
+test('date rotation, browse offset, daily listen, badge after 7, quiz once',()=>{assert.equal(S.indexFor('2026-10-13',12),S.indexFor('2026-10-13',12));assert.notEqual(S.indexFor('2026-10-13',12),S.indexFor('2026-10-14',12));
+ assert.equal(S.indexFor('2026-10-13',12,1),S.indexFor('2026-10-14',12));assert.equal(S.indexFor('2026-10-13',12,-1),S.indexFor('2026-10-12',12));const seen=new Set();for(let d=1;d<=12;d++)seen.add(S.indexFor('2026-10-'+String(d).padStart(2,'0'),12));assert.equal(seen.size,12);
+ let s=S.fresh(),r=S.listen(s,'2026-10-13');assert.ok(r.firstToday);s=r.state;assert.ok(!S.listen(s,'2026-10-13').firstToday);let bn=0;for(let d=14;d<20;d++){r=S.listen(s,'2026-10-'+d);s=r.state;if(r.badgeNew)bn++;}assert.equal(bn,1);assert.ok(s.badge);
+ r=S.answer(s,'dhruv',0);assert.ok(r.fresh);assert.ok(!S.answer(r.state,'dhruv',0).fresh);assert.deepEqual(S.validate({v:1,days:['bad','2026-01-01'],answered:[5]}).days,['2026-01-01']);assert.deepEqual(S.validate(null),S.fresh());
+ let k=K.fresh();k=K.claimSpot(k,'sakhi:2026-10-13').state;assert.equal(K.claimSpot(k,'sakhi:2026-10-13').added,0);assert.equal(K.quiz(k,true).added,10);assert.equal(K.quiz(k,false).added,-3);});
+test('page, door, feed, khazana, naksha, sw, no Khanda, no faces/selfies',()=>{const h=R('sakhi.html'),js=R('assets/sakhi/sakhi.js'),c=R('assets/sakhi/sakhi-core.js'),all=h+js+c+R('assets/sakhi/sakhi.json');
+ assert.ok(h.includes('lang="hi"')&&h.includes('data-heritage')&&h.includes('goldtv.js')&&h.includes('hindi-fonts.css')&&h.includes('असली पैसा नहीं'));
+ assert.ok(js.includes("'hi-IN'")&&js.includes('claimSpot')&&js.includes('K.quiz')&&js.includes('3000'));assert.ok(!/innerHTML/.test(js));
+ assert.ok(!/☬/.test(all));assert.ok(!/<img|\.webp|\.jpe?g|selfie/i.test(h+js));assert.ok(R('assets/sakhi/sakhi.css').includes('prefers-reduced-motion'));
+ assert.ok(Dr.all().some(d=>d.href==='./sakhi.html'));assert.ok(JSON.parse(R('assets/goldtv/feed.json')).items.some(i=>i.href==='./sakhi.html'));
+ assert.ok(Z.GAMES.some(g=>g.id==='sakhi'&&g.badge===S.BADGE&&g.key===S.KEY));assert.ok(N.IDS.includes('sakhi'));
+ const sw=R('sw.js');assert.equal((sw.match(/const CACHE/g)||[]).length,1);for(const a of['./sakhi.html','./assets/sakhi/sakhi-core.js','./assets/sakhi/sakhi.js','./assets/sakhi/sakhi.css','./assets/sakhi/sakhi.json'])assert.ok(sw.includes(a),a);});
