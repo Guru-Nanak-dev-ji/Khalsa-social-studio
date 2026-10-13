@@ -14,4 +14,4 @@ test('page is Hindi, private, wired into SW and door palace, no Khanda',()=>{con
  assert.doesNotMatch(h,/[A-Za-z]{3,} [A-Za-z]{3,} [A-Za-z]{3,}<\//);
  for(const f of['avatar.html','assets/avatar/avatar.js','assets/avatar/avatar.css','assets/avatar/avatar-core.js']){assert.doesNotMatch(r(f),/☬|khanda/i);assert.match(r('sw.js'),new RegExp("'\\./"+f.replace(/[.]/g,'\\.')+"'"));}
  const js=r('assets/avatar/avatar.js');assert.doesNotMatch(js,/fetch\(|XMLHttpRequest|sendBeacon/);assert.match(js,/tasks-vision/);assert.match(r('assets/avatar/vendor/GIFENC-LICENSE.md'),/MIT/);
- assert.ok(require('../assets/doors-core.js').all().some(d=>d.href==='./avatar.html'));assert.match(r('sw.js'),/v0\.15\.3/);});
+ assert.ok(require('../assets/doors-core.js').all().some(d=>d.href==='./avatar.html'));assert.match(r('sw.js'),/v0\.16\.2/);});

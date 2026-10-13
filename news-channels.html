@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="hi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#1a0606">
+<meta name="description" content="KNN News चैनल — अपना न्यूज़ चैनल बनाइए">
+<link rel="manifest" href="./manifest.webmanifest"><link rel="icon" href="./icons/khalsa-v1-192.png"><title>📺 KNN News चैनल · KDN</title>
+<link rel="stylesheet" href="./assets/hindi-fonts.css"><link rel="stylesheet" href="./assets/newsroom.css"><link rel="stylesheet" href="./assets/news-channels.css"><link rel="stylesheet" href="./assets/jaali-live.css"><link rel="stylesheet" href="./assets/heritage.css">
+</head>
+<body data-heritage="court" class="kdn-hindi"><div class="heritage-banner" aria-hidden="true"></div><main>
+<nav class="crumb"><a href="./studio.html">🏰 कंट्रोल रूम</a> › <a href="./studio.html#door=knn">📺 KNN News</a> › <b>न्यूज़ चैनल</b></nav>
+<header class="arch jaali-live"><h1>📺 KNN न्यूज़ चैनल</h1><p>अपने शहर का न्यूज़ चैनल बनाइए — मुफ़्त</p></header>
+
+<section class="panel"><h2>📜 सभी चैनल</h2>
+ <p id="list-status" class="status" role="status">चैनल लोड हो रहे हैं…</p>
+ <div id="channels" class="chan-grid"></div>
+</section>
+
+<section class="panel" id="create"><h2>➕ नया चैनल बनाइए</h2>
+ <p class="note big-note">नियम: चैनल के नाम के आख़िर में <b>News</b> या <b>News TV</b> (या <b>न्यूज़</b>) ज़रूर हो। जैसे: <b>मालवा News</b>, <b>Ludhiana News TV</b>।</p>
+ <div id="login-box"><p class="step">① पहले Telegram से login कीजिए (एक tap):</p><div id="tg-login"></div>
+  <p class="note">Login बटन न दिखे तो Telegram app खुला रखकर page refresh करें।</p></div>
+ <p id="who" class="status" hidden></p>
+ <form id="form" novalidate>
+  <label>चैनल का नाम<input id="f-name" maxlength="40" placeholder="मालवा News" autocomplete="off" required></label><p class="err" data-for="name"></p>
+  <label>Handle (पहचान, अंग्रेज़ी में)<input id="f-handle" maxlength="30" placeholder="malwa-news" autocomplete="off" inputmode="latin" required></label><p class="err" data-for="handle"></p>
+  <label>शहर<input id="f-city" maxlength="40" placeholder="बठिंडा" required></label><p class="err" data-for="city"></p>
+  <label>चैनल की भाषा<select id="f-lang"><option value="hi" selected>हिंदी</option><option value="pa">ਪੰਜਾਬੀ</option><option value="en">English</option></select></label><p class="err" data-for="lang"></p>
+  <label>Logo (वैकल्पिक, अपने आप छोटा होगा)<input id="f-logo" type="file" accept="image/png,image/jpeg,image/webp"></label><p class="err" data-for="logo"></p>
+  <label>Ticker का रंग<input id="f-color" type="color" value="#f2c66a"></label><p class="err" data-for="tickerColor"></p>
+  <div class="preview" aria-label="झलक"><span id="pv-logo" class="pv-logo">KNN</span><span id="pv-name" class="pv-name">मालवा News</span><span id="pv-tick" class="pv-tick">ताज़ा ख़बर ◆ आपके शहर से</span></div>
+  <button id="f-submit" class="big gold" type="submit">✅ चैनल बनाइए</button>
+  <p id="f-status" class="status" role="status" aria-live="polite"></p>
+ </form>
+</section>
+<p class="foot">मुफ़्त · Open Source · सिर्फ़ चैनल का नाम, शहर, logo और आपका पहला नाम दिखता है। Telegram नंबर कभी नहीं।</p>
+</main>
+<script src="./assets/news-channels-core.js"></script><script src="./assets/news-channels.js" defer></script><script src="./assets/jaali-live.js" defer></script>
+<script>if("serviceWorker"in navigator)addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));</script>
+</body></html>
