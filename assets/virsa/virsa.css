@@ -1,0 +1,6 @@
+.vr-artist{margin:18px auto;max-width:900px;padding:14px 12px;border-radius:18px;border:1px solid rgba(242,198,106,.5);background:linear-gradient(160deg,rgba(60,30,8,.88),rgba(28,14,40,.88))}
+.vr-artist h2{color:#f2c66a;text-align:center;margin:0 0 4px}.vr-pa{font-family:'KDN Gurmukhi','Noto Sans Gurmukhi',sans-serif;font-size:.8em;color:#ffe3a3}
+.vr-sub{text-align:center;color:#ffeccc;margin:0 0 8px}.vr-thumb{background:radial-gradient(circle at 70% 25%,#fff1b8,#d7a23a 50%,#3d1d06)}
+#virsa-artists .kp-nav{flex-wrap:wrap}.vr-badge{text-align:center;color:#2a1606;background:#f6d27a;border-radius:999px;padding:8px 14px;max-width:420px;margin:10px auto;font-weight:700}
+.vr-head{text-align:center;padding:24px 12px 4px}.vr-head h1{color:#f2c66a;margin:6px 0}.vr-head p{color:#ffeccc;margin:4px 0}.vr-credit{text-align:center;color:#e9d9b8;font-size:12px;margin:12px 8px 40px}
+.hud{position:sticky;top:0;z-index:5;display:flex;justify-content:space-between;padding:10px 14px;background:rgba(26,13,6,.85);border-bottom:1px solid rgba(242,198,106,.5)}.hud a{color:#f2c66a;font-weight:700;text-decoration:none}
