@@ -8,6 +8,7 @@ const GAMES=[
  {id:'khel',icon:'🎮',game:'खेल बनाओ',badge:'खेल निर्माता',key:'kdn-khel-v1',href:'./khel-banao.html',got:s=>s.badge===true},
  {id:'guru',icon:'🙏',game:'दस गुरु साहिबान',badge:'दस गुरू यात्री',key:'kdn-guru-v1',href:'./guru.html',got:s=>s.badge===true},
  {id:'panj',icon:'🏛️',game:'पंज तख़्त',badge:'पंज तख़्त यात्री',key:'kdn-panj-v1',href:'./panj-takht.html',got:s=>s.badge===true},
+ {id:'kshetra',icon:'🌾',game:'मालवा यात्रा',badge:'मालवा यात्री',key:'kdn-kshetra-v1',href:'./kshetra-malwa.html',got:s=>s.badge===true},
  {id:'jod',icon:'🔤',game:'शब्द जोड़',badge:'अक्खर साथी',key:'kdn-jod-v1',href:'./shabad-jod.html',got:s=>s.badge===true},
  {id:'rush',icon:'🍛',game:'लंगर रश',badge:'लंगर सेवादार',key:'kdn-rush-v1',href:'./langar-rush.html',got:s=>s.badge===true},
  {id:'khoj',icon:'🗺️',game:'नक्शा खोज',badge:'नक्शा खोजी',key:'kdn-khoj-v1',href:'./naksha-khoj.html',got:s=>s.badge===true},
