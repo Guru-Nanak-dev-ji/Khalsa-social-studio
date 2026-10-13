@@ -1,0 +1,10 @@
+const test=require('node:test'),assert=require('node:assert'),C=require('../assets/neta/neta-core.js'),Z=require('../assets/khazana/khazana-core.js'),fs=require('fs'),path=require('path');
+const R=f=>fs.readFileSync(path.join(__dirname,'..',f),'utf8');
+test('8 states with verified seat counts',()=>{const m={};for(const s of C.S)m[s.id]=[s.vs,s.ls,s.rs];
+ assert.deepStrictEqual(m,{punjab:[117,13,7],haryana:[90,10,5],delhi:[70,7,3],rajasthan:[200,25,10],up:[403,80,31],himachal:[68,4,3],jk:[90,5,4],chandigarh:[0,1,0]});});
+test('official links only, https, non-partisan (no party names)',()=>{for(const s of [...C.S.flatMap(s=>s.links),...C.COMMON])assert.match(s.u,/^https:\/\/[^/]*(gov\.in|nic\.in|sansad\.in)\//,s.u);
+ assert.doesNotMatch(JSON.stringify(C.S)+C.NOTE,/BJP|Congress|AAP|भाजपा|कांग्रेस|आम आदमी|अकाली|Shri |Smt\.|श्री |श्रीमती/);});
+test('quiz answers correct + badge after all 8',()=>{for(const s of C.S){assert.equal(s.quiz.length,3);assert.equal(s.quiz[0][1][0],String(s.ls))}let st=C.fresh();for(const id of C.IDS.slice(0,7))st=C.finish(st,id,3,3).state;assert.equal(st.badge,false);assert.ok(C.finish(st,'chandigarh',2,3).badgeNew);assert.equal(C.finish(C.fresh(),'up',1,3).isNew,false);assert.deepStrictEqual(C.validate(7),C.fresh());});
+test('pages + wiring',()=>{for(const s of C.S)assert.ok(R('neta-'+s.id+'.html').includes('data-neta="'+s.id+'"'));assert.ok(R('neta-rajya.html').includes('id="ne-main"'));
+ for(const f of['sab.html','dwar.html','community.html'])assert.ok(R(f).includes('./neta-rajya.html'),f);const P=JSON.parse(R('assets/pages.json')).pages;for(const id of['neta-rajya',...C.IDS.map(i=>'neta-'+i)])assert.equal(P.find(p=>p.id===id).cat,'s',id);
+ assert.equal(Z.GAMES.find(g=>g.id==='neta').badge,'जागरूक नागरिक');assert.match(R('sw.js'),/const CACHE=PREFIX\+'v0\.(7[3-9]|[89]\d)\./);});

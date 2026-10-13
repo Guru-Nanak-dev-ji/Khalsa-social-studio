@@ -8,6 +8,7 @@ const GAMES=[
  {id:'khel',icon:'🎮',game:'खेल बनाओ',badge:'खेल निर्माता',key:'kdn-khel-v1',href:'./khel-banao.html',got:s=>s.badge===true},
  {id:'guru',icon:'🙏',game:'दस गुरु साहिबान',badge:'दस गुरू यात्री',key:'kdn-guru-v1',href:'./guru.html',got:s=>s.badge===true},
  {id:'panj',icon:'🏛️',game:'पंज तख़्त',badge:'पंज तख़्त यात्री',key:'kdn-panj-v1',href:'./panj-takht.html',got:s=>s.badge===true},
+ {id:'neta',icon:'🗳️',game:'My Neta — राज्य',badge:'जागरूक नागरिक',key:'kdn-neta-v1',href:'./neta-rajya.html',got:s=>s.badge===true},
  {id:'swad',icon:'🍲',game:'हर राज्य का स्वाद',badge:'स्वाद यात्री',key:'kdn-swad-v1',href:'./swad.html',got:s=>s.badge===true},
  {id:'haq',icon:'📜',game:'वकील डायरेक्टरी',badge:'हक़ जानकार',key:'kdn-sewa-v1',href:'./vakil.html',got:s=>s.rightsBadge===true},
  {id:'madad',icon:'⛑️',game:'खत्री Aid',badge:'मदद साथी',key:'kdn-sewa-v1',href:'./khatri-aid.html',got:s=>s.aidBadge===true},

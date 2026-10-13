@@ -1,0 +1,2 @@
+.ne-links{list-style:none;padding:0;display:grid;gap:8px}.ne-links a{display:block;padding:10px 12px;border:1px solid rgba(242,198,106,.45);border-radius:10px;color:#f2c66a;text-decoration:none;background:rgba(242,198,106,.06)}.ne-links a:hover{background:rgba(242,198,106,.16)}
+.ne-t{width:100%;border-collapse:collapse}.ne-t th,.ne-t td{text-align:left;padding:8px;border-bottom:1px solid rgba(242,198,106,.25);vertical-align:top}.ne-t th{color:#f2c66a;width:40%}
