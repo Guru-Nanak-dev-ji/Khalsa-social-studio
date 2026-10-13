@@ -1,0 +1,17 @@
+const test=require('node:test'),assert=require('node:assert'),C=require('../assets/kahani/kahani-core.js'),K=require('../assets/koins-core.js'),Dr=require('../assets/doors-core.js'),Z=require('../assets/khazana/khazana-core.js'),N=require('../assets/naksha/naksha-core.js'),fs=require('fs'),path=require('path');
+const R=f=>fs.readFileSync(path.join(__dirname,'..',f),'utf8');
+test('chapter 1 branching, endings, badge once, junk safe',()=>{assert.equal(C.KEY,'kdn-kahani-v1');assert.equal(C.BADGE,'कथा यात्री');assert.equal(C.TIMES.length,3);assert.equal(C.CH1.length,3);assert.ok(C.MAP.length>=5);
+ assert.equal(C.play(['a','a','a']).end.icon,'😇');assert.equal(C.play(['b','b','b']).end.icon,'😈');assert.equal(C.play(['a','b','a']).end.icon,'🦋');assert.equal(C.play(['x']),null);assert.ok(!C.play(['a']).done);
+ let s=C.fresh(),bn=0;for(const p of['a','b','a']){const r=C.choose(s,p);assert.ok(r.ok);s=r.state;if(r.badgeNew)bn++;}assert.equal(bn,1);assert.ok(!C.choose(s,'a').ok);
+ s=C.restart(s);assert.deepEqual(s.picks,[]);assert.ok(s.badge);for(const p of['a','a','a'])s=C.choose(s,p).state;assert.ok(!C.choose(C.restart(s),'z').ok);
+ assert.deepEqual(C.validate({v:1,picks:['a','evil','b','a','a']}).picks,['a','b','a']);assert.deepEqual(C.validate(null),C.fresh());
+ assert.ok(Z.GAMES.find(g=>g.id==='kahani').got(s));const k=K.claimSpot(K.fresh(),'kahani:ch1');assert.equal(k.added,5);});
+test('content: fictional, safe, credited, ep1+ep2',()=>{const all=JSON.stringify(C);assert.ok(C.DISCLAIMER.includes('काल्पनिक')&&C.DISCLAIMER.includes('टिवाणा')&&C.DISCLAIMER.includes('प्रेरित'));
+ for(const bad of['Navdeep','Kharar','खरड़','Khalistan','खालिस्तान','शिकार','तर्क सिंह','भावना कौर','क्यों?','KDN'])assert.ok(!all.includes(bad),bad);
+ assert.ok(C.AVATAR.ep1.length>=5&&C.AVATAR.ep2.length>=5);assert.ok(C.AVATAR.ep3.length>=6&&JSON.stringify(C.AVATAR.ep3).includes('तुम सिर्फ़ एक मोहरा हो')&&JSON.stringify(C.AVATAR.ep3).includes('नीला धागा'));assert.ok(C.AVATAR.ep4.length>=6&&JSON.stringify(C.AVATAR.ep4).includes('हम दोनों सिर्फ़ किरदार हैं')&&JSON.stringify(C.AVATAR.ep4).includes('Chapter 18'));assert.ok(JSON.stringify(C.AVATAR.ep2).includes('असली लेखक कौन?'));assert.ok(C.AVATAR.msg.includes('ग़लत इस्तेमाल पाप'));
+ assert.deepEqual(C.AVATAR.cast.map(c=>c.n),['अयान','मीरा','कबीर','डॉ. सेन']);});
+test('page, door, feed, khazana, naksha, sw, no Khanda, safe DOM',()=>{const h=R('kahani.html'),js=R('assets/kahani/kahani.js'),css=R('assets/kahani/kahani.css'),all=h+js+R('assets/kahani/kahani-core.js')+css;
+ assert.ok(h.includes('lang="hi"')&&h.includes('hindi-fonts.css')&&h.includes('goldtv.js')&&h.includes('चेतना का धागा')&&h.includes('असली पैसा नहीं'));assert.ok(!/☬/.test(all));assert.ok(!/<img|selfie/i.test(h+js));
+ assert.ok(!/innerHTML|outerHTML|insertAdjacentHTML|fetch\(/.test(js));assert.ok(css.includes('prefers-reduced-motion')&&css.includes('@keyframes draw'));
+ assert.ok(Dr.all().some(d=>d.href==='./kahani.html'));assert.equal(JSON.parse(R('assets/goldtv/feed.json')).items[0].href,'./kahani.html');assert.ok(N.IDS.includes('kahani'));
+ const sw=R('sw.js');assert.equal((sw.match(/const CACHE/g)||[]).length,1);assert.ok(sw.includes("const CACHE=PREFIX+'v0.42.0'"));assert.ok(sw.includes("const ASSETS=['./kahani.html','./assets/kahani/kahani-core.js'"));});
