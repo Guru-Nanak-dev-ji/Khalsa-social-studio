@@ -6,6 +6,8 @@ const COMBO={'gussa+parivar':'घर वालों पर गुस्सा �
 function detect(text){text=String(text||'').toLowerCase();const m=MOODS.filter(([id,,kw])=>kw.some(k=>text.includes(k.toLowerCase()))).map(m=>m[0]);return m;}
 function danger(text){text=String(text||'').toLowerCase();return DANGER.some(k=>text.includes(k.toLowerCase()));}
 const ROT={};function pick(quotes,moods,rot){rot=rot||ROT;const out=[];for(const m of moods.slice(0,3)){const c=quotes.filter(q=>q.moods.includes(m)&&!out.includes(q));if(!c.length)continue;const i=(rot[m]||0)%c.length;rot[m]=(rot[m]||0)+1;out.push(c[i]);}return out;}
+function fromGranth(g){return (Array.isArray(g)?g:[]).filter(q=>q&&q.original&&q.source&&q.meaning&&Array.isArray(q.moods)).map(q=>({id:'g:'+q.id,moods:q.moods,line:q.original,meaning:q.meaning,source:q.source+(q.speaker?' · बोले: '+q.speaker:''),speaker:q.speaker||'',kind:'granth'}));}
+function merge(bani,granth){const a=(bani||[]).map(q=>Object.assign({kind:'bani'},q)),b=fromGranth(granth),out=[];for(let i=0;i<Math.max(a.length,b.length);i++){if(a[i])out.push(a[i]);if(b[i])out.push(b[i]);}return out;}
 function respond(who,moods,quotes){const s=SAATHI[who]||SAATHI.tark;moods=[...new Set(moods)].filter(m=>MOODS.some(x=>x[0]===m));if(!moods.length)moods=['khushi'];const qs=pick(quotes,moods);const key=moods.slice(0,2).sort().join('+');const names=moods.map(m=>MOODS.find(x=>x[0]===m)[1].replace(/^\S+\s/,'')).join(' + ');
-const parts=[s.hi,'आपने बताया: '+names+'।'];qs.forEach(q=>parts.push('बाणी कहती है: "'+q.line+'" — '+q.source+'। अर्थ: '+q.meaning));if(COMBO[key])parts.push(COMBO[key]);parts.push(s.ask);return{name:s.name,moods,quotes:qs,text:parts.join('\n\n'),speak:parts.join(' ')};}
-return{MOODS,SAATHI,detect,danger,pick,respond};});
+const parts=[s.hi,'आपने बताया: '+names+'।'];qs.forEach(q=>parts.push((q.kind==='granth'?'📜 ग्रंथ से: "':'बाणी कहती है: "')+q.line+'" — '+q.source+'। अर्थ: '+q.meaning));if(COMBO[key])parts.push(COMBO[key]);parts.push(s.ask);return{name:s.name,moods,quotes:qs,text:parts.join('\n\n'),speak:parts.join(' ')};}
+return{MOODS,SAATHI,detect,danger,pick,respond,fromGranth,merge};});
