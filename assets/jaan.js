@@ -23,6 +23,11 @@ function games(el){if(el.dataset.jaanDone)return;el.dataset.jaanDone='1';el.clas
 var FUN={tv:['📺 चैनल बदलो',['📺 ख़बर: गाँव में नया लंगर 🍲','🎶 कीर्तन चैनल 🪕','⚽ खेल: पिंड का मैच 🏆','📚 ज्ञान: आज का सवाल ❓','😁 हँसी चैनल 🤣'],'📡 घुमाओ'],
 mandal:['🦅 बाज़ उड़ाओ',['🦅 बाज़ ने 1 चक्कर लगाया','🦅🦅 दो बाज़ साथ उड़े','🌄 बाज़ पहाड़ तक गया','🏰 बाज़ महल पर बैठा','✨ बाज़ सुनहरा हो गया'],'🚀 उड़ान'],
 community:['🤝 हाथ मिलाओ',['🤝 1 नया साथी जुड़ा','💛 मोहब्बत फैली','🍲 लंगर में हाथ बँटाया','🌱 एक पेड़ लगाया','🎉 पूरा मोहल्ला एक'],'🤝 मिलाओ'],
+naksha:['🧭 कम्पास घुमाओ',['🧭 उत्तर: 📚 ज्ञान घर','🧭 दक्षिण: 🍲 लंगर','🧭 पूरब: ☀️ सुबह का द्वार','🧭 पश्चिम: 🏰 क़िला','🧭 बीच में: 💰 ख़ज़ाना'],'🌀 घुमाओ'],
+takht:['👑 ताज उछालो',['👑 ताज सीधा गिरा — आज तू राजा!','🪙 सिक्का निकला — सेवा कर','🦅 बाज़ ले उड़ा — फिर कोशिश','😁 ताज हँसते हुए गिरा','🙏 ताज सेवक के सिर पर'],'👑 उछालो'],
+titli:['🦋 तितली पकड़ो',['🦋 पीली तितली पकड़ी!','🦋 उड़ गई… फिर से!','🌼 फूल पर बैठी तितली','🦋🦋 दो तितलियाँ!','🌈 सतरंगी तितली मिली'],'🫴 पकड़ो'],
+bhav:['🎭 भाव मिलाओ',['😁 + 📚 = जिज्ञासा 🤔','😢 + 🤝 = सहारा 💛','😠 + 🧘 = शांति 🕊️','😨 + 🦅 = हिम्मत 💪','🤩 + 🍲 = वंड छको 🙏'],'🎭 मिलाओ'],
+khazana:['💰 संदूक खोलो',['💰 10 koins मिले!','💎 हीरा — ज्ञान का','📜 पुराना नक्शा','🪙 सोने का सिक्का','🎁 सरप्राइज़: एक मुस्कान 😁'],'🗝️ खोलो'],
 kyon:['❓ सवाल का पासा',['❓ आसमान नीला क्यों?','❓ हम सपने क्यों देखते हैं?','❓ सच कड़वा क्यों लगता है?','❓ माफ़ी से हल्कापन क्यों?','❓ किताबें दोस्त क्यों?'],'🎲 फेंको']};
 function fun(el){if(el.dataset.jaanFunDone)return;el.dataset.jaanFunDone='1';var c=FUN[el.dataset.jaanFun];if(!c)return;var b=mk('div','jaan-box jaan-fun');b.appendChild(mk('h3','jaan-head',c[0]));
  var out=mk('p','jaan-fun-out',c[1][0]),n=0,cnt=mk('small','','0'),btn=mk('button','jaan-btn',c[2]);btn.type='button';out.setAttribute('aria-live','polite');
@@ -30,6 +35,9 @@ function fun(el){if(el.dataset.jaanFunDone)return;el.dataset.jaanFunDone='1';var
  b.append(out,btn,mk('br'),cnt);el.appendChild(b);}
 function reveal(){var els=document.querySelectorAll('main section,.panel,.card,article');if(reduce||!('IntersectionObserver'in window))return;var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('jaan-on');io.unobserve(e.target);}});},{threshold:.08});
  [].forEach.call(els,function(e){if(e.getBoundingClientRect().top>innerHeight){e.classList.add('jaan-in');io.observe(e);}});}
-function init(){sky();[].forEach.call(document.querySelectorAll('.jaan-slider'),slider);[].forEach.call(document.querySelectorAll('[data-jaan-games]'),games);[].forEach.call(document.querySelectorAll('[data-jaan-fun]'),fun);reveal();}
+function intro(){var o=document.querySelector('.jaan-intro');if(!o)return;var k='kdn-jaan-intro';try{if(sessionStorage.getItem(k)){o.remove();return;}}catch(e){}
+ o.hidden=false;var close=function(){try{sessionStorage.setItem(k,'1');}catch(e){}o.classList.add('bye');setTimeout(function(){o.remove();},reduce?0:400);};
+ [].forEach.call(o.querySelectorAll('[data-jaan-close]'),function(b){b.addEventListener('click',close);});document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});var f=o.querySelector('[data-jaan-close]');if(f)f.focus();}
+function init(){intro();sky();[].forEach.call(document.querySelectorAll('.jaan-slider'),slider);[].forEach.call(document.querySelectorAll('[data-jaan-games]'),games);[].forEach.call(document.querySelectorAll('[data-jaan-fun]'),fun);reveal();}
 if(typeof window!=='undefined'){window.KDNJaan={slider:slider,games:games};if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();}
 })();
