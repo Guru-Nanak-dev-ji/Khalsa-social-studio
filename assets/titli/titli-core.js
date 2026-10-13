@@ -1,6 +1,6 @@
 (function(root,f){const m=f();if(typeof module==='object'&&module.exports)module.exports=m;else root.KDNTitli=m;})(this,function(){'use strict';
 // Butterfly चुनाव — छोटे चुनाव, बड़ा असर (butterfly effect). सिर्फ़ game koins.
-const KEY='kdn-titli-v1',BADGE='तितली प्रभाव',SLOGAN='One click and change your life 🧧';
+const KEY='kdn-titli-v1',BADGE='तितली प्रभाव',SLOGAN='One click and change your life 🧬';
 const SCENES=[
  {t:'🌅 सुबह आँख खुली। phone हाथ में है।',c:[{x:'🙏 पहले पाँच मिनट शांत बैठूँ, धन्यवाद करूँ',k:1,e:'मन हल्का हुआ, दिन की शुरुआत मुस्कान से हुई।'},{x:'📱 सीधा reels scroll करूँ',k:-1,e:'एक घंटा कहाँ गया, पता ही नहीं चला। मन भारी है।'}]},
  {t:'🚌 रास्ते में एक बुज़ुर्ग का थैला गिर गया।',c:[{x:'🤝 रुककर थैला उठाऊँ',k:1,e:'बुज़ुर्ग ने आशीर्वाद दिया। आपका दिन चमक उठा।'},{x:'⏩ देर हो रही है, आगे बढ़ूँ',k:-1,e:'मन में हल्की चुभन रह गई।'}]},

@@ -5,7 +5,7 @@ test('5 scenes x 2 choices, three endings',()=>{assert.equal(T.SCENES.length,5);
  let r=play(T.fresh(),0);assert.equal(r.result,'swarg');assert.ok(r.badgeNew&&r.isNewResult);let s=T.again(r.state);assert.ok(s.badge);assert.equal(s.step,0);
  r=play(s,1);assert.equal(r.result,'narak');assert.ok(!r.badgeNew);s=T.again(r.state);
  r=T.choose(s,0);r=T.choose(r.state,1);r=T.choose(r.state,0);r=T.choose(r.state,1);r=T.choose(r.state,0);assert.equal(r.result,'beech');assert.equal(r.state.seen.length,3);
- assert.equal(T.choose(r.state,0).effect,null);assert.equal(T.SLOGAN,'One click and change your life 🧧');assert.equal(T.BADGE,'तितली प्रभाव');});
+ assert.equal(T.choose(r.state,0).effect,null);assert.equal(T.SLOGAN,'One click and change your life 🧬');assert.equal(T.BADGE,'तितली प्रभाव');});
 test('validate recomputes karma',()=>{const s=T.validate({v:1,path:'aab',karma:99,seen:['swarg','zz']});assert.equal(s.karma,1);assert.equal(s.step,3);assert.deepEqual(s.seen,['swarg']);assert.equal(T.validate({v:1,path:'xyz'}).path,'');
  let k=K.claimSpot(K.fresh(),'titli:swarg').state;assert.equal(K.claimSpot(k,'titli:swarg').added,0);});
 test('page, door, feed, sw, no Khanda',()=>{const h=R('titli.html');assert.ok(h.includes('lang="hi"')&&h.includes('data-heritage')&&h.includes('goldtv.js')&&h.includes('One click and change your life'));
