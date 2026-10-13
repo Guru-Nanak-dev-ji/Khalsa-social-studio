@@ -12,6 +12,7 @@
 #tool-search{width:100%;box-sizing:border-box;padding:.8rem 1rem;border-radius:12px;border:1px solid #c9a24a;background:#1d140c;color:#f6e7c1;font-size:1rem;margin:.5rem 0 1rem}
 .cat h2{color:#e8c46a;margin:1.2rem 0 .5rem;font-size:1.15rem}
 .tools{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:.7rem}
+@media (max-width:520px){.tools{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}}
 .tool{display:block;text-decoration:none;color:#f6e7c1;background:linear-gradient(160deg,#2c1f12,#1a120a);border:1px solid #8a6a2a;border-radius:14px;padding:.8rem .9rem;box-shadow:0 2px 10px #0006}
 .tool:hover,.tool:focus{border-color:#e8c46a;outline:none}
 .tool b{font-size:1.05rem;color:#ffd77a}
@@ -19,6 +20,24 @@
 .badge{display:inline-block;font-size:.72rem;padding:.12rem .5rem;border-radius:99px;border:1px solid #c9a24a;color:#ffd77a}
 .badge.os{background:#3a2a0e}
 .empty{color:#e9dcc0}
+.shapes{margin:1.1rem 0 1.4rem;padding:1rem .9rem 1.05rem;border:1px solid #8a6a2a;border-radius:16px;background:linear-gradient(165deg,#2a1c10,#16100a);box-shadow:0 2px 14px #0007}
+.shapes h2{margin:0 0 .25rem;font-size:1.2rem;color:#e8c46a}
+.shapes .sub-s{margin:0 0 .85rem;font-size:.92rem;color:#e9dcc0;line-height:1.4}
+.shape-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.55rem}
+@media (max-width:520px){.shape-row{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.shp{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:.4rem;text-decoration:none;color:#f6e7c1;background:#1d140c;border:1px solid #8a6a2a;border-radius:12px;padding:.65rem .4rem .7rem;min-height:7.2rem;box-sizing:border-box}
+.shp:hover,.shp:focus{border-color:#e8c46a;outline:none;box-shadow:0 0 0 1px #c9a24a55}
+.shp .frame{border:2px solid #c9a24a;border-radius:6px;background:linear-gradient(160deg,#3a2a0e,#24180f);box-shadow:inset 0 0 12px #c9a24a33}
+.shp .frame.r916{width:28px;height:50px;aspect-ratio:9/16}
+.shp .frame.r11{width:42px;height:42px;aspect-ratio:1/1}
+.shp .frame.r45{width:36px;height:45px;aspect-ratio:4/5}
+.shp .frame.r169{width:52px;height:29px;aspect-ratio:16/9}
+.shp b{font-size:.88rem;color:#ffd77a;text-align:center;line-height:1.25}
+.shp .ratio{font-size:.78rem;color:#e8c46a}
+.shp .px{font-size:.68rem;color:#c9b892;margin-top:-.15rem}
+.shp-frames{margin:.75rem 0 0;font-size:.78rem;color:#c9b892;text-align:center;line-height:1.45}
+.shp-frames a{color:#e8c46a;text-decoration:none;border-bottom:1px dotted #c9a24a66}
+.shp-frames a:hover,.shp-frames a:focus{color:#ffd77a}
 </style>
 <link rel="stylesheet" href="./assets/lworld/living-world.css"><script defer src="./assets/lworld/living-world.js" data-world="library"></script><script defer src="./assets/goldtv/goldtv.js"></script></head>
 <body data-heritage="court">
@@ -28,6 +47,18 @@
 <p class="eyebrow">KDN · FREE AI TOOLS DWAR · v0.1</p>
 <h1>Free AI Tools द्वार</h1>
 <p class="sub">मुफ़्त और open-source AI tools एक ही दरवाज़े पर · ਮੁਫ਼ਤ AI ਟੂਲ · Free AI tools in one place. हर card tool की असली website नई tab में खोलता है।</p>
+
+<section class="shapes" id="mobile-shapes" aria-labelledby="shapes-title">
+<h2 id="shapes-title">📱 मोबाइल आकार</h2>
+<p class="sub-s">पोस्ट के लिए तैयार आकार — टैप करो, KDN में बनाओ · Post shapes</p>
+<div class="shape-row">
+<a class="shp" href="./reels.html"><span class="frame r916" aria-hidden="true"></span><b>रील्स / स्टोरी</b><span class="ratio">9:16</span><span class="px">1080×1920</span></a>
+<a class="shp" href="./poster.html"><span class="frame r11" aria-hidden="true"></span><b>फ़ीड वर्ग</b><span class="ratio">1:1</span><span class="px">1080×1080</span></a>
+<a class="shp" href="./poster.html"><span class="frame r45" aria-hidden="true"></span><b>पोर्ट्रेट</b><span class="ratio">4:5</span><span class="px">1080×1350</span></a>
+<a class="shp" href="./poster.html"><span class="frame r169" aria-hidden="true"></span><b>लैंडस्केप</b><span class="ratio">16:9</span><span class="px">1920×1080</span></a>
+</div>
+<p class="shp-frames">रील ढाँचे: <a href="./reels.html">मेहराब</a> · <a href="./reels.html">शतरंज</a> · <a href="./reels.html">ताश</a></p>
+</section>
 <input id="tool-search" type="search" placeholder="खोजें / ਖੋਜੋ / Search… (chat, image, voice)" aria-label="Search tools">
 <div id="cats"></div>
 <p class="empty" id="empty" hidden>कोई tool नहीं मिला · No tool found</p>
