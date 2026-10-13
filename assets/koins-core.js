@@ -8,7 +8,8 @@ function validate(v){if(!v||v.version!==1)return fresh();const n=x=>Number.isFin
 function grantWelcome(s){s=validate(s);if(s.welcome)return{state:s,added:0};return{state:{...s,welcome:WELCOME},added:WELCOME};}
 function claimSpot(s,id){s=validate(s);if(!/^[a-z0-9/_:-]{1,60}$/.test(id)||s.spots.includes(id)||s.spots.length>=MAX_SPOTS)return{state:s,added:0};return{state:{...s,earned:s.earned+SPOT,spots:[...s.spots,id]},added:SPOT};}
 function quiz(s,right){s=validate(s);const d=right?QUIZ_RIGHT:QUIZ_WRONG;return{state:{...s,score:s.score+d},added:d};}
+function ring(s){s=validate(s);return{state:{...s,earned:s.earned+SPOT},added:SPOT};}
 function total(s){s=validate(s);return s.welcome+s.earned;}
 function fmt(n){return Number(n).toLocaleString('en-IN');}
 function spotsFor(path){const base=(path.join('/')||'root');return[0,1].map(i=>base+':'+i);}
-return{KEY,WELCOME,SPOT,QUIZ_RIGHT,QUIZ_WRONG,fresh,validate,grantWelcome,claimSpot,quiz,total,fmt,spotsFor};});
+return{KEY,WELCOME,SPOT,QUIZ_RIGHT,QUIZ_WRONG,fresh,validate,grantWelcome,claimSpot,ring,quiz,total,fmt,spotsFor};});
