@@ -33,7 +33,7 @@ el('listen').addEventListener('click',()=>{seek(book.chapters[current].start);pl
 el('speed').addEventListener('change',()=>audio.playbackRate=Number(el('speed').value));
 audio.addEventListener('loadedmetadata',()=>{if(pendingSeek!==null){audio.currentTime=pendingSeek;pendingSeek=null}});
 audio.addEventListener('play',()=>document.body.classList.add('speaking'));audio.addEventListener('pause',()=>document.body.classList.remove('speaking'));
-audio.addEventListener('timeupdate',()=>{let i=0;for(let j=0;j<book.chapters.length;j++){if(audio.currentTime+.08>=book.chapters[j].start)i=j}if(i!==current)render(i)});
+audio.addEventListener('timeupdate',()=>{if(pendingSeek!==null||audio.paused)return;let i=0;for(let j=0;j<book.chapters.length;j++){if(audio.currentTime+.08>=book.chapters[j].start)i=j}if(i!==current)render(i)});
 audio.addEventListener('error',()=>el('playError').textContent='ऑडियो नहीं खुला। साथ दी गई MP3 फाइल किसी ऑडियो प्लेयर में खोल सकते हैं।');
 render(0);
 </script></body></html>
