@@ -97,3 +97,12 @@ test('service worker leaves API, other apps and write requests alone',()=>{
   const h=swHarness();
   for(const request of [{method:'GET',url:'https://api.github.com/repos/a/b'},{method:'GET',url:'https://example.org/other-app/'},{method:'POST',url:'https://example.org/Khalsa-social-studio/creator.html'},{method:'GET',url:'https://example.org/Khalsa-social-studio/unbundled'}])h.events.fetch({request,respondWith:()=>assert.fail('must not intercept')});
 });
+test('one-tap share links encode Devanagari and Gurmukhi text',()=>{
+  const text='संगत ਸੇਵਾ & #KDN',l=C.shareLinks(text,'https://example.org/a b');
+  assert.equal(l.whatsapp,'https://wa.me/?text='+encodeURIComponent(text));
+  assert.ok(l.telegram.startsWith('https://t.me/share/url?url='));
+  assert.ok(l.x.includes(encodeURIComponent('ਸੇਵਾ')));
+  assert.equal(decodeURIComponent(new URL(l.whatsapp).searchParams.get('text')===text?'ok':'no'),'ok');
+  assert.ok(l.facebook.includes('sharer.php?u='));
+  assert.equal(Array.from(new URL(C.shareLinks('ਸ'.repeat(400)).x).searchParams.get('text')).length,280);
+});
