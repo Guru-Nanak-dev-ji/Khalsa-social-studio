@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#1b1035">
+<meta name="description" content="🦅 बाज उड़ान — tap करो, उड़ो, 💰 पकड़ो। KDN का मुफ़्त game।">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icons/khalsa-v1-32.png" sizes="32x32" type="image/png">
+<link rel="stylesheet" href="./assets/heritage.css">
+<link rel="stylesheet" href="./assets/hindi-fonts.css">
+<link rel="stylesheet" href="./assets/fx/fx.css">
+<link rel="stylesheet" href="./assets/baaz/baaz.css">
+<title>🦅 बाज उड़ान · KDN</title>
+<script defer src="./assets/koins-core.js"></script>
+<script defer src="./assets/baaz/baaz-core.js"></script>
+<script defer src="./assets/baaz/baaz.js"></script>
+<link rel="stylesheet" href="./assets/jaan.css"><script defer src="./assets/jaan.js"></script></head>
+<body class="kdn-hindi" data-heritage="immersive">
+<div class="heritage-banner" aria-hidden="true"></div>
+<main class="baaz" id="shell" data-phase="ready">
+<header class="hud" role="status" aria-live="polite"><a href="./khazana.html">← 🏆 खज़ाना</a><div>💰 <span id="h-koins">0</span> <small>game koins, असली पैसा नहीं</small></div></header>
+<h1 class="fx-display">🦅 बाज उड़ान</h1>
+<p class="sub">tap करो — बाज ऊपर उड़ेगा। सुनहरे मीनारों के बीच से निकलो, 💰 पकड़ो!</p>
+<div class="baaz-stage">
+<canvas id="sky" aria-label="बाज उड़ान game — tap करके उड़ाओ" role="img"></canvas>
+<div class="score-row" aria-live="polite"><div><span>अंक</span><strong id="score">000</strong></div><div style="text-align:right"><span>BEST</span><strong id="best">000</strong></div></div>
+<div class="baaz-card" id="ready"><b class="fx-display" style="font-size:1.4rem">🦅 उड़ने को तैयार?</b><br>तब तक tap करो जब तक बाज हवा में रहे 😁<br><button id="go" type="button">⏯️ उड़ान शुरू</button></div>
+<div class="baaz-card" id="over"><span id="over-msg">🦅 उड़ान खत्म</span><br><button id="again" type="button">🔁 फिर उड़ो</button></div>
+</div>
+<p style="text-align:center"><span class="baaz-badge" id="badge" hidden>🏅 बाज उड़ान badge मिला</span></p>
+<section class="baaz-how"><h2 class="fx-display">📜 कैसे खेलें</h2><ul><li>👆 tap / Space = पंख मारो</li><li>🏛️ हर मीनार पार = +1 अंक, 💰 = +2 अंक</li><li>🔟 10+ अंक = +5 game koins</li><li>🏅 20+ अंक = <b>बाज उड़ान</b> badge (🏆 खज़ाना में दिखेगा)</li><li>💾 best score सिर्फ़ इसी phone में सेव</li></ul></section>
+<div class="baaz-toast" id="toast" role="status" hidden></div>
+</main>
+<section class="jaan-hero jaan-shell-hero" style="padding-top:16px"><h2 class="jaan-head" style="color:#f2c66a;text-align:center">🦅💰 बाज की दुनिया</h2><div class="jaan-slider" aria-label="तस्वीरें" data-jaan-slides="gfal|🦅 सुनहरा बाज;sfal|🦅 चाँदी बाज;sun|🌅 सूरज"></div><div data-jaan-games data-jaan-fun="baaz"></div></section>
+</body>
+</html>

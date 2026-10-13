@@ -1,0 +1,12 @@
+const {test}=require('node:test');const assert=require('node:assert/strict');const fs=require('fs'),path=require('path');
+const B=require('../assets/baaz/baaz-core.js');const root=path.join(__dirname,'..');const r=f=>fs.readFileSync(path.join(root,f),'utf8');
+test('baaz state validate/finish/badge',()=>{assert.deepEqual(B.validate(null),B.fresh());assert.equal(B.validate({v:1,best:-5,runs:'x',badge:'yes'}).best,0);
+ let x=B.finish(B.fresh(),12);assert.equal(x.state.best,12);assert.equal(x.firstBadge,false);assert.equal(x.newBest,true);
+ x=B.finish(x.state,B.GOAL);assert.equal(x.firstBadge,true);assert.equal(x.state.badge,true);x=B.finish(x.state,25);assert.equal(x.firstBadge,false);assert.equal(x.state.runs,3);assert.equal(x.state.best,25);});
+test('baaz physics: falling ends game, flapping scores',()=>{let g=B.newGame(3,600);for(let i=0;i<200&&!g.over;i++)B.step(g,1/60,false,400);assert.ok(g.over);
+ g=B.newGame(3,600);g.score=0;for(let i=0;i<600&&!g.over;i++){const c=g.cols.find(c=>c.x>400*0.3-40);const target=c?c.top+c.gap/2:300;B.step(g,1/60,g.y>target+10&&g.vy>0,400);}assert.ok(g.score>=1,'score '+g.score);});
+test('baaz page: canvas, HUD, jaan, fx, cached, in khazana',()=>{const s=r('baaz.html');assert.match(s,/<canvas id="sky"/);assert.match(s,/id="score"/);assert.match(s,/data-jaan-fun="baaz"/);assert.match(r('assets/baaz/baaz.js'),/prefers-reduced-motion/);
+ const sw=r('sw.js');for(const a of ['./baaz.html','./assets/baaz/baaz.js','./assets/fx/fx.js','./assets/fx/fx.css','./assets/fonts/YatraOne-deva.woff2'])assert.ok(sw.includes("'"+a+"'"),a);
+ assert.ok(require('../assets/khazana/khazana-core.js').GAMES.some(g=>g.id==='baaz'&&g.key===B.KEY));assert.match(r('dwar.html'),/href="\.\/baaz\.html"/);});
+test('fx layer: OFL font, reduced motion, applied to 8 pages',()=>{assert.ok(fs.existsSync(path.join(root,'assets/fonts/OFL-YatraOne.txt')));assert.match(r('assets/fx/fx.css'),/prefers-reduced-motion/);assert.match(r('assets/fx/fx.js'),/prefers-reduced-motion/);assert.match(r('assets/fx/fx.js'),/IntersectionObserver/);assert.doesNotMatch(r('assets/fx/fx.css'),/googleapis/);
+ for(const f of ['index','enter','world','kingdom','khalsa','maze','palace','dwar'])assert.equal((r(f+'.html').match(/assets\/fx\/fx\.js/g)||[]).length,1,f);});
