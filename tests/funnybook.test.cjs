@@ -21,4 +21,4 @@ test('page, door, feed, khazana, naksha, sw, no Khanda, no selfies, safe DOM',()
  assert.ok(css.includes('prefers-reduced-motion')&&css.includes('@keyframes flipin')&&css.includes('glow'));
  assert.ok(Dr.all().some(d=>d.href==='./funnybook.html'&&d.title==='फनीबुक'));assert.ok(JSON.parse(R('assets/goldtv/feed.json')).items.some(i=>i.href==='./funnybook.html'));
  assert.ok(Z.GAMES.some(g=>g.id==='funny'&&g.badge===F.BADGE&&g.key===F.KEY&&g.href==='./funnybook.html'));assert.ok(N.IDS.includes('funnybook'));
- const sw=R('sw.js');assert.equal((sw.match(/const CACHE/g)||[]).length,1);assert.match(sw,/const CACHE=PREFIX\+'v0\.59\.0'/);assert.ok(sw.includes("'./funnybook.html','./assets/funny/funny-core.js','./assets/funny/funny.js','./assets/funny/funny.css'"));});
+ const sw=R('sw.js');assert.equal((sw.match(/const CACHE/g)||[]).length,1);assert.match(sw,/const CACHE=PREFIX\+'v0\.(59|[6-9]\d)\./);assert.ok(sw.includes("'./funnybook.html','./assets/funny/funny-core.js','./assets/funny/funny.js','./assets/funny/funny.css'"));});

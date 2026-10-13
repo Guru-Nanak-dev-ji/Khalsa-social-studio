@@ -68,3 +68,4 @@ h3[id]{scroll-margin-top:80px}
 @keyframes fbpop{from{transform:scale(.4);opacity:0}to{transform:none;opacity:1}}
 @keyframes fbrise{from{transform:translateY(20px);opacity:0}to{transform:none;opacity:1}}
 @media (prefers-reduced-motion:reduce){.fb-chip,.fb-ch{animation:none}}
+@media (max-width:600px){.hub .dhaga{display:none}.hub .tile:not(.wide){flex:0 0 calc(50% - 6px);min-width:0}.hub{gap:8px}}

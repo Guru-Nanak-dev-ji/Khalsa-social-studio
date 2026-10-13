@@ -21,6 +21,7 @@ function render(S,slides,badge){const box=$(S.id+'-body');if(!box)return;
    if(x.table){const tb=el('table','fb-tab');x.table.forEach((r,j)=>{const tr=el('tr');r.forEach(v=>tr.append(el(j?'td':'th',null,v)));tb.append(tr);});d.append(tb);}
    if(x.help)d.append(help());card.append(d);});box.append(card);});
  if(S.link){const a=el('a','btn fb-link','🤣 Funnybook पर जाएँ ↗');a.href=S.link;a.target='_blank';a.rel='noopener';box.append(a);}
+ if(S.id==='fb'){const g=el('a','btn fb-link','😊 फनीबुक खेलो — रोज़ एक नर्म चुटकुला ➜');g.href='./funnybook.html';box.append(g);}
  const b=el('button','btn fb-done',(st[S.id]?'🏅 ':'✅ ')+'कहानी पूरी पढ़ ली');b.type='button';const out=el('p','res');out.setAttribute('aria-live','polite');
  b.onclick=()=>{const r=F.finish(st,S.id);st=r.state;save(F.KEY,st);b.textContent='🏅 कहानी पूरी पढ़ ली';out.textContent='🏅 '+badge;
   if(r.badgeNew&&K){const g=K.claimSpot(kst,S.id+':done');kst=g.state;save(K.KEY,kst);toast('🏅 '+badge+(g.added?' · +'+g.added+' 💰':''));}};box.append(b,out);}
