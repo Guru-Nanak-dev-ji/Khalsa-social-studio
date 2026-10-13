@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#24180f">
+<meta name="description" content="Book 📖 Bar Audiobook द्वार — कोई भी text मुफ़्त में सुनें, हिंदी · ਪੰਜਾਬੀ · English।">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icons/khalsa-v1-32.png" sizes="32x32" type="image/png"><link rel="apple-touch-icon" href="./icons/khalsa-v1-180.png" sizes="180x180">
+<link rel="stylesheet" href="./assets/heritage.css"><link rel="stylesheet" href="./assets/ai.css"><link rel="stylesheet" href="./assets/audiobook.css">
+<title>Book 📖 Bar Audiobook · KDN Studio</title>
+</head>
+<body data-heritage="court">
+<div class="wrap">
+<header class="top"><a href="./studio.html">← Control Room</a> · <a href="./ai-tools.html">🚪 AI द्वार</a></header>
+<main><div class="heritage-banner" aria-hidden="true"></div>
+<p class="eyebrow">KDN · BOOK BAR AUDIOBOOK DWAR · v0.1</p>
+<h1>Book 📖 Bar Audiobook</h1>
+<p class="sub">कोई भी किताब या लेख सुनें · ਕੋਈ ਵੀ ਕਿਤਾਬ ਸੁਣੋ · Listen to any text. आवाज़ आपके phone में ही बनती है — मुफ़्त, बिना login, text कहीं नहीं भेजा जाता।</p>
+<section class="card"><h2>1 · किताब डालें · ਕਿਤਾਬ ਪਾਓ · Add text</h2>
+<textarea id="ab-text" rows="7" placeholder="यहाँ text paste करें। 'अध्याय 1', 'ਅਧਿਆਇ 2', 'Chapter 3', '# शीर्षक' या '---' से अध्याय अलग होंगे।"></textarea>
+<div class="row"><button id="ab-load" class="action" type="button">📚 अध्याय बनाओ</button><label class="action file">📄 .txt file<input id="ab-file" type="file" accept=".txt,text/plain" hidden></label><button id="ab-clear" class="ghost" type="button">🗑 हटाओ</button></div></section>
+<section class="card"><h2>2 · सुनें · ਸੁਣੋ · Listen</h2>
+<div id="ab-chapters" class="chaps"></div>
+<h3 id="ab-title">—</h3>
+<div class="row"><progress id="ab-progress" max="100" value="0"></progress><span id="ab-pct">0%</span></div>
+<div class="row ctrl"><button id="ab-prev" type="button" aria-label="पीछे">⏮</button><button id="ab-play" class="big" type="button">▶ Play</button><button id="ab-pause" type="button">⏸</button><button id="ab-stop" type="button">⏹</button><button id="ab-next" type="button" aria-label="आगे">⏭</button></div>
+<div class="row"><label>भाषा <select id="ab-lang"><option value="hi-IN">हिंदी</option><option value="pa-IN">ਪੰਜਾਬੀ</option><option value="en-IN">English (India)</option></select></label>
+<label>गति <input id="ab-rate" type="range" min="0.5" max="2" step="0.1" value="1"> <span id="ab-rv">1.0×</span></label></div>
+<label class="wide">आवाज़ · Voice <select id="ab-voice"></select></label>
+<p id="ab-vnote" class="fine" hidden>ਪੰਜਾਬੀ आवाज़ इस phone में नहीं मिली — Settings › Text-to-speech में Google की भाषा-आवाज़ डाउनलोड करें, या हिंदी आवाज़ चुनें।</p>
+<p id="ab-status" class="status" role="status">तैयार · Ready</p>
+<div id="ab-reader" class="reader" aria-live="off"></div>
+<p class="fine">आपकी जगह (progress) इसी phone में save रहती है — अगली बार वहीं से शुरू।</p></section>
+<section class="card"><h2>🎧 Free open-source Audiobook / TTS tools</h2><div id="ab-tools" class="tools"></div>
+<p class="fine">हर card असली website नई tab में खोलता है। License ज़रूर पढ़ें।</p></section>
+</main></div>
+<script src="./assets/audiobook-core.js"></script><script src="./assets/audiobook.js"></script>
+</body></html>
