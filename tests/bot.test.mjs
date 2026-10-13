@@ -1,0 +1,11 @@
+import {test} from 'node:test';import assert from 'node:assert/strict';
+import worker,{handleUpdate,extractPost} from '../bot/worker.js';
+const env={OWNER_ID:'7812291108',GROUP_ID:'-1002221114009',TELEGRAM_BOT_TOKEN:'x',WEBHOOK_SECRET:'s'};
+const rec=()=>{const calls=[];return [calls,async(e,m,b)=>{calls.push([m,b]);return {ok:true};}];};
+const cb=(from,data)=>({callback_query:{id:'1',from:{id:from},data,message:{message_id:5,chat:{id:7812291108},text:'Khalsa konnect में यह post डालूँ?\n\n"ਸੇਵਾ ਲੰਗਰ 7 ਵਜੇ"'}}});
+test('extractPost takes quoted text',()=>assert.equal(extractPost('a "हिंदी" b'),'हिंदी'));
+test('owner yes posts quoted text to group',async()=>{const [c,s]=rec();assert.equal(await handleUpdate(cb(7812291108,'post_yes'),env,s),'post_yes');assert.deepEqual(c[0],['sendMessage',{chat_id:-1002221114009,text:'ਸੇਵਾ ਲੰਗਰ 7 ਵਜੇ'}]);});
+test('non-owner is ignored',async()=>{const [c,s]=rec();assert.equal(await handleUpdate(cb(1,'post_yes'),env,s),'ignored');assert.equal(c.length,0);});
+test('no does not post to group',async()=>{const [c,s]=rec();await handleUpdate(cb(7812291108,'post_no'),env,s);assert.ok(c.every(([m,b])=>b.chat_id!==-1002221114009));});
+test('/post from owner sends approval popup',async()=>{const [c,s]=rec();assert.equal(await handleUpdate({message:{from:{id:7812291108},chat:{type:'private'},text:'/post नमस्ते'}},env,s),'asked');assert.ok(c[0][1].reply_markup);});
+test('webhook rejects wrong secret',async()=>{const r=await worker.fetch(new Request('https://x/',{method:'POST',body:'{}'}),env);assert.equal(r.status,403);});
