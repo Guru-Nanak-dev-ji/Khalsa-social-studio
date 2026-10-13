@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#24180f">
+<meta name="description" content="KDN AI साथी — free, open-source AI that runs on your phone. No login, no server.">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icons/khalsa-v1-32.png" sizes="32x32" type="image/png"><link rel="apple-touch-icon" href="./icons/khalsa-v1-180.png" sizes="180x180">
+<link rel="stylesheet" href="./assets/heritage.css"><link rel="stylesheet" href="./assets/ai.css">
+<title>AI साथी · KDN Studio</title>
+<script defer src="./assets/creator-core.js"></script>
+<script type="module" src="./assets/ai.js"></script>
+</head>
+<body data-heritage="court">
+<div class="wrap">
+<header class="top"><a href="./studio.html" data-i18n="home">← Control Room</a><select id="lang" aria-label="Language"><option value="hi">हिंदी</option><option value="pa">ਪੰਜਾਬੀ</option><option value="en">English</option></select></header>
+<main><div class="heritage-banner" aria-hidden="true"></div>
+<p class="eyebrow">KDN · AI SAATHI · v0.1</p>
+<h1 data-i18n="title">AI साथी</h1>
+<p class="sub" data-i18n="sub">मुफ़्त, open-source AI जो आपके फ़ोन में ही चलता है। कोई login या server नहीं; आपकी बातें फ़ोन से बाहर नहीं जातीं।</p>
+<p id="gpu" class="notice" role="status" hidden></p>
+<section class="panel" id="setup">
+<label for="model" data-i18n="model">मॉडल चुनें</label>
+<select id="model">
+<option value="Qwen2.5-0.5B-Instruct-q4f16_1-MLC" data-mb="280">Qwen2.5 0.5B · ~280 MB</option>
+<option value="Qwen2.5-1.5B-Instruct-q4f16_1-MLC" data-mb="870">Qwen2.5 1.5B · ~870 MB</option>
+</select>
+<p class="fine" id="size-note"></p>
+<button id="start" class="primary" type="button" data-i18n="start">डाउनलोड करके शुरू करें</button>
+<progress id="bar" max="1" value="0" hidden></progress><p class="fine" id="progress-text"></p>
+</section>
+<section class="panel" id="chat-panel">
+<div id="log" aria-live="polite"></div>
+<form id="chat"><textarea id="q" rows="3" maxlength="4000" disabled></textarea>
+<div class="actions"><button id="send" class="primary" type="submit" disabled data-i18n="send">पूछें</button><button id="to-creator" type="button" disabled data-i18n="toCreator">Creator में भेजें</button></div></form>
+<p class="fine" data-i18n="warn">AI गलती कर सकता है। तथ्य, नाम और तारीखें खुद जाँचें।</p>
+</section>
+</main></div>
+</body></html>

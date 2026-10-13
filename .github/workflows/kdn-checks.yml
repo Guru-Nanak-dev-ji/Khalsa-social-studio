@@ -45,4 +45,6 @@ jobs:
           node --check assets/realm/v014/realm-core.js
           node --check assets/realm/v014/realm-world.mjs
           node --check sw.js
-          node --test tests/*.test.cjs
+          node --check assets/ai.js
+          node --check bot/worker.js
+          node --test tests/*.test.cjs tests/*.test.mjs

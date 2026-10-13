@@ -1,0 +1,8 @@
+name = "kdn-telegram-bot"
+main = "worker.js"
+compatibility_date = "2026-10-01"
+
+# Not secret. Secrets are set with: wrangler secret put TELEGRAM_BOT_TOKEN / WEBHOOK_SECRET
+[vars]
+OWNER_ID = "7812291108"
+GROUP_ID = "-1002221114009"
