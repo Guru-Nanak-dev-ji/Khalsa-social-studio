@@ -13,7 +13,8 @@ const TREE={id:'root',icon:'🏰',title:'द्वार महल · ਦਰਵ�
   {icon:'🎙',title:'News Studio',sub:'Live · Guest · Record',href:'./newsroom.html'}]},
  {id:'ai',icon:'🤖',title:'AI',sub:'AI साथी · ਸਾਥੀ',doors:[
   {icon:'🤖',title:'AI साथी',sub:'AI Saathi',href:'./ai.html'},
-  {icon:'🚪',title:'Free AI Tools',sub:'मुफ़्त AI द्वार',href:'./ai-tools.html'}]},
+  {icon:'🚪',title:'Free AI Tools',sub:'मुफ़्त AI द्वार',href:'./ai-tools.html'},
+  {icon:'📜',title:'AI का खुला संविधान',sub:'AI के 13 नियम · सुनें',href:'./ai-samvidhan.html'}]},
  {id:'social',icon:'📣',title:'Social',sub:'सोशल · ਸੋਸ਼ਲ',doors:[
   {icon:'✈️',title:'Telegram Bot',sub:'@Khalsaworld_bot',href:'https://t.me/Khalsaworld_bot'},
   {icon:'▶️',title:'YouTube',sub:'/yt · /channels',href:'https://t.me/Khalsaworld_bot?start=yt'},
