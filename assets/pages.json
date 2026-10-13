@@ -42,7 +42,9 @@
 "name": "KDN घर",
 "sub": "किरत करो वंड छक्को",
 "cat": "t",
-"href": "./index.html"
+"href": "./index.html",
+"group": "main",
+"status": "published"
 },
 {
 "id": "enter",
@@ -50,7 +52,9 @@
 "name": "प्रवेश द्वार",
 "sub": "नगर में प्रवेश",
 "cat": "t",
-"href": "./enter.html"
+"href": "./enter.html",
+"group": "main",
+"status": "published"
 },
 {
 "id": "world",
@@ -58,7 +62,9 @@
 "name": "KDN संसार",
 "sub": "पूरा नगर",
 "cat": "t",
-"href": "./world.html"
+"href": "./world.html",
+"group": "main",
+"status": "published"
 },
 {
 "id": "kingdom",
@@ -66,7 +72,9 @@
 "name": "राज दरबार",
 "sub": "राज्य का नगर",
 "cat": "t",
-"href": "./kingdom.html"
+"href": "./kingdom.html",
+"group": "main",
+"status": "published"
 },
 {
 "id": "khalsa",
@@ -74,7 +82,9 @@
 "name": "खालसा नगर",
 "sub": "सुनहरा नगर",
 "cat": "t",
-"href": "./khalsa.html"
+"href": "./khalsa.html",
+"group": "main",
+"status": "published"
 },
 {
 "id": "maze",
@@ -82,7 +92,9 @@
 "name": "भूलभुलैया",
 "sub": "रास्ता खोजो",
 "cat": "g",
-"href": "./maze.html"
+"href": "./maze.html",
+"group": "games",
+"status": "published"
 },
 {
 "id": "palace",
@@ -90,7 +102,9 @@
 "name": "सुनहरा महल",
 "sub": "महल के द्वार",
 "cat": "t",
-"href": "./palace.html"
+"href": "./palace.html",
+"group": "main",
+"status": "published"
 },
 {
 "id": "dwar",
@@ -98,7 +112,9 @@
 "name": "ज्ञान का दरवाज़ा",
 "sub": "पढ़ो और विचारो",
 "cat": "j",
-"href": "./dwar.html"
+"href": "./dwar.html",
+"group": "main",
+"status": "published"
 },
 {
 "id": "gyan",
@@ -106,7 +122,9 @@
 "name": "ज्ञान मंडल",
 "sub": "सवाल से चानण तक",
 "cat": "j",
-"href": "./gyan.html"
+"href": "./gyan.html",
+"group": "gurbani",
+"status": "published"
 },
 {
 "id": "sakhi",
@@ -114,7 +132,9 @@
 "name": "आज की साखी",
 "sub": "रोज़ एक साखी",
 "cat": "j",
-"href": "./sakhi.html"
+"href": "./sakhi.html",
+"group": "gurbani",
+"status": "published"
 },
 {
 "id": "gun",
@@ -122,7 +142,9 @@
 "name": "आज का गुण",
 "sub": "रोज़ एक गुण",
 "cat": "j",
-"href": "./gun.html"
+"href": "./gun.html",
+"group": "gurbani",
+"status": "published"
 },
 {
 "id": "mala",
@@ -130,7 +152,9 @@
 "name": "सिमरन माला",
 "sub": "नाम सिमरन",
 "cat": "j",
-"href": "./mala.html"
+"href": "./mala.html",
+"group": "gurbani",
+"status": "published"
 },
 {
 "id": "sankalp",
@@ -138,7 +162,9 @@
 "name": "आज का संकल्प",
 "sub": "रोज़ एक प्रण",
 "cat": "j",
-"href": "./sankalp.html"
+"href": "./sankalp.html",
+"group": "gurbani",
+"status": "published"
 },
 {
 "id": "kyon",
@@ -146,7 +172,9 @@
 "name": "क्यों?",
 "sub": "सत्ता, समाज और सवाल",
 "cat": "j",
-"href": "./kyon.html"
+"href": "./kyon.html",
+"group": "gurbani",
+"status": "published"
 },
 {
 "id": "Begampura_FAQ_542_Offline_Reader",
@@ -154,7 +182,9 @@
 "name": "बेगमपुरा FAQ",
 "sub": "542 उत्तर",
 "cat": "j",
-"href": "./Begampura_FAQ_542_Offline_Reader.html"
+"href": "./Begampura_FAQ_542_Offline_Reader.html",
+"group": "gurbani",
+"status": "published"
 },
 {
 "id": "study",
@@ -162,7 +192,9 @@
 "name": "स्टडी स्टूडियो",
 "sub": "ऑडियो-वीडियो पढ़ाई",
 "cat": "j",
-"href": "./study.html"
+"href": "./study.html",
+"group": "gurbani",
+"status": "published"
 },
 {
 "id": "ai-samvidhan",
@@ -170,7 +202,9 @@
 "name": "AI का खुला संविधान",
 "sub": "AI के नियम",
 "cat": "j",
-"href": "./ai-samvidhan.html"
+"href": "./ai-samvidhan.html",
+"group": "ai",
+"status": "published"
 },
 {
 "id": "akarshan",
@@ -178,7 +212,9 @@
 "name": "आकर्षण का नियम",
 "sub": "सोच और कर्म",
 "cat": "j",
-"href": "./akarshan.html"
+"href": "./akarshan.html",
+"group": "gurbani",
+"status": "published"
 },
 {
 "id": "guru",
@@ -186,7 +222,9 @@
 "name": "दस गुरु साहिबान",
 "sub": "जीवन, सीख, गुरबाणी",
 "cat": "j",
-"href": "./guru.html"
+"href": "./guru.html",
+"group": "gurbani",
+"status": "published"
 },
 {
 "id": "guru-1",
@@ -194,7 +232,9 @@
 "name": "श्री गुरु नानक देव जी",
 "sub": "गुरु साहिब 1 / 10",
 "cat": "j",
-"href": "./guru-1.html"
+"href": "./guru-1.html",
+"group": "gurbani",
+"status": "published"
 },
 {
 "id": "guru-2",
@@ -202,7 +242,9 @@
 "name": "श्री गुरु अंगद देव जी",
 "sub": "गुरु साहिब 2 / 10",
 "cat": "j",
-"href": "./guru-2.html"
+"href": "./guru-2.html",
+"group": "gurbani",
+"status": "published"
 },
 {
 "id": "guru-3",
@@ -210,7 +252,9 @@
 "name": "श्री गुरु अमरदास जी",
 "sub": "गुरु साहिब 3 / 10",
 "cat": "j",
-"href": "./guru-3.html"
+"href": "./guru-3.html",
+"group": "gurbani",
+"status": "published"
 },
 {
 "id": "guru-4",
@@ -218,7 +262,9 @@
 "name": "श्री गुरु रामदास जी",
 "sub": "गुरु साहिब 4 / 10",
 "cat": "j",
-"href": "./guru-4.html"
+"href": "./guru-4.html",
+"group": "gurbani",
+"status": "published"
 },
 {
 "id": "guru-5",
@@ -226,7 +272,9 @@
 "name": "श्री गुरु अर्जन देव जी",
 "sub": "गुरु साहिब 5 / 10",
 "cat": "j",
-"href": "./guru-5.html"
+"href": "./guru-5.html",
+"group": "gurbani",
+"status": "published"
 },
 {
 "id": "guru-6",
@@ -234,7 +282,9 @@
 "name": "श्री गुरु हरगोबिंद साहिब जी",
 "sub": "गुरु साहिब 6 / 10",
 "cat": "j",
-"href": "./guru-6.html"
+"href": "./guru-6.html",
+"group": "gurbani",
+"status": "published"
 },
 {
 "id": "guru-7",
@@ -242,7 +292,9 @@
 "name": "श्री गुरु हरिराय जी",
 "sub": "गुरु साहिब 7 / 10",
 "cat": "j",
-"href": "./guru-7.html"
+"href": "./guru-7.html",
+"group": "gurbani",
+"status": "published"
 },
 {
 "id": "guru-8",
@@ -250,7 +302,9 @@
 "name": "श्री गुरु हरकृष्ण साहिब जी",
 "sub": "गुरु साहिब 8 / 10",
 "cat": "j",
-"href": "./guru-8.html"
+"href": "./guru-8.html",
+"group": "gurbani",
+"status": "published"
 },
 {
 "id": "guru-9",
@@ -258,7 +312,9 @@
 "name": "श्री गुरु तेग़ बहादुर जी",
 "sub": "गुरु साहिब 9 / 10",
 "cat": "j",
-"href": "./guru-9.html"
+"href": "./guru-9.html",
+"group": "gurbani",
+"status": "published"
 },
 {
 "id": "guru-10",
@@ -266,7 +322,9 @@
 "name": "श्री गुरु गोबिंद सिंह जी",
 "sub": "गुरु साहिब 10 / 10",
 "cat": "j",
-"href": "./guru-10.html"
+"href": "./guru-10.html",
+"group": "gurbani",
+"status": "published"
 },
 {
 "id": "panj-takht",
@@ -274,7 +332,9 @@
 "name": "पंज तख़्त",
 "sub": "पाँच तख़्त, दर्शन गाइड",
 "cat": "j",
-"href": "./panj-takht.html"
+"href": "./panj-takht.html",
+"group": "history",
+"status": "published"
 },
 {
 "id": "takht-1",
@@ -282,7 +342,9 @@
 "name": "श्री अकाल तख़्त साहिब",
 "sub": "तख़्त 1 / 5",
 "cat": "j",
-"href": "./takht-1.html"
+"href": "./takht-1.html",
+"group": "history",
+"status": "published"
 },
 {
 "id": "takht-2",
@@ -290,7 +352,9 @@
 "name": "तख़्त श्री केसगढ़ साहिब",
 "sub": "तख़्त 2 / 5",
 "cat": "j",
-"href": "./takht-2.html"
+"href": "./takht-2.html",
+"group": "history",
+"status": "published"
 },
 {
 "id": "takht-3",
@@ -298,7 +362,9 @@
 "name": "तख़्त श्री दमदमा साहिब",
 "sub": "तख़्त 3 / 5",
 "cat": "j",
-"href": "./takht-3.html"
+"href": "./takht-3.html",
+"group": "history",
+"status": "published"
 },
 {
 "id": "takht-4",
@@ -306,7 +372,9 @@
 "name": "तख़्त श्री पटना साहिब",
 "sub": "तख़्त 4 / 5",
 "cat": "j",
-"href": "./takht-4.html"
+"href": "./takht-4.html",
+"group": "history",
+"status": "published"
 },
 {
 "id": "takht-5",
@@ -314,7 +382,9 @@
 "name": "तख़्त श्री हज़ूर साहिब",
 "sub": "तख़्त 5 / 5",
 "cat": "j",
-"href": "./takht-5.html"
+"href": "./takht-5.html",
+"group": "history",
+"status": "published"
 },
 {
 "id": "kahani",
@@ -322,7 +392,9 @@
 "name": "कहानी घर",
 "sub": "5 series",
 "cat": "k",
-"href": "./kahani.html"
+"href": "./kahani.html",
+"group": "stories",
+"status": "published"
 },
 {
 "id": "shakha",
@@ -330,7 +402,9 @@
 "name": "कहानी की शाखाएँ",
 "sub": "कहानी आगे बढ़ाओ",
 "cat": "k",
-"href": "./shakha.html"
+"href": "./shakha.html",
+"group": "stories",
+"status": "published"
 },
 {
 "id": "chakravyuh",
@@ -338,7 +412,9 @@
 "name": "चक्रव्यूह कथा",
 "sub": "चुनो और सीखो",
 "cat": "k",
-"href": "./chakravyuh.html"
+"href": "./chakravyuh.html",
+"group": "stories",
+"status": "published"
 },
 {
 "id": "titli",
@@ -346,7 +422,9 @@
 "name": "Butterfly चुनाव",
 "sub": "हर चुनाव का असर",
 "cat": "k",
-"href": "./titli.html"
+"href": "./titli.html",
+"group": "stories",
+"status": "published"
 },
 {
 "id": "scroll-dwar",
@@ -354,7 +432,9 @@
 "name": "Scroll से खुलता द्वार",
 "sub": "scroll कहानी",
 "cat": "k",
-"href": "./scroll-dwar.html"
+"href": "./scroll-dwar.html",
+"group": "stories",
+"status": "published"
 },
 {
 "id": "promo",
@@ -362,7 +442,9 @@
 "name": "KDN परिचय",
 "sub": "हम कौन हैं",
 "cat": "k",
-"href": "./promo.html"
+"href": "./promo.html",
+"group": "news",
+"status": "published"
 },
 {
 "id": "baaz",
@@ -370,7 +452,9 @@
 "name": "बाज उड़ान",
 "sub": "उड़ो, 💰 पकड़ो",
 "cat": "g",
-"href": "./baaz.html"
+"href": "./baaz.html",
+"group": "games",
+"status": "published"
 },
 {
 "id": "takht",
@@ -378,7 +462,9 @@
 "name": "तख़्त Cube",
 "sub": "घुमाओ और जानो",
 "cat": "g",
-"href": "./takht.html"
+"href": "./takht.html",
+"group": "games",
+"status": "published"
 },
 {
 "id": "takht3d",
@@ -386,7 +472,9 @@
 "name": "3D तख़्त दरबार",
 "sub": "3D दरबार",
 "cat": "g",
-"href": "./takht3d.html"
+"href": "./takht3d.html",
+"group": "region",
+"status": "published"
 },
 {
 "id": "chabi",
@@ -394,7 +482,9 @@
 "name": "चाबी वाला द्वार",
 "sub": "पहेली",
 "cat": "g",
-"href": "./chabi.html"
+"href": "./chabi.html",
+"group": "games",
+"status": "published"
 },
 {
 "id": "patta",
@@ -402,7 +492,9 @@
 "name": "पत्ता उड़ाओ",
 "sub": "हल्का खेल",
 "cat": "g",
-"href": "./patta.html"
+"href": "./patta.html",
+"group": "games",
+"status": "published"
 },
 {
 "id": "khel-banao",
@@ -410,7 +502,9 @@
 "name": "खेल बनाओ",
 "sub": "अपना खेल",
 "cat": "g",
-"href": "./khel-banao.html"
+"href": "./khel-banao.html",
+"group": "games",
+"status": "published"
 },
 {
 "id": "khazana",
@@ -418,7 +512,9 @@
 "name": "मेरा खज़ाना",
 "sub": "सब badges",
 "cat": "g",
-"href": "./khazana.html"
+"href": "./khazana.html",
+"group": "games",
+"status": "published"
 },
 {
 "id": "naksha",
@@ -426,7 +522,9 @@
 "name": "KDN नक्शा",
 "sub": "दुनिया घूमो",
 "cat": "g",
-"href": "./naksha.html"
+"href": "./naksha.html",
+"group": "region",
+"status": "published"
 },
 {
 "id": "kingdom-lands",
@@ -434,7 +532,9 @@
 "name": "My Kingdom Lands",
 "sub": "खोजी सफ़र",
 "cat": "g",
-"href": "./kingdom-lands.html"
+"href": "./kingdom-lands.html",
+"group": "region",
+"status": "published"
 },
 {
 "id": "mandal",
@@ -442,7 +542,9 @@
 "name": "मंडल",
 "sub": "KDN World",
 "cat": "g",
-"href": "./mandal.html"
+"href": "./mandal.html",
+"group": "region",
+"status": "published"
 },
 {
 "id": "newsroom",
@@ -450,7 +552,9 @@
 "name": "KNN न्यूज़ स्टूडियो",
 "sub": "ख़बर बनाओ",
 "cat": "n",
-"href": "./newsroom.html"
+"href": "./newsroom.html",
+"group": "news",
+"status": "published"
 },
 {
 "id": "news-channels",
@@ -458,7 +562,9 @@
 "name": "KNN News चैनल",
 "sub": "चैनल",
 "cat": "n",
-"href": "./news-channels.html"
+"href": "./news-channels.html",
+"group": "news",
+"status": "published"
 },
 {
 "id": "goldtv",
@@ -466,7 +572,9 @@
 "name": "Golden TV",
 "sub": "सुनहरा TV",
 "cat": "n",
-"href": "./goldtv.html"
+"href": "./goldtv.html",
+"group": "news",
+"status": "published"
 },
 {
 "id": "creator",
@@ -474,7 +582,9 @@
 "name": "News & Social Creator",
 "sub": "post बनाओ",
 "cat": "n",
-"href": "./creator.html"
+"href": "./creator.html",
+"group": "ai",
+"status": "published"
 },
 {
 "id": "langar",
@@ -482,7 +592,9 @@
 "name": "लंगर रसोई",
 "sub": "रोटी बेलो, सेवा करो",
 "cat": "s",
-"href": "./langar.html"
+"href": "./langar.html",
+"group": "seva",
+"status": "published"
 },
 {
 "id": "vand",
@@ -490,7 +602,9 @@
 "name": "वंड छक्को",
 "sub": "बाँटकर खाओ",
 "cat": "s",
-"href": "./vand.html"
+"href": "./vand.html",
+"group": "seva",
+"status": "published"
 },
 {
 "id": "swad",
@@ -498,7 +612,9 @@
 "name": "हर राज्य का स्वाद",
 "sub": "शाकाहारी, लंगर के लायक",
 "cat": "s",
-"href": "./swad.html"
+"href": "./swad.html",
+"group": "seva",
+"status": "published"
 },
 {
 "id": "swad-punjab",
@@ -506,7 +622,9 @@
 "name": "पंजाब का स्वाद",
 "sub": "🥬🫓🍛🫘🍚",
 "cat": "s",
-"href": "./swad-punjab.html"
+"href": "./swad-punjab.html",
+"group": "seva",
+"status": "published"
 },
 {
 "id": "swad-haryana",
@@ -514,7 +632,9 @@
 "name": "हरियाणा का स्वाद",
 "sub": "🥣🍲🫓🌿🍮",
 "cat": "s",
-"href": "./swad-haryana.html"
+"href": "./swad-haryana.html",
+"group": "seva",
+"status": "published"
 },
 {
 "id": "swad-rajasthan",
@@ -522,7 +642,9 @@
 "name": "राजस्थान का स्वाद",
 "sub": "🟤🍛🫓🌵🍯",
 "cat": "s",
-"href": "./swad-rajasthan.html"
+"href": "./swad-rajasthan.html",
+"group": "seva",
+"status": "published"
 },
 {
 "id": "swad-gujarat",
@@ -530,7 +652,9 @@
 "name": "गुजरात का स्वाद",
 "sub": "🟨🍚🫓🥘🥣",
 "cat": "s",
-"href": "./swad-gujarat.html"
+"href": "./swad-gujarat.html",
+"group": "seva",
+"status": "published"
 },
 {
 "id": "swad-maharashtra",
@@ -538,7 +662,9 @@
 "name": "महाराष्ट्र का स्वाद",
 "sub": "🍚🥣🫓⚪🥞",
 "cat": "s",
-"href": "./swad-maharashtra.html"
+"href": "./swad-maharashtra.html",
+"group": "seva",
+"status": "published"
 },
 {
 "id": "swad-bengal",
@@ -546,7 +672,9 @@
 "name": "बंगाल का स्वाद",
 "sub": "🥕🫘🥔🫓🍮",
 "cat": "s",
-"href": "./swad-bengal.html"
+"href": "./swad-bengal.html",
+"group": "seva",
+"status": "published"
 },
 {
 "id": "swad-tamilnadu",
@@ -554,7 +682,9 @@
 "name": "तमिलनाडु का स्वाद",
 "sub": "🍲🥣🍚🍋🥛",
 "cat": "s",
-"href": "./swad-tamilnadu.html"
+"href": "./swad-tamilnadu.html",
+"group": "seva",
+"status": "published"
 },
 {
 "id": "swad-kashmir",
@@ -562,7 +692,9 @@
 "name": "कश्मीर का स्वाद",
 "sub": "🥔🪷🫘🥬🍵",
 "cat": "s",
-"href": "./swad-kashmir.html"
+"href": "./swad-kashmir.html",
+"group": "seva",
+"status": "published"
 },
 {
 "id": "neta-rajya",
@@ -570,7 +702,9 @@
 "name": "My Neta — राज्य",
 "sub": "शासन-ढाँचा, सीटें, अपना MLA/MP — निष्पक्ष",
 "cat": "s",
-"href": "./neta-rajya.html"
+"href": "./neta-rajya.html",
+"group": "rights",
+"status": "published"
 },
 {
 "id": "neta-punjab",
@@ -578,7 +712,9 @@
 "name": "पंजाब — शासन ढाँचा",
 "sub": "सीटें, आधिकारिक लिंक, RTI",
 "cat": "s",
-"href": "./neta-punjab.html"
+"href": "./neta-punjab.html",
+"group": "rights",
+"status": "published"
 },
 {
 "id": "neta-haryana",
@@ -586,7 +722,9 @@
 "name": "हरियाणा — शासन ढाँचा",
 "sub": "सीटें, आधिकारिक लिंक, RTI",
 "cat": "s",
-"href": "./neta-haryana.html"
+"href": "./neta-haryana.html",
+"group": "rights",
+"status": "published"
 },
 {
 "id": "neta-delhi",
@@ -594,7 +732,9 @@
 "name": "दिल्ली — शासन ढाँचा",
 "sub": "सीटें, आधिकारिक लिंक, RTI",
 "cat": "s",
-"href": "./neta-delhi.html"
+"href": "./neta-delhi.html",
+"group": "rights",
+"status": "published"
 },
 {
 "id": "neta-rajasthan",
@@ -602,7 +742,9 @@
 "name": "राजस्थान — शासन ढाँचा",
 "sub": "सीटें, आधिकारिक लिंक, RTI",
 "cat": "s",
-"href": "./neta-rajasthan.html"
+"href": "./neta-rajasthan.html",
+"group": "rights",
+"status": "published"
 },
 {
 "id": "neta-up",
@@ -610,7 +752,9 @@
 "name": "उत्तर प्रदेश — शासन ढाँचा",
 "sub": "सीटें, आधिकारिक लिंक, RTI",
 "cat": "s",
-"href": "./neta-up.html"
+"href": "./neta-up.html",
+"group": "rights",
+"status": "published"
 },
 {
 "id": "neta-himachal",
@@ -618,7 +762,9 @@
 "name": "हिमाचल प्रदेश — शासन ढाँचा",
 "sub": "सीटें, आधिकारिक लिंक, RTI",
 "cat": "s",
-"href": "./neta-himachal.html"
+"href": "./neta-himachal.html",
+"group": "rights",
+"status": "published"
 },
 {
 "id": "neta-jk",
@@ -626,7 +772,9 @@
 "name": "जम्मू-कश्मीर — शासन ढाँचा",
 "sub": "सीटें, आधिकारिक लिंक, RTI",
 "cat": "s",
-"href": "./neta-jk.html"
+"href": "./neta-jk.html",
+"group": "rights",
+"status": "published"
 },
 {
 "id": "neta-chandigarh",
@@ -634,7 +782,9 @@
 "name": "चंडीगढ़ — शासन ढाँचा",
 "sub": "सीटें, आधिकारिक लिंक, RTI",
 "cat": "s",
-"href": "./neta-chandigarh.html"
+"href": "./neta-chandigarh.html",
+"group": "rights",
+"status": "published"
 },
 {
 "id": "nanak-ghar",
@@ -642,7 +792,9 @@
 "name": "नानक घर सेवा",
 "sub": "सेवा",
 "cat": "s",
-"href": "./nanak-ghar.html"
+"href": "./nanak-ghar.html",
+"group": "seva",
+"status": "published"
 },
 {
 "id": "khatri-aid",
@@ -650,7 +802,9 @@
 "name": "खत्री Aid",
 "sub": "मदद का अनुरोध, हेल्पलाइन",
 "cat": "s",
-"href": "./khatri-aid.html"
+"href": "./khatri-aid.html",
+"group": "rights",
+"status": "published"
 },
 {
 "id": "vakil",
@@ -658,7 +812,9 @@
 "name": "वकील डायरेक्टरी",
 "sub": "मुफ़्त कानूनी मदद, अपने हक़",
 "cat": "s",
-"href": "./vakil.html"
+"href": "./vakil.html",
+"group": "rights",
+"status": "published"
 },
 {
 "id": "sehat",
@@ -666,7 +822,9 @@
 "name": "सेहत Control Room",
 "sub": "सेहत",
 "cat": "s",
-"href": "./sehat.html"
+"href": "./sehat.html",
+"group": "rights",
+"status": "published"
 },
 {
 "id": "community",
@@ -674,7 +832,9 @@
 "name": "संगत दरबार",
 "sub": "संगत",
 "cat": "s",
-"href": "./community.html"
+"href": "./community.html",
+"group": "seva",
+"status": "published"
 },
 {
 "id": "virsa",
@@ -682,7 +842,9 @@
 "name": "पंजाब दा विरसा",
 "sub": "माणक और चमकीला",
 "cat": "m",
-"href": "./virsa.html"
+"href": "./virsa.html",
+"group": "history",
+"status": "published"
 },
 {
 "id": "mytube",
@@ -690,7 +852,9 @@
 "name": "MyTube",
 "sub": "मेरा channel, साफ़ गीत",
 "cat": "m",
-"href": "./mytube.html"
+"href": "./mytube.html",
+"group": "music",
+"status": "published"
 },
 {
 "id": "audiobook",
@@ -698,7 +862,9 @@
 "name": "ऑडियोबुक",
 "sub": "सुनो किताब",
 "cat": "m",
-"href": "./audiobook.html"
+"href": "./audiobook.html",
+"group": "music",
+"status": "published"
 },
 {
 "id": "saathi",
@@ -706,7 +872,9 @@
 "name": "बोलने वाले AI साथी",
 "sub": "आवाज़ साथी",
 "cat": "m",
-"href": "./saathi.html"
+"href": "./saathi.html",
+"group": "music",
+"status": "published"
 },
 {
 "id": "funnybook",
@@ -714,7 +882,9 @@
 "name": "फनीबुक",
 "sub": "हँसी का द्वार",
 "cat": "c",
-"href": "./funnybook.html"
+"href": "./funnybook.html",
+"group": "funny",
+"status": "published"
 },
 {
 "id": "studio",
@@ -722,7 +892,9 @@
 "name": "KDN Social Studio",
 "sub": "सब साधन",
 "cat": "t",
-"href": "./studio.html"
+"href": "./studio.html",
+"group": "news",
+"status": "published"
 },
 {
 "id": "ai",
@@ -730,7 +902,9 @@
 "name": "AI साथी",
 "sub": "AI से बात",
 "cat": "t",
-"href": "./ai.html"
+"href": "./ai.html",
+"group": "ai",
+"status": "published"
 },
 {
 "id": "ai-tools",
@@ -738,7 +912,9 @@
 "name": "Free AI Tools",
 "sub": "मुफ़्त AI",
 "cat": "t",
-"href": "./ai-tools.html"
+"href": "./ai-tools.html",
+"group": "ai",
+"status": "published"
 },
 {
 "id": "poster",
@@ -746,7 +922,9 @@
 "name": "Poster Creator",
 "sub": "poster बनाओ",
 "cat": "t",
-"href": "./poster.html"
+"href": "./poster.html",
+"group": "ai",
+"status": "published"
 },
 {
 "id": "reels",
@@ -754,7 +932,9 @@
 "name": "Reel Studio",
 "sub": "reel बनाओ",
 "cat": "t",
-"href": "./reels.html"
+"href": "./reels.html",
+"group": "ai",
+"status": "published"
 },
 {
 "id": "avatar",
@@ -762,7 +942,9 @@
 "name": "मेरा अवतार",
 "sub": "अवतार बनाओ",
 "cat": "t",
-"href": "./avatar.html"
+"href": "./avatar.html",
+"group": "ai",
+"status": "published"
 },
 {
 "id": "aaj-bhav",
@@ -770,7 +952,9 @@
 "name": "आज का भाव",
 "sub": "मन का मौसम",
 "cat": "t",
-"href": "./aaj-bhav.html"
+"href": "./aaj-bhav.html",
+"group": "work",
+"status": "published"
 },
 {
 "id": "bhav",
@@ -778,7 +962,9 @@
 "name": "मेरे भाव",
 "sub": "अनेक होकर भी एक",
 "cat": "t",
-"href": "./bhav.html"
+"href": "./bhav.html",
+"group": "work",
+"status": "published"
 },
 {
 "id": "sab",
@@ -786,7 +972,19 @@
 "name": "सब कुछ एक जगह",
 "sub": "हर पेज यहाँ",
 "cat": "t",
-"href": "./sab.html"
+"href": "./sab.html",
+"group": "main",
+"status": "published"
+},
+{
+"id": "yojana",
+"icon": "🧭",
+"name": "योजना द्वार",
+"sub": "1001 पेज का नक्शा, समूह-वार प्रगति",
+"cat": "t",
+"href": "./yojana.html",
+"group": "main",
+"status": "published"
 }
 ]
 }
