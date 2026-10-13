@@ -1,0 +1,10 @@
+const test=require('node:test'),assert=require('node:assert'),fs=require('fs'),path=require('path'),G=require('../assets/gyan-cube/cube-core.js'),K=require('../assets/koins-core.js');const R=f=>fs.readFileSync(path.join(__dirname,'..',f),'utf8');
+test('cube: front face math, order, reset on wrong, solve once koins',()=>{assert.equal(G.FACES.length,6);assert.deepEqual(G.FACES.map(f=>f.l),['ੳ','ਅ','ੲ','ਸ','ਹ','ਕ']);
+ assert.equal(G.front(0,0),0);assert.equal(G.front(0,-90),1);assert.equal(G.front(0,180),2);assert.equal(G.front(0,90),3);assert.equal(G.front(-90,0),4);assert.equal(G.front(90,0),5);
+ const fr=new Set();for(const rx of[0,90,180,270])for(const ry of[0,90,180,270])fr.add(G.front(rx,ry));assert.equal(fr.size,6);
+ let s=G.fresh();assert.ok(!G.tap(s,1).ok);for(const f of G.ORDER){const r=G.tap(s,f);assert.ok(r.ok);s=r.state;}assert.ok(s.done);
+ let k=K.claimSpot(K.fresh(),G.SPOT);assert.equal(k.added,5);assert.equal(K.claimSpot(k.state,G.SPOT).added,0);});
+test('pages wired, reduced motion, safe DOM, sw',()=>{const g=R('gyan.html'),k=R('kahani.html'),js=R('assets/gyan-cube/cube.js')+R('assets/kahani/wm-scroll.js');
+ assert.ok(g.includes('id="gur-cube"')&&g.includes('cube.js')&&g.includes('koins-core.js'));assert.ok(k.includes('id="wms"')&&k.includes('wm-scroll.js'));
+ assert.ok(R('assets/gyan-cube/cube.css').includes('prefers-reduced-motion')&&R('assets/kahani/wm-scroll.css').includes('prefers-reduced-motion')&&R('assets/kahani/wm-scroll.css').includes('position:sticky'));
+ assert.ok(!/innerHTML|fetch\(|☬/.test(js));const sw=R('sw.js');assert.ok(sw.includes("'v0.61.0'")&&sw.includes('./assets/gyan-cube/cube.js')&&sw.includes('./assets/kahani/wm-scroll.js'));});
