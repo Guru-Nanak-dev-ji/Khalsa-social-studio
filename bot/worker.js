@@ -173,10 +173,59 @@ export async function handleYt(request,env,send=call,f=fetch){
   }
   return new Response('not found',{status:404});
 }
+// ---- KNN News channel accounts (KV: news_ch:<handle>, news_index, news_owner:<tgId>) ----
+export const NEWS_SUFFIX=/(?:^|[\s\u00a0·\-])(news(?:\s+tv)?|न्यूज़?(?:\s+(?:टीवी|tv))?|ਨਿਊਜ਼?(?:\s+(?:ਟੀਵੀ|tv))?)$/iu;
+const nclean=s=>String(s==null?'':s).normalize('NFC').replace(/[\u0000-\u001f\u007f<>]/g,'').replace(/\s+/g,' ').trim();
+export function newsValidate(c){const e={};const n=nclean(c.name);const m=NEWS_SUFFIX.exec(n);
+ if(n.length<6||n.length>40||!m||nclean(n.slice(0,m.index)).length<2)e.name='name must end with News / News TV';
+ if(!/^[a-z0-9](?:[a-z0-9-]{1,28}[a-z0-9])$/.test(String(c.handle||'')))e.handle='bad handle';
+ const city=nclean(c.city);if(city.length<2||city.length>40)e.city='bad city';
+ if(!['hi','pa','en'].includes(c.lang))e.lang='bad lang';if(!/^#[0-9a-f]{6}$/i.test(String(c.tickerColor||'')))e.tickerColor='bad color';
+ const l=c.logo;if(!(l===''||l==null||(typeof l==='string'&&l.length<=60000&&/^data:image\/(png|jpeg|webp);base64,[A-Za-z0-9+/=]+$/.test(l))))e.logo='bad logo';return e;}
+const hex=b=>[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('');
+// Telegram Login Widget: hash = HMAC_SHA256(data_check_string, SHA256(bot_token)).
+export async function verifyTelegramLogin(auth,token,now=Date.now()){
+ if(!auth||typeof auth!=='object'||!token||typeof auth.hash!=='string')return null;
+ const keys=Object.keys(auth).filter(k=>k!=='hash'&&auth[k]!=null&&auth[k]!=='').sort();
+ const dcs=keys.map(k=>k+'='+auth[k]).join('\n');const enc=new TextEncoder();
+ const secret=await crypto.subtle.digest('SHA-256',enc.encode(token));
+ const key=await crypto.subtle.importKey('raw',secret,{name:'HMAC',hash:'SHA-256'},false,['sign']);
+ const sig=hex(await crypto.subtle.sign('HMAC',key,enc.encode(dcs)));
+ if(!(await safeEqual(sig,auth.hash.toLowerCase())))return null;
+ const age=now/1000-Number(auth.auth_date);if(!(age>=-300&&age<86400))return null;
+ return {id:String(auth.id),username:auth.username||'',first_name:auth.first_name||''};}
+function ncors(origin){return origin===ALLOWED_ORIGIN?{'Access-Control-Allow-Origin':ALLOWED_ORIGIN,'Access-Control-Allow-Methods':'GET, POST, OPTIONS','Access-Control-Allow-Headers':'content-type','Access-Control-Max-Age':'86400',Vary:'Origin'}:{Vary:'Origin'};}
+const pub=c=>({handle:c.handle,name:c.name,city:c.city,lang:c.lang,logo:c.logo||'',tickerColor:c.tickerColor,created:c.created,by:c.by||''});
+export async function handleNews(request,env){
+ const url=new URL(request.url),origin=request.headers.get('Origin')||'',h=ncors(origin),kv=env.KDN_KV;
+ if(request.method==='OPTIONS')return new Response(null,{status:origin===ALLOWED_ORIGIN?204:403,headers:h});
+ if(!kv)return json({error:'storage unavailable'},503,h);
+ if(request.method==='GET'&&url.pathname==='/news/channels'){const idx=JSON.parse(await kv.get('news_index')||'[]');
+  const list=(await Promise.all(idx.slice(-200).map(k=>kv.get('news_ch:'+k)))).filter(Boolean).map(s=>pub(JSON.parse(s)));
+  return json({channels:list.reverse()},200,{...h,'Cache-Control':'public, max-age=30'});}
+ const m=/^\/news\/channel\/([a-z0-9-]{3,30})$/.exec(url.pathname);
+ if(request.method==='GET'&&m){const s=await kv.get('news_ch:'+m[1]);return s?json({channel:pub(JSON.parse(s))},200,h):json({error:'not found'},404,h);}
+ if(request.method==='POST'&&url.pathname==='/news/channel'){
+  if(origin!==ALLOWED_ORIGIN)return json({error:'forbidden'},403,h);
+  if(rateLimited('news:'+(request.headers.get('CF-Connecting-IP')||'?')))return json({error:'slow down'},429,h);
+  const raw=await request.text();if(raw.length>80000)return json({error:'too large'},413,h);
+  let body;try{body=JSON.parse(raw);}catch{return json({error:'bad json'},400,h);}
+  const user=await verifyTelegramLogin(body&&body.auth,env.TELEGRAM_BOT_TOKEN);if(!user)return json({error:'telegram login invalid'},401,h);
+  const c=body.channel||{};const errors=newsValidate(c);if(Object.keys(errors).length)return json({error:'invalid',errors},400,h);
+  const mine=JSON.parse(await kv.get('news_owner:'+user.id)||'[]');if(mine.length>=3)return json({error:'limit: 3 channels per account'},409,h);
+  if(await kv.get('news_ch:'+c.handle))return json({error:'handle taken'},409,h);
+  const name=nclean(c.name).toLowerCase();const idx=JSON.parse(await kv.get('news_index')||'[]');
+  const rec={handle:c.handle,name:nclean(c.name),city:nclean(c.city),lang:c.lang,logo:c.logo||'',tickerColor:c.tickerColor.toLowerCase(),owner:user.id,by:String(user.first_name).slice(0,40),created:new Date().toISOString()};
+  for(const k of idx.slice(-500)){const s=await kv.get('news_ch:'+k);if(s&&JSON.parse(s).name.toLowerCase()===name)return json({error:'name taken'},409,h);}
+  await kv.put('news_ch:'+c.handle,JSON.stringify(rec));idx.push(c.handle);await kv.put('news_index',JSON.stringify(idx));
+  mine.push(c.handle);await kv.put('news_owner:'+user.id,JSON.stringify(mine));
+  return json({ok:true,channel:pub(rec)},201,h);}
+ return json({error:'not found'},404,h);}
 export default {
   async fetch(request,env){
     const path=new URL(request.url).pathname;
     if(path==='/draft')return handleDraft(request,env);
+    if(path.startsWith('/news/'))return handleNews(request,env);
     if(path==='/yt/start'||path==='/yt/callback')return handleYt(request,env);
     if(request.method!=='POST')return new Response('KDN bot OK');
     // Only Telegram (which knows WEBHOOK_SECRET) may call the webhook.

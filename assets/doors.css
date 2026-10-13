@@ -14,3 +14,4 @@
 .door-in .door{animation:doorIn .45s both}@keyframes doorIn{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:none}}
 .door:focus-visible{outline:4px solid #fff;outline-offset:3px}
 @media (prefers-reduced-motion:reduce){.leaf,.door-in .door{transition:none;animation:none}}
+#palace h2,#palace .door b{font-family:var(--kdn-head);font-weight:400;letter-spacing:.02em}#palace h2{font-size:30px}
