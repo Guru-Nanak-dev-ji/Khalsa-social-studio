@@ -112,3 +112,11 @@ test('green WhatsApp button and safe wa.me link',()=>{
   const u=C.waLink('ਸ'.repeat(3000));assert.ok(u.length<=1800&&u.startsWith('https://wa.me/?text='));
   assert.equal(C.shareLinks('a').whatsapp,'https://wa.me/?text=a');
 });
+
+test('Instagram button, poster and deep-link fallback',()=>{
+  const html=readFileSync(resolve(__dirname,'../creator.html'),'utf8');assert.match(html,/id="ig-send"/);assert.doesNotMatch(html,/ੴ|☬/);
+  assert.deepEqual(C.igTargets(true),['instagram://camera','https://www.instagram.com/']);
+  assert.deepEqual(C.igTargets(false),['https://www.instagram.com/']);
+  assert.deepEqual(C.wrapLines('aa bb cc',5),['aa bb','cc']);
+  const js=readFileSync(resolve(__dirname,'../assets/creator.js'),'utf8');assert.match(js,/igSend:\['📸 Instagram पर भेजो','📸 Instagram ਤੇ ਭੇਜੋ','📸 Send on Instagram'\]/);assert.match(js,/image\/png/);
+});
