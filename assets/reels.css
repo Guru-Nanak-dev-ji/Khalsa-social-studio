@@ -42,3 +42,4 @@ canvas{width:min(100%,300px);aspect-ratio:9/16;border-radius:14px;border:2px sol
 #status{min-height:1.5em;color:#ffe7a3}
 video{width:min(100%,300px);border-radius:12px;display:block;margin:10px auto}
 label.file{display:inline-block}
+.hero.jaali-live{padding-bottom:40px}.hero h1{font-family:var(--kdn-head);font-weight:400}

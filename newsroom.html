@@ -1,8 +1,9 @@
 <!doctype html>
-<html lang="hi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#1a0606"><meta name="description" content="KNN News Studio — free TV newsroom with guest video and recording"><link rel="manifest" href="./manifest.webmanifest"><title>KNN News Studio · KDN</title><link rel="icon" href="./icons/khalsa-v1-192.png"><link rel="stylesheet" href="./assets/newsroom.css"><link rel="stylesheet" href="./assets/heritage.css"></head>
-<body data-heritage="court"><div class="heritage-banner" aria-hidden="true"></div><main>
+<html lang="hi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#1a0606"><meta name="description" content="KNN News Studio — free TV newsroom with guest video and recording"><link rel="manifest" href="./manifest.webmanifest"><title>KNN News Studio · KDN</title><link rel="icon" href="./icons/khalsa-v1-192.png"><link rel="stylesheet" href="./assets/newsroom.css"><link rel="stylesheet" href="./assets/heritage.css"><link rel="stylesheet" href="./assets/hindi-fonts.css"><link rel="stylesheet" href="./assets/jaali-live.css"><script defer src="./assets/jaali-live.js"></script></head>
+<body data-heritage="court" class="kdn-hindi"><div class="heritage-banner" aria-hidden="true"></div><main>
 <nav class="crumb"><a href="./studio.html">🏰 Control Room</a> › <a href="./studio.html#door=media">🎬 Media</a> › <b>📺 KNN News Studio</b></nav>
-<header class="arch"><h1>📺 KNN News Studio</h1><p>ਨਿਊਜ਼ ਸਟੂਡੀਓ · न्यूज़ स्टूडियो · News Studio</p></header>
+<header class="arch jaali-live"><h1>📺 KNN News Studio</h1><p>ਨਿਊਜ਼ ਸਟੂਡੀਓ · न्यूज़ स्टूडियो · News Studio</p></header>
+<section class="panel chan-pick"><h2>📺 आपका चैनल</h2><label>चैनल चुनिए<select id="chan"><option value="">KNN (मूल)</option></select></label><p class="note"><a href="./news-channels.html">➕ नया न्यूज़ चैनल बनाइए</a></p></section>
 <section class="stage-wrap"><canvas id="stage" width="1080" height="1920" aria-label="Studio preview"></canvas></section>
 <section class="panel">
  <div class="row"><button id="cam" class="big gold">📷 कैमरा चालू · Camera</button><button id="flip" class="big">🔄 Flip</button><button id="orient" class="big">↔ 16:9 / 9:16</button></div>
@@ -25,8 +26,8 @@ KNN पर अपनी ख़बर भेजें</textarea></label>
 </section>
 <p class="foot">Free &amp; Open Source · Camera/mic सिर्फ़ आपकी अनुमति से · कुछ भी upload नहीं होता</p>
 </main>
-<script src="./assets/newsroom-core.js"></script>
+<script src="./assets/newsroom-core.js"></script><script src="./assets/news-channels-core.js"></script>
 <script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js" defer></script>
-<script src="./assets/newsroom.js" defer></script>
+<script src="./assets/newsroom.js" defer></script><script src="./assets/newsroom-channel.js" defer></script>
 <script>if("serviceWorker"in navigator)addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));</script>
 </body></html>
