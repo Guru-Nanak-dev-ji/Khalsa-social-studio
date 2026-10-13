@@ -42,3 +42,6 @@ Preserve exact motto:
 सब कुछ सबका, सबकुछ सबको free
 The new khalsa world 🌍 order
 
+
+## Installed-PWA compatibility follow-up
+Cache v0.11.1. The four entry aliases load scripts from assets/world/v011/, a path absent from earlier worker cache lists. This prevents an old worker from mixing the fresh maze.html with cached v0.10 controller/content. Top-level world scripts are canonical for tests; synchronize their versioned copies on changes, and use a new version directory for the next release. Existing user state is preserved.
