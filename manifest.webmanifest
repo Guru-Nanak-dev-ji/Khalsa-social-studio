@@ -2,7 +2,7 @@
   "name": "KDN Social Studio",
   "short_name": "KDN Studio",
   "description": "Khalsa Digital World mobile control room",
-  "start_url": "./palace.html",
+  "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "background_color": "#120f0c",
