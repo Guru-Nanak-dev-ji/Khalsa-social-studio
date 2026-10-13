@@ -22,6 +22,7 @@ const TREE={id:'root',icon:'🏰',title:'द्वार महल · ਦਰਵ�
  {id:'games',icon:'🎮',title:'Games & Quiz',sub:'खेल · ਖੇਡਾਂ · जल्द',doors:[
   {icon:'☯',title:'Game of Takhats',sub:'पाँच प्रण द्वार',href:'./maze.html'},
   {icon:'🍃',title:'पत्ता उड़ाओ',sub:'उड़ान game · koins',href:'./patta.html'},
+  {icon:'🚪',title:'Scroll से खुलता द्वार',sub:'scroll करो · +5 koins',href:'./scroll-dwar.html'},
   {icon:'♞',title:'शतरंज Quiz',sub:'जल्द आ रहा · Soon',soon:true},
   {icon:'🃏',title:'ताश पत्ते Quiz',sub:'जल्द आ रहा · Soon',soon:true}]},
  {id:'gyan',icon:'🏛',title:'Gyan',sub:'ज्ञान मंडल · ਗਿਆਨ',doors:[
