@@ -8,6 +8,7 @@ class DualityTests(unittest.TestCase):
     def test_new_entry_matches_opening_and_bypasses_the_old_route(self):
         self.assertEqual((ROOT/'enter.html').read_bytes(), (ROOT/'index.html').read_bytes())
         self.assertEqual((ROOT/'world.html').read_bytes(), (ROOT/'index.html').read_bytes())
+        self.assertEqual((ROOT/'maze.html').read_bytes(), (ROOT/'index.html').read_bytes())
         self.assertIn('assets/app-update.js', (ROOT/'enter.html').read_text())
 
     def test_all_controller_targets_and_local_links_exist(self):

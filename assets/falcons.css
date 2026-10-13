@@ -1,0 +1,5 @@
+/* Birds sit above the artwork, but below the pager, menu and dialogs. */
+.falcon-sky{position:fixed;inset:0;z-index:8;pointer-events:none;overflow:hidden;contain:layout style;}
+.falcon-sky[hidden],.falcon-flight[hidden]{display:none;}
+.falcon-flight{position:absolute;left:0;top:0;width:0;height:0;pointer-events:none;will-change:transform;}
+.falcon-flight canvas{position:absolute;left:0;top:0;pointer-events:none;transform-origin:50% 60%;filter:drop-shadow(0 2px 2px #00172955);}
