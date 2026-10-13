@@ -24,6 +24,7 @@ export async function handleUpdate(u,env,send=call){
     if(m.from?.id===OWNER&&(m.chat?.type==='group'||m.chat?.type==='supergroup')&&/^\/id(?:@\w+)?$/.test((m.text||'').trim())){await send(env,'sendMessage',{chat_id:OWNER,text:`Group: ${m.chat.title||''}\nID: ${m.chat.id}`});return 'id';}
     if(m.from?.id!==OWNER||m.chat?.type!=='private')return 'ignored';
     let txt=(m.text||'').trim().replace(/^["'“”]+|["'“”]+$/g,'').trim();
+    if(/^\/yt(?:@\w+)?$/.test(txt)){if(!env.APP_KEY||!env.YT_CLIENT_ID){await send(env,'sendMessage',{chat_id:OWNER,text:'YouTube setup अभी अधूरा है।'});return 'yt';}await send(env,'sendMessage',{chat_id:OWNER,text:`YouTube जोड़ने के लिए यह link खोलें (15 मिनट तक चलेगा):\nhttps://kdn-telegram-bot.khatrinewsnetwork.workers.dev/yt/start?t=${await ytToken(env)}`});return 'yt';}
     if(txt==='/start'||txt==='/help'||txt==='/post'){await send(env,'sendMessage',{chat_id:OWNER,text:'जो भी post डालनी हो, बस वही text यहाँ लिख दें। मैं पूछूँगा, फिर ✅ दबाने पर Khalsa konnect में डाल दूँगा।'});return 'help';}
     const pm=txt.match(/^\/post(?:@\w+)?\s+([\s\S]+)$/);const post=(pm?pm[1]:(txt.startsWith('/')?'':txt)).trim();
     if(post){await send(env,'sendMessage',{chat_id:OWNER,text:`Khalsa konnect में यह post डालूँ?\n\n"${post}"`,reply_markup:keyboardFor(env)});return 'asked';}
@@ -76,9 +77,45 @@ export async function handleDraft(request,env,send=call){
   await send(env,'sendMessage',{chat_id:Number(env.OWNER_ID),text:`Creator से नया draft — Khalsa konnect में यह post डालूँ?\n\n"${text}"`,reply_markup:keyboardFor(env)});
   return json({ok:true},200,h);
 }
+
+// ---- YouTube OAuth (owner-only). Link is signed with APP_KEY (HMAC), valid 15 min. ----
+const YT_REDIRECT='https://kdn-telegram-bot.khatrinewsnetwork.workers.dev/yt/callback';
+const YT_SCOPES='https://www.googleapis.com/auth/youtube.readonly https://www.googleapis.com/auth/youtube.upload';
+const b64u=buf=>btoa(String.fromCharCode(...new Uint8Array(buf))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+async function hmac(key,msg){const k=await crypto.subtle.importKey('raw',new TextEncoder().encode(key),{name:'HMAC',hash:'SHA-256'},false,['sign']);return b64u(await crypto.subtle.sign('HMAC',k,new TextEncoder().encode(msg)));}
+export async function ytToken(env,now=Date.now()){const exp=Math.floor(now/1000)+900;return `${exp}.${await hmac(env.APP_KEY,'yt|'+exp)}`;}
+export async function ytVerify(env,t,now=Date.now()){if(!env.APP_KEY||!t)return false;const [exp,sig]=String(t).split('.');if(!exp||!sig||Number(exp)<Math.floor(now/1000))return false;return safeEqual(sig,await hmac(env.APP_KEY,'yt|'+exp));}
+const page=(title,body,status=200)=>new Response(`<!doctype html><html lang="hi"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${title}</title><body style="font-family:sans-serif;background:#0b1020;color:#f5e6b8;text-align:center;padding:40px 16px"><h1>${title}</h1><p style="font-size:18px">${body}</p></body></html>`,{status,headers:{'content-type':'text/html; charset=utf-8','cache-control':'no-store'}});
+const esc=x=>String(x).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+export async function handleYt(request,env,send=call,f=fetch){
+  const u=new URL(request.url);
+  if(!env.YT_CLIENT_ID||!env.YT_CLIENT_SECRET||!env.APP_KEY)return page('अभी तैयार नहीं','YouTube setup अधूरा है।',503);
+  if(u.pathname==='/yt/start'){
+    const t=u.searchParams.get('t');if(!(await ytVerify(env,t)))return page('Link पुराना है','Telegram में bot को /yt भेजकर नया link लीजिए।',403);
+    const q=new URLSearchParams({client_id:env.YT_CLIENT_ID,redirect_uri:YT_REDIRECT,response_type:'code',scope:YT_SCOPES,access_type:'offline',prompt:'consent',include_granted_scopes:'true',state:t});
+    return Response.redirect('https://accounts.google.com/o/oauth2/v2/auth?'+q,302);
+  }
+  if(u.pathname==='/yt/callback'){
+    if(u.searchParams.get('error'))return page('इजाज़त नहीं मिली','आपने Allow नहीं दबाया। Telegram में /yt भेजकर दोबारा कोशिश करें।',400);
+    if(!(await ytVerify(env,u.searchParams.get('state'))))return page('Link पुराना है','Telegram में bot को /yt भेजकर नया link लीजिए।',403);
+    const code=u.searchParams.get('code');if(!code)return page('गड़बड़','Code नहीं मिला।',400);
+    const tr=await f('https://oauth2.googleapis.com/token',{method:'POST',headers:{'content-type':'application/x-www-form-urlencoded'},body:new URLSearchParams({code,client_id:env.YT_CLIENT_ID,client_secret:env.YT_CLIENT_SECRET,redirect_uri:YT_REDIRECT,grant_type:'authorization_code'})});
+    const tok=await tr.json().catch(()=>({}));
+    if(!tr.ok||!tok.access_token){console.log('yt token err',tok&&tok.error);return page('गड़बड़','Google से token नहीं मिला। /yt से दोबारा कोशिश करें।',502);}
+    let channel='(नाम नहीं मिला)';
+    try{const cr=await f('https://www.googleapis.com/youtube/v3/channels?part=snippet&mine=true',{headers:{authorization:'Bearer '+tok.access_token}});const cj=await cr.json();channel=cj.items?.[0]?.snippet?.title||channel;}catch(e){}
+    let stored=false;
+    if(tok.refresh_token&&env.KDN_KV){await env.KDN_KV.put('yt_refresh_token',tok.refresh_token);await env.KDN_KV.put('yt_channel',channel);stored=true;}
+    await send(env,'sendMessage',{chat_id:Number(env.OWNER_ID),text:`YouTube जुड़ गया: ${channel}`+(stored?'':'\n⚠️ Token save नहीं हुआ (KV नहीं जुड़ा)।')});
+    return page('✅ YouTube जुड़ गया',`Channel: <b>${esc(channel)}</b><br>अब आप यह page बंद करके Telegram पर लौट सकते हैं। 🙏`);
+  }
+  return new Response('not found',{status:404});
+}
 export default {
   async fetch(request,env){
-    if(new URL(request.url).pathname==='/draft')return handleDraft(request,env);
+    const path=new URL(request.url).pathname;
+    if(path==='/draft')return handleDraft(request,env);
+    if(path==='/yt/start'||path==='/yt/callback')return handleYt(request,env);
     if(request.method!=='POST')return new Response('KDN bot OK');
     // Only Telegram (which knows WEBHOOK_SECRET) may call the webhook.
     if(!env.WEBHOOK_SECRET||request.headers.get('X-Telegram-Bot-Api-Secret-Token')!==env.WEBHOOK_SECRET)return new Response('forbidden',{status:403});
