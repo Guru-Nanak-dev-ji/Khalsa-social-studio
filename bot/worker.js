@@ -3,7 +3,8 @@
 export function extractPost(text){const t=text||'';const a=t.indexOf('"'),b=t.lastIndexOf('"');return a>=0&&b>a?t.slice(a+1,b):t;}
 export const KEYBOARD={inline_keyboard:[[{text:'✅ हाँ, post करो',callback_data:'post_yes'},{text:'✏️ बदलो',callback_data:'post_edit'},{text:'❌ नहीं',callback_data:'post_no'}]]};
 // Extra 🧪 button only when TEST_GROUP_ID is set; otherwise the keyboard is unchanged.
-export function keyboardFor(env){if(!env||!env.TEST_GROUP_ID)return KEYBOARD;return {inline_keyboard:[...KEYBOARD.inline_keyboard,[{text:'🧪 Test group में डालो',callback_data:'post_test'}]]};}
+export function waUrl(text,max=1800){const base='https://wa.me/?text=',e=encodeURIComponent;const c=Array.from(String(text||''));if((base+e(c.join(''))).length<=max)return base+e(c.join(''));let lo=0,hi=c.length;while(lo<hi){const m=Math.ceil((lo+hi)/2);if((base+e(c.slice(0,m).join('')+'…')).length<=max)lo=m;else hi=m-1;}return base+e(c.slice(0,lo).join('')+'…');}
+export function keyboardFor(env,post){const rows=[...KEYBOARD.inline_keyboard];if(env&&env.TEST_GROUP_ID)rows.push([{text:'🧪 Test group में डालो',callback_data:'post_test'}]);if(post)rows.push([{text:'🟢 WhatsApp पर भेजो',url:waUrl(post)}]);return rows.length===KEYBOARD.inline_keyboard.length?KEYBOARD:{inline_keyboard:rows};}
 async function call(env,method,body){
   const r=await fetch(`https://api.telegram.org/bot${env.TELEGRAM_BOT_TOKEN}/${method}`,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body)});
   return r.json();
@@ -28,7 +29,7 @@ export async function handleUpdate(u,env,send=call){
     if(/^\/channels(?:@\w+)?$/.test(txt)){await send(env,'sendMessage',channelsMessage(env,await ytChannels(env)));return 'channels';}
     if(txt==='/start'||txt==='/help'||txt==='/post'){await send(env,'sendMessage',{chat_id:OWNER,text:'जो भी post डालनी हो, बस वही text यहाँ लिख दें। मैं पूछूँगा, फिर ✅ दबाने पर Khalsa konnect में डाल दूँगा।'});return 'help';}
     const pm=txt.match(/^\/post(?:@\w+)?\s+([\s\S]+)$/);const post=(pm?pm[1]:(txt.startsWith('/')?'':txt)).trim();
-    if(post){await send(env,'sendMessage',{chat_id:OWNER,text:`Khalsa konnect में यह post डालूँ?\n\n"${post}"`,reply_markup:keyboardFor(env)});return 'asked';}
+    if(post){await send(env,'sendMessage',{chat_id:OWNER,text:`Khalsa konnect में यह post डालूँ?\n\n"${post}"`,reply_markup:keyboardFor(env,post)});return 'asked';}
     await send(env,'sendMessage',{chat_id:OWNER,text:'Post के लिए लिखें: /post आपका text'});return 'help';
   }
   const q=u.callback_query;
@@ -82,7 +83,7 @@ export async function handleDraft(request,env,send=call){
   const text=typeof data?.text==='string'?data.text.trim():'';
   if(!text)return json({ok:false,error:'empty'},400,h);
   if(Array.from(text).length>MAX_DRAFT)return json({ok:false,error:'long'},413,h);
-  await send(env,'sendMessage',{chat_id:Number(env.OWNER_ID),text:`Creator से नया draft — Khalsa konnect में यह post डालूँ?\n\n"${text}"`,reply_markup:keyboardFor(env)});
+  await send(env,'sendMessage',{chat_id:Number(env.OWNER_ID),text:`Creator से नया draft — Khalsa konnect में यह post डालूँ?\n\n"${text}"`,reply_markup:keyboardFor(env,text)});
   return json({ok:true},200,h);
 }
 

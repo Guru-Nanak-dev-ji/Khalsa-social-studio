@@ -59,17 +59,20 @@
     }
     return {drafts,skipped};
   }
+  // wa.me link with text trimmed so the encoded URL stays under a safe length.
+  function waLink(text,max=1800){const e=encodeURIComponent,base='https://wa.me/?text=';let c=Array.from(String(text||''));if((base+e(c.join(''))).length<=max)return base+e(c.join(''));
+    let lo=0,hi=c.length;while(lo<hi){const m=Math.ceil((lo+hi)/2);if((base+e(c.slice(0,m).join('')+'…')).length<=max)lo=m;else hi=m-1;}return base+e(c.slice(0,lo).join('')+'…');}
   // One-tap share links: free public intent URLs, no login or server.
   function shareLinks(text,link){
     const e=encodeURIComponent,u=safeUrl(link||'')||'';
     return {
-      whatsapp:'https://wa.me/?text='+e(text),
+      whatsapp:waLink(text),
       telegram:'https://t.me/share/url?url='+e(u)+'&text='+e(text),
       x:'https://twitter.com/intent/tweet?text='+e(Array.from(text).length>280?Array.from(text).slice(0,279).join('')+'…':text),
       facebook:'https://www.facebook.com/sharer/sharer.php?u='+e(u)+'&quote='+e(text),
       instagram:'https://www.instagram.com/'
     };
   }
-  const api={KEY,uid,safeUrl,validate,parse,serialize,compose,Store,legacy,shareLinks};
+  const api={KEY,uid,safeUrl,validate,parse,serialize,compose,Store,legacy,shareLinks,waLink};
   if(typeof module==='object'&&module.exports)module.exports=api;else root.KDNCreator=api;
 })(typeof globalThis!=='undefined'?globalThis:this);
