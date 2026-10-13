@@ -1,6 +1,6 @@
 // KDN Telegram bot — Cloudflare Worker (webhook). Port of the box prototype bot.py.
-// Secrets (never in code): TELEGRAM_BOT_TOKEN, WEBHOOK_SECRET. Vars: OWNER_ID, GROUP_ID (wrangler.toml).
-export function extractPost(text){const t=text||'';const a=t.indexOf('"'),b=t.indexOf('"',a+1);return a>=0&&b>a?t.slice(a+1,b):t;}
+// Secrets (never in code): TELEGRAM_BOT_TOKEN, WEBHOOK_SECRET, APP_KEY (for Creator /draft). Vars: OWNER_ID, GROUP_ID (wrangler.toml).
+export function extractPost(text){const t=text||'';const a=t.indexOf('"'),b=t.lastIndexOf('"');return a>=0&&b>a?t.slice(a+1,b):t;}
 export const KEYBOARD={inline_keyboard:[[{text:'✅ हाँ, post करो',callback_data:'post_yes'},{text:'✏️ बदलो',callback_data:'post_edit'},{text:'❌ नहीं',callback_data:'post_no'}]]};
 async function call(env,method,body){
   const r=await fetch(`https://api.telegram.org/bot${env.TELEGRAM_BOT_TOKEN}/${method}`,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body)});
@@ -12,9 +12,10 @@ export async function handleUpdate(u,env,send=call){
   const m=u.message;
   if(m){
     if(m.from?.id!==OWNER||m.chat?.type!=='private')return 'ignored';
-    const txt=m.text||'';
-    if(txt.startsWith('/post ')){const post=txt.slice(6).trim();if(!post)return 'empty';
-      await send(env,'sendMessage',{chat_id:OWNER,text:`Khalsa konnect में यह post डालूँ?\n\n"${post}"`,reply_markup:KEYBOARD});return 'asked';}
+    let txt=(m.text||'').trim().replace(/^["'“”]+|["'“”]+$/g,'').trim();
+    if(txt==='/start'||txt==='/help'||txt==='/post'){await send(env,'sendMessage',{chat_id:OWNER,text:'जो भी post डालनी हो, बस वही text यहाँ लिख दें। मैं पूछूँगा, फिर ✅ दबाने पर Khalsa konnect में डाल दूँगा।'});return 'help';}
+    const pm=txt.match(/^\/post(?:@\w+)?\s+([\s\S]+)$/);const post=(pm?pm[1]:(txt.startsWith('/')?'':txt)).trim();
+    if(post){await send(env,'sendMessage',{chat_id:OWNER,text:`Khalsa konnect में यह post डालूँ?\n\n"${post}"`,reply_markup:KEYBOARD});return 'asked';}
     await send(env,'sendMessage',{chat_id:OWNER,text:'Post के लिए लिखें: /post आपका text'});return 'help';
   }
   const q=u.callback_query;
@@ -28,8 +29,44 @@ export async function handleUpdate(u,env,send=call){
   await send(env,'sendMessage',{chat_id:OWNER,text:note});
   return d;
 }
+export const ALLOWED_ORIGIN='https://guru-nanak-dev-ji.github.io';
+export const MAX_DRAFT=3500;
+const enc=new TextEncoder();
+// Constant-time comparison: hash both values to equal length, then XOR every byte.
+export async function safeEqual(a,b){
+  if(typeof a!=='string'||typeof b!=='string'||!a||!b)return false;
+  const [x,y]=await Promise.all([a,b].map(v=>crypto.subtle.digest('SHA-256',enc.encode(v))));
+  const p=new Uint8Array(x),q=new Uint8Array(y);let diff=0;for(let i=0;i<p.length;i++)diff|=p[i]^q[i];return diff===0;
+}
+// Simple per-isolate limiter (best effort; Workers may run several isolates).
+const hits=new Map();
+export function rateLimited(key,now=Date.now(),limit=5,windowMs=60000){
+  const list=(hits.get(key)||[]).filter(t=>now-t<windowMs);
+  if(list.length>=limit){hits.set(key,list);return true;}
+  list.push(now);hits.set(key,list);if(hits.size>1000)hits.clear();return false;
+}
+function cors(origin){return origin===ALLOWED_ORIGIN?{'Access-Control-Allow-Origin':ALLOWED_ORIGIN,'Access-Control-Allow-Methods':'POST, OPTIONS','Access-Control-Allow-Headers':'content-type, x-kdn-app-key','Access-Control-Max-Age':'86400',Vary:'Origin'}:{Vary:'Origin'};}
+function json(body,status,headers){return new Response(JSON.stringify(body),{status,headers:{'content-type':'application/json',...headers}});}
+// Creator -> owner approval popup. Never posts to the group; only the owner's ✅ does.
+export async function handleDraft(request,env,send=call){
+  const origin=request.headers.get('Origin')||'',h=cors(origin);
+  if(request.method==='OPTIONS')return new Response(null,{status:origin===ALLOWED_ORIGIN?204:403,headers:h});
+  if(request.method!=='POST')return json({ok:false,error:'method'},405,h);
+  if(origin!==ALLOWED_ORIGIN)return json({ok:false,error:'origin'},403,h);
+  if(!env.APP_KEY)return json({ok:false,error:'not-configured'},503,h);
+  const ip=request.headers.get('CF-Connecting-IP')||'unknown';
+  if(rateLimited(ip))return json({ok:false,error:'rate'},429,{...h,'Retry-After':'60'});
+  if(!(await safeEqual(request.headers.get('X-KDN-App-Key')||'',env.APP_KEY)))return json({ok:false,error:'key'},401,h);
+  let data;try{data=await request.json();}catch{return json({ok:false,error:'json'},400,h);}
+  const text=typeof data?.text==='string'?data.text.trim():'';
+  if(!text)return json({ok:false,error:'empty'},400,h);
+  if(Array.from(text).length>MAX_DRAFT)return json({ok:false,error:'long'},413,h);
+  await send(env,'sendMessage',{chat_id:Number(env.OWNER_ID),text:`Creator से नया draft — Khalsa konnect में यह post डालूँ?\n\n"${text}"`,reply_markup:KEYBOARD});
+  return json({ok:true},200,h);
+}
 export default {
   async fetch(request,env){
+    if(new URL(request.url).pathname==='/draft')return handleDraft(request,env);
     if(request.method!=='POST')return new Response('KDN bot OK');
     // Only Telegram (which knows WEBHOOK_SECRET) may call the webhook.
     if(!env.WEBHOOK_SECRET||request.headers.get('X-Telegram-Bot-Api-Secret-Token')!==env.WEBHOOK_SECRET)return new Response('forbidden',{status:403});
