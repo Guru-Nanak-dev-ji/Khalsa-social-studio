@@ -43,7 +43,7 @@
 <body data-heritage="court">
 <div class="wrap">
 <header class="top"><a href="./studio.html">← Control Room</a></header>
-<section class="jaan-hero jaan-shell-hero" style="padding-top:52px"><h2 class="jaan-head" style="color:#f2c66a;text-align:center">🛠️🤖 AI औज़ार — मुफ़्त</h2><div class="jaan-slider" aria-label="तस्वीरें" data-jaan-slides="network|🌐 नेटवर्क;lib|📚 ज्ञान;city|🌆 भविष्य"></div><div data-jaan-games data-jaan-fun="ai-tools"></div></section><main><div class="heritage-banner" aria-hidden="true"></div>
+<main><div class="heritage-banner" aria-hidden="true"></div>
 <p class="eyebrow">KDN · FREE AI TOOLS DWAR · v0.1</p>
 <h1>Free AI Tools द्वार</h1>
 <p class="sub">मुफ़्त और open-source AI tools एक ही दरवाज़े पर · ਮੁਫ਼ਤ AI ਟੂਲ · Free AI tools in one place. हर card tool की असली website नई tab में खोलता है।</p>
@@ -100,4 +100,4 @@ const cats=document.getElementById('cats');
 cats.innerHTML=TOOLS.map(([cat,list])=>`<section class="cat"><h2>${esc(cat)}</h2><div class="tools">${list.map(([n,u,d,b])=>{const ext=u.startsWith('http');return `<a class="tool" href="${esc(u)}"${ext?' target="_blank" rel="noopener noreferrer"':''} data-q="${esc((cat+' '+n+' '+d+' '+b).toLowerCase())}"><b>${esc(n)}</b><p>${esc(d)}</p><span class="badge${b===OS?' os':''}">${b}</span></a>`}).join('')}</div></section>`).join('');
 document.getElementById('tool-search').addEventListener('input',e=>{const q=e.target.value.trim().toLowerCase();let any=false;cats.querySelectorAll('.cat').forEach(s=>{let n=0;s.querySelectorAll('.tool').forEach(t=>{const m=!q||t.dataset.q.includes(q);t.hidden=!m;if(m)n++});s.hidden=!n;if(n)any=true});document.getElementById('empty').hidden=any});
 </script>
-</body></html>
+<section class="jaan-hero jaan-shell-hero" style="padding-top:16px"><h2 class="jaan-head" style="color:#f2c66a;text-align:center">🛠️🤖 AI औज़ार — मुफ़्त</h2><div class="jaan-slider" aria-label="तस्वीरें" data-jaan-slides="network|🌐 नेटवर्क;lib|📚 ज्ञान;city|🌆 भविष्य"></div><div data-jaan-games data-jaan-fun="ai-tools"></div></section></body></html>
