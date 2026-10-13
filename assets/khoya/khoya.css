@@ -60,7 +60,7 @@ body{margin:0;min-height:100vh;color:var(--ink);background:radial-gradient(ellip
 .card2{aspect-ratio:.8;font-size:38px;border:3px solid var(--g);border-radius:10px;background:repeating-linear-gradient(45deg,#6b3f12 0 8px,#2a1407 8px 16px)}.card2.open{background:#ffe6a0}
 
 .part{min-height:58px;margin:6px 0;padding:10px 14px;border:3px solid var(--g);border-radius:30px;background:#ffe6a0;color:#2a1407;font:inherit;font-size:20px;font-weight:700;touch-action:none;width:100%}
-.ghost{position:fixed;z-index:30;pointer-events:none;transform:translate(-50%,-50%) scale(1.1);opacity:.9;margin:0;width:auto}
+.dragghost{position:fixed;z-index:30;pointer-events:none;transform:translate(-50%,-50%) scale(1.1);opacity:.9;margin:0;width:auto}
 .lockz{min-height:90px;display:flex;align-items:center;justify-content:center;border:3px dashed var(--g);border-radius:16px;background:#0008;font-size:24px;font-weight:700;color:#ffe6a0;animation:lk 1.6s ease-in-out infinite}@keyframes lk{50%{box-shadow:0 0 24px #f4c867}}
 #tiles.pz-place,#tiles.pz-rings,#tiles.pz-scale,#tiles.pz-veena,#tiles.pz-beam,#tiles.pz-jigsaw{display:block}
 .rings{position:relative;width:300px;height:300px;margin:8px auto}.pin{position:absolute;top:-6px;left:50%;translate:-50% 0;z-index:3;color:#ff6b4a;font-size:26px;font-style:normal}

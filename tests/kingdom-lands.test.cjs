@@ -43,3 +43,4 @@ test('sound: procedural only, off by default, remembered, wired',()=>{const S=re
  assert.ok(!/\.mp3|\.ogg|\.wav|new Audio\(|fetch\(/.test(src));assert.ok(src.includes('createOscillator'));
  for(const k of['find','wrong','hint','open','clear'])assert.ok(js.includes("sfx('"+k+"')"),k);assert.ok(js.includes('pointerdown')&&h.includes('id="snd"')&&h.includes('khoya-sound.js'));
  assert.ok(R('sw.js').includes('./assets/khoya/khoya-sound.js'));});
+test('drag ghost class does not hide .btn.ghost buttons',()=>{const css=R('assets/khoya/khoya.css');assert.ok(!/(^|\n)\.ghost\{position:fixed/.test(css));assert.ok(css.includes('.dragghost{'));});

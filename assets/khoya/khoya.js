@@ -22,7 +22,7 @@ const HOW_EXTRA={rings:['☀️🌙 सूरज-चाँद द्वार','
  beam:['🔆 रोशनी का रास्ता','🪞 शीशे छूकर पलटिए ताकि बाएँ से आती रोशनी 💎 ताले के बिल्लौर तक पहुँचे।'],
  jigsaw:['🗿 टूटी ज्योति-मूर्ति','टुकड़ों को खींचकर (या छूकर फिर खाने को छूकर) सही जगह रखिए — मूर्ति जुड़ते ही पूरा राज्य रोशन होगा!']};
 let dragInfo=null,pickJ=-1;
-function dragify(b,onDrop){b.addEventListener('pointerdown',e=>{e.preventDefault();const g=b.cloneNode(true);g.classList.add('ghost');document.body.append(g);dragInfo={g,b,moved:false,x:e.clientX,y:e.clientY};
+function dragify(b,onDrop){b.addEventListener('pointerdown',e=>{e.preventDefault();const g=b.cloneNode(true);g.classList.add('dragghost');document.body.append(g);dragInfo={g,b,moved:false,x:e.clientX,y:e.clientY};
   const mv=ev=>{if(Math.hypot(ev.clientX-dragInfo.x,ev.clientY-dragInfo.y)>8)dragInfo.moved=true;g.style.left=ev.clientX+'px';g.style.top=ev.clientY+'px';};mv(e);
   const up=ev=>{document.removeEventListener('pointermove',mv);document.removeEventListener('pointerup',up);g.remove();const t=document.elementFromPoint(ev.clientX,ev.clientY),moved=dragInfo.moved;dragInfo=null;onDrop(t&&t.closest('[data-drop]'),moved);};
   document.addEventListener('pointermove',mv);document.addEventListener('pointerup',up);});}
