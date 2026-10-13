@@ -36,3 +36,11 @@ curl "https://api.telegram.org/bot<TOKEN>/setWebhook" \
 
 ## वापस polling पर जाना
 `https://api.telegram.org/bot<TOKEN>/deleteWebhook` खोलें, फिर box का `bot.py` चालू करें।
+
+## 5. Creator से Telegram मंज़ूरी (`/draft`)
+1. एक लंबी random app key बनाएँ और worker में डालें: `wrangler secret put APP_KEY`
+2. `wrangler deploy`
+3. Creator में "App key (सिर्फ़ मालिक के लिए)" खोलें, वही key paste करके "Key सेव करें" दबाएँ।
+4. "Telegram पर मंज़ूरी के लिए भेजें" दबाएँ → Telegram में ✅/✏️/❌ popup आएगा। ✅ के बिना group में कुछ नहीं जाता।
+
+सुरक्षा: key सिर्फ़ उसी फ़ोन के localStorage में रहती है; worker key को constant-time से जाँचता है, सिर्फ़ `https://guru-nanak-dev-ji.github.io` से CORS देता है, प्रति IP 5 requests/मिनट की सीमा है, post 3500 अक्षर तक।
