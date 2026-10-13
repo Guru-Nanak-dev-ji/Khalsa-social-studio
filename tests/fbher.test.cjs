@@ -1,0 +1,14 @@
+const test=require('node:test'),assert=require('node:assert'),F=require('../assets/kahani/fb-core.js'),K=require('../assets/koins-core.js'),Z=require('../assets/khazana/khazana-core.js'),fs=require('fs'),path=require('path');
+const R=f=>fs.readFileSync(path.join(__dirname,'..',f),'utf8');
+test('structure: 3 ch / 21 scenes, HER 8 ch, jokes 15-18, table, link, help',()=>{assert.equal(F.FB.ch.length,3);const sc=F.FB.ch.flatMap(c=>c.sc);assert.equal(sc.length,21);
+ assert.equal(sc.filter(x=>x.joke).length,4);assert.equal(sc.filter(x=>x.cut).length,3);assert.ok(sc.find(x=>x.table).table.length===6);assert.equal(F.FB.link,'https://khalsa.lol/Funnybook');
+ assert.equal(F.HER.ch.length,8);const hs=F.HER.ch.flatMap(c=>c.sc);assert.ok(hs.some(x=>x.help));const h=JSON.stringify(F.HELP);assert.ok(h.includes('14416')&&h.includes('9-8-8')&&h.includes('112')&&h.includes('9-1-1'));
+ assert.ok(F.FB.sub.includes('ਫਨੀਬੁੱਕ')&&/[\u0A00-\u0A7F]/.test(F.HER.sub));});
+test('exclusions: no real names, threats, numbers, methods',()=>{const all=JSON.stringify(F)+R('assets/kahani/fb.js');
+ for(const bad of['भगवंत','पैगवंत','पैग्गवंत','मान चवल','अमृतपाल','अमृत पाल','बादल','बेअंत','कंजर','डिबरूगढ़','मर जा','मरजा','waheguru','84','भंता','कुल्फ़ी गरमा','कुलफ़ी गरमा','ज़हर','फाँसी','छत से','कूद','पुल से','बच्चा','Khalistan','खालिस्तान','☬','China','चीन'])assert.ok(!all.includes(bad),bad);
+ assert.ok(!/\+?\d[\d -]{9,}\d/.test(JSON.stringify([F.FB,F.HER])),'phone');assert.ok(!/innerHTML|outerHTML|insertAdjacentHTML|fetch\(/.test(R('assets/kahani/fb.js')));});
+test('badges once + koins + khazana + page + sw',()=>{let s=F.fresh();let r=F.finish(s,'fb');assert.ok(r.badgeNew);assert.ok(!F.finish(r.state,'fb').badgeNew);r=F.finish(r.state,'her');assert.ok(r.badgeNew&&r.state.fb&&r.state.her);
+ assert.deepEqual(F.validate({v:1,fb:'x'}),F.fresh());assert.ok(!F.finish(s,'evil').badgeNew);
+ assert.ok(Z.GAMES.find(g=>g.id==='funnybook').got(r.state)&&Z.GAMES.find(g=>g.id==='her').got(r.state));assert.equal(K.claimSpot(K.fresh(),'fb:done').added,5);
+ const h=R('kahani.html');assert.ok(h.includes('id="fb"')&&h.includes('id="her"')&&h.includes('fb-core.js'));const sw=R('sw.js');assert.match(sw,/const CACHE=PREFIX\+'v0\.(5[8-9]|[6-9]\d)\./);assert.ok(sw.includes('./assets/kahani/fb.js')&&sw.includes('./assets/kahani/fb-core.js'));
+ assert.ok(R('assets/kahani/kahani.css').includes('@keyframes fbpop'));});

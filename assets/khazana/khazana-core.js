@@ -13,6 +13,8 @@ const GAMES=[
  {id:'sankalp',icon:'🪔',game:'आज का संकल्प',badge:'संकल्प दीप',key:'kdn-sankalp-v1',href:'./sankalp.html',got:s=>s.badge===true},
  {id:'mala',icon:'📿',game:'सिमरन माला',badge:'सिमरन साधक',key:'kdn-mala-v1',href:'./mala.html',got:s=>s.badge===true},
  {id:'gun',icon:'📜',game:'आज का गुण',badge:'गुण साधक',key:'kdn-gun-v1',href:'./gun.html',got:s=>s.badge===true||(Array.isArray(s.done)&&s.done.length>=7)},
+ {id:'funnybook',icon:'🤣',game:'फनीबुक बनाम फेकबुक',badge:'हँसी का दर्पण',key:'kdn-fbher-v1',href:'./kahani.html#fb',got:s=>s.fb===true},
+ {id:'her',icon:'👽',game:'HER — आवाज़ें',badge:'आवाज़ सुनने वाला',key:'kdn-fbher-v1',href:'./kahani.html#her',got:s=>s.her===true},
  {id:'whitemirror',icon:'🤍',game:'White Mirror',badge:'सफ़ेद शीशा',key:'kdn-whitemirror-v1',href:'./kahani.html',got:s=>s.badge===true},
  {id:'kahani',icon:'📖',game:'कहानी घर',badge:'कथा यात्री',key:'kdn-kahani-v1',href:'./kahani.html',got:s=>s.badge===true},
  {id:'funny',icon:'🤣',game:'फनीबुक',badge:'फनी साधक',key:'kdn-funny-v1',href:'./funnybook.html',got:s=>s.badge===true||(Array.isArray(s.done)&&s.done.length>=7)},
