@@ -9,7 +9,7 @@ const dayKey=d=>{d=d||new Date();return d.getFullYear()+'-'+String(d.getMonth()+
 const dayNum=k=>{const m=/^(\d{4})-(\d\d)-(\d\d)$/.exec(k);return m?Math.floor(Date.UTC(+m[1],+m[2]-1,+m[3])/864e5):0;};
 const fromNum=n=>new Date(n*864e5).toISOString().slice(0,10);
 // नकारात्मक शब्द पहचानो ताकि सकारात्मक रूप सुझा सकें (सिर्फ़ सलाह, रोक नहीं)
-const NEG=/(नहीं|मत |कभी न|डर|बीमार|गरीब|हार)/;
+const NEG=/(नहीं|(^|\s)मत(\s|$)|कभी न|डर|बीमार|गरीब|हार)/;
 const isNegative=t=>NEG.test(clean(t));
 const fresh=()=>({v:1,days:{},badge:false});
 function vDay(d){d=d||{};const g=(Array.isArray(d.grat)?d.grat:[]).map(x=>clean(x,60)).filter(Boolean).slice(0,3);

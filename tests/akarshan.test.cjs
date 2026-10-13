@@ -6,7 +6,7 @@ test('attract + 3 steps complete once, empty/junk safe',()=>{let s=A.fresh();ass
  s=A.gratitude(r.state,'2026-10-13',['a','b']).state;assert.ok(!A.complete(A.get(s,'2026-10-13')));assert.ok(!A.doAct(s,'2026-10-13').completeNew);
  r=full(A.fresh(),'2026-10-13');assert.ok(r.completeNew);assert.ok(!A.doAct(r.state,'2026-10-13').completeNew);
  assert.deepEqual(A.validate(null),A.fresh());assert.deepEqual(A.validate({v:1,days:{bad:{},'2026-01-01':{grat:[1,'',3,'x','y','z'],act:'zz'}}}).days,{'2026-01-01':{intent:'',attracted:false,think:false,grat:['1','3','x'],act:'',actDone:false}});
- assert.ok(A.isNegative('मैं डरता नहीं'));assert.ok(!A.isNegative('मैं हिम्मत वाला हूँ'));assert.equal(A.VALUES.map(v=>v.title).join(','),'किरत करो,वंड छको,नाम जपो');});
+ assert.ok(A.isNegative('मैं डरता नहीं'));assert.ok(!A.isNegative('मैं हिम्मत वाला हूँ'));assert.ok(A.isNegative('मत डरो'));assert.equal(A.VALUES.map(v=>v.title).join(','),'किरत करो,वंड छको,नाम जपो');});
 test('streak, badge at 7, week, koins once a day',()=>{let s=A.fresh(),bn=0;for(let d=1;d<=7;d++){const r=full(s,'2026-10-0'+d);s=r.state;if(r.badgeNew)bn++;}
  assert.equal(bn,1);assert.ok(s.badge);assert.equal(A.count(s),7);assert.equal(A.streak(s,'2026-10-07'),7);assert.equal(A.streak(s,'2026-10-08'),7);assert.equal(A.streak(s,'2026-10-09'),0);
  const w=A.week(s,'2026-10-08');assert.equal(w.length,7);assert.ok(w[6].today&&!w[6].done&&w[5].done);assert.ok(A.validate(JSON.parse(JSON.stringify(s))).badge);
