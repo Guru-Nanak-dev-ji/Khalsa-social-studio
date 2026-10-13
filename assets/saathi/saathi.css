@@ -1,0 +1,27 @@
+body.kdn-hindi{background:radial-gradient(ellipse at top,#3a2208,#140a03 70%);color:#fff1c8;font-family:Mukta,'Noto Sans Devanagari',sans-serif;margin:0}
+.st{max-width:640px;margin:0 auto;padding:16px 14px 40px;font-size:18px;line-height:1.55}
+.st h1,.st h2{font-family:'Rozha One',Mukta,serif;color:#ffd76a;font-weight:400;margin:.3em 0}
+.st h1{font-size:30px}.st h2{font-size:22px}.eyebrow{color:#e2b04a;font-size:14px;margin:0}
+.ai-tag{display:inline-block;background:#1a0e05;border:1px solid #e2b04a;border-radius:999px;padding:2px 10px;font-size:13px;color:#ffd76a}
+.pick{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.pick button{background:linear-gradient(160deg,#2a1606,#4a2a08);border:2px solid #7a5a1a;border-radius:18px;padding:8px;color:#fff1c8;font:inherit;cursor:pointer}
+.pick button[aria-pressed=true]{border-color:#ffd76a;box-shadow:0 0 18px #ffd76a66}
+.av{width:100%;aspect-ratio:3/4;border-radius:48% 48% 14px 14px/26% 26% 14px 14px;background:#e9dcc0 url(../world/kdn-nihang-guides-v22.webp) no-repeat;background-size:200% auto;animation:sBreathe 4.5s ease-in-out infinite;transform-origin:50% 100%}
+.av.tark{background-position:4% 0}.av.bhavna{background-position:96% 4%}
+.pick b{display:block;font-family:'Rozha One',serif;font-size:21px;color:#ffd76a;font-weight:400}.pick small{font-size:14px;opacity:.85}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips button{font:inherit;font-size:17px;padding:8px 14px;border-radius:999px;border:1.5px solid #e2b04a;background:#1a0e05;color:#fff1c8;cursor:pointer}
+.chips button[aria-pressed=true]{background:#e2b04a;color:#1a0e05;font-weight:700}
+.row{display:flex;gap:8px;margin-top:10px}.row input{flex:1;min-width:0;font:inherit;padding:10px;border-radius:12px;border:1.5px solid #e2b04a;background:#fff8e6;color:#1a0e05}
+.btn{font:inherit;font-weight:700;padding:10px 16px;border-radius:14px;border:0;background:linear-gradient(#ffd76a,#c8922a);color:#1a0e05;cursor:pointer}
+.btn.ghost{background:#1a0e05;color:#ffd76a;border:1.5px solid #e2b04a}
+.answer{display:flex;gap:12px;align-items:flex-start;margin-top:16px;padding:14px;border:1.5px solid #e2b04a;border-radius:18px;background:#2a1606cc}
+.answer .av{width:96px;flex:none;aspect-ratio:3/4}
+.answer .av.speaking{animation:sBreathe 4.5s ease-in-out infinite,sGlow .5s ease-in-out infinite alternate}
+.txt{white-space:pre-line;font-size:17px}.txt q{color:#ffd76a}
+.warn{margin-top:14px;padding:12px;border-radius:14px;background:#5a1010;border:1.5px solid #ff8a6a}
+.disc{font-size:14px;opacity:.85;margin-top:18px;border-top:1px solid #7a5a1a;padding-top:10px}
+.st a{color:#ffd76a}
+@keyframes sBreathe{50%{transform:scale(1.012) translateY(-1px)}}
+@keyframes sGlow{from{box-shadow:0 0 6px #ffd76a55}to{box-shadow:0 0 26px #ffd76acc}}
+@media (prefers-reduced-motion:reduce){.av,.answer .av.speaking{animation:none!important}.answer .av.speaking{box-shadow:0 0 16px #ffd76a}}
