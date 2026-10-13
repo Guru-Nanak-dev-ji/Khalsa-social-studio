@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#24070b">
+<meta name="description" content="🍃 पत्ता उड़ाओ — सुनहरे मेहराबों के बीच पत्ता उड़ाइए, छल्लों से koins और quiz से अंक कमाइए।">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icons/khalsa-v1-32.png" sizes="32x32" type="image/png">
+<link rel="stylesheet" href="./assets/heritage.css">
+<link rel="stylesheet" href="./assets/hindi-fonts.css">
+<link rel="stylesheet" href="./assets/patta.css">
+<title>🍃 पत्ता उड़ाओ · KDN</title>
+<script defer src="./assets/koins-core.js"></script>
+<script defer src="./assets/patta-core.js"></script>
+<script defer src="./assets/patta.js"></script>
+</head>
+<body class="kdn-hindi" data-heritage="immersive">
+<div class="heritage-banner" aria-hidden="true"></div>
+<canvas id="sky" aria-label="पत्ता उड़ाओ खेल का मैदान"></canvas>
+<header class="hud" role="status" aria-live="polite">
+<a href="./studio.html#door=games">← द्वार</a>
+<div class="big">💰 <span id="h-koins">0</span><small>कमाए <span id="h-earn">0</span> · game koins, असली पैसा नहीं</small></div>
+<div class="big">⭐ <span id="h-score">0</span><small>अंक · इस उड़ान 🟡 <span id="h-run">0</span></small></div>
+</header>
+<div class="tools"><button type="button" id="pause">⏸ रोको</button><button type="button" id="simple">🪶 सरल graphics</button></div>
+<section class="pane" id="intro"><div class="card">
+<h1>🍃 पत्ता उड़ाओ</h1>
+<p>उँगली से खींचकर सुनहरा पत्ता उड़ाइए। <b>🟡 सुनहरे छल्ले</b> से निकलें तो <b>+5 koins</b>। <b>🔵 ? वाले छल्ले</b> पर एक सवाल आएगा: सही पर <b>+10 अंक</b>, गलत पर <b>−3</b>।</p>
+<button type="button" id="start">▶ उड़ान शुरू करें</button>
+</div></section>
+<section class="pane" id="quiz" hidden><div class="card" role="dialog" aria-labelledby="q-text">
+<h2>🔑 सवाल का द्वार</h2><p id="q-text"></p><div class="opts" id="q-opts"></div><p id="q-note" aria-live="polite"></p>
+</div></section>
+</body>
+</html>
