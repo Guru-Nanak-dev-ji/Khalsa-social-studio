@@ -1,0 +1,24 @@
+const test=require('node:test'),assert=require('node:assert'),F=require('../assets/funny/funny-core.js'),K=require('../assets/koins-core.js'),Dr=require('../assets/doors-core.js'),Z=require('../assets/khazana/khazana-core.js'),N=require('../assets/naksha/naksha-core.js'),fs=require('fs'),path=require('path');
+const R=f=>fs.readFileSync(path.join(__dirname,'..',f),'utf8');
+test('14 gentle jokes, unique, rotate by day, motto safe',()=>{assert.equal(F.KEY,'kdn-funny-v1');assert.equal(F.BADGE,'फनी साधक');assert.equal(F.NEED,7);
+ assert.ok(F.JOKES.length>=12&&F.JOKES.length<=16);assert.equal(new Set(F.JOKES.map(j=>j.id)).size,F.JOKES.length);
+ for(const j of F.JOKES)assert.ok(j.icon&&j.setup&&j.punch,j.id);
+ const all=F.JOKES.map(j=>j.setup+' '+j.punch).join(' ');
+ for(const bad of['धर्म','मज़हब','जाति','राजनीति','पार्टी','☬','कुरान','बाइबल','गुरु ग्रंथ'])assert.ok(!all.includes(bad),bad);
+ assert.equal(F.dayOfYear('2026-01-01'),1);assert.notEqual(F.jokeFor('2026-10-13').id,F.jokeFor('2026-10-14').id);
+ const seen=new Set();for(let i=0;i<F.JOKES.length;i++){const d=new Date(Date.UTC(2026,0,1+i));const k=d.toISOString().slice(0,10);seen.add(F.jokeFor(k).id);}
+ assert.equal(seen.size,F.JOKES.length);assert.match(F.dayKey(new Date(2026,9,3)),/^2026-10-03$/);});
+test('mark once a day, badge at 7 distinct days, week, junk safe, koins once',()=>{let s=F.fresh();let r=F.mark(s,'2026-10-13');assert.ok(r.firstToday);s=r.state;assert.ok(!F.mark(s,'2026-10-13').firstToday);assert.ok(!F.mark(s,'bad').firstToday);
+ let bn=0;for(const d of['2026-10-01','2026-10-03','2026-10-05','2026-10-07','2026-10-09','2026-10-11']){r=F.mark(s,d);s=r.state;if(r.badgeNew)bn++;}assert.equal(bn,1);assert.ok(s.badge);assert.equal(F.count(s),7);
+ assert.ok(!F.mark(s,'2026-10-12').badgeNew);
+ const w=F.week(s,'2026-10-13');assert.equal(w.length,7);assert.ok(w[6].today&&w[6].done);assert.ok(!w[5].done);assert.ok(w[4].done);assert.ok(w[0].icon);
+ assert.deepEqual(F.validate(null),F.fresh());assert.deepEqual(F.validate({v:1,done:['x','2026-01-01','2026-01-01',5]}).done,['2026-01-01']);
+ const g=Z.GAMES.find(x=>x.id==='funny');assert.ok(g.got(s));assert.ok(!g.got(F.fresh()));
+ let k=K.fresh();const a=K.claimSpot(k,'funny:2026-10-13');assert.equal(a.added,5);assert.equal(K.claimSpot(a.state,'funny:2026-10-13').added,0);});
+test('page, door, feed, khazana, naksha, sw, no Khanda, no selfies, safe DOM',()=>{const h=R('funnybook.html'),js=R('assets/funny/funny.js'),c=R('assets/funny/funny-core.js'),css=R('assets/funny/funny.css'),all=h+js+c+css;
+ assert.ok(h.includes('lang="hi"')&&h.includes('data-heritage="immersive"')&&h.includes('heritage-banner')&&h.includes('goldtv.js')&&h.includes('hindi-fonts.css')&&h.includes('heritage.css')&&h.includes('असली पैसा नहीं')&&h.includes('koins-core.js')&&h.includes('./studio.html#door=games')&&h.includes('😊 आज मुस्कुराए')&&h.includes('हँसी से सच, किसी को चोट नहीं')&&h.includes('data-jaan-fun="funny"'));
+ assert.ok(js.includes("'hi-IN'")&&js.includes("claimSpot(kst,'funny:'+today)")&&js.includes('window.__funny')&&!/innerHTML|outerHTML|insertAdjacentHTML|XMLHttpRequest|fetch\(/.test(js+c));assert.ok(!/☬/.test(all));assert.ok(!/<img|\.webp|\.jpe?g|selfie/i.test(h+js+css));
+ assert.ok(css.includes('prefers-reduced-motion')&&css.includes('@keyframes flipin')&&css.includes('glow'));
+ assert.ok(Dr.all().some(d=>d.href==='./funnybook.html'&&d.title==='फनीबुक'));assert.ok(JSON.parse(R('assets/goldtv/feed.json')).items.some(i=>i.href==='./funnybook.html'));
+ assert.ok(Z.GAMES.some(g=>g.id==='funny'&&g.badge===F.BADGE&&g.key===F.KEY&&g.href==='./funnybook.html'));assert.ok(N.IDS.includes('funnybook'));
+ const sw=R('sw.js');assert.equal((sw.match(/const CACHE/g)||[]).length,1);assert.match(sw,/const CACHE=PREFIX\+'v0\.57\.0'/);assert.ok(sw.includes("'./funnybook.html','./assets/funny/funny-core.js','./assets/funny/funny.js','./assets/funny/funny.css'"));});
