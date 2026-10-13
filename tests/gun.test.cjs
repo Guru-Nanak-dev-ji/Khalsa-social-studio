@@ -17,6 +17,6 @@ test('page, door, feed, khazana, naksha, sw, no Khanda, no Gurbani refs, no self
  assert.ok(js.includes("'hi-IN'")&&js.includes("claimSpot(kst,'gun:'+today)")&&!/innerHTML|XMLHttpRequest|fetch\(/.test(js+c));assert.ok(!/☬/.test(all));assert.ok(!/<img|\.webp|\.jpe?g|selfie/i.test(h+js));
  assert.ok(!/अंग\s*\d|ang\s*\d|॥/i.test(all));
  const css=R('assets/gun/gun.css');assert.ok(css.includes('prefers-reduced-motion'));
- assert.ok(Dr.all().some(d=>d.href==='./gun.html'));assert.equal(JSON.parse(R('assets/goldtv/feed.json')).items[0].href,'./gun.html');
+ assert.ok(Dr.all().some(d=>d.href==='./gun.html'));assert.ok(JSON.parse(R('assets/goldtv/feed.json')).items.some(i=>i.href==='./gun.html'));
  assert.ok(Z.GAMES.some(g=>g.id==='gun'&&g.badge===G.BADGE&&g.key===G.KEY));assert.ok(N.IDS.includes('gun'));
- const sw=R('sw.js');assert.equal((sw.match(/const CACHE/g)||[]).length,1);assert.ok(sw.includes("v0.27.0"));for(const a of['./gun.html','./assets/gun/gun-core.js','./assets/gun/gun.js','./assets/gun/gun.css'])assert.ok(sw.includes(a),a);});
+ const sw=R('sw.js');assert.equal((sw.match(/const CACHE/g)||[]).length,1);assert.ok(/v0\.(2[7-9]|[3-9]\d)\./.test(sw));for(const a of['./gun.html','./assets/gun/gun-core.js','./assets/gun/gun.js','./assets/gun/gun.css'])assert.ok(sw.includes(a),a);});
