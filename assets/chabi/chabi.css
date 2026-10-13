@@ -1,0 +1,32 @@
+:root{--g:#ffd23f;--ink:#fff6dc}
+html,body{margin:0;min-height:100%;background:#1a0d06;color:var(--ink);font-family:Mukta,'Noto Sans Devanagari',sans-serif;overflow-x:hidden}
+.room-bg{position:fixed;inset:0;background:#1a0d06 center/cover no-repeat;transition:opacity .6s;z-index:0}
+.room-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(#0008,#0003 40%,#000a)}
+.mist{position:fixed;inset:0;z-index:1;pointer-events:none;background:radial-gradient(60% 30% at 20% 80%,#fff3,transparent),radial-gradient(50% 25% at 80% 70%,#fff2,transparent);animation:mist 14s ease-in-out infinite alternate}
+@keyframes mist{to{transform:translateX(6%)}}
+#diya{position:fixed;inset:0;z-index:2;pointer-events:none}
+.hud{position:relative;z-index:5;display:flex;gap:10px;align-items:center;justify-content:space-between;padding:10px 12px;background:#000a;border-bottom:2px solid var(--g)}
+.hud a{color:var(--g);font-size:18px;text-decoration:none}.big{font-size:22px;font-weight:700}.big small{display:block;font-size:12px;font-weight:400;opacity:.8}
+.roomhead{position:relative;z-index:5;text-align:center;padding:8px 14px}.roomhead h1{margin:2px 0;font-family:'Rozha One',serif;color:var(--g);font-size:28px;text-shadow:0 2px 8px #000}
+.roomhead p{margin:2px 0;font-size:17px;text-shadow:0 1px 4px #000}
+#stage{position:relative;z-index:4;height:46vh;min-height:300px;background:#0003;margin:0 10px;border:3px solid var(--g);border-radius:50% 50% 12px 12px/26% 26% 12px 12px;overflow:hidden;box-shadow:0 0 24px #ffd23f55 inset}
+.door{position:absolute;left:34%;right:34%;top:30%;bottom:0;border-radius:50% 50% 0 0/30% 30% 0 0;overflow:hidden;display:flex;perspective:900px;pointer-events:none;z-index:1}
+.door i{flex:1;background:linear-gradient(90deg,#5a2a0c,#8a4a18 50%,#5a2a0c);border:2px solid #c9952f;transition:transform 1.4s ease;transform-origin:left}
+.door i+i{transform-origin:right}.door.open i{transform:rotateY(-100deg)}.door.open i+i{transform:rotateY(100deg)}
+.spot{position:absolute;width:64px;height:64px;margin:-32px;border:0;border-radius:50%;background:radial-gradient(#ffffff18,transparent 70%);font-size:30px;opacity:.28;cursor:pointer;z-index:2;filter:grayscale(.6)}
+.spot.found{opacity:1;filter:none;animation:glow 1.4s ease-in-out infinite alternate}
+@keyframes glow{from{box-shadow:0 0 10px var(--g)}to{box-shadow:0 0 34px 8px var(--g)}}
+.inv{position:relative;z-index:5;display:flex;gap:8px;align-items:center;justify-content:center;margin:10px;font-size:18px}
+#keys{display:flex;gap:4px;font-size:26px}#keys b{opacity:.5;filter:grayscale(1)}#keys b.on{opacity:1;filter:drop-shadow(0 0 6px var(--g))}
+.bar{position:relative;z-index:5;display:flex;gap:10px;justify-content:center;padding:0 10px 150px}
+button{font:inherit;font-size:19px;padding:12px 16px;border-radius:14px;border:2px solid var(--g);background:#3a1a08;color:var(--ink);min-height:52px}
+button:disabled{opacity:.55}#riddle:not(:disabled){background:linear-gradient(#ffd23f,#c9952f);color:#2a1205;font-weight:700}
+.pane{position:fixed;inset:0;z-index:20;display:flex;align-items:center;justify-content:center;background:#000b;padding:14px}
+.pane[hidden]{display:none}.card{background:#2a1205;border:3px solid var(--g);border-radius:20px;padding:16px;max-width:520px;width:100%;max-height:92vh;overflow:auto}
+.card h2{color:var(--g);margin:0 0 8px;font-size:24px}blockquote{margin:6px 0 12px;padding:10px;border-left:4px solid var(--g);background:#0004;font-size:19px}
+.opts{display:grid;gap:8px}.opts button{text-align:left}#q-note{font-size:18px;min-height:1.4em}
+#share-card{width:100%;height:auto;border-radius:12px;margin:8px 0}
+.flykey{position:fixed;z-index:30;font-size:54px;transition:all 1.1s cubic-bezier(.5,-.3,.4,1.3);pointer-events:none}
+.toast{position:fixed;left:50%;top:40%;transform:translate(-50%);z-index:40;font-size:28px;font-weight:700;color:var(--g);text-shadow:0 2px 6px #000;animation:up .9s forwards}
+@keyframes up{to{transform:translate(-50%,-60px);opacity:0}}
+@media (prefers-reduced-motion:reduce){*,*::after{animation:none!important;transition:none!important}}

@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#1a0d06">
+<meta name="description" content="🗝️ चाबी वाला द्वार — 7 कमरों में छिपी चीज़ें खोजिए, ग्रंथों की पहेली सुलझाइए, सुनहरी चाबी से अगला द्वार खोलिए।">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icons/khalsa-v1-32.png" sizes="32x32" type="image/png">
+<link rel="stylesheet" href="./assets/heritage.css">
+<link rel="stylesheet" href="./assets/hindi-fonts.css">
+<link rel="stylesheet" href="./assets/chabi/chabi.css">
+<title>🗝️ चाबी वाला द्वार · KDN</title>
+<script defer src="./assets/koins-core.js"></script>
+<script defer src="./assets/chabi/chabi-core.js"></script>
+<script defer src="./assets/chabi/chabi.js"></script>
+<script defer src="./assets/goldtv/goldtv.js"></script></head>
+<body class="kdn-hindi" data-heritage="immersive">
+<div class="heritage-banner" aria-hidden="true"></div>
+<div id="bg" class="room-bg" aria-hidden="true"></div>
+<div class="mist" aria-hidden="true"></div>
+<canvas id="diya" aria-hidden="true"></canvas>
+<header class="hud" role="status" aria-live="polite">
+<a href="./studio.html#door=games">← द्वार</a>
+<div class="big">💰 <span id="h-koins">0</span><small>game koins, असली पैसा नहीं</small></div>
+<div class="big">⭐ <span id="h-score">0</span><small>अंक</small></div>
+</header>
+<section class="roomhead"><p id="r-num">कमरा 1 / 7</p><h1 id="r-name">🗝️ चाबी वाला द्वार</h1><p id="r-help">छिपी हुई 3 चीज़ें छूकर खोजिए (+5 koins हर एक)। फिर पहेली सुलझाइए।</p></section>
+<main id="stage" aria-label="कमरा"></main>
+<div class="inv" aria-label="चाबियाँ"><span>चाबियाँ:</span><div id="keys"></div></div>
+<div class="bar"><button type="button" id="riddle" disabled>🔒 पहेली (पहले 3 चीज़ें खोजें)</button><button type="button" id="reset">↺ फिर से</button></div>
+<section class="pane" id="quiz" hidden><div class="card" role="dialog" aria-labelledby="q-text">
+<h2 id="q-text">यह किसने कहा?</h2><blockquote id="q-line"></blockquote><div class="opts" id="q-opts"></div><p id="q-note" aria-live="polite"></p>
+</div></section>
+<section class="pane" id="win" hidden><div class="card">
+<h2>🏅 चक्रव्यूह भेदी</h2><p>आपने सातों द्वार खोल दिए! 7 सुनहरी चाबियाँ आपके पास हैं।</p>
+<canvas id="share-card" width="720" height="960" aria-label="share card"></canvas>
+<div class="opts"><button type="button" id="share">📤 Share card</button><button type="button" id="close-win">बंद करें</button></div>
+</div></section>
+</body>
+</html>
