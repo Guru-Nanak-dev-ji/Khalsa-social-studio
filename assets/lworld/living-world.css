@@ -1,0 +1,58 @@
+/* Living worlds v0.17 — background layers only; page UI untouched. */
+html.lw{background:#0b0704 !important}
+html.lw body{background:transparent !important}
+.lw-bg{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none;background:#0b0704}
+.lw-img{position:absolute;inset:-4%;background-size:cover;background-position:center;animation:lw-drift 40s ease-in-out infinite alternate}
+.lw-scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,5,2,.55) 0%,rgba(8,5,2,.72) 45%,rgba(8,5,2,.88) 100%)}
+@keyframes lw-drift{from{transform:scale(1.02) translate3d(-1%,0,0)}to{transform:scale(1.08) translate3d(1%,-1%,0)}}
+.lw-gate .lw-img{background-image:url(gate.webp)}
+.lw-library .lw-img{background-image:url(library.webp)}
+.lw-city .lw-img{background-image:url(city.webp)}
+.lw-sun .lw-img{background-image:url(sun.webp)}
+@media (max-width:700px){
+ .lw-gate .lw-img{background-image:url(gate-m.webp)}
+ .lw-library .lw-img{background-image:url(library-m.webp)}
+ .lw-city .lw-img{background-image:url(city-m.webp)}
+ .lw-sun .lw-img{background-image:url(sun-m.webp)}}
+.lw-canvas{position:absolute;inset:0;width:100%;height:100%}
+/* library: globe + lanterns */
+.lw-globe{position:absolute;left:50%;top:22%;width:min(46vw,260px);aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;
+ background:repeating-linear-gradient(90deg,rgba(255,214,120,.0) 0 18px,rgba(255,214,120,.35) 18px 20px),radial-gradient(circle at 35% 30%,rgba(255,236,170,.55),rgba(120,70,10,.25) 60%,transparent 72%);
+ background-size:120px 100%,100% 100%;box-shadow:0 0 60px 10px rgba(255,190,80,.35),inset 0 0 40px rgba(255,220,140,.4);animation:lw-spin 24s linear infinite,lw-pulse 5s ease-in-out infinite;opacity:.75;mix-blend-mode:screen}
+@keyframes lw-spin{to{background-position:120px 0,0 0}}
+@keyframes lw-pulse{50%{box-shadow:0 0 90px 20px rgba(255,190,80,.5),inset 0 0 50px rgba(255,220,140,.5)}}
+.lw-lantern{position:absolute;width:90px;height:90px;border-radius:50%;background:radial-gradient(circle,rgba(255,200,90,.7),rgba(255,140,30,.15) 55%,transparent 70%);mix-blend-mode:screen;animation:lw-flicker 3.1s infinite}
+@keyframes lw-flicker{0%,100%{opacity:.85}20%{opacity:.6}35%{opacity:.95}60%{opacity:.7}80%{opacity:1}}
+/* city: boat */
+.lw-boat{position:absolute;bottom:12%;left:-80px;width:70px;animation:lw-sail 46s linear infinite;filter:drop-shadow(0 0 8px rgba(255,190,90,.7))}
+@keyframes lw-sail{from{transform:translateX(0)}to{transform:translateX(calc(100vw + 160px))}}
+/* sun: rings */
+.lw-orrery{position:absolute;left:50%;top:30%;width:min(80vw,420px);aspect-ratio:1;transform:translate(-50%,-50%);mix-blend-mode:screen}
+.lw-orrery .r{transform-origin:50% 50%;animation:lw-rot 30s linear infinite}
+.lw-orrery .r2{animation-duration:46s;animation-direction:reverse}
+.lw-orrery .r3{animation-duration:70s}
+.lw-orrery .sun{transform-origin:50% 50%;animation:lw-sunp 4s ease-in-out infinite}
+@keyframes lw-rot{to{transform:rotate(360deg)}}
+@keyframes lw-sunp{50%{transform:scale(1.15);opacity:.75}}
+/* gate intro */
+.lw-intro{position:fixed;inset:0;z-index:9999;background:#0b0704;perspective:1400px;cursor:pointer;overflow:hidden}
+.lw-leaf{position:absolute;top:0;bottom:0;width:50%;background-size:200% 100%;transition:transform 1.6s cubic-bezier(.6,.05,.3,1),filter 1.6s;backface-visibility:hidden}
+.lw-leaf.l{left:0;transform-origin:left center;background-position:left center}
+.lw-leaf.r{right:0;transform-origin:right center;background-position:right center}
+.lw-leaf{background-image:url(gate.webp)}
+@media (max-width:700px){.lw-leaf{background-image:url(gate-m.webp)}}
+.lw-rays{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 55%,rgba(255,230,160,.95),rgba(255,180,60,.35) 30%,transparent 60%),repeating-conic-gradient(from 0deg at 50% 55%,rgba(255,220,140,.18) 0 4deg,transparent 4deg 12deg);opacity:0;transition:opacity 1.2s}
+.lw-enter{position:absolute;left:50%;bottom:9%;transform:translateX(-50%);z-index:2;font:700 1.25rem 'Rozha One','Mukta',sans-serif;color:#2a1600;background:linear-gradient(#ffe9a8,#d9a63c);border:2px solid #fff3c4;border-radius:999px;padding:.7em 1.6em;box-shadow:0 0 30px rgba(255,200,90,.8);animation:lw-pulse2 2.4s infinite}
+@keyframes lw-pulse2{50%{box-shadow:0 0 50px rgba(255,210,110,1)}}
+.lw-intro.open .lw-leaf.l{transform:rotateY(-105deg);filter:brightness(.5)}
+.lw-intro.open .lw-leaf.r{transform:rotateY(105deg);filter:brightness(.5)}
+.lw-intro.open .lw-rays{opacity:1}
+.lw-intro.open .lw-enter{opacity:0;transition:opacity .3s}
+.lw-intro.gone{opacity:0;transition:opacity .7s;pointer-events:none}
+@media (prefers-reduced-motion:reduce){
+ .lw-bg *,.lw-enter{animation:none !important}
+ .lw-leaf{transition:none !important}
+ .lw-intro.open .lw-leaf{transform:none !important;opacity:0}}
+/* let the world show through page shells */
+html.lw body>main,html.lw body>.shell{background:rgba(12,7,3,.5) !important;backdrop-filter:blur(1.5px)}
+html.lw .panel{background-color:rgba(29,11,12,.7) !important}
