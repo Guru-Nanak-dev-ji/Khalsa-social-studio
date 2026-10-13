@@ -1,0 +1,9 @@
+.gc{max-width:760px;margin:24px auto;padding:16px;border:2px solid #c99a3e;border-radius:20px;background:linear-gradient(160deg,#2a1a0c,#120c07);color:#f5dfb2;text-align:center;position:relative;z-index:1}
+.gc h2{font-family:'Rozha One','Mukta',serif;color:#f2c66a;margin:.2em 0}
+.gc-stage{height:240px;perspective:700px;display:flex;align-items:center;justify-content:center;touch-action:none;user-select:none;cursor:grab}
+.gc-cube{--h:70px;width:140px;height:140px;position:relative;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.3,1.4,.5,1)}
+.gc-face{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;border:3px solid #f2c66a;border-radius:14px;background:radial-gradient(circle,#7a1f1f,#3d0f0f);color:#ffe9b0;backface-visibility:hidden;cursor:pointer;padding:0}
+.gc-face b{font-size:64px;line-height:1;font-family:'Noto Sans Gurmukhi','Mukta',sans-serif}.gc-face small{font-size:.9rem}
+.gc-ctrl{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:8px}.gc-ctrl button{background:#efc66e;color:#25190c;border:0;border-radius:10px;padding:10px 14px;font-weight:700;cursor:pointer;font-family:inherit}
+.gc-trail{font-size:1.6rem;letter-spacing:6px;color:#f2c66a;min-height:1.4em}.gc-msg{min-height:1.4em;font-size:1.05rem}
+@media (prefers-reduced-motion:reduce){.gc-cube{transition:none}}
