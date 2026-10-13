@@ -1,8 +1,8 @@
 /* 💬 सुझाव bubble — एक line लिखो या बोलो, owner के Telegram पर जाता है */
 (function(){if(window.__kdnSuggest)return;window.__kdnSuggest=1;
 const API='https://kdn-telegram-bot.khatrinewsnetwork.workers.dev',LS='kdn_suggest_list',OPEN='kdn_suggest_open',POS='kdn_suggest_pos';
-const css=`#kdn-sg-b{position:fixed;left:10px;bottom:calc(78px + env(safe-area-inset-bottom));z-index:2147483000;border:1px solid #e9c46a;background:linear-gradient(180deg,#3a2410,#1c1007);color:#ffe7a3;border-radius:22px;padding:7px 12px;font:600 14px Mukta,'Noto Sans Devanagari',sans-serif;box-shadow:0 4px 14px #0008;cursor:pointer}
-#kdn-sg-p{position:fixed;left:10px;bottom:calc(122px + env(safe-area-inset-bottom));width:min(300px,calc(100vw - 20px));z-index:2147483001;background:linear-gradient(180deg,#2b1a0b,#140b04);border:1.5px solid #d4a73a;border-radius:14px;color:#fbe9c0;font:14px Mukta,'Noto Sans Devanagari',sans-serif;box-shadow:0 8px 28px #000a;display:none}
+const css=`#kdn-sg-b{position:fixed;left:10px;bottom:calc(8px + var(--kdn-dock-off,0px) + env(safe-area-inset-bottom));z-index:2147483000;border:1px solid #e9c46a;background:linear-gradient(180deg,#3a2410,#1c1007);color:#ffe7a3;border-radius:22px;padding:7px 12px;font:600 14px Mukta,'Noto Sans Devanagari',sans-serif;box-shadow:0 4px 14px #0008;cursor:pointer}
+#kdn-sg-p{position:fixed;left:10px;bottom:calc(var(--kdn-dock-h,40px) + 14px + var(--kdn-dock-off,0px) + env(safe-area-inset-bottom));width:min(300px,calc(100vw - 20px));z-index:2147483001;background:linear-gradient(180deg,#2b1a0b,#140b04);border:1.5px solid #d4a73a;border-radius:14px;color:#fbe9c0;font:14px Mukta,'Noto Sans Devanagari',sans-serif;box-shadow:0 8px 28px #000a;display:none}
 #kdn-sg-p.on{display:block}#kdn-sg-p .h{display:flex;align-items:center;gap:6px;padding:6px 10px;border-bottom:1px solid #d4a73a55;cursor:move;touch-action:none;color:#ffd76a;font-weight:700}
 #kdn-sg-p .h span{flex:1}#kdn-sg-p button{font:inherit;cursor:pointer}#kdn-sg-p .x{background:none;border:0;color:#ffd76a;font-size:16px}
 #kdn-sg-p ol{list-style:none;margin:0;padding:6px 10px;max-height:130px;overflow:auto}#kdn-sg-p li{padding:3px 0;border-bottom:1px dashed #d4a73a33;font-size:13px;line-height:1.35}#kdn-sg-p li b{color:#ffd76a;font-weight:600;margin-left:4px}
@@ -17,7 +17,7 @@ function start(){document.head.appendChild(st);
 const b=document.createElement('button');b.id='kdn-sg-b';b.type='button';b.textContent='💬 सुझाव';b.setAttribute('aria-label','सुझाव भेजें');
 const p=document.createElement('div');p.id='kdn-sg-p';p.setAttribute('role','dialog');p.setAttribute('aria-label','सुझाव');
 p.innerHTML='<div class="h"><span>💬 सुझाव · एक line में</span><button class="x" type="button" aria-label="बंद करें">✕</button></div><ol></ol><div class="e" aria-live="polite"></div><form class="r"><input maxlength="500" placeholder="जैसे: इस page पर बटन बड़ा करो" aria-label="सुझाव"><button class="m" type="button" aria-label="बोलकर लिखें">🎙️</button><button class="s" type="submit">भेजें</button></form>';
-document.body.append(b,p);const ol=p.querySelector('ol'),inp=p.querySelector('input'),err=p.querySelector('.e'),mic=p.querySelector('.m');
+document.body.append(b,p);if(window.__kdnDockAdopt)window.__kdnDockAdopt();const ol=p.querySelector('ol'),inp=p.querySelector('input'),err=p.querySelector('.e'),mic=p.querySelector('.m');
 function draw(){const l=load();ol.innerHTML=l.length?l.slice(-20).map(x=>`<li>${esc(x.text)}<b>${LBL[x.status]||''}</b></li>`).join(''):'<li>अभी कोई सुझाव नहीं। नीचे लिखिए या 🎙️ से बोलिए।</li>';ol.scrollTop=1e6;}
 function setOpen(o){p.classList.toggle('on',o);sessionStorage.setItem(OPEN,o?'1':'');if(o){draw();}}
 b.onclick=()=>setOpen(!p.classList.contains('on'));p.querySelector('.x').onclick=()=>setOpen(false);
