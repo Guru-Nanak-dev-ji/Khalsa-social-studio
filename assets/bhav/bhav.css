@@ -1,0 +1,21 @@
+body.kdn-hindi{background:radial-gradient(ellipse at top,#3a2208,#140a03 70%);color:#fff1c8;font-family:Mukta,'Noto Sans Devanagari',sans-serif;margin:0}
+.bv{max-width:640px;margin:0 auto;padding:16px 14px 90px;font-size:18px;line-height:1.55}
+.bv h1,.bv h2{font-family:'Rozha One',Mukta,serif;color:#ffd76a;font-weight:400;margin:.3em 0}.bv h1{font-size:30px}.bv h2{font-size:22px}
+.eyebrow{color:#e2b04a;font-size:14px;margin:0}.slogan{font-family:'Rozha One',serif;color:#ffe9a8;text-align:center;font-size:19px;margin:6px 0 12px}
+.stage{position:relative;width:min(100%,380px);margin:0 auto;aspect-ratio:1122/1402;border-radius:48% 48% 18px 18px/22% 22% 18px 18px;padding:8px;background:linear-gradient(160deg,#ffe48a,#b8862a 40%,#ffd76a 60%,#7a5a1a);box-shadow:0 0 40px var(--aura,#ffd76a),0 0 90px var(--aura,#ffd76a);transition:box-shadow .5s}
+.frame{position:relative;width:100%;height:100%;overflow:hidden;border-radius:inherit;background:#140a03}
+.frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .5s;transform-origin:50% 90%}
+.frame img.front{animation:bBreathe 4.5s ease-in-out infinite}
+.aura{position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 50% 35%,transparent 45%,var(--aura,#ffd76a) 120%);mix-blend-mode:screen;opacity:.55}
+canvas.fx{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+@keyframes bBreathe{0%,100%{transform:scale(1.02) translate(var(--px,0),var(--py,0))}50%{transform:scale(1.045) translate(var(--px,0),calc(var(--py,0px) - 3px))}}
+.sliders{display:grid;gap:10px;margin:18px 0}
+.sl{display:grid;grid-template-columns:44px 1fr 52px;align-items:center;gap:10px;background:#1a0e05;border:1.5px solid #7a5a1a;border-radius:14px;padding:6px 10px}
+.sl img{width:44px;height:44px;border-radius:50%;object-fit:cover;object-position:50% 15%;border:2px solid var(--c)}
+.sl label{display:block;font-weight:700;color:var(--c)}.sl input{width:100%;accent-color:var(--c)}.sl output{text-align:right;font-weight:700}
+.card{background:linear-gradient(160deg,#2a1606,#4a2a08);border:2px solid #e2b04a;border-radius:18px;padding:14px;margin:12px 0}
+.card .nm{font-family:'Rozha One',serif;font-size:26px;color:#ffd76a}.card ul{margin:.4em 0;padding-left:1.2em}
+.btns{display:flex;flex-wrap:wrap;gap:10px}.btn{font:inherit;font-weight:700;padding:10px 16px;border-radius:999px;border:0;background:linear-gradient(#ffe48a,#d9a634);color:#1a0e05;cursor:pointer;text-decoration:none}
+.btn.ghost{background:#1a0e05;color:#ffd76a;border:1.5px solid #e2b04a}
+#msg{min-height:1.4em;color:#ffe9a8}.disc{font-size:14px;opacity:.8}.disc a{color:#ffd76a}
+@media (prefers-reduced-motion:reduce){.frame img.front{animation:none}.frame img,.stage{transition:none}}
