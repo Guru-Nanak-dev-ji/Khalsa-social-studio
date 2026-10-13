@@ -1,0 +1,26 @@
+// KDN जान layer: emoji particles, sliders, ताश/प्यादा mini-games, bounce-in. Original, free, offline.
+(function(){'use strict';
+var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+var EMO=['😁','💰','📚','⛑️','♟️','🃏','🦅','✨','🪔','🌼'];
+var TIPS=['📚 रोज़ 10 मिनट पढ़ो — दिमाग़ चमकेगा','💰 पहले बचाओ, फिर ख़र्चो','⛑️ सेहत ही असली ख़ज़ाना','😁 मुस्कान मुफ़्त है, बाँटो','🦅 ऊँचा सोचो, धीरे बोलो','♟️ प्यादा भी चलते-चलते राजा बनता है','🤝 वंड छको — मिलकर खाओ','🪔 एक अच्छा काम, आज ही'];
+function mk(t,c,h){var e=document.createElement(t);if(c)e.className=c;if(h!=null)e.textContent=h;return e;}
+function sky(){if(reduce||document.querySelector('.jaan-sky')||document.body.dataset.jaan==='off')return;var s=mk('div','jaan-sky');s.setAttribute('aria-hidden','true');
+ for(var i=0;i<9;i++){var p=mk('span','jaan-p',EMO[i%EMO.length]);p.style.left=(Math.random()*95)+'%';p.style.setProperty('--d',(12+Math.random()*10).toFixed(1)+'s');p.style.setProperty('--dl',(-Math.random()*18).toFixed(1)+'s');p.style.setProperty('--dx',((Math.random()-.5)*120|0)+'px');s.appendChild(p);}
+ document.body.prepend(s);var m=mk('div','jaan-motifs');m.setAttribute('aria-hidden','true');['♟️','🃏','🦅'].forEach(function(x){m.appendChild(mk('span','',x));});document.body.appendChild(m);}
+function slider(el){if(el.dataset.jaanDone)return;el.dataset.jaanDone='1';var f=[].slice.call(el.querySelectorAll('figure'));if(!f.length)return;var i=0,d=mk('div','jaan-dots');
+ function go(n){f[i].classList.remove('on');d.children[i].classList.remove('on');i=(n+f.length)%f.length;f[i].classList.add('on');d.children[i].classList.add('on');}
+ f.forEach(function(_,k){var b=mk('button');b.type='button';b.setAttribute('aria-label','तस्वीर '+(k+1));b.onclick=function(){go(k);};d.appendChild(b);});el.appendChild(d);f[0].classList.add('on');d.children[0].classList.add('on');
+ var x0=null;el.addEventListener('touchstart',function(e){x0=e.touches[0].clientX;},{passive:true});el.addEventListener('touchend',function(e){if(x0==null)return;var dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>30)go(i+(dx<0?1:-1));x0=null;});
+ if(!reduce)setInterval(function(){if(!document.hidden)go(i+1);},4200);}
+function games(el){if(el.dataset.jaanDone)return;el.dataset.jaanDone='1';el.classList.add('jaan-games');
+ var a=mk('div','jaan-box');a.appendChild(mk('h3','jaan-head','🃏 ताश का पत्ता'));var c=mk('button','jaan-card');c.type='button';c.setAttribute('aria-label','पत्ता पलटो');var w=mk('i'),b=mk('b','','🦅'),t=mk('em','',TIPS[0]);w.append(b,t);c.appendChild(w);
+ c.onclick=function(){if(!c.classList.contains('flip'))t.textContent=TIPS[Math.random()*TIPS.length|0];c.classList.toggle('flip');};a.append(c,mk('p','','छूकर पलटो — आज की सीख'));
+ var g=mk('div','jaan-box');g.appendChild(mk('h3','jaan-head','♟️ प्यादा चलाओ'));var bd=mk('div','jaan-board'),pos=0,cells=[];for(var k=0;k<8;k++){var s=mk('span');bd.appendChild(s);cells.push(s);}cells[0].textContent='♟️';cells[7].textContent='👑';
+ var msg=mk('p','','प्यादा 7 क़दम चले तो राजा!'),btn=mk('button','jaan-btn','आगे बढ़ो ➜');btn.type='button';msg.setAttribute('aria-live','polite');
+ btn.onclick=function(){cells[pos].textContent='';pos=(pos+1)%8;if(pos===0){cells[7].textContent='👑';}cells[pos].textContent=pos===7?'👑♟️':'♟️';msg.textContent=pos===7?'🎉 प्यादा राजा बन गया! 😁':'क़दम '+pos+' / 7';};
+ g.append(bd,btn,msg);el.append(a,g);}
+function reveal(){var els=document.querySelectorAll('main section,.panel,.card,article');if(reduce||!('IntersectionObserver'in window))return;var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('jaan-on');io.unobserve(e.target);}});},{threshold:.08});
+ [].forEach.call(els,function(e){if(e.getBoundingClientRect().top>innerHeight){e.classList.add('jaan-in');io.observe(e);}});}
+function init(){sky();[].forEach.call(document.querySelectorAll('.jaan-slider'),slider);[].forEach.call(document.querySelectorAll('[data-jaan-games]'),games);reveal();}
+if(typeof window!=='undefined'){window.KDNJaan={slider:slider,games:games};if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();}
+})();

@@ -1,0 +1,34 @@
+/* KDN जान layer — free, original, no external deps. Royal Gold. */
+.jaan-sky{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.jaan-p{position:absolute;bottom:-40px;font-size:22px;opacity:.55;animation:jaan-rise var(--d,14s) linear var(--dl,0s) infinite;filter:drop-shadow(0 0 6px rgba(242,198,106,.5))}
+@keyframes jaan-rise{0%{transform:translate(0,0) rotate(0)}50%{transform:translate(var(--dx,20px),-55vh) rotate(180deg)}100%{transform:translate(0,-110vh) rotate(360deg);opacity:0}}
+.jaan-motifs{position:fixed;left:8px;bottom:78px;opacity:.85;display:flex;gap:6px;z-index:5;pointer-events:none}
+.jaan-motifs span{font-size:26px;animation:jaan-bob 3s ease-in-out infinite;display:inline-block}
+.jaan-motifs span:nth-child(2){animation-delay:.5s}.jaan-motifs span:nth-child(3){animation-delay:1s;animation-name:jaan-fly}
+@keyframes jaan-bob{50%{transform:translateY(-8px) rotate(-6deg)}}
+@keyframes jaan-fly{0%,100%{transform:translate(0,0)}25%{transform:translate(-10px,-12px) rotate(-8deg)}75%{transform:translate(6px,-4px) rotate(6deg)}}
+.jaan-in{opacity:0;transform:translateY(24px) scale(.97);transition:opacity .6s ease,transform .6s cubic-bezier(.3,1.6,.5,1)}
+.jaan-in.jaan-on{opacity:1;transform:none}
+.jaan-slider{position:relative;overflow:hidden;border-radius:18px;border:2px solid #c99a3e;box-shadow:0 0 24px rgba(242,198,106,.35);aspect-ratio:16/9;background:#1a120b;margin:12px 0;z-index:1}
+.jaan-slider figure{position:absolute;inset:0;margin:0;opacity:0;transition:opacity .9s,transform 6s linear;transform:scale(1.08)}
+.jaan-slider figure.on{opacity:1;transform:scale(1)}
+.jaan-slider img{width:100%;height:100%;object-fit:cover;display:block}
+.jaan-slider figcaption{position:absolute;left:0;right:0;bottom:0;padding:10px 14px;background:linear-gradient(transparent,rgba(0,0,0,.8));color:#f8dc9a;font:700 1.15rem 'Rozha One','Mukta',serif}
+.jaan-dots{position:absolute;top:8px;right:10px;display:flex;gap:6px;z-index:2}
+.jaan-slider .jaan-dots button{min-height:0!important;max-height:12px!important;padding:0!important;line-height:0!important;all:unset;box-sizing:border-box;flex:none;width:12px!important;height:12px!important;min-width:0;border-radius:50%;padding:0;margin:0;border:1px solid #f2c66a;background:transparent;cursor:pointer}
+.jaan-slider .jaan-dots button.on{background:#f2c66a}
+.jaan-games{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:16px 0;position:relative;z-index:1}
+.jaan-box{background:#211a15;border:1px solid #86602e;border-radius:16px;padding:14px;color:#f5dfb2;text-align:center}
+.jaan-box h3{margin:.2em 0;color:#f2c66a}
+.jaan-card{display:block;width:120px;height:170px;margin:8px auto;perspective:700px;cursor:pointer;border:0;background:none;padding:0}
+.jaan-card i{display:block;position:relative;width:100%;height:100%;transition:transform .7s;transform-style:preserve-3d;font-style:normal}
+.jaan-card.flip i{transform:rotateY(180deg)}
+.jaan-card b,.jaan-card em{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;display:flex;align-items:center;justify-content:center;font-style:normal}
+.jaan-card b{background:repeating-linear-gradient(45deg,#7a1f1f 0 8px,#5a1414 8px 16px);border:3px solid #f2c66a;font-size:42px}
+.jaan-card em{background:#fff8e6;color:#3a2508;transform:rotateY(180deg);padding:8px;font-size:.95rem;border:3px solid #c99a3e}
+.jaan-board{display:grid;grid-template-columns:repeat(8,1fr);max-width:260px;margin:8px auto;border:2px solid #c99a3e}
+.jaan-board span{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:20px}
+.jaan-board span:nth-child(odd){background:#f5dfb2}.jaan-board span:nth-child(even){background:#8a5a2b}
+.jaan-btn{background:#efc66e;color:#25190c;border:0;border-radius:10px;padding:10px 14px;font-weight:700;cursor:pointer}
+.jaan-head{font-family:'Rozha One','Mukta',serif}
+@media (prefers-reduced-motion:reduce){.jaan-sky,.jaan-motifs span{animation:none!important}.jaan-sky{display:none}.jaan-in{opacity:1;transform:none;transition:none}.jaan-slider figure,.jaan-card i{transition:none}}
