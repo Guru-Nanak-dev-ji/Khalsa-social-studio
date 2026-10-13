@@ -43,6 +43,14 @@ section.card.wmc{background:linear-gradient(160deg,#fbf8f1,#e6dfd0)!important;co
 .ring-c{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:20px;font-weight:700;background:#fff;border:3px solid #f4c867;border-radius:50%;width:96px;height:96px;display:flex;align-items:center;justify-content:center;animation:spinc 40s linear infinite reverse}@keyframes spinc{from{transform:translate(-50%,-50%) rotate(0)}to{transform:translate(-50%,-50%) rotate(360deg)}}
 @keyframes spin{to{transform:rotate(360deg)}}.ring:hover{animation-play-state:paused}
 .wmc .res{color:#5a3a10;text-align:center}
+.wm-idx{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}.wi{padding:4px 12px;border-radius:20px;border:2px solid #b8862b;color:#5a3a10;text-decoration:none;font-weight:700}.wi.soon{opacity:.5;border-style:dashed}
+.dcard .gq{background:#0004;color:#ffe6a0;font-size:14px}
+.doors{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0}.dcard{display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px;padding:12px 8px;border:3px solid #f4c867;border-radius:16px 16px 6px 6px;background:linear-gradient(#6b3f12,#2a1407);color:#fff4dc!important;text-decoration:none;animation:dopen .8s ease both}.dcard b{color:#f4c867;font-size:20px}.dcard small{font-size:14px;line-height:1.4}.di{font-size:32px}
+@keyframes dopen{from{opacity:0;transform:perspective(400px) rotateY(-70deg)}to{opacity:1;transform:none}}
+.rules li{margin:4px 0;font-weight:700}.mir{font-style:italic;font-weight:700;text-align:center;color:#5a3a10}
+.cq{text-align:center;font-family:'Rozha One',serif;font-size:22px;color:#7a5214}.mrow{display:flex;gap:12px}
+.mirror{flex:1;min-height:150px;border-radius:50% 50% 12px 12px;border:4px solid #b8862b;font:inherit;font-size:17px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;cursor:pointer}
+.mirror.black{background:#111;color:#bbb}.mirror.white{background:#fff;color:#2a1407}.mirror.white.on{box-shadow:0 0 30px 8px #fff,0 0 50px #f4c867;animation:float 2s ease-in-out infinite}.mirror.black.on{filter:brightness(.6)}
 .disc{border:1px solid var(--g2);border-radius:10px;padding:10px}
 @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}.lines .br{stroke-dasharray:none}}
 h3[id]{scroll-margin-top:80px}
