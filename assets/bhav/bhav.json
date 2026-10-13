@@ -1,0 +1,6 @@
+{"_help":"नया भाव जोड़ने के लिए bhavs में एक पंक्ति जोड़ें: id, नाम, विशेषण, रंग, कण (sparkle/star/mist/ember), तस्वीर और सलाह।","bhavs":[
+{"id":"anand","name":"आनंद","avatar":"आनंद सिंह","adj":"आनंदी","color":"#ffd23f","particle":"sparkle","img":"./assets/bhav/anand.webp","title":"उजाला","tip":"आपकी खुशी दूसरों तक पहुँचती है — आज किसी एक की मदद कर उसे बाँटिए।"},
+{"id":"jigyasa","name":"जिज्ञासा","avatar":"जिज्ञासा सिंह","adj":"जिज्ञासु","color":"#a463ff","particle":"star","img":"./assets/bhav/jigyasa.webp","title":"खोजी","tip":"सवाल पूछना ही ज्ञान का द्वार है — आज एक नई बात सीखिए और किसी को सिखाइए।"},
+{"id":"bhay","name":"भय","avatar":"भय सिंह","adj":"सजग","color":"#3f8cff","particle":"mist","img":"./assets/bhav/bhay.webp","title":"रक्षक","tip":"डर आपको सावधान रखता है — गहरी साँस लीजिए, एक छोटा कदम उठाइए, हिम्मत अपने आप बढ़ेगी।"},
+{"id":"krodh","name":"क्रोध","avatar":"क्रोध सिंह","adj":"जोशीले","color":"#ff4a3a","particle":"ember","img":"./assets/bhav/krodh.webp","title":"योद्धा","tip":"आपका जोश अन्याय के ख़िलाफ़ ताक़त है — उसे गुस्से में नहीं, सेवा और सच में लगाइए।"}
+]}
