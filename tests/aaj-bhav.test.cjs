@@ -1,0 +1,14 @@
+const test=require('node:test'),assert=require('node:assert'),A=require('../assets/aaj-bhav/aaj-bhav-core.js'),K=require('../assets/koins-core.js'),Dr=require('../assets/doors-core.js'),Z=require('../assets/khazana/khazana-core.js'),fs=require('fs'),path=require('path');
+const R=f=>fs.readFileSync(path.join(__dirname,'..',f),'utf8');
+test('six moods, daily pick, diary, badge after 7 days',()=>{assert.deepEqual(A.MOODS.map(m=>m.name),['आनंद','जिज्ञासा','भय','क्रोध','उदासी','शांति']);
+ let s=A.fresh();let r=A.pick(s,'anand','2026-10-13');assert.ok(r.firstToday);s=r.state;r=A.pick(s,'krodh','2026-10-13');assert.ok(!r.firstToday);s=r.state;assert.equal(s.days['2026-10-13'],'krodh');
+ for(let d=14;d<20;d++)s=A.pick(s,'shanti','2026-10-'+d).state;assert.ok(A.badge(s));assert.equal(A.diary(s).length,7);assert.equal(A.diary(s)[0].day,'2026-10-19');
+ assert.equal(A.pick(s,'xyz','2026-10-20').firstToday,false);assert.deepEqual(A.validate({days:{bad:'anand','2026-01-01':'nope'}}).days,{});
+ let k=K.fresh();k=K.claimSpot(k,'aajbhav:2026-10-13').state;assert.equal(K.claimSpot(k,'aajbhav:2026-10-13').added,0);});
+test('every mood gets a sourced quote',()=>{const L=A.quotes(JSON.parse(R('assets/saathi/bani.json')),JSON.parse(R('assets/gyan/granth.json')));
+ for(const m of A.MOODS){const q=A.quoteFor(L,m.id,'2026-10-13');assert.ok(q&&q.source&&q.line,m.id);}});
+test('page, door, feed, khazana, sw, no Khanda, no selfies',()=>{const h=R('aaj-bhav.html'),js=R('assets/aaj-bhav/aaj-bhav.js'),c=R('assets/aaj-bhav/aaj-bhav-core.js');
+ assert.ok(h.includes('lang="hi"')&&h.includes('data-heritage')&&h.includes('goldtv.js')&&h.includes('hindi-fonts.css'));assert.ok(js.includes("'hi-IN'")&&js.includes('claimSpot'));
+ assert.ok(!/☬/.test(h+js+c));assert.ok(!/-s\.webp|selfie/i.test(c));assert.ok(R('assets/aaj-bhav/aaj-bhav.css').includes('prefers-reduced-motion'));
+ assert.ok(Dr.all().some(d=>d.href==='./aaj-bhav.html'));assert.ok(JSON.parse(R('assets/goldtv/feed.json')).items.some(i=>i.href==='./aaj-bhav.html'));
+ assert.ok(Z.GAMES.some(g=>g.id==='aaj-bhav'));const sw=R('sw.js');assert.equal((sw.match(/const CACHE/g)||[]).length,1);assert.ok(sw.includes('./aaj-bhav.html')&&sw.includes('./assets/aaj-bhav/aaj-bhav.js'));});

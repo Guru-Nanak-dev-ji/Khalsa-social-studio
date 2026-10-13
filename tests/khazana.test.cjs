@@ -1,11 +1,11 @@
 const test=require('node:test'),assert=require('node:assert'),Z=require('../assets/khazana/khazana-core.js'),J=require('../assets/jeevit/jeevit-core.js'),Dr=require('../assets/doors-core.js'),fs=require('fs'),path=require('path');
 const R=f=>fs.readFileSync(path.join(__dirname,'..',f),'utf8');
-test('every game key + badge name matches its own core',()=>{const map={chabi:'chabi/chabi-core.js',chakravyuh:'chakravyuh/chakravyuh-core.js',takht:'takht/takht-core.js',langar:'langar/langar-core.js',titli:'titli/titli-core.js','nanak-ghar':'nanak-ghar/nanak-ghar-core.js',jeevit:'jeevit/jeevit-core.js'};
+test('every game key + badge name matches its own core',()=>{const map={chabi:'chabi/chabi-core.js',chakravyuh:'chakravyuh/chakravyuh-core.js',takht:'takht/takht-core.js',langar:'langar/langar-core.js',titli:'titli/titli-core.js','nanak-ghar':'nanak-ghar/nanak-ghar-core.js',jeevit:'jeevit/jeevit-core.js','aaj-bhav':'aaj-bhav/aaj-bhav-core.js'};
  for(const g of Z.GAMES){const c=require('../assets/'+map[g.id]);assert.equal(g.key,c.KEY,g.id);assert.equal(g.badge,c.BADGE,g.id);assert.ok(fs.existsSync(path.join(__dirname,'..',g.href.slice(2))),g.href);}});
 test('scan: locked, started, got; junk safe',()=>{const store={'kdn-chabi-v1':JSON.stringify({v:1,done:true}),'kdn-takht-v1':JSON.stringify({v:1,seen:[],badge:false}),'kdn-langar-v1':'{bad json','kdn-jeevit-v1':JSON.stringify({version:1,done:J.IDS})};
  const rows=Z.scan(k=>store[k]??null),by=Object.fromEntries(rows.map(r=>[r.id,r.status]));
  assert.equal(by.chabi,'got');assert.equal(by.takht,'started');assert.equal(by.langar,'locked');assert.equal(by.titli,'locked');assert.equal(by.jeevit,'got');
- const s=Z.summary(rows);assert.equal(s.got,2);assert.equal(s.total,7);assert.equal(s.rank,'🔍 खोजी');assert.equal(s.next.id,'takht');
+ const s=Z.summary(rows);assert.equal(s.got,2);assert.equal(s.total,8);assert.equal(s.rank,'🔍 खोजी');assert.equal(s.next.id,'takht');
  assert.equal(Z.summary(Z.scan(()=>null)).rank,'🚶 यात्री');const all=Z.summary(Z.GAMES.map(g=>({...g,status:'got'})));assert.equal(all.rank,'👑 खज़ाना रक्षक');assert.equal(all.next,null);assert.equal(all.pct,100);});
 test('page, door, feed, sw, read-only, no Khanda',()=>{const h=R('khazana.html'),j=R('assets/khazana/khazana.js'),c=R('assets/khazana/khazana-core.js');
  assert.ok(h.includes('lang="hi"')&&h.includes('data-heritage')&&h.includes('goldtv.js')&&h.includes('असली पैसा नहीं'));
