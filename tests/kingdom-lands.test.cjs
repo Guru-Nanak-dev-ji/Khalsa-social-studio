@@ -1,12 +1,12 @@
 const test=require('node:test'),assert=require('node:assert'),C=require('../assets/khoya/khoya-core.js'),K=require('../assets/koins-core.js'),Dr=require('../assets/doors-core.js'),Z=require('../assets/khazana/khazana-core.js'),N=require('../assets/naksha/naksha-core.js'),fs=require('fs'),path=require('path');
 const R=f=>fs.readFileSync(path.join(__dirname,'..',f),'utf8');
-test('5 scenes, 8 unique Hindi objects each, items',()=>{assert.equal(C.SCENES.length,10);assert.equal(new Set(C.SCENES.map(x=>x.item.id)).size,10);for(const s of C.SCENES){assert.equal(s.objs.length,8);assert.equal(new Set(s.objs.map(o=>o.id)).size,8);assert.ok(s.item&&s.item.e&&s.story);for(const o of s.objs)assert.ok(/[\u0900-\u097F]/.test(o.name)&&o.x>0&&o.x<100&&o.y>0&&o.y<100,o.id);}
- assert.deepEqual(C.SCENES.slice(0,5).map(s=>s.name),['पुराना दरवाज़ा','लंगर हॉल','पुस्तकालय','बाग़','सुनहरा महल']);assert.ok(C.SCENES.slice(5).every(x=>x.ch===2)&&C.SCENES.slice(0,5).every(x=>x.ch===1));});
+test('5 scenes, 8 unique Hindi objects each, items',()=>{assert.equal(C.SCENES.length,15);assert.equal(new Set(C.SCENES.map(x=>x.item.id)).size,15);for(const s of C.SCENES){assert.equal(s.objs.length,8);assert.equal(new Set(s.objs.map(o=>o.id)).size,8);assert.ok(s.item&&s.item.e&&s.story);for(const o of s.objs)assert.ok(/[\u0900-\u097F]/.test(o.name)&&o.x>0&&o.x<100&&o.y>0&&o.y<100,o.id);}
+ assert.deepEqual(C.SCENES.slice(0,5).map(s=>s.name),['पुराना दरवाज़ा','लंगर हॉल','पुस्तकालय','बाग़','सुनहरा महल']);assert.ok(C.SCENES.slice(5,10).every(x=>x.ch===2)&&C.SCENES.slice(10).every(x=>x.ch===3&&x.card)&&C.SCENES.slice(0,5).every(x=>x.ch===1));});
 test('full playthrough: tap, lock, puzzle, badge, junk safe',()=>{let s=C.fresh();assert.ok(!C.unlocked(s,1));assert.ok(!C.tap(s,1,'roti').ok);assert.ok(C.tap(s,0,'nope').wrong);
- let badges=0,b2=0;for(let i=0;i<10;i++){for(const o of C.SCENES[i].objs){assert.equal(C.hint(s,i).id,o.id);const r=C.tap(s,i,o.id);assert.ok(r.ok);s=r.state;if(r.badgeNew)badges++;if(r.badge2New)b2++;}if(i===4){assert.ok(s.badge&&!s.badge2);}
+ let badges=0,b2=0;for(let i=0;i<15;i++){for(const o of C.SCENES[i].objs){assert.equal(C.hint(s,i).id,o.id);const r=C.tap(s,i,o.id);assert.ok(r.ok);s=r.state;if(r.badgeNew)badges++;if(r.badge2New)b2++;}if(i===4){assert.ok(s.badge&&!s.badge2);}
   assert.ok(s.cleared.includes(i)&&s.inv.includes(C.SCENES[i].item.id));assert.ok(!C.tap(s,i,C.SCENES[i].objs[0].id).ok);
-  {if(i<9)assert.ok(!C.unlocked(s,i+1));s=solve(s,i);if(i<9)assert.ok(C.unlocked(s,i+1),'puz '+i);}}
- assert.equal(badges,1);assert.equal(b2,1);assert.ok(s.badge&&s.badge2);assert.ok(Z.GAMES.some(g=>g.id==='khoya2'&&g.badge===C.BADGE2&&g.got(s)));assert.equal(C.progress(s).pct,100);assert.deepEqual(C.validate(JSON.parse(JSON.stringify(s))),s);
+  {if(i<14)assert.ok(!C.unlocked(s,i+1));s=solve(s,i);if(i<14)assert.ok(C.unlocked(s,i+1),'puz '+i);}}
+ assert.equal(badges,1);assert.equal(b2,1);assert.ok(s.badge&&s.badge2&&s.badge3&&C.ending3(s));assert.ok(Z.GAMES.some(g=>g.id==='khoya3'&&g.badge==='खालसा योद्धा'&&g.got(s)));assert.ok(Z.GAMES.some(g=>g.id==='khoya2'&&g.badge===C.BADGE2&&g.got(s)));assert.equal(C.progress(s).pct,100);assert.deepEqual(C.validate(JSON.parse(JSON.stringify(s))),s);
  assert.deepEqual(C.validate(null),C.fresh());assert.deepEqual(C.validate({v:1,found:[['x','ghanti','ghanti']],cleared:[0,9],scene:3}).found[0],['ghanti']);
  assert.ok(C.canHint(0,5));assert.ok(!C.canHint(1000,1000+C.HINT_MS-1));assert.ok(C.canHint(1000,1000+C.HINT_MS));
  let k=K.fresh();const a=K.claimSpot(k,'khoya:darwaza');assert.ok(a.added>0);assert.equal(K.claimSpot(a.state,'khoya:darwaza').added,0);});
@@ -30,11 +30,11 @@ function solve(s,p){const t=C.ptype(p);let solved=false,g=0;
  if(t==='runes'){const w=C.rune(s,p,(C.runeSeq(p)[0]+1)%6);assert.ok(w.wrong);for(const i of C.runeSeq(p)){const r=C.rune(s,p,i);s=r.state;solved=r.solved;}}
  if(t==='match'){const c=C.matchCards(p);assert.ok(!C.match(s,p,0,0).ok);for(let a=0;a<12;a++)for(let b=a+1;b<12;b++)if(c[a]===c[b]){const r=C.match(s,p,a,b);assert.ok(r.ok);s=r.state;solved=solved||r.solved;}}
  assert.ok(solved,t+' '+p);return s;}
-test('puzzle types: all four used, gears solvable, wrong rune resets, junk pz safe',()=>{assert.deepEqual([...new Set([0,1,2,3,4,5,6,7,8,9].map(C.ptype))].sort(),['beam','gears','jigsaw','match','rings','runes','scale','tiles','veena']);assert.equal(C.ptype(9),'jigsaw');
+test('puzzle types: all four used, gears solvable, wrong rune resets, junk pz safe',()=>{assert.deepEqual([...new Set([...Array(15).keys()].map(C.ptype))].sort(),['beam','gears','jigsaw','match','rings','runes','scale','tiles','veena']);assert.equal(C.ptype(9),'jigsaw');
  for(let p=0;p<9;p++)if(C.ptype(p)==='gears')assert.ok(C.gearStart(p).some(x=>x));
  for(let p=0;p<9;p++){const c=C.matchCards(p);if(C.ptype(p)==='match'){assert.equal(c.length,12);for(const x of new Set(c))assert.equal(c.filter(y=>y===x).length,2);}}
  const v=C.validate({v:1,found:[],pz:[{},{g:[9,'x']},{k:99},{m:[1,1,'z']},{r:[9,9],pl:['x','surya-tukda']}]});assert.deepEqual(v.pz[1],{g:C.gearStart(1),pl:[]});assert.deepEqual(v.pz[2],{k:0,pl:[]});assert.deepEqual(v.pz[3],{m:[1],pl:[]});assert.deepEqual(v.pz[4],{r:[3,4],pl:['surya-tukda']});
- const h0=R('kingdom-lands.html');assert.ok(h0.includes('Harsheen Loops')&&h0.includes('काफ़िर से खत्री, खत्री से खालसा')&&h0.includes('id="ending"'));assert.ok(!/susan|aethelgard/i.test(h0+R('assets/khoya/khoya.js')+R('assets/khoya/khoya-core.js')));
+ const h0=R('kingdom-lands.html');assert.ok(h0.includes('Harsheen Loops')&&h0.includes('काफ़िर से खत्री, खत्री से खालसा')&&!h0.includes('<li>🛤️')&&h0.includes('id="ending"'));assert.ok(!/susan|aethelgard/i.test(h0+R('assets/khoya/khoya.js')+R('assets/khoya/khoya-core.js')));
  const h=R('kingdom-lands.html');assert.ok(h.includes('id="puz-how"'));});
 
 test('sound: procedural only, off by default, remembered, wired',()=>{const S=require('../assets/khoya/khoya-sound.js'),src=R('assets/khoya/khoya-sound.js'),js=R('assets/khoya/khoya.js'),h=R('kingdom-lands.html');
@@ -60,3 +60,11 @@ test('lock manager: requiredItemIds, wrong item, tap fallback, reward',()=>{asse
  let s=C.fresh();for(let i=0;i<=4;i++){for(const o of C.SCENES[i].objs)s=C.tap(s,i,o.id).state;if(i<4)s.puzzles.push(i);}s=C.validate(s);
  assert.ok(!C.place(s,4,'agni').ok);let r=C.place(s,4,'surya-tukda');assert.ok(r.ok&&!r.ready);r=C.place(r.state,4,'chandra-lens');assert.ok(r.ready&&!C.hasItem(r.state.bag,'chandra-lens'));
  const js=R('assets/khoya/khoya.js');assert.ok(js.includes('यह यहाँ फिट नहीं होता')&&js.includes("'khoya-lock:'")&&js.includes('selItem'));});
+
+test('chapter 3: story cards, hero art, content rules',()=>{const c3=C.SCENES.slice(10);assert.deepEqual(c3.map(x=>x.name),['टूटा घर','कचहरी','किताबों की कोठरी','छिपा नेटवर्क','गुरु दा दर']);
+ let s=C.fresh();assert.equal(C.seeCard(s,0).cards.length,0);s=C.seeCard(s,10);assert.deepEqual(s.cards,[10]);assert.deepEqual(C.seeCard(s,10).cards,[10]);assert.deepEqual(C.validate({v:1,found:[],cards:[10,10,3,'x']}).cards,[10]);
+ const all=R('kingdom-lands.html')+R('assets/khoya/khoya-core.js')+R('assets/khoya/khoya.js'),svg=R('assets/khoya/hero-daljit.svg');
+ assert.ok(all.includes('मैं ज़िंदगी नहीं, एक कहानी जी रहा हूँ!')&&all.includes('काल्पनिक'));assert.ok(!/☬|khalistan|खालिस्तान|ड्रग|drug|BJP|Congress|AAP|भाजपा|कांग्रेस/i.test(all+svg));
+ assert.ok(svg.startsWith('<svg')&&!/<image|href=/.test(svg));assert.ok(!/\.jpe?g|selfie/i.test(R('kingdom-lands.html')));
+ for(const k of['ghar','kachehri','kothri','network','gurudar'])assert.ok(fs.statSync(path.join(__dirname,'..','assets/khoya/bg/'+k+'.webp')).size<250000);
+ assert.ok(R('sw.js').includes('./assets/khoya/hero-daljit.svg'));});
