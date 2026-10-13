@@ -30,6 +30,7 @@ const TREE={id:'root',icon:'🏰',title:'द्वार महल · ਦਰਵ�
   {icon:'🚪',title:'Scroll से खुलता द्वार',sub:'scroll करो · +5 koins',href:'./scroll-dwar.html'},
   {icon:'🗝️',title:'चाबी वाला द्वार',sub:'7 कमरे · पहेली · चाबी',href:'./chabi.html'},
   {icon:'🧊',title:'तख़्त Cube',sub:'घुमाओ · 6 द्वार · koins',href:'./takht.html'},
+  {icon:'🧡',title:'सेहत Control Room',sub:'दवाई · नींद · anxiety · निजी',href:'./sehat.html'},
   {icon:'🪔',title:'आज का संकल्प',sub:'सुबह संकल्प · शाम ✅ · दीप',href:'./sankalp.html'},
   {icon:'📿',title:'सिमरन माला',sub:'108 मनके · tap · नाम · koins',href:'./mala.html'},
   {icon:'📖',title:'आज की साखी',sub:'रोज़ एक साखी · सुनो · quiz',href:'./sakhi.html'},

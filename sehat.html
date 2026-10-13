@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#1a0d06">
+<meta name="robots" content="noindex">
+<meta name="description" content="🧡 सेहत Control Room — निजी सेहत डायरी। सब कुछ इसी phone में रहता है।">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icons/khalsa-v1-32.png" sizes="32x32" type="image/png">
+<link rel="stylesheet" href="./assets/heritage.css">
+<link rel="stylesheet" href="./assets/hindi-fonts.css">
+<link rel="stylesheet" href="./assets/sehat/sehat.css">
+<title>🧡 सेहत Control Room · KDN</title>
+<script defer src="./assets/sehat/sehat-core.js"></script>
+<script defer src="./assets/sehat/sehat.js"></script>
+<script defer src="./assets/goldtv/goldtv.js"></script></head>
+<body class="kdn-hindi sehat" data-heritage="immersive">
+<div class="heritage-banner" aria-hidden="true"></div>
+<header class="hud">
+<a href="./studio.html">← द्वार</a>
+<div class="sos"><a class="call doc" id="call-doc" href="#doctor">📞 Doctor</a><a class="call e911" href="tel:911">🚨 911</a></div>
+</header>
+<section class="head"><h1>🧡 सेहत Control Room</h1><p class="slogan">One click and change your life 🧬</p>
+<p class="warn">तबीयत ज़्यादा बिगड़े तो सीधे <a href="tel:911">911</a> पर call कीजिए।</p></section>
+
+<section class="card calm" id="calm" hidden aria-live="assertive">
+<h2>🌬️ थोड़ा रुकिए, साथ में साँस लेते हैं</h2>
+<div class="breath" aria-hidden="true"><span id="bcircle"></span></div>
+<p id="bstep" class="bstep">4 गिनती साँस अंदर…</p>
+<p>4 गिनती साँस अंदर · 7 गिनती रोकिए · 8 गिनती धीरे बाहर। आप अकेले नहीं हैं।</p>
+<div class="row"><a class="btn call doc" href="#doctor" data-doc>📞 Doctor को call</a><a class="btn e911" href="tel:911">🚨 911</a></div>
+<button type="button" class="btn ghost" id="calm-close">🙏 अब ठीक लग रहा है</button>
+</section>
+
+<section class="card" id="today"><h2 class="orn">✦ आज का हाल ✦</h2><div id="today-box" class="stats"></div></section>
+
+<section class="card"><h2 class="orn">✦ 💊 दवाइयाँ ✦</h2>
+<div id="meds"></div><p id="nomed" class="note">अभी कोई दवाई नहीं जोड़ी। नीचे अपनी दवाई जोड़िए।</p>
+<button type="button" class="btn ghost" id="undo">↩️ आख़िरी "ले ली" वापस</button>
+<details id="add"><summary>➕ दवाई जोड़ें</summary>
+<label for="m-name">दवाई का नाम</label><input id="m-name" maxlength="60" autocomplete="off">
+<label for="m-dose">मात्रा (जैसे 50 mg)</label><input id="m-dose" maxlength="30" autocomplete="off">
+<label for="m-time">समय (एक से ज़्यादा हों तो फिर से जोड़ें)</label><div class="row"><input id="m-time" type="time"><button type="button" class="btn ghost small" id="m-addtime">+ समय</button></div>
+<p id="m-times" class="note"></p>
+<button type="button" class="btn" id="m-save">✅ दवाई जोड़ें</button>
+<p class="note">समय और मात्रा वही लिखिए जो doctor ने बताई है।</p></details>
+</section>
+
+<section class="card"><h2 class="orn">✦ 😴 नींद ✦</h2>
+<div class="row"><button type="button" class="btn" id="slept">😴 सोया</button><button type="button" class="btn" id="woke">🌅 उठा</button></div>
+<p id="sleep-msg" class="note" aria-live="polite"></p></section>
+
+<section class="card"><h2 class="orn">✦ 😟 Anxiety अभी कितनी? ✦</h2>
+<div id="anx" class="anx" role="group" aria-label="Anxiety 1 से 10"></div>
+<label for="anx-note">एक पंक्ति note (चाहें तो)</label><input id="anx-note" maxlength="80" autocomplete="off">
+<p id="anx-msg" class="note" aria-live="polite"></p></section>
+
+<section class="card"><h2 class="orn">✦ 📈 पिछले 7 दिन ✦</h2><div id="chart"></div>
+<p class="note"><span class="k ka">■</span> Anxiety (औसत, 0–10) · <span class="k ks">■</span> नींद घंटे (0–10+) · <span class="k km">■</span> दवाई ली %</p></section>
+
+<section class="card"><h2 class="orn">✦ ⚙️ Settings ✦</h2>
+<label for="doc">📞 Doctor का phone नंबर (सिर्फ़ इसी phone में रहेगा)</label>
+<div class="row"><input id="doc" type="tel" inputmode="tel" maxlength="20" autocomplete="off"><button type="button" class="btn small" id="doc-save">Save</button></div>
+<button type="button" class="btn ghost" id="notify">🔔 दवाई का reminder चालू करें</button>
+<p class="note">Reminder सिर्फ़ तब आता है जब यह page (या app) खुला हो। Page बंद या phone sleep में हो तो reminder नहीं आएगा — phone के alarm को भी साथ रखिए।</p>
+<button type="button" class="btn" id="export">📄 Doctor के लिए सार</button>
+<pre id="sum" hidden></pre>
+<button type="button" class="btn ghost danger" id="wipe">🗑 सब मिटाएँ</button></section>
+
+<p class="note disc">⚠️ यह doctor की जगह नहीं है। दवाई का समय/मात्रा doctor के कहने पर ही बदलें। सब कुछ सिर्फ़ इसी phone के browser में रहता है — कोई server नहीं, कोई analytics नहीं, कोई दूसरा नहीं देखता। Browser data मिटाने पर यह भी मिट जाएगा।</p>
+</body>
+</html>
