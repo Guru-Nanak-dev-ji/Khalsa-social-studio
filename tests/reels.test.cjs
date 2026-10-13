@@ -1,0 +1,15 @@
+const {test}=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path');
+const C=require('../assets/reels-core.js');
+const mem=()=>{const m={};return{getItem:k=>k in m?m[k]:null,setItem:(k,v)=>{m[k]=String(v);}};};
+test('lines split, trimmed, capped',()=>{assert.deepEqual(C.splitLines(' a \n\n ਬ \r\nc'),['a','ਬ','c']);assert.equal(C.splitLines('x\n'.repeat(30)).length,12);});
+test('sceneAt timing',()=>{assert.deepEqual(C.sceneAt(4,3,2),{index:2,p:0,done:false});assert.equal(C.sceneAt(7,3,2).done,true);assert.equal(C.sceneAt(1,0,2).index,-1);});
+test('mime prefers mp4 then webm',()=>{assert.equal(C.pickMime(m=>m.startsWith('video/webm')),'video/webm;codecs=vp9,opus');assert.equal(C.extFor('video/mp4'),'mp4');assert.equal(C.pickMime(()=>false),'');});
+test('hashtags normalise, dedupe, persist',()=>{assert.equal(C.normTags('KDN #KDN, #KiratKaro'),'#KDN #KiratKaro');const s=mem();const sets=C.loadSets(s);assert.match(sets[0].tags,/#KhalsaDigitalWorld/);assert.match(sets[0].tags,/#GameOfTakhats/);
+  sets[0].tags='a b';C.saveSets(s,sets);assert.equal(C.loadSets(s)[0].tags,'#a #b');s.setItem(C.TAG_KEY,'bad');assert.equal(C.loadSets(s).length,C.DEFAULT_SETS.length);});
+test('caption joins text and tags',()=>{assert.equal(C.caption('hi',['#a','#a #b']),'hi\n\n#a #b');});
+test('creator drafts read-only import',()=>{const s=mem();s.setItem('kdn-news-social-creator-v1',JSON.stringify({drafts:[{id:'1',heading:'H',body:'B'}]}));assert.deepEqual(C.creatorDrafts(s)[0].text,'H\nB');assert.deepEqual(C.creatorDrafts(mem()),[]);});
+test('wrap respects width',()=>{assert.deepEqual(C.wrap('aa bb cc',5),['aa bb','cc']);});
+test('page cached, linked, no Khanda',()=>{const r=f=>fs.readFileSync(path.resolve(__dirname,'..',f),'utf8');
+  for(const f of ['reels.html','assets/reels.css','assets/reels-core.js','assets/reels.js'])assert.match(r('sw.js'),new RegExp("'\\./"+f.replace(/[.]/g,'\\.')+"'"));
+  assert.match(r('studio.html'),/reels\.html/);assert.match(r('ai-tools.html'),/reels\.html/);
+  for(const f of ['reels.html','assets/reels.js','assets/reels.css'])assert.doesNotMatch(r(f),/☬|khanda/i);});

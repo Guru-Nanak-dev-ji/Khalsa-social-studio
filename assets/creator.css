@@ -4,3 +4,4 @@
 .tg-box{margin-top:12px;border:1px solid #d4af37;border-radius:14px;padding:10px}.tg-box #tg-send{width:100%;min-height:48px}.tg-box details{margin-top:8px}.tg-box summary{cursor:pointer;color:#f3d77a}.tg-box input{width:100%;margin:6px 0}
 
 .wa-row{margin-top:10px}.wa-row .wa-btn{flex:1 1 100%;min-height:52px;border:2px solid #d4af37;background:linear-gradient(180deg,#25d366,#128c4a);color:#fff;font-weight:800;font-size:1.05rem;border-radius:14px;box-shadow:0 0 0 1px #140e08 inset,0 4px 14px rgba(212,175,55,.35)}.wa-row .wa-btn:active{filter:brightness(.9)}
+.ig-row{margin-top:10px}.ig-row .ig-btn{flex:1 1 100%;min-height:52px;border:2px solid #d4af37;background:linear-gradient(45deg,#f58529,#dd2a7b 45%,#8134af 75%,#515bd4);color:#fff;font-weight:800;font-size:1.05rem;border-radius:14px;box-shadow:0 0 0 1px #140e08 inset,0 4px 14px rgba(212,175,55,.35)}.ig-row .ig-btn:active{filter:brightness(.9)}
