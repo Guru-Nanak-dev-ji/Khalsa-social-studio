@@ -68,8 +68,27 @@ function pzValid(p,z){const t=ptype(p),f=pzFresh(p);if(!z||typeof z!=='object')r
  if(t==='match')return Array.isArray(z.m)?{m:z.m.filter((x,i,a)=>Number.isInteger(x)&&x>=0&&x<12&&a.indexOf(x)===i),pl}:{...f,pl};return {...f,pl};}
 const canPz=(s,p)=>p>=0&&p<N&&s.cleared.includes(p)&&!s.puzzles.includes(p);
 const ready=(s,p)=>partsFor(p).every(x=>s.pz[p].pl.includes(x.id));
-function pzSet(s,p,z,solved){z={...z,pl:s.pz[p].pl};const pz=s.pz.slice();pz[p]=z;return{state:{...s,pz,puzzles:solved?[...s.puzzles,p]:s.puzzles},solved};}
-function place(s,p,id){s=validate(s);if(!canPz(s,p)||!partsFor(p).some(x=>x.id===id)||!s.inv.includes(id)||s.pz[p].pl.includes(id))return{state:s,ok:false};
+// 🎒 झोला (inventory): item definitions + 12 खाने, stack गिनती. Unity वाले design का web रूप.
+const CAP=12,KAN='roshni-kan';
+const ITEMS=(()=>{const d={};SCENES.forEach((sc,i)=>{d[sc.item.id]={itemId:sc.item.id,displayName:sc.item.name,icon:sc.item.e,stackable:false,maxStack:1,usableTags:['door:'+i]};
+ partsFor(i).forEach(x=>{d[x.id]={itemId:x.id,displayName:x.name,icon:x.e,stackable:false,maxStack:1,usableTags:['lock:'+i]};});});
+ d[KAN]={itemId:KAN,displayName:'रोशनी के कण',icon:'✨',stackable:true,maxStack:99,usableTags:['hint']};return d;})();
+const bagValid=b=>Array.isArray(b)?b.filter(x=>x&&ITEMS[x.id]&&Number.isInteger(x.n)&&x.n>0).slice(0,CAP).map(x=>({id:x.id,n:Math.min(x.n,ITEMS[x.id].maxStack)})):[];
+const count=(b,id)=>b.filter(x=>x.id===id).reduce((a,x)=>a+x.n,0);
+const hasItem=(b,id,n)=>count(b,id)>=(n||1);
+function addItem(b,id,n){n=n||1;const d=ITEMS[id];b=b.map(x=>({...x}));if(!d)return{bag:b,ok:false,added:0};let left=n;
+ if(d.stackable)for(const x of b)if(x.id===id&&x.n<d.maxStack){const k=Math.min(left,d.maxStack-x.n);x.n+=k;left-=k;if(!left)break;}
+ while(left>0&&b.length<CAP){const k=Math.min(left,d.maxStack);b.push({id,n:k});left-=k;}
+ return{bag:b,ok:left===0,added:n-left,full:left>0};}
+function removeItem(b,id,n){n=n||1;if(!hasItem(b,id,n))return{bag:b,ok:false};b=b.map(x=>({...x}));let left=n;
+ for(let i=b.length-1;i>=0&&left;i--)if(b[i].id===id){const k=Math.min(left,b[i].n);b[i].n-=k;left-=k;}return{bag:b.filter(x=>x.n>0),ok:true};}
+function useItem(b,id,tag){const d=ITEMS[id];if(!d||!hasItem(b,id))return{bag:b,ok:false,reason:'none'};if(!d.usableTags.includes(tag))return{bag:b,ok:false,reason:'tag'};return{...removeItem(b,id,1),reason:'ok'};}
+// पुराने save से झोला बनाओ: पूरे दृश्यों की चीज़ें, जो अभी इस्तेमाल नहीं हुईं
+function bagFromState(f){let b=[];f.cleared.forEach(i=>{const sc=SCENES[i];if(!f.puzzles.includes(i))b=addItem(b,sc.item.id).bag;partsFor(i).forEach(x=>{if(!f.puzzles.includes(i)&&!f.pz[i].pl.includes(x.id))b=addItem(b,x.id).bag;});});
+ const k=f.found.reduce((a,x)=>a+x.length,0);if(k)b=addItem(b,KAN,Math.min(k,99)).bag;return b;}
+function useKan(s,n){s=validate(s);const r=removeItem(s.bag,KAN,n||3);return{state:r.ok?{...s,bag:r.bag}:s,ok:r.ok};}
+function pzSet(s,p,z,solved){z={...z,pl:s.pz[p].pl};const pz=s.pz.slice();pz[p]=z;let bag=s.bag;if(solved){const u=useItem(bag,SCENES[p].item.id,'door:'+p);if(u.ok)bag=u.bag;}return{state:{...s,pz,bag,puzzles:solved?[...s.puzzles,p]:s.puzzles},solved};}
+function place(s,p,id){s=validate(s);if(!canPz(s,p)||!partsFor(p).some(x=>x.id===id)||s.pz[p].pl.includes(id))return{state:s,ok:false};const u=useItem(s.bag,id,'lock:'+p);if(!u.ok)return{state:s,ok:false,reason:u.reason};s={...s,bag:u.bag};
  const pz=s.pz.slice();pz[p]={...pz[p],pl:[...pz[p].pl,id]};return{state:{...s,pz},ok:true,ready:ready({...s,pz},p)};}
 const go=(s,p,t)=>canPz(s,p)&&ptype(p)===t&&ready(s,p);
 function ring(s,p,i){s=validate(s);if(!go(s,p,'rings')||!(i===0||i===1))return{state:s,solved:false};const r=s.pz[p].r.slice();r[i]=(r[i]+1)%6;return pzSet(s,p,{r},r[0]===RING_GOAL[0]&&r[1]===RING_GOAL[1]);}
@@ -88,7 +107,7 @@ function rune(s,p,idx){s=validate(s);if(!canPz(s,p)||ptype(p)!=='runes'||!ready(
 function match(s,p,a,b){s=validate(s);if(!canPz(s,p)||ptype(p)!=='match'||a===b)return{state:s,solved:false,ok:false};
  const c=matchCards(p),m=s.pz[p].m;if(!ready(s,p)||!(a>=0&&a<12&&b>=0&&b<12)||m.includes(a)||m.includes(b)||c[a]!==c[b])return{state:s,solved:false,ok:false};
  const nm=[...m,a,b];const r=pzSet(s,p,{m:nm},nm.length===12);r.ok=true;return r;}
-const fresh=()=>({v:1,scene:0,found:SCENES.map(()=>[]),cleared:[],puzzles:[],inv:[],tiles:PUZ_START.map(t=>t.slice()),badge:false,badge2:false,pz:SCENES.map((x,p)=>pzFresh(p))});
+const fresh=()=>({v:1,scene:0,found:SCENES.map(()=>[]),cleared:[],puzzles:[],inv:[],tiles:PUZ_START.map(t=>t.slice()),badge:false,badge2:false,bag:[],pz:SCENES.map((x,p)=>pzFresh(p))});
 function validate(s){if(!s||s.v!==1||!Array.isArray(s.found))return fresh();const f=fresh();
  f.found=SCENES.map((sc,i)=>Array.isArray(s.found[i])?s.found[i].filter((id,j,a)=>sc.objs.some(o=>o.id===id)&&a.indexOf(id)===j):[]);
  const idx=a=>Array.isArray(a)?a.filter((x,j,b)=>Number.isInteger(x)&&x>=0&&x<N&&b.indexOf(x)===j):[];
@@ -96,18 +115,19 @@ function validate(s){if(!s||s.v!==1||!Array.isArray(s.found))return fresh();cons
  f.inv=SCENES.flatMap((sc,i)=>f.cleared.includes(i)?[sc.item.id,...partsFor(i).map(x=>x.id)]:[]);
  if(Array.isArray(s.tiles)&&s.tiles.length===N-1)f.tiles=s.tiles.map((t,i)=>Array.isArray(t)&&t.length===4&&t.every(x=>Number.isInteger(x)&&x>=0&&x<4)?t.slice():PUZ_START[i].slice());
  f.pz=SCENES.map((x,p)=>pzValid(p,Array.isArray(s.pz)?s.pz[p]:null));
+  f.bag=Array.isArray(s.bag)?bagValid(s.bag):bagFromState(f);
  f.scene=Number.isInteger(s.scene)&&s.scene>=0&&s.scene<N&&unlocked(f,s.scene)?s.scene:0;f.badge=[0,1,2,3,4].every(i=>f.cleared.includes(i));f.badge2=f.cleared.length===N;return f;}
 // दृश्य i खुला है अगर i=0, या पिछला साफ़ + पहेली हल (पिछली चीज़ inventory में)
 function unlocked(s,i){return i===0||(s.cleared.includes(i-1)&&s.puzzles.includes(i-1));}
 function tap(s,i,id){s=validate(s);const sc=SCENES[i];if(!sc||!unlocked(s,i))return{state:s,ok:false};
  if(!sc.objs.some(o=>o.id===id))return{state:s,ok:false,wrong:true};if(s.found[i].includes(id))return{state:s,ok:false,again:true};
- const found=s.found.map((a,j)=>j===i?[...a,id]:a.slice()),st={...s,found};let clearedNew=false,badgeNew=false,badge2New=false;
- if(found[i].length===sc.objs.length&&!s.cleared.includes(i)){clearedNew=true;st.cleared=[...s.cleared,i];st.inv=[...s.inv,sc.item.id,...partsFor(i).map(x=>x.id)];if(!s.badge&&[0,1,2,3,4].every(j=>st.cleared.includes(j))){badgeNew=true;st.badge=true;}if(!s.badge2&&st.cleared.length===N){st.badge2=true;badge2New=true;}}
- return{state:st,ok:true,clearedNew,badgeNew,badge2New,item:clearedNew?sc.item:null};}
+ const found=s.found.map((a,j)=>j===i?[...a,id]:a.slice()),st={...s,found};const ka=addItem(s.bag,KAN);st.bag=ka.bag;let full=false;let clearedNew=false,badgeNew=false,badge2New=false;
+ if(found[i].length===sc.objs.length&&!s.cleared.includes(i)){clearedNew=true;st.cleared=[...s.cleared,i];st.inv=[...s.inv,sc.item.id,...partsFor(i).map(x=>x.id)];for(const id2 of[sc.item.id,...partsFor(i).map(x=>x.id)]){const a=addItem(st.bag,id2);st.bag=a.bag;if(a.full)full=true;}if(!s.badge&&[0,1,2,3,4].every(j=>st.cleared.includes(j))){badgeNew=true;st.badge=true;}if(!s.badge2&&st.cleared.length===N){st.badge2=true;badge2New=true;}}
+ return{state:st,ok:true,full,clearedNew,badgeNew,badge2New,item:clearedNew?sc.item:null};}
 function hint(s,i){s=validate(s);const sc=SCENES[i];return sc?sc.objs.find(o=>!s.found[i].includes(o.id))||null:null;}
 function canHint(last,now){return !last||now-last>=HINT_MS;}
 function rotate(s,p,t){s=validate(s);if(ptype(p)!=='tiles'||!(p>=0&&p<N-1)||!(t>=0&&t<4)||!s.cleared.includes(p)||s.puzzles.includes(p))return{state:s,solved:false};
  const tiles=s.tiles.map(a=>a.slice());tiles[p][t]=(tiles[p][t]+1)%4;const solved=tiles[p].every(x=>x===0);
- return{state:{...s,tiles,puzzles:solved?[...s.puzzles,p]:s.puzzles},solved};}
+ let bag=s.bag;if(solved){const u=useItem(bag,SCENES[p].item.id,'door:'+p);if(u.ok)bag=u.bag;}return{state:{...s,tiles,bag,puzzles:solved?[...s.puzzles,p]:s.puzzles},solved};}
 const progress=s=>{s=validate(s);const tot=SCENES.reduce((a,sc)=>a+sc.objs.length,0),got=s.found.reduce((a,f)=>a+f.length,0);return{got,tot,pct:Math.round(got*100/tot),cleared:s.cleared.length};};
-return{PARTS,partsFor,ready,place,RING,RING_GOAL,VIALS,STONE,scaleSum,VEENA,BEAM,trace,JIG,ring,vial,pluck,mirror,jig,ending:s=>validate(s).puzzles.includes(N-1),PTYPES,ptype,GEAR_LINKS,gearStart,RUNE_SET,runeSeq,matchCards,gear,rune,match,KEY,BADGE,BADGE2,CH1,HINT_MS,WRONG_MS,SCENES,PUZ_START,fresh,validate,unlocked,tap,hint,canHint,rotate,progress};});
+return{requiredItemIds:p=>partsFor(p).map(x=>x.id),CAP,KAN,ITEMS,bagValid,addItem,removeItem,hasItem,useItem,bagFromState,useKan,PARTS,partsFor,ready,place,RING,RING_GOAL,VIALS,STONE,scaleSum,VEENA,BEAM,trace,JIG,ring,vial,pluck,mirror,jig,ending:s=>validate(s).puzzles.includes(N-1),PTYPES,ptype,GEAR_LINKS,gearStart,RUNE_SET,runeSeq,matchCards,gear,rune,match,KEY,BADGE,BADGE2,CH1,HINT_MS,WRONG_MS,SCENES,PUZ_START,fresh,validate,unlocked,tap,hint,canHint,rotate,progress};});
