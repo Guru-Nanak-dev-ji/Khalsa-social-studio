@@ -1,0 +1,14 @@
+const test=require('node:test'),assert=require('node:assert'),S=require('../assets/sewa/sewa-core.js'),V=require('../assets/vakil/vakil-core.js'),Z=require('../assets/khazana/khazana-core.js'),fs=require('fs'),path=require('path');
+const R=f=>fs.readFileSync(path.join(__dirname,'..',f),'utf8');
+test('helplines: required official numbers, each with gov source',()=>{const t=S.HELP.map(h=>h.tel);for(const n of['112','108','1098','181','14567','14416','1930','15100'])assert.ok(t.includes(n),n);
+ for(const h of S.HELP){assert.ok(S.telOk(h.tel));assert.match(h.src,/^https:\/\/(www\.)?[a-z0-9.-]*(gov\.in|nic\.in)\//,h.id)}});
+test('legal aid: NALSA, SLSA directory, tele-law; no invented lawyers',()=>{const h=S.LEGAL.map(l=>l.href);assert.ok(h.includes('https://nalsa.gov.in/directory/')&&h.includes('https://www.tele-law.in/'));
+ assert.deepStrictEqual(V.lawyers({lawyers:[{name:'X',city:'Y',cats:['parivar']}]}),[]);const d=JSON.parse(R('data/vakil.json'));for(const l of d.lawyers||[])assert.ok(l.verified===true&&l.consent===true);
+ for(const c of['parivar','zameen','apradh','upbhokta','immigration','naukri'])assert.ok(V.CAT_IDS.includes(c),c);});
+test('rights badge after all cards; aid request local + badge; joins stay in review',()=>{let s=S.fresh();for(const r of S.RIGHTS.slice(0,-1))s=S.readRight(s,r.id).state;assert.equal(s.rightsBadge,false);assert.ok(S.readRight(s,S.RIGHTS.at(-1).id).badgeNew);
+ assert.ok(S.addReq(s,{cat:'x',note:'मदद चाहिए'}).error);const r=S.addReq(s,{cat:'food',note:'राशन चाहिए परिवार को'});assert.ok(r.badgeNew&&r.state.reqs.length===1);
+ s=S.addJoin(s,{name:'नाम',city:'शहर'});assert.equal(s.joins[0].status,'review');assert.deepStrictEqual(S.validate('x'),S.fresh());});
+test('upgrade only: old pages keep their sections + load plus layer; links; sw',()=>{const v=R('vakil.html'),k=R('khatri-aid.html');for(const x of['<h1>कानूनी साथी','id="open-join"','id="free"'])assert.ok(v.includes(x),x);for(const x of['<h1>🤝 Khatri Aid','id="m-need"','id="circle"'])assert.ok(k.includes(x),x);
+ for(const h of[v,k])assert.ok(h.includes('assets/sewa/sewa-plus.js'));const p=R('assets/sewa/sewa-plus.js');for(const x of['./langar.html','./nanak-ghar.html','./vakil.html'])assert.ok(p.includes(x));
+ for(const f of['sab.html','dwar.html'])assert.ok(R(f).includes('./vakil.html')&&R(f).includes('./khatri-aid.html'),f);assert.ok(Z.GAMES.find(g=>g.badge==='हक़ जानकार')&&Z.GAMES.find(g=>g.badge==='मदद साथी'));
+ assert.match(R('sw.js'),/const CACHE=PREFIX\+'v0\.(7[2-9]|[89]\d)\./);});
