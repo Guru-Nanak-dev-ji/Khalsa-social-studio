@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#1a0d06">
+<meta name="description" content="🎮 अपना quiz या रास्ता-चुनो खेल बनाओ, खेलकर देखो और link से शेयर करो।">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icons/khalsa-v1-32.png" sizes="32x32" type="image/png">
+<link rel="stylesheet" href="./assets/heritage.css">
+<link rel="stylesheet" href="./assets/hindi-fonts.css">
+<link rel="stylesheet" href="./assets/shakha/shakha.css"><script defer src="./assets/shakha/filter-core.js"></script><script defer src="./assets/shakha/share-core.js"></script><script defer src="./assets/shakha/common.js"></script><script defer src="./assets/khel/khel-core.js"></script><script defer src="./assets/khel/khel.js"></script>
+<title>🎮 खेल बनाओ · KDN</title>
+<script defer src="./assets/koins-core.js"></script>
+<script defer src="./assets/goldtv/goldtv.js"></script><link rel="stylesheet" href="./assets/jaan.css"><script defer src="./assets/jaan.js"></script><link rel="stylesheet" href="./assets/i18n/i18n.css"><script defer src="./assets/i18n/i18n.js"></script>
+</head>
+<body class="kdn-hindi" data-heritage="immersive">
+<div class="heritage-banner" aria-hidden="true"></div>
+<header class="hud"><a href="./dwar.html">← द्वार</a><a href="./shakha.html">🌳 शाखाएँ</a></header>
+<div class="sk-wrap"><section class="sk-head"><h1>🎮 खेल बनाओ</h1><p>अपना छोटा खेल बनाओ, खुद खेलकर जाँचो, फिर दोस्तों को link भेजो 🎲🃏♟️</p></section>
+<section class="sk-card"><h2>1️⃣ खेल का ढाँचा चुनो</h2><div class="kb-tpl"><button type="button" class="sk-b big" data-kb-t="quiz">❓ Quiz</button><button type="button" class="sk-b big" data-kb-t="path">🧭 रास्ता चुनो</button></div>
+<p class="sk-note">रास्ता चुनो: कदम 0 से शुरू; हर विकल्प के आगे लिखो किस कदम # पर जाए; बिना विकल्प वाला कदम = अंत।</p></section>
+<section class="sk-card"><h2>2️⃣ भरो</h2><form id="kb-form"><label for="kb-title">खेल का नाम</label><input id="kb-title" maxlength="120" required placeholder="जैसे: लंगर का quiz">
+<div id="kb-items"></div><p><button type="button" class="sk-b" id="kb-add">➕ और जोड़ो</button><button type="button" class="sk-b" id="kb-test-btn">🧪 खेलकर देखो</button><button class="sk-b big" type="submit">💾 सेव करो</button></p><p id="kb-msg" class="sk-msg" aria-live="polite"></p></form></section>
+<section class="sk-card"><h2>3️⃣ खेलो</h2><div id="kb-test" aria-live="polite"><p class="sk-note">यहाँ खेल चलेगा — पूरा करने पर 💰 game koins (असली पैसा नहीं)।</p></div></section>
+<section class="sk-card"><h2>📦 मेरे खेल</h2><ul id="kb-mine"></ul><p class="sk-note">🛡️ फ़ोन नंबर, link और अपशब्द filter में रुकते हैं। सब इसी फ़ोन पर; शेयर link में ही खेल होता है।</p></section></div>
+<section class="jaan-hero jaan-shell-hero"><div data-jaan-games data-jaan-fun="funny"></div></section></body></html>

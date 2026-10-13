@@ -70,6 +70,10 @@ function reveal(){var els=document.querySelectorAll('main section,.panel,.card,a
 function intro(){var o=document.querySelector('.jaan-intro');if(!o)return;var k='kdn-jaan-intro';try{if(sessionStorage.getItem(k)){o.remove();return;}}catch(e){}
  o.hidden=false;var close=function(){try{sessionStorage.setItem(k,'1');}catch(e){}o.classList.add('bye');setTimeout(function(){o.remove();},reduce?0:400);};
  [].forEach.call(o.querySelectorAll('[data-jaan-close]'),function(b){b.addEventListener('click',close);});document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});var f=o.querySelector('[data-jaan-close]');if(f)f.focus();}
-function init(){intro();sky();[].forEach.call(document.querySelectorAll('.jaan-slider'),slider);[].forEach.call(document.querySelectorAll('[data-jaan-games]'),games);[].forEach.call(document.querySelectorAll('[data-jaan-fun]'),fun);reveal();}
+function endcard(){var p=location.pathname,M='क्या कहानी को आगे बढ़ाने के लिए साथ दोगे? बताओ आगे कहानी किस तरफ जाए';
+function card(root){var d=mk('div','jaan-endcard');d.setAttribute('data-jaan-endcard',root);var t=document.createElement('p');t.textContent='🌳 '+M;var a=document.createElement('a');a.href='./shakha.html?root='+root;a.textContent='✍️ मेरी शाखा लिखो';var b=document.createElement('a');b.href='./khel-banao.html';b.textContent='🎮 अपना खेल बनाओ';d.appendChild(t);d.appendChild(a);d.appendChild(b);return d}
+if(/kahani\.html/.test(p)){['safar','ch1','avatar','wm','fb','her'].forEach(function(id){var s=document.getElementById(id);if(s&&!s.querySelector('[data-jaan-endcard]'))s.appendChild(card(id==='safar'?'chetna':id))});return}
+var r=/kyon\.html/.test(p)?'kyon':/funnybook\.html/.test(p)?'funny':null;if(!r||document.querySelector('[data-jaan-endcard]'))return;var h=document.querySelector('.jaan-shell-hero');if(h&&h.parentNode)h.parentNode.insertBefore(card(r),h);else document.body.appendChild(card(r));}
+function init(){endcard();intro();sky();[].forEach.call(document.querySelectorAll('.jaan-slider'),slider);[].forEach.call(document.querySelectorAll('[data-jaan-games]'),games);[].forEach.call(document.querySelectorAll('[data-jaan-fun]'),fun);reveal();}
 if(typeof window!=='undefined'){window.KDNJaan={slider:slider,games:games,fun:fun};if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();}
 })();

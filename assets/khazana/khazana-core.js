@@ -4,6 +4,8 @@ const J=()=>(root&&root.KDNJeevit)||(typeof require==='function'?(()=>{try{retur
 const GAMES=[
  {id:'chabi',icon:'🗝️',game:'चाबी वाला द्वार',badge:'चक्रव्यूह भेदी',key:'kdn-chabi-v1',href:'./chabi.html',got:s=>s.done===true},
  {id:'chakravyuh',icon:'🏹',game:'चक्रव्यूह कथा',badge:'चक्रव्यूह भेदक',key:'kdn-chakravyuh-v1',href:'./chakravyuh.html',got:s=>s.badge===true},
+ {id:'shakha',icon:'🌳',game:'कहानी की शाखाएँ',badge:'शाखा लेखक',key:'kdn-shakha-v1',href:'./shakha.html',got:s=>s.badge===true},
+ {id:'khel',icon:'🎮',game:'खेल बनाओ',badge:'खेल निर्माता',key:'kdn-khel-v1',href:'./khel-banao.html',got:s=>s.badge===true},
  {id:'virsa',icon:'🎙️',game:'पंजाब दा विरसा',badge:'विरसा सुनने वाला',key:'kdn-virsa-v1',href:'./virsa.html',got:s=>s.badge===true},
  {id:'takht',icon:'🧊',game:'तख़्त Cube',badge:'तख़्त परिक्रमा',key:'kdn-takht-v1',href:'./takht.html',got:s=>s.badge===true},
  {id:'langar',icon:'🍛',game:'लंगर रसोई',badge:'लंगर सेवादार',key:'kdn-langar-v1',href:'./langar.html',got:s=>s.badge===true},
