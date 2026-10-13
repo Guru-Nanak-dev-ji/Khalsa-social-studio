@@ -1,0 +1,9 @@
+const test=require('node:test'),assert=require('node:assert'),T=require('../assets/takht/takht-core.js'),K=require('../assets/koins-core.js'),Dr=require('../assets/doors-core.js'),fs=require('fs'),path=require('path');
+const R=f=>fs.readFileSync(path.join(__dirname,'..',f),'utf8');
+test('6 faces, real pages, distinct normals',()=>{assert.equal(T.FACES.length,6);const hs=['./studio.html','./gyan.html','./chabi.html','./newsroom.html','./saathi.html','./bhav.html'];assert.deepEqual(T.FACES.map(f=>f.href),hs);hs.forEach(h=>assert.ok(fs.existsSync(path.join(__dirname,'..',h))));
+ const ns=new Set(T.FACES.map(f=>T.normal(f).map(Math.round).join()));assert.equal(ns.size,6);});
+test('target brings each face to front; snap',()=>{T.FACES.forEach((_,i)=>{const t=T.target(i);assert.equal(T.front(t.rx,t.ry),i);});assert.equal(T.snap(50),90);assert.equal(T.snap(-40),0);assert.equal(T.front(0,0),0);});
+test('visit once + badge, koins once',()=>{let s=T.fresh();for(let i=0;i<6;i++){const r=T.visit(s,i);assert.ok(r.isNew);assert.equal(r.badgeNew,i===5);s=r.state;assert.ok(!T.visit(s,i).isNew);}assert.ok(s.badge);assert.equal(T.BADGE,'तख़्त परिक्रमा');
+ let k=K.fresh();k=K.claimSpot(k,'takht:mahal').state;assert.equal(K.claimSpot(k,'takht:mahal').added,0);assert.deepEqual(T.validate({v:1,seen:['x','gyan','gyan']}).seen,['gyan']);});
+test('page, door, feed, sw, no Khanda, no three',()=>{const h=R('takht.html');assert.ok(h.includes('lang="hi"')&&h.includes('data-heritage')&&h.includes('goldtv.js'));assert.ok(!/☬|three/i.test(h+R('assets/takht/takht.js')+R('assets/takht/takht.css')));assert.ok(R('assets/takht/takht.css').includes('prefers-reduced-motion'));
+ assert.ok(Dr.all().some(d=>d.href==='./takht.html'));assert.ok(JSON.parse(R('assets/goldtv/feed.json')).items.some(i=>i.href==='./takht.html'));const sw=R('sw.js');assert.equal((sw.match(/const CACHE/g)||[]).length,1);assert.ok(sw.includes('./takht.html')&&sw.includes('./assets/takht/takht.js'));});
