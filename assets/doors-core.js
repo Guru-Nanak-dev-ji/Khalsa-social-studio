@@ -34,6 +34,7 @@ const TREE={id:'root',icon:'🏰',title:'द्वार महल · ਦਰਵ�
   {icon:'🏹',title:'चक्रव्यूह कथा',sub:'7 घेरे · Quiz · अभिमन्यु',href:'./chakravyuh.html'},
   {icon:'🦋',title:'Butterfly चुनाव',sub:'One click · छोटे चुनाव बड़ा असर',href:'./titli.html'},
   {icon:'🏠',title:'नानक घर सेवा',sub:'मदद माँगो · मदद करो · koins',href:'./nanak-ghar.html'},
+  {icon:'🏆',title:'मेरा खज़ाना',sub:'सब badges एक जगह',href:'./khazana.html'},
   {icon:'♞',title:'शतरंज Quiz',sub:'जल्द आ रहा · Soon',soon:true},
   {icon:'🃏',title:'ताश पत्ते Quiz',sub:'जल्द आ रहा · Soon',soon:true}]},
  {id:'gyan',icon:'🏛',title:'Gyan',sub:'ज्ञान मंडल · ਗਿਆਨ',doors:[
