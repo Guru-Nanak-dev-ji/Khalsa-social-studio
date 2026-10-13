@@ -9,6 +9,7 @@ const GAMES=[
  {id:'titli',icon:'🦋',game:'Butterfly चुनाव',badge:'तितली प्रभाव',key:'kdn-titli-v1',href:'./titli.html',got:s=>s.badge===true},
  {id:'nanak-ghar',icon:'🏠',game:'नानक घर सेवा',badge:'नानक घर सेवादार',key:'kdn-nanak-ghar-v1',href:'./nanak-ghar.html',got:s=>s.badge===true},
  {id:'aaj-bhav',icon:'🌸',game:'मेरा आज का भाव',badge:'सात दिन का भाव-साधक',key:'kdn-aaj-bhav-v1',href:'./aaj-bhav.html',got:s=>!!(s.days&&Object.keys(s.days).length>=7)},
+ {id:'naksha',icon:'🌍',game:'KDN नक्शा',badge:'नक्शा यात्री',key:'kdn-naksha-v1',href:'./naksha.html',got:s=>s.badge===true},
  {id:'jeevit',icon:'📜',game:'जीवित तस्वीरें (मुख्य द्वार)',badge:'साखी संग्रह',key:'kdn-jeevit-v1',href:'./index.html',got:s=>{const j=J();return !!(j&&j.badge(s));}}];
 const RANKS=[[0,'🚶 यात्री'],[1,'🔍 खोजी'],[3,'🙏 सेवादार'],[5,'🛡️ रक्षक'],[GAMES.length,'👑 खज़ाना रक्षक']];
 const parse=raw=>{if(typeof raw!=='string'||!raw)return null;try{const v=JSON.parse(raw);return v&&typeof v==='object'?v:null;}catch{return null;}};
