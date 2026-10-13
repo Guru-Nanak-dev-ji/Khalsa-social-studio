@@ -1,0 +1,21 @@
+const test=require('node:test'),assert=require('node:assert'),A=require('../assets/akarshan/akarshan-core.js'),K=require('../assets/koins-core.js'),Dr=require('../assets/doors-core.js'),Z=require('../assets/khazana/khazana-core.js'),N=require('../assets/naksha/naksha-core.js'),fs=require('fs'),path=require('path');
+const R=f=>fs.readFileSync(path.join(__dirname,'..',f),'utf8');
+const full=(s,d)=>{s=A.attract(s,d,'मैं शांत हूँ').state;s=A.think(s,d).state;s=A.gratitude(s,d,['परिवार','रोटी','साँसें']).state;s=A.chooseAct(s,d,'kirat').state;return A.doAct(s,d);};
+test('attract + 3 steps complete once, empty/junk safe',()=>{let s=A.fresh();assert.ok(!A.attract(s,'2026-10-13','  ').ok);
+ let r=A.attract(s,'2026-10-13','<b>मैं   खुश हूँ</b>');assert.equal(r.state.days['2026-10-13'].intent,'bमैं खुश हूँ/b');assert.ok(!r.completeNew);
+ s=A.gratitude(r.state,'2026-10-13',['a','b']).state;assert.ok(!A.complete(A.get(s,'2026-10-13')));assert.ok(!A.doAct(s,'2026-10-13').completeNew);
+ r=full(A.fresh(),'2026-10-13');assert.ok(r.completeNew);assert.ok(!A.doAct(r.state,'2026-10-13').completeNew);
+ assert.deepEqual(A.validate(null),A.fresh());assert.deepEqual(A.validate({v:1,days:{bad:{},'2026-01-01':{grat:[1,'',3,'x','y','z'],act:'zz'}}}).days,{'2026-01-01':{intent:'',attracted:false,think:false,grat:['1','3','x'],act:'',actDone:false}});
+ assert.ok(A.isNegative('मैं डरता नहीं'));assert.ok(!A.isNegative('मैं हिम्मत वाला हूँ'));assert.equal(A.VALUES.map(v=>v.title).join(','),'किरत करो,वंड छको,नाम जपो');});
+test('streak, badge at 7, week, koins once a day',()=>{let s=A.fresh(),bn=0;for(let d=1;d<=7;d++){const r=full(s,'2026-10-0'+d);s=r.state;if(r.badgeNew)bn++;}
+ assert.equal(bn,1);assert.ok(s.badge);assert.equal(A.count(s),7);assert.equal(A.streak(s,'2026-10-07'),7);assert.equal(A.streak(s,'2026-10-08'),7);assert.equal(A.streak(s,'2026-10-09'),0);
+ const w=A.week(s,'2026-10-08');assert.equal(w.length,7);assert.ok(w[6].today&&!w[6].done&&w[5].done);assert.ok(A.validate(JSON.parse(JSON.stringify(s))).badge);
+ const a=K.claimSpot(K.fresh(),'akarshan:2026-10-13');assert.equal(a.added,5);assert.equal(K.claimSpot(a.state,'akarshan:2026-10-13').added,0);});
+test('page, door, feed, khazana, naksha, sw, no Khanda/Gurbani/selfies, honest note',()=>{const h=R('akarshan.html'),js=R('assets/akarshan/akarshan.js'),c=R('assets/akarshan/akarshan-core.js'),all=h+js+c;
+ assert.ok(h.includes('lang="hi"')&&h.includes('data-heritage="immersive"')&&h.includes('heritage-banner')&&h.includes('goldtv.js')&&h.includes('hindi-fonts.css')&&h.includes('heritage.css')&&h.includes('असली पैसा नहीं')&&h.includes('koins-core.js'));
+ assert.ok(h.includes('जैसी भावना, वैसा फल')&&h.includes('जादू नहीं')&&h.includes('डॉक्टरी'));
+ assert.ok(js.includes("'hi-IN'")&&js.includes("claimSpot(kst,'akarshan:'+today)")&&!/innerHTML|XMLHttpRequest|fetch\(/.test(js+c));assert.ok(!/☬/.test(all));assert.ok(!/<img|\.webp|\.jpe?g|selfie/i.test(h+js));
+ assert.ok(!/अंग\s*\d|ang\s*\d|॥/i.test(all));assert.ok(R('assets/akarshan/akarshan.css').includes('prefers-reduced-motion'));
+ assert.ok(Dr.all().some(d=>d.href==='./akarshan.html'));assert.equal(JSON.parse(R('assets/goldtv/feed.json')).items[0].href,'./akarshan.html');
+ assert.ok(Z.GAMES.some(g=>g.id==='akarshan'&&g.badge===A.BADGE&&g.key===A.KEY));assert.ok(N.IDS.includes('akarshan'));
+ const sw=R('sw.js');assert.equal((sw.match(/const CACHE/g)||[]).length,1);assert.ok(sw.includes("v0.28.0"));for(const a of['./akarshan.html','./assets/akarshan/akarshan-core.js','./assets/akarshan/akarshan.js','./assets/akarshan/akarshan.css'])assert.ok(sw.includes(a),a);});

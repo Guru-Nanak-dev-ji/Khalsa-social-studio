@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#1a0d06">
+<meta name="description" content="🧲 आकर्षण का नियम — जैसी भावना वैसा फल। रोज़ एक सकारात्मक भावना, 3 शुक्राने और एक छोटा अच्छा काम।">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icons/khalsa-v1-32.png" sizes="32x32" type="image/png">
+<link rel="stylesheet" href="./assets/heritage.css">
+<link rel="stylesheet" href="./assets/hindi-fonts.css">
+<link rel="stylesheet" href="./assets/akarshan/akarshan.css">
+<title>🧲 आकर्षण का नियम · KDN</title>
+<script defer src="./assets/koins-core.js"></script>
+<script defer src="./assets/akarshan/akarshan-core.js"></script>
+<script defer src="./assets/akarshan/akarshan.js"></script>
+<script defer src="./assets/goldtv/goldtv.js"></script></head>
+<body class="kdn-hindi" data-heritage="immersive">
+<div class="heritage-banner" aria-hidden="true"></div>
+<header class="hud" role="status" aria-live="polite">
+<a href="./studio.html#door=games">← द्वार</a>
+<div class="big">💰 <span id="h-koins">0</span><small>game koins, असली पैसा नहीं</small></div>
+</header>
+<section class="head"><h1>🧲 आकर्षण का नियम</h1><p class="slogan">जैसी भावना, वैसा फल</p><p>आज की एक अच्छी भावना लिखिए, 🧲 चुंबक दबाइए, फिर 3 कदम: सोचो · महसूस करो · करो।</p></section>
+<section class="card">
+<p class="orn">✦ आज की भावना ✦</p>
+<label for="intent">✍️ ऐसे लिखिए जैसे अभी सच है — "मैं … हूँ"</label>
+<textarea id="intent" maxlength="120" placeholder="जैसे: मैं शांत और मज़बूत हूँ।"></textarea>
+<p id="neg" hidden>💡 "नहीं/डर" की जगह जो चाहिए वह लिखिए — जैसे "मैं डरता नहीं" की जगह "मैं हिम्मत वाला हूँ"।</p>
+<button type="button" class="btn ghost" id="ex">🎲 उदाहरण दिखाओ</button>
+<div id="field"><button type="button" id="magnet" class="magnet" aria-label="भावना खींचो">🧲</button></div>
+<button type="button" class="btn" id="pull">🧲 भावना खींचो</button>
+<div id="attracted" hidden aria-live="polite"><p id="my-intent"></p><div id="orbit"></div><button type="button" class="btn ghost" id="say">🔊 सुनें</button></div>
+</section>
+<div id="steps" hidden>
+<section class="card step" id="s1"><h3>1️⃣ सोचो</h3><p>आँखें बंद कीजिए, 3 गहरी साँसें लीजिए और अपनी भावना को ऐसे देखिए जैसे वह पूरी हो चुकी है।</p>
+<button type="button" class="btn" id="think">🧘 मैंने सोचा</button><p class="ok-msg" id="think-ok" hidden>✅ मन में बस गई</p></section>
+<section class="card step" id="s2"><h3>2️⃣ महसूस करो</h3><p>आज की 3 चीज़ें जिनके लिए आप शुक्रगुज़ार हैं:</p>
+<input type="text" id="g0" maxlength="60" placeholder="1. जैसे: मेरा परिवार"><input type="text" id="g1" maxlength="60" placeholder="2. जैसे: आज की रोटी" style="margin-top:6px"><input type="text" id="g2" maxlength="60" placeholder="3. जैसे: मेरी साँसें" style="margin-top:6px">
+<button type="button" class="btn" id="grat-save">🙏 शुक्राना</button><p class="ok-msg" id="grat-ok" hidden>✅ दिल शुक्राने से भरा</p></section>
+<section class="card step" id="s3"><h3>3️⃣ करो</h3><p>भावना + मेहनत = फल। आज एक छोटा काम चुनिए:</p><div id="vals"></div>
+<button type="button" class="btn" id="act" hidden>💪 आज यह काम किया</button><p class="ok-msg" id="act-ok" hidden>✅ भावना को मेहनत मिली</p>
+<p class="honest">🙏 सच से दबाएँ — तभी जब सच में किया हो।</p></section>
+<p id="done-all" hidden>🌟 आज की आकर्षण साधना पूरी! (+5 koins दिन में एक बार)</p>
+</div>
+<section class="card"><p id="streak"></p><div id="week" aria-label="पिछले 7 दिन"></div><p class="note">🧲 पूरा दिन · ✨ शुरू किया</p></section>
+<p id="badge" class="badge" hidden>🏅 आकर्षण साधक — 7 दिन साधना पूरी!</p>
+<p class="note">🌱 याद रखिए: सिर्फ़ सोचने से जादू नहीं होता। अच्छी भावना मन को सही दिशा देती है, फल मेहनत (किरत), बाँटने (वंड छको) और नाम से आता है। यह कोई डॉक्टरी या पैसे की सलाह नहीं है — परेशानी हो तो डॉक्टर या अपनों से बात कीजिए। सब कुछ इसी phone में रहता है, कोई server नहीं। Koins game के हैं, असली पैसा नहीं।</p>
+</body>
+</html>
