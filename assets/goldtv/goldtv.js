@@ -1,6 +1,7 @@
 (function(){if(window.__goldtv)return;window.__goldtv=1;
 const base=(document.currentScript&&document.currentScript.src)?new URL('./',document.currentScript.src).href:'./assets/goldtv/';
 if(window.GoldTVCore)run();else{const s=document.createElement('script');s.src=base+'goldtv-core.js';s.onload=run;document.head.appendChild(s);}
+if(!window.__kdnSuggest){const sg=document.createElement('script');sg.src=base+'../suggest/suggest.js';sg.defer=true;document.head.appendChild(sg);}
 function run(){const C=window.GoldTVCore;
 const css=document.createElement('link');css.rel='stylesheet';css.href=base+'goldtv.css';document.head.appendChild(css);
 const KEY='goldtv_off',reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;const ICS='<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><rect x="3" y="2" width="3.5" height="12" rx="1" fill="currentColor"/><rect x="9.5" y="2" width="3.5" height="12" rx="1" fill="currentColor"/></svg>',ICP='<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M4 2l10 6-10 6z" fill="currentColor"/></svg>';let items=[],i=0,timer=null,paused=reduce;
