@@ -54,3 +54,17 @@ section.card.wmc{background:linear-gradient(160deg,#fbf8f1,#e6dfd0)!important;co
 .disc{border:1px solid var(--g2);border-radius:10px;padding:10px}
 @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}.lines .br{stroke-dasharray:none}}
 h3[id]{scroll-margin-top:80px}
+.fbc-card{background:linear-gradient(160deg,#1d1030,#0d1a2e)!important}
+.fb-sub{font-size:1.05rem;color:#f2c66a;margin:.2em 0}
+.fb-chips{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.fb-chip{background:#efc66e;color:#25190c;border-radius:999px;padding:6px 12px;font-weight:700;text-decoration:none;animation:fbpop .6s cubic-bezier(.3,1.6,.5,1) both}
+.fb-ch{background:rgba(255,255,255,.06);border:1px solid #86602e;border-radius:16px;padding:12px;margin:12px 0;animation:fbrise .7s ease both}
+.fb-sc{border-top:1px dashed #86602e;padding-top:8px;margin-top:8px}.fb-sc h4{margin:.2em 0;color:#f2c66a}
+.fb-poem{white-space:pre-line;font-style:italic;border-left:4px solid #f2c66a;margin:8px 0;padding:6px 12px;background:rgba(242,198,106,.08)}
+.fb-cut{background:#3a1a1a;border:1px dashed #e88;border-radius:10px;padding:8px;color:#ffd6d6}
+.fb-joke{font-size:1.1rem;background:#fff6d8;color:#3a2508;border-radius:12px;padding:10px;border:2px solid #f2c66a}
+.fb-stat{font-weight:700;color:#9fe0a0}.fbm{margin:4px 0}.fbm b{color:#8cc8ff}
+.fb-tab{width:100%;border-collapse:collapse;margin:8px 0}.fb-tab th,.fb-tab td{border:1px solid #86602e;padding:6px;text-align:center}.fb-tab th{background:#efc66e;color:#25190c}
+@keyframes fbpop{from{transform:scale(.4);opacity:0}to{transform:none;opacity:1}}
+@keyframes fbrise{from{transform:translateY(20px);opacity:0}to{transform:none;opacity:1}}
+@media (prefers-reduced-motion:reduce){.fb-chip,.fb-ch{animation:none}}
