@@ -43,3 +43,12 @@ test('popups (text and /draft) include test button when set',async()=>{const [c,
 test('post_test posts to test group only; post_yes still main',async()=>{const [c,s]=rec();assert.equal(await handleUpdate(cb(7812291108,'post_test'),tenv,s),'post_test');assert.deepEqual(c[0],['sendMessage',{chat_id:-1009999,text:'ਸੇਵਾ ਲੰਗਰ 7 ਵਜੇ'}]);assert.ok(c.every(([m,b])=>b.chat_id!==-1002221114009));
   const [c2,s2]=rec();await handleUpdate(cb(7812291108,'post_yes'),tenv,s2);assert.equal(c2[0][1].chat_id,-1002221114009);
   const [c3,s3]=rec();await handleUpdate(cb(7812291108,'post_test'),env,s3);assert.ok(c3.every(([m,b])=>b.chat_id!==-1002221114009&&b.chat_id!==-1009999));});
+import {handleYt,ytToken} from '../bot/worker.js';
+const yenv={...env,APP_KEY:'k-123',YT_CLIENT_ID:'cid',YT_CLIENT_SECRET:'csec'};
+test('/yt sends owner signed link; start redirects; bad token 403',async()=>{const [c,s]=rec();assert.equal(await handleUpdate(msg('/yt'),yenv,s),'yt');const link=c[0][1].text.match(/https:\S+/)[0];assert.equal(c[0][1].chat_id,7812291108);
+  const r=await handleYt(new Request(link),yenv);assert.equal(r.status,302);const loc=new URL(r.headers.get('location'));assert.equal(loc.searchParams.get('access_type'),'offline');assert.match(loc.searchParams.get('scope'),/youtube.upload/);
+  assert.equal((await handleYt(new Request('https://w/yt/start?t=1.bad'),yenv)).status,403);});
+test('/yt from non-owner ignored',async()=>{const [c,s]=rec();assert.equal(await handleUpdate({message:{from:{id:1},chat:{type:'private'},text:'/yt'}},yenv,s),'ignored');});
+test('callback stores token in KV and tells owner',async()=>{const kv={};const e={...yenv,KDN_KV:{put:async(k,v)=>{kv[k]=v;}}};const t=await ytToken(e);const [c,s]=rec();
+  const f=async(url)=>new Response(JSON.stringify(String(url).includes('oauth2')?{access_token:'a',refresh_token:'r'}:{items:[{snippet:{title:'Khatri जागरण मिशन'}}]}));
+  const r=await handleYt(new Request('https://w/yt/callback?code=x&state='+t),e,s,f);assert.equal(r.status,200);assert.equal(kv.yt_refresh_token,'r');assert.equal(c[0][1].text,'YouTube जुड़ गया: Khatri जागरण मिशन');});
