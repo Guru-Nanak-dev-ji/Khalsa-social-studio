@@ -517,6 +517,36 @@
 "status": "published"
 },
 {
+"id": "shabad-jod",
+"icon": "🔤",
+"name": "शब्द जोड़",
+"sub": "गुरमुखी ↔ हिंदी मेमोरी खेल — अक्खर से शब",
+"cat": "g",
+"href": "./shabad-jod.html",
+"group": "games",
+"status": "published"
+},
+{
+"id": "langar-rush",
+"icon": "🍛",
+"name": "लंगर रश",
+"sub": "मिलकर संगत को परोसो — समय-प्रबंधन सेवा ख",
+"cat": "g",
+"href": "./langar-rush.html",
+"group": "games",
+"status": "published"
+},
+{
+"id": "naksha-khoj",
+"icon": "🗺️",
+"name": "नक्शा खोज",
+"sub": "संकेत पढ़ो, पंजाब और भारत की जगह पहचानो।",
+"cat": "g",
+"href": "./naksha-khoj.html",
+"group": "games",
+"status": "published"
+},
+{
 "id": "naksha",
 "icon": "🌍",
 "name": "KDN नक्शा",
