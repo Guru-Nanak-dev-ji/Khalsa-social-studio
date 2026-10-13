@@ -8,7 +8,7 @@ function toast(t){const e=el('div','toast',t);document.body.append(e);setTimeout
 C.MAP.forEach(m=>{const li=el('li');li.append(el('b',null,m.title+' — '),el('span',null,m.text));$('map').append(li);});
 const A=C.AVATAR;$('av-tag').textContent=A.tag;$('av-teaser').textContent=A.teaser;$('av-msg').textContent=A.msg;$('disc').textContent='⚠️ '+C.DISCLAIMER;
 A.cast.forEach(c=>{const li=el('li');li.append(el('b',null,c.n+': '),el('span',null,c.r));$('cast').append(li);});
-for(const [id,arr] of [['ep1',A.ep1],['ep2',A.ep2],['ep3',A.ep3],['ep4',A.ep4],['ep5',A.ep5]])arr.forEach(l=>{const p=el('p',l.who?'line':'dir');if(l.who)p.append(el('b',null,l.who+': '));p.append(el('span',null,l.t));$(id).append(p);});
+for(const [id,arr] of [['ep1',A.ep1],['ep2',A.ep2],['ep3',A.ep3],['ep4',A.ep4],['ep5',A.ep5],['ep6',A.ep6]])arr.forEach(l=>{const p=el('p',l.who?'line':'dir');if(l.who)p.append(el('b',null,l.who+': '));p.append(el('span',null,l.t));$(id).append(p);});
 const Y=[40,100,160];
 function lines(){const s=$('lines');s.replaceChildren();C.TIMES.forEach((t,i)=>{s.append(sv('path',{d:`M10 ${Y[i]} H330`,class:'base'}));const tx=sv('text',{x:12,y:Y[i]-10,class:'lbl'});tx.textContent=t.icon+' '+t.name;s.append(tx);});
  st.picks.forEach((p,i)=>{const y=Y[i],x=90+i*0;const up=p==='a';s.append(sv('path',{d:`M90 ${y} C150 ${y} 170 ${y+(up?-22:22)} 320 ${y+(up?-22:22)}`,class:'br '+(up?'good':'bad')}));
