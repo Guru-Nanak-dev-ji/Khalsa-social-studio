@@ -1,0 +1,35 @@
+const {test}=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
+const C=require('../assets/news-channels-core.js');const r=f=>fs.readFileSync(path.resolve(__dirname,'..',f),'utf8');
+const W=()=>import('../bot/worker.js');
+const good=['मालवा News','Ludhiana News TV','ਮਾਲਵਾ ਨਿਊਜ਼','पंजाब न्यूज़','दोआबा न्यूज़ टीवी','Amritsar news tv'],bad=['Malwa Times','News','मालवा','Fake Newsy','NewsMalwa','x News'];
+test('name must end with News / News TV / न्यूज़ / ਨਿਊਜ਼ (client)',()=>{for(const n of good)assert.equal(C.nameError(n),'',n);for(const n of bad)assert.notEqual(C.nameError(n),'',n);});
+test('server rules match client rules',async()=>{const {newsValidate}=await W();const base={handle:'malwa-news',city:'बठिंडा',lang:'hi',tickerColor:'#f2c66a',logo:''};
+ for(const n of good)assert.deepEqual(newsValidate({...base,name:n}),{},n);for(const n of bad)assert.ok(newsValidate({...base,name:n}).name,n);
+ for(const h of ['ab','-ab','A-b','malwa news','a'.repeat(31)])assert.ok(newsValidate({...base,name:good[0],handle:h}).handle,h);
+ assert.ok(newsValidate({...base,name:good[0],logo:'data:image/svg+xml;base64,AA=='}).logo);assert.ok(newsValidate({...base,name:good[0],tickerColor:'red'}).tickerColor);});
+const TOKEN='123:test-token';
+function signed(o){const dcs=Object.keys(o).sort().map(k=>k+'='+o[k]).join('\n');const key=crypto.createHash('sha256').update(TOKEN).digest();return {...o,hash:crypto.createHmac('sha256',key).update(dcs).digest('hex')};}
+function kv(){const m=new Map();return {m,get:async k=>m.has(k)?m.get(k):null,put:async(k,v)=>{m.set(k,v);}};}
+const O='https://guru-nanak-dev-ji.github.io';let ip=0;
+const post=(body,origin=O)=>new Request('https://w/news/channel',{method:'POST',headers:{Origin:origin,'content-type':'application/json','CF-Connecting-IP':'9.9.9.'+(ip++)},body:JSON.stringify(body)});
+test('telegram login hash verified, tampered or old rejected',async()=>{const {verifyTelegramLogin}=await W();const now=Date.now();const a=signed({id:42,first_name:'Daljit',auth_date:Math.floor(now/1000)});
+ assert.equal((await verifyTelegramLogin(a,TOKEN,now)).id,'42');assert.equal(await verifyTelegramLogin({...a,id:43},TOKEN,now),null);
+ assert.equal(await verifyTelegramLogin(a,'other',now),null);assert.equal(await verifyTelegramLogin(a,TOKEN,now+2*86400e3),null);});
+test('create, unique handle, list, get, CORS',async()=>{const w=(await W()).default;const env={TELEGRAM_BOT_TOKEN:TOKEN,KDN_KV:kv()};
+ const auth=signed({id:7,first_name:'D',auth_date:Math.floor(Date.now()/1000)});const ch={name:'मालवा News',handle:'malwa-news',city:'बठिंडा',lang:'hi',tickerColor:'#F2C66A',logo:''};
+ let res=await w.fetch(post({auth,channel:ch}),env);assert.equal(res.status,201);assert.equal(res.headers.get('Access-Control-Allow-Origin'),O);
+ assert.equal((await w.fetch(post({auth,channel:ch}),env)).status,409);
+ assert.equal((await w.fetch(post({auth,channel:{...ch,handle:'malwa-2'}}),env)).status,409,'same name');
+ assert.equal((await w.fetch(post({auth,channel:{...ch,handle:'x-news',name:'Malwa Times'}}),env)).status,400);
+ assert.equal((await w.fetch(post({auth:{...auth,hash:'0'.repeat(64)},channel:{...ch,handle:'zz-news'}}),env)).status,401);
+ assert.equal((await w.fetch(post({auth,channel:{...ch,handle:'qq-news'}},'https://evil.example'),env)).status,403);
+ res=await w.fetch(new Request('https://w/news/channels',{headers:{Origin:O}}),env);const j=await res.json();assert.equal(j.channels.length,1);assert.equal(j.channels[0].tickerColor,'#f2c66a');assert.equal(j.channels[0].owner,undefined);
+ res=await w.fetch(new Request('https://w/news/channel/malwa-news'),env);assert.equal((await res.json()).channel.name,'मालवा News');
+ assert.equal((await w.fetch(new Request('https://w/news/channel/nope-x'),env)).status,404);
+ const p=await w.fetch(new Request('https://w/news/channel',{method:'OPTIONS',headers:{Origin:O}}),env);assert.equal(p.status,204);assert.match(p.headers.get('Access-Control-Allow-Methods'),/GET/);});
+test('page, door, picker, fonts, cache',()=>{const h=r('news-channels.html');assert.match(h,/Khalsaworld_bot|news-channels\.js/);assert.match(r('assets/news-channels.js'),/Khalsaworld_bot/);assert.doesNotMatch(h,/khanda|☬/i);
+ const D=require('../assets/doors-core.js');assert.ok(D.TREE.doors.find(d=>d.id==='knn').doors.some(d=>d.href==='./news-channels.html'));assert.ok(D.TREE.doors.find(d=>d.id==='media').doors.some(d=>d.href==='./news-channels.html'));
+ assert.match(r('newsroom.html'),/id="chan"/);assert.match(r('assets/newsroom.js'),/KNNChan/);
+ const sw=r('sw.js');for(const a of ['news-channels.html','hindi-fonts.css','RozhaOne-deva.woff2','Mukta-400-deva.woff2','jaali-live.js'])assert.ok(sw.includes(a),a);
+ assert.match(r('assets/hindi-fonts.css'),/font-display:swap/);for(const f of ['news-channels.html','newsroom.html','studio.html'])assert.match(r(f),/hindi-fonts\.css/,f);
+ for(const f of ['studio.html','newsroom.html','reels.html'])assert.match(r(f),/jaali-live/,f);assert.match(r('assets/jaali-live.css'),/prefers-reduced-motion/);});
