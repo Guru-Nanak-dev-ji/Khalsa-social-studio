@@ -1,0 +1,18 @@
+/* ✨ fx layer — frosted glass + scroll reveal + self-hosted Yatra One (OFL). Additive only. */
+@font-face{font-family:'KDN Yatra';src:url('../fonts/YatraOne-deva.woff2') format('woff2');font-display:swap;unicode-range:U+0900-097F,U+1CD0-1CF9,U+200C-200D,U+25CC,U+A8E0-A8FF,U+0020-007E}
+.fx-display{font-family:'KDN Yatra','Rozha One',serif;letter-spacing:.01em}
+.fx-fab{position:fixed;right:10px;bottom:calc(96px + env(safe-area-inset-bottom));z-index:10000;font:700 15px/1 'KDN Yatra',system-ui,sans-serif;color:#fff6e0;padding:12px 16px;border-radius:999px;border:1px solid rgba(255,230,170,.45);background:rgba(36,20,50,.45);backdrop-filter:blur(12px) saturate(140%);-webkit-backdrop-filter:blur(12px) saturate(140%);box-shadow:0 6px 24px rgba(0,0,0,.35);cursor:pointer}
+.fx-sheet{position:fixed;inset:auto 0 0 0;max-height:82vh;z-index:10001;overflow-y:auto;overscroll-behavior:contain;padding:18px 14px calc(24px + env(safe-area-inset-bottom));border-radius:26px 26px 0 0;background:rgba(22,12,34,.62);backdrop-filter:blur(16px) saturate(150%);-webkit-backdrop-filter:blur(16px) saturate(150%);border-top:1px solid rgba(255,230,170,.4);color:#fff3dc;box-shadow:0 -10px 40px rgba(0,0,0,.45);animation:fx-up .45s cubic-bezier(.22,1,.36,1)}
+.fx-sheet[hidden]{display:none}
+.fx-sheet h2{font-family:'KDN Yatra','Rozha One',serif;font-size:clamp(1.5rem,6vw,2.2rem);margin:.1em 0 .2em;color:#f6d58b;text-align:center}
+.fx-sheet>p{text-align:center;margin:0 0 12px;opacity:.85}
+.fx-close{position:sticky;top:0;float:right;font:700 20px/1 system-ui;border:0;border-radius:50%;width:38px;height:38px;background:rgba(255,255,255,.15);color:#fff;cursor:pointer}
+.fx-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;clear:both}
+.fx-card{display:block;text-decoration:none;color:#fff3dc;padding:14px;border-radius:18px;background:rgba(255,255,255,.08);border:1px solid rgba(255,230,170,.25);box-shadow:inset 0 1px 0 rgba(255,255,255,.15);transform:translateY(26px) scale(.97);opacity:0;transition:transform .7s cubic-bezier(.22,1,.36,1),opacity .7s cubic-bezier(.22,1,.36,1)}
+.fx-card.fx-in{transform:none;opacity:1}
+.fx-card i{font-style:normal;font-size:2rem;display:block}
+.fx-card b{font-family:'KDN Yatra','Rozha One',serif;font-weight:400;font-size:1.25rem;display:block;color:#f6d58b}
+.fx-card small{opacity:.85;line-height:1.5}
+@keyframes fx-up{from{transform:translateY(40%);opacity:0}to{transform:none;opacity:1}}
+@media (max-width:600px){.fx-sheet,.fx-fab{backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}}
+@media (prefers-reduced-motion:reduce){.fx-sheet{animation:none}.fx-card{transform:none;opacity:1;transition:none}}
