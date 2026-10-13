@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#1a0d06">
+<meta name="description" content="🏆 मेरा खज़ाना — KDN के सब games के badges एक जगह।">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icons/khalsa-v1-32.png" sizes="32x32" type="image/png">
+<link rel="stylesheet" href="./assets/heritage.css">
+<link rel="stylesheet" href="./assets/hindi-fonts.css">
+<link rel="stylesheet" href="./assets/khazana/khazana.css">
+<title>🏆 मेरा खज़ाना · KDN</title>
+<script defer src="./assets/koins-core.js"></script>
+<script defer src="./assets/jeevit/jeevit-core.js"></script>
+<script defer src="./assets/khazana/khazana-core.js"></script>
+<script defer src="./assets/khazana/khazana.js"></script>
+<script defer src="./assets/goldtv/goldtv.js"></script></head>
+<body class="kdn-hindi" data-heritage="immersive">
+<div class="heritage-banner" aria-hidden="true"></div>
+<header class="hud" role="status" aria-live="polite">
+<a href="./studio.html#door=games">← द्वार</a>
+<div class="big">💰 <span id="h-koins">0</span><small>game koins, असली पैसा नहीं</small></div>
+</header>
+<section class="head"><h1>🏆 मेरा खज़ाना</h1><p>हर द्वार का badge यहाँ चमकता है। जितने badge, उतना खुला खज़ाना।</p></section>
+<div class="vault" aria-hidden="true"><div class="glow"></div><span class="coin c1">🪙</span><span class="coin c2">🪙</span><span class="coin c3">🪙</span><div class="chest"><div class="lid"></div><div class="lock"></div><div class="box"></div></div></div>
+<section class="rankcard"><div id="rank">🚶 यात्री</div><div id="count">0 badges</div><div class="track" role="progressbar" aria-label="badges" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div id="bar"></div></div></section>
+<a id="next" class="btn" href="./chabi.html" hidden>अगली चुनौती →</a>
+<main id="grid" aria-live="polite" aria-label="badges"></main>
+<p class="note">कोई server नहीं, कोई login नहीं: यह page सिर्फ़ आपके इसी phone में रखे games का हाल पढ़ता है, कुछ बदलता नहीं। किसी badge पर दबाइए, वह game खुल जाएगा। "Reduce motion" setting में खज़ाना स्थिर रहता है।</p>
+</body>
+</html>
