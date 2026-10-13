@@ -14,6 +14,7 @@ const GAMES=[
  {id:'mala',icon:'📿',game:'सिमरन माला',badge:'सिमरन साधक',key:'kdn-mala-v1',href:'./mala.html',got:s=>s.badge===true},
  {id:'gun',icon:'📜',game:'आज का गुण',badge:'गुण साधक',key:'kdn-gun-v1',href:'./gun.html',got:s=>s.badge===true||(Array.isArray(s.done)&&s.done.length>=7)},
  {id:'akarshan',icon:'🧲',game:'आकर्षण का नियम',badge:'आकर्षण साधक',key:'kdn-akarshan-v1',href:'./akarshan.html',got:s=>s.badge===true},
+ {id:'khoya',icon:'🏰',game:'My Kingdom Lands',badge:'खोजी सिंह',key:'kdn-khoya-v1',href:'./kingdom-lands.html',got:s=>s.badge===true},
  {id:'naksha',icon:'🌍',game:'KDN नक्शा',badge:'नक्शा यात्री',key:'kdn-naksha-v1',href:'./naksha.html',got:s=>s.badge===true},
  {id:'jeevit',icon:'📜',game:'जीवित तस्वीरें (मुख्य द्वार)',badge:'साखी संग्रह',key:'kdn-jeevit-v1',href:'./index.html',got:s=>{const j=J();return !!(j&&j.badge(s));}}];
 const RANKS=[[0,'🚶 यात्री'],[1,'🔍 खोजी'],[3,'🙏 सेवादार'],[5,'🛡️ रक्षक'],[GAMES.length,'👑 खज़ाना रक्षक']];

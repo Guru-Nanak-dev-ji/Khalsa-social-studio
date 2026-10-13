@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#1a0d06">
+<meta name="description" content="🏰 My Kingdom Lands — मेरा राज्य, खोई हुई ज़मीनें। बेगमपुरा की खोई रोशनी लौटाओ। छिपी चीज़ें ढूँढो, पहेली सुलझाओ, koins पाओ।">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icons/khalsa-v1-32.png" sizes="32x32" type="image/png">
+<link rel="stylesheet" href="./assets/heritage.css">
+<link rel="stylesheet" href="./assets/hindi-fonts.css">
+<link rel="stylesheet" href="./assets/khoya/khoya.css">
+<title>🏰 My Kingdom Lands · KDN</title>
+<script defer src="./assets/koins-core.js"></script>
+<script defer src="./assets/khoya/khoya-core.js"></script>
+<script defer src="./assets/khoya/khoya.js"></script>
+<script defer src="./assets/goldtv/goldtv.js"></script></head>
+<body class="kdn-hindi" data-heritage="immersive">
+<div class="heritage-banner" aria-hidden="true"></div>
+<header class="hud" role="status" aria-live="polite">
+<a href="./studio.html#door=games">← द्वार</a>
+<div class="big">💰 <span id="h-koins">0</span><small>game koins, असली पैसा नहीं</small></div>
+</header>
+<section class="head"><h1>🏰 My Kingdom Lands</h1><p class="sub">मेरा राज्य · खोई हुई ज़मीनें</p><p>आपके राज्य की 5 ज़मीनें और सुनहरा नगर बेगमपुरा कोहरे में खो गए हैं। हर ज़मीन में छिपी चीज़ें ढूँढो और नगर की रोशनी लौटाओ।</p></section>
+<div class="guides"><img src="./assets/world/kdn-nihang-guides-v22.webp" alt="गाइड तरक सिंह और भावना कौर" width="84" height="84"><p>🙏 हम तरक सिंह और भावना कौर हैं — आपके साथ चलेंगे। सूची की चीज़ें दृश्य में छूकर ढूँढिए।</p></div>
+<p id="prog"></p><div id="city"><div id="bar"></div></div>
+<nav id="tabs" aria-label="ज़मीनें"></nav>
+<h2 id="s-name"></h2><p id="s-story"></p>
+<div id="scene" class="scene" role="group" aria-label="खोज का दृश्य"></div>
+<div class="row"><button type="button" class="btn" id="hint">✨ संकेत</button><button type="button" class="btn ghost" id="say">🔊 सुनें</button></div>
+<section class="card"><h3>📜 ढूँढो <span id="count"></span></h3><ul id="list"></ul></section>
+<section class="card" id="puz" hidden><h3>🧩 दरवाज़े की पहेली</h3><p>आपको <b id="puz-item"></b> मिली! अगला दरवाज़ा खोलने के लिए हर टाइल को छूकर घुमाइए — सारे तीर ⬆️ ऊपर होने चाहिए।</p><div id="tiles"></div></section>
+<div class="row"><button type="button" class="btn" id="next" hidden>🚪 अगले दृश्य में चलो</button></div>
+<section class="card"><h3>🎒 झोला</h3><div id="inv"></div></section>
+<p id="badge" class="badge" hidden>🏅 खोजी सिंह — बेगमपुरा फिर से रोशन हो गया!</p>
+<p class="note">यह KDN की अपनी कहानी और अपने चित्र हैं। गलत जगह छूने पर संकेत 4 सेकंड देर से मिलता है। हर दृश्य पहली बार पूरा करने पर koins। सब कुछ इसी phone में रहता है। Koins game के हैं, असली पैसा नहीं।</p>
+</body>
+</html>

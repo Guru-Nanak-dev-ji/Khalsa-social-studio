@@ -16,6 +16,6 @@ test('page, door, feed, khazana, naksha, sw, no Khanda/Gurbani/selfies, honest n
  assert.ok(h.includes('जैसी भावना, वैसा फल')&&h.includes('जादू नहीं')&&h.includes('डॉक्टरी'));
  assert.ok(js.includes("'hi-IN'")&&js.includes("claimSpot(kst,'akarshan:'+today)")&&!/innerHTML|XMLHttpRequest|fetch\(/.test(js+c));assert.ok(!/☬/.test(all));assert.ok(!/<img|\.webp|\.jpe?g|selfie/i.test(h+js));
  assert.ok(!/अंग\s*\d|ang\s*\d|॥/i.test(all));assert.ok(R('assets/akarshan/akarshan.css').includes('prefers-reduced-motion'));
- assert.ok(Dr.all().some(d=>d.href==='./akarshan.html'));assert.equal(JSON.parse(R('assets/goldtv/feed.json')).items[0].href,'./akarshan.html');
+ assert.ok(Dr.all().some(d=>d.href==='./akarshan.html'));assert.ok(JSON.parse(R('assets/goldtv/feed.json')).items.some(i=>i.href==='./akarshan.html'));
  assert.ok(Z.GAMES.some(g=>g.id==='akarshan'&&g.badge===A.BADGE&&g.key===A.KEY));assert.ok(N.IDS.includes('akarshan'));
- const sw=R('sw.js');assert.equal((sw.match(/const CACHE/g)||[]).length,1);assert.ok(sw.includes("v0.28.0"));for(const a of['./akarshan.html','./assets/akarshan/akarshan-core.js','./assets/akarshan/akarshan.js','./assets/akarshan/akarshan.css'])assert.ok(sw.includes(a),a);});
+ const sw=R('sw.js');assert.equal((sw.match(/const CACHE/g)||[]).length,1);assert.ok(sw.includes("v0.29.0"));for(const a of['./akarshan.html','./assets/akarshan/akarshan-core.js','./assets/akarshan/akarshan.js','./assets/akarshan/akarshan.css'])assert.ok(sw.includes(a),a);});

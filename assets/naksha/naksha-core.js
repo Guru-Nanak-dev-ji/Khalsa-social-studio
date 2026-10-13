@@ -5,7 +5,7 @@ const NODES=[
  {id:'studio',icon:'🏰',name:'द्वार महल'},{id:'gyan',icon:'🏛',name:'ज्ञान मंडल'},{id:'chabi',icon:'🗝️',name:'चाबी वाला द्वार'},
  {id:'takht',icon:'🧊',name:'तख़्त Cube'},{id:'langar',icon:'🍛',name:'लंगर रसोई'},{id:'chakravyuh',icon:'🏹',name:'चक्रव्यूह कथा'},
  {id:'titli',icon:'🦋',name:'Butterfly चुनाव'},{id:'nanak-ghar',icon:'🏠',name:'नानक घर सेवा'},{id:'khazana',icon:'🏆',name:'मेरा खज़ाना'},
- {id:'aaj-bhav',icon:'🌸',name:'मेरा आज का भाव'},{id:'sakhi',icon:'📖',name:'आज की साखी'},{id:'sankalp',icon:'🪔',name:'आज का संकल्प'},{id:'mala',icon:'📿',name:'सिमरन माला'},{id:'gun',icon:'📜',name:'आज का गुण'},{id:'akarshan',icon:'🧲',name:'आकर्षण का नियम'},{id:'saathi',icon:'🎙️',name:'बोलने वाले AI साथी'},{id:'bhav',icon:'🎭',name:'मेरे भाव'},
+ {id:'aaj-bhav',icon:'🌸',name:'मेरा आज का भाव'},{id:'sakhi',icon:'📖',name:'आज की साखी'},{id:'sankalp',icon:'🪔',name:'आज का संकल्प'},{id:'mala',icon:'📿',name:'सिमरन माला'},{id:'gun',icon:'📜',name:'आज का गुण'},{id:'kingdom-lands',icon:'🏰',name:'My Kingdom Lands'},{id:'akarshan',icon:'🧲',name:'आकर्षण का नियम'},{id:'saathi',icon:'🎙️',name:'बोलने वाले AI साथी'},{id:'bhav',icon:'🎭',name:'मेरे भाव'},
  {id:'study',icon:'🎓',name:'स्टडी स्टूडियो'},{id:'goldtv',icon:'📺',name:'Golden TV'},{id:'ai-samvidhan',icon:'📜',name:'AI का खुला संविधान'},
  {id:'patta',icon:'🍃',name:'पत्ता उड़ाओ'},{id:'scroll-dwar',icon:'🚪',name:'Scroll से खुलता द्वार'},{id:'newsroom',icon:'🎙',name:'KNN न्यूज़ स्टूडियो'},
  {id:'news-channels',icon:'📡',name:'न्यूज़ चैनल'},{id:'ai-tools',icon:'🤖',name:'Free AI Tools'},{id:'reels',icon:'🎞️',name:'Reel Studio'},
