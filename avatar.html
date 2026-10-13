@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#24070b">
+<meta name="description" content="मेरा अवतार — अपनी फ़ोटो से कार्टून अवतार, इमोजी स्टिकर और GIF बनाएँ। फ़ोटो फ़ोन से बाहर नहीं जाती।">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icons/khalsa-v1-32.png" sizes="32x32" type="image/png"><link rel="apple-touch-icon" href="./icons/khalsa-v1-180.png" sizes="180x180">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;700&family=Tiro+Devanagari+Hindi&display=swap">
+<link rel="stylesheet" href="./assets/avatar/avatar.css">
+<title>😀 मेरा अवतार · KDN</title>
+<script defer src="./assets/avatar/avatar-core.js"></script>
+<script type="module" src="./assets/avatar/avatar.js"></script>
+</head>
+<body>
+<div class="wrap">
+<header class="top"><a href="./studio.html">← नियंत्रण कक्ष</a></header>
+<main>
+<section class="hero">
+<div class="mehrab" aria-hidden="true"></div>
+<p class="eyebrow">खालसा डिजिटल वर्ल्ड · अवतार द्वार</p>
+<h1>😀 मेरा अवतार</h1>
+<p class="sub">अपनी फ़ोटो डालिए, अपना कार्टून अवतार बनाइए, और उससे इमोजी स्टिकर व चलते GIF बनाइए। <b>फ़ोटो आपके फ़ोन में ही रहती है, कहीं भेजी नहीं जाती।</b> सब कुछ मुफ़्त है।</p>
+</section>
+
+<section class="card"><h2><span class="num">१</span> फ़ोटो चुनिए</h2>
+<div class="row">
+<label class="btn">📷 फ़ोटो खींचें<input id="av-camera" type="file" accept="image/*" capture="user" hidden></label>
+<label class="btn ghost">🖼️ गैलरी से चुनें<input id="av-file" type="file" accept="image/*" hidden></label>
+</div>
+<div class="photo-box"><canvas id="av-photo" width="300" height="300" aria-label="आपकी फ़ोटो"></canvas></div>
+<p id="av-status" class="status" role="status">फ़ोटो चुनें या बिना फ़ोटो के नीचे से अपना अवतार खुद सजाएँ।</p>
+</section>
+
+<section class="card"><h2><span class="num">२</span> अवतार सजाइए</h2>
+<div class="stage"><canvas id="av-canvas" width="512" height="512" aria-label="आपका अवतार"></canvas></div>
+<label class="field">नाम<input id="av-name" maxlength="30" placeholder="जैसे: दलजीत"></label>
+<div class="group"><h3>त्वचा का रंग</h3><div id="av-skin" class="swatches"></div></div>
+<div class="group"><h3>सिर</h3><div id="av-head" class="chips"></div></div>
+<div class="group" id="av-dastaar-group"><h3>दस्तार / पटके का रंग</h3><div id="av-dastaar" class="swatches"></div></div>
+<div class="group"><h3>बालों और दाढ़ी का रंग</h3><div id="av-hair" class="swatches"></div></div>
+<div class="group"><h3>दाढ़ी</h3><div id="av-beard" class="chips"></div></div>
+<div class="group"><h3>आँखें</h3><div id="av-eyes" class="chips"></div></div>
+<label class="field">मुस्कान<input id="av-smile" type="range" min="0" max="1" step="0.05"></label>
+<div class="row"><button id="av-save" type="button">💾 अवतार सहेजें</button><button id="av-dl" class="ghost" type="button">⬇️ अवतार डाउनलोड</button><button id="av-reset" class="ghost" type="button">↺ नए सिरे से</button></div>
+</section>
+
+<section class="card"><h2><span class="num">३</span> इमोजी स्टिकर</h2>
+<p class="fine">किसी भी स्टिकर को दबाकर डाउनलोड करें या भेजें। ये PNG चित्र हैं।</p>
+<div id="av-stickers" class="grid"></div>
+</section>
+
+<section class="card"><h2><span class="num">४</span> चलते GIF</h2>
+<p class="fine">कमेंट में लगाने के लिए छोटे GIF। "GIF बनाओ" दबाइए।</p>
+<button id="av-gif-make" type="button">🎞️ GIF बनाओ</button>
+<div id="av-gifs" class="grid"></div>
+</section>
+<p class="fine center">चेहरा पहचानने के लिए Google का मुफ़्त MediaPipe आपके ब्राउज़र में ही चलता है। GIF के लिए gifenc (MIT लाइसेंस)।</p>
+</main>
+</div>
+</body>
+</html>
