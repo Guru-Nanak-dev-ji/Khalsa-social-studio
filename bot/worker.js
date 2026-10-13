@@ -25,6 +25,7 @@ export async function handleUpdate(u,env,send=call){
     if(m.from?.id!==OWNER||m.chat?.type!=='private')return 'ignored';
     let txt=(m.text||'').trim().replace(/^["'“”]+|["'“”]+$/g,'').trim();
     if(/^\/yt(?:@\w+)?$/.test(txt)){if(!env.APP_KEY||!env.YT_CLIENT_ID){await send(env,'sendMessage',{chat_id:OWNER,text:'YouTube setup अभी अधूरा है।'});return 'yt';}await send(env,'sendMessage',{chat_id:OWNER,text:`YouTube जोड़ने के लिए यह link खोलें (15 मिनट तक चलेगा):\nhttps://kdn-telegram-bot.khatrinewsnetwork.workers.dev/yt/start?t=${await ytToken(env)}`});return 'yt';}
+    if(/^\/channels(?:@\w+)?$/.test(txt)){await send(env,'sendMessage',channelsMessage(env,await ytChannels(env)));return 'channels';}
     if(txt==='/start'||txt==='/help'||txt==='/post'){await send(env,'sendMessage',{chat_id:OWNER,text:'जो भी post डालनी हो, बस वही text यहाँ लिख दें। मैं पूछूँगा, फिर ✅ दबाने पर Khalsa konnect में डाल दूँगा।'});return 'help';}
     const pm=txt.match(/^\/post(?:@\w+)?\s+([\s\S]+)$/);const post=(pm?pm[1]:(txt.startsWith('/')?'':txt)).trim();
     if(post){await send(env,'sendMessage',{chat_id:OWNER,text:`Khalsa konnect में यह post डालूँ?\n\n"${post}"`,reply_markup:keyboardFor(env)});return 'asked';}
@@ -32,7 +33,14 @@ export async function handleUpdate(u,env,send=call){
   }
   const q=u.callback_query;
   if(!q||q.from?.id!==OWNER)return 'ignored';
-  const msg=q.message,d=q.data,post=extractPost(msg?.text);let note;
+  const msg=q.message,d=q.data;
+  const ym=/^yt(def|del):(.+)$/.exec(d||'');
+  if(ym){const ok=ym[1]==='def'?await ytSetDefault(env,ym[2]):await ytRemove(env,ym[2]);
+    await send(env,'answerCallbackQuery',{callback_query_id:q.id,text:ok?(ym[1]==='def'?'⭐ Default channel बदल गया':'🗑 Channel हटा दिया'):'Channel नहीं मिला'});
+    const v=channelsMessage(env,await ytChannels(env));
+    if(msg)await send(env,'editMessageText',{chat_id:msg.chat.id,message_id:msg.message_id,text:v.text,reply_markup:v.reply_markup||{inline_keyboard:[]}});
+    return 'yt'+ym[1];}
+  const post=extractPost(msg?.text);let note;
   if(d==='post_yes'){await send(env,'sendMessage',{chat_id:GROUP,text:post});note='✅ Khalsa konnect में post हो गया।';}
   else if(d==='post_test'&&env.TEST_GROUP_ID){await send(env,'sendMessage',{chat_id:Number(env.TEST_GROUP_ID),text:post});note='🧪 Test group में post हो गया।';}
   else if(d==='post_edit')note='✏️ नया text भेजें: /post नया text';
@@ -87,6 +95,57 @@ export async function ytToken(env,now=Date.now()){const exp=Math.floor(now/1000)
 export async function ytVerify(env,t,now=Date.now()){if(!env.APP_KEY||!t)return false;const [exp,sig]=String(t).split('.');if(!exp||!sig||Number(exp)<Math.floor(now/1000))return false;return safeEqual(sig,await hmac(env.APP_KEY,'yt|'+exp));}
 const page=(title,body,status=200)=>new Response(`<!doctype html><html lang="hi"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${title}</title><body style="font-family:sans-serif;background:#0b1020;color:#f5e6b8;text-align:center;padding:40px 16px"><h1>${title}</h1><p style="font-size:18px">${body}</p></body></html>`,{status,headers:{'content-type':'text/html; charset=utf-8','cache-control':'no-store'}});
 const esc=x=>String(x).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+// ---- Multi-channel YouTube store (KV) ----
+// yt_ch:<channelId> = {id,title,refresh_token,connected}; yt_channels = [ids]; yt_default = id.
+// Legacy keys yt_refresh_token / yt_channel always mirror the default channel (backward compatible).
+const kvGet=async(env,k)=>{const kv=env.KDN_KV;if(!kv||typeof kv.get!=='function')return null;return kv.get(k);};
+const kvJson=async(env,k,d)=>{try{const v=await kvGet(env,k);return v?JSON.parse(v):d;}catch(e){return d;}};
+async function ytIndex(env){
+  let ids=await kvJson(env,'yt_channels',null);
+  if(Array.isArray(ids))return ids;
+  // Migrate old single-token data once.
+  const rt=await kvGet(env,'yt_refresh_token');if(!rt)return [];
+  const title=(await kvGet(env,'yt_channel'))||'YouTube channel (पुराना)';
+  const rec={id:'legacy',title,refresh_token:rt,connected:''};
+  await env.KDN_KV.put('yt_ch:legacy',JSON.stringify(rec));await env.KDN_KV.put('yt_channels',JSON.stringify(['legacy']));await env.KDN_KV.put('yt_default','legacy');
+  return ['legacy'];
+}
+export async function ytChannels(env){
+  if(!env.KDN_KV)return {list:[],def:null};
+  const ids=await ytIndex(env);const list=[];
+  for(const id of ids){const r=await kvJson(env,'yt_ch:'+id,null);if(r)list.push({id,title:r.title||id,connected:r.connected||''});}
+  let def=await kvGet(env,'yt_default');if(!list.some(c=>c.id===def))def=list[0]?.id||null;
+  return {list,def};
+}
+async function ytMirrorLegacy(env,id,known){
+  const kv=env.KDN_KV;const r=known||(id?await kvJson(env,'yt_ch:'+id,null):null);
+  if(r){await kv.put('yt_default',id);await kv.put('yt_refresh_token',r.refresh_token);await kv.put('yt_channel',r.title);}
+  else if(typeof kv.delete==='function'){await kv.delete('yt_default');await kv.delete('yt_refresh_token');await kv.delete('yt_channel');}
+}
+export async function ytSaveChannel(env,rec){
+  const kv=env.KDN_KV;const ids=await ytIndex(env);
+  await kv.put('yt_ch:'+rec.id,JSON.stringify(rec));
+  if(!ids.includes(rec.id))ids.push(rec.id);
+  await kv.put('yt_channels',JSON.stringify(ids));
+  const def=await kvGet(env,'yt_default');
+  // New channel becomes default only if there is none yet; re-connecting the default refreshes legacy mirror.
+  if(!def||!ids.includes(def)||def===rec.id||typeof kv.get!=='function')await ytMirrorLegacy(env,rec.id,rec);
+}
+export async function ytSetDefault(env,id){if(!env.KDN_KV)return false;const ids=await ytIndex(env);if(!ids.includes(id))return false;await ytMirrorLegacy(env,id);return true;}
+export async function ytRemove(env,id){
+  const kv=env.KDN_KV;if(!kv)return false;const ids=await ytIndex(env);if(!ids.includes(id))return false;
+  const rest=ids.filter(x=>x!==id);await kv.put('yt_channels',JSON.stringify(rest));
+  if(typeof kv.delete==='function')await kv.delete('yt_ch:'+id);
+  const def=await kvGet(env,'yt_default');if(def===id||!def)await ytMirrorLegacy(env,rest[0]||null);
+  return true;
+}
+export function channelsMessage(env,{list,def}){
+  const OWNER=Number(env.OWNER_ID);
+  if(!list.length)return {chat_id:OWNER,text:'अभी कोई YouTube channel नहीं जुड़ा। /yt भेजकर जोड़ें।'};
+  const lines=list.map((c,i)=>`${i+1}. ${c.id===def?'⭐ ':''}${c.title}`);
+  const kb=list.map(c=>[{text:(c.id===def?'⭐ ':'')+'Default: '+c.title.slice(0,24),callback_data:('ytdef:'+c.id).slice(0,64)},{text:'🗑 हटाओ',callback_data:('ytdel:'+c.id).slice(0,64)}]);
+  return {chat_id:OWNER,text:`जुड़े हुए YouTube channels (⭐ = default):\n${lines.join('\n')}\n\nनया channel जोड़ने के लिए /yt भेजें।`,reply_markup:{inline_keyboard:kb}};
+}
 export async function handleYt(request,env,send=call,f=fetch){
   const u=new URL(request.url);
   if(!env.YT_CLIENT_ID||!env.YT_CLIENT_SECRET||!env.APP_KEY)return page('अभी तैयार नहीं','YouTube setup अधूरा है।',503);
@@ -102,10 +161,12 @@ export async function handleYt(request,env,send=call,f=fetch){
     const tr=await f('https://oauth2.googleapis.com/token',{method:'POST',headers:{'content-type':'application/x-www-form-urlencoded'},body:new URLSearchParams({code,client_id:env.YT_CLIENT_ID,client_secret:env.YT_CLIENT_SECRET,redirect_uri:YT_REDIRECT,grant_type:'authorization_code'})});
     const tok=await tr.json().catch(()=>({}));
     if(!tr.ok||!tok.access_token){console.log('yt token err',tok&&tok.error);return page('गड़बड़','Google से token नहीं मिला। /yt से दोबारा कोशिश करें।',502);}
-    let channel='(नाम नहीं मिला)';
-    try{const cr=await f('https://www.googleapis.com/youtube/v3/channels?part=snippet&mine=true',{headers:{authorization:'Bearer '+tok.access_token}});const cj=await cr.json();channel=cj.items?.[0]?.snippet?.title||channel;}catch(e){}
+    let channel='',chId='';
+    try{const cr=await f('https://www.googleapis.com/youtube/v3/channels?part=snippet&mine=true',{headers:{authorization:'Bearer '+tok.access_token}});const cj=await cr.json();const it=cj.items?.[0];channel=it?.snippet?.title||'';chId=it?.id||'';}catch(e){}
+    if(!chId)chId='noid-'+Date.now().toString(36);
+    if(!channel)channel=`YouTube channel (${chId})`;
     let stored=false;
-    if(tok.refresh_token&&env.KDN_KV){await env.KDN_KV.put('yt_refresh_token',tok.refresh_token);await env.KDN_KV.put('yt_channel',channel);stored=true;}
+    if(tok.refresh_token&&env.KDN_KV){await ytSaveChannel(env,{id:chId,title:channel,refresh_token:tok.refresh_token,connected:new Date().toISOString()});stored=true;}
     await send(env,'sendMessage',{chat_id:Number(env.OWNER_ID),text:`YouTube जुड़ गया: ${channel}`+(stored?'':'\n⚠️ Token save नहीं हुआ (KV नहीं जुड़ा)।')});
     return page('✅ YouTube जुड़ गया',`Channel: <b>${esc(channel)}</b><br>अब आप यह page बंद करके Telegram पर लौट सकते हैं। 🙏`);
   }
