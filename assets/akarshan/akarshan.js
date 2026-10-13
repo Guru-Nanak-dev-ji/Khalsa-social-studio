@@ -20,9 +20,9 @@ function paint(){$('h-koins').textContent=K.fmt(K.total(kst));const d=A.get(st,t
  $('intent').value=$('intent').value||d.intent;$('magnet').className='magnet'+(d.attracted?' on':'');
  $('attracted').hidden=!d.attracted;$('my-intent').textContent=d.intent?'“'+d.intent+'”':'';if(d.attracted&&!$('orbit').childElementCount)words(d.intent);
  $('steps').hidden=!d.attracted;
- $('s1').className='step'+(d.think?' ok':'');$('think').hidden=d.think;$('think-ok').hidden=!d.think;
- $('s2').className='step'+(d.grat.length>=3?' ok':'');[0,1,2].forEach(i=>{const g=$('g'+i);if(!g.value)g.value=d.grat[i]||'';});$('grat-ok').hidden=d.grat.length<3;
- $('s3').className='step'+(d.actDone?' ok':'');const V=$('vals');V.textContent='';A.VALUES.forEach(v=>{const b=el('button','val'+(d.act===v.id?' sel':''));b.type='button';
+ $('s1').className='card stp'+(d.think?' ok':'');$('think').hidden=d.think;$('think-ok').hidden=!d.think;
+ $('s2').className='card stp'+(d.grat.length>=3?' ok':'');[0,1,2].forEach(i=>{const g=$('g'+i);if(!g.value)g.value=d.grat[i]||'';});$('grat-ok').hidden=d.grat.length<3;
+ $('s3').className='card stp'+(d.actDone?' ok':'');const V=$('vals');V.textContent='';A.VALUES.forEach(v=>{const b=el('button','val'+(d.act===v.id?' sel':''));b.type='button';
   b.append(el('span','vi',v.icon),el('b',null,v.title),el('small',null,v.hint));b.onclick=()=>after(A.chooseAct(st,today,v.id));V.append(b);});
  $('act').hidden=!d.act||d.actDone;$('act-ok').hidden=!d.actDone;
  $('done-all').hidden=!A.complete(d);

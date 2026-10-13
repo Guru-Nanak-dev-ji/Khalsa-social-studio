@@ -24,8 +24,8 @@ body{margin:0;min-height:100vh;color:var(--ink);background:radial-gradient(ellip
 textarea,input[type=text]{width:100%;padding:12px;border:2px solid var(--g);border-radius:12px;background:#1a0d06;color:var(--ink);font:inherit;font-size:21px}
 textarea{min-height:90px}label{display:block;font-size:19px;margin:6px 0 4px;color:var(--g)}
 #neg{color:#ffd2a0;font-size:18px}#my-intent{text-align:center;font-family:'Rozha One',serif;font-size:28px;color:#ffe6a0;margin:6px 0}
-.step h3{margin:0 0 6px;font-family:'Rozha One',serif;font-weight:400;font-size:28px;color:var(--g)}.step.ok h3::after{content:' ✅'}
-.step p{line-height:1.5;margin:4px 0}.ok-msg{color:#9be89b;font-weight:700;text-align:center;font-size:20px}
+.stp h3{margin:0 0 6px;font-family:'Rozha One',serif;font-weight:400;font-size:28px;color:var(--g)}.stp.ok h3::after{content:' ✅'}
+.stp p{line-height:1.5;margin:4px 0}.ok-msg{color:#9be89b;font-weight:700;text-align:center;font-size:20px}
 #vals{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
 .val{display:flex;flex-direction:column;align-items:center;gap:2px;padding:10px 4px;min-height:110px;border:2px solid var(--g2);border-radius:12px;background:#0006;color:var(--ink);font:inherit;font-size:18px;cursor:pointer}
 .val .vi{font-size:34px}.val small{font-size:14px;opacity:.85;text-align:center}.val.sel{border-color:#fff;background:#6b3f12;box-shadow:0 0 12px #f4c867}
