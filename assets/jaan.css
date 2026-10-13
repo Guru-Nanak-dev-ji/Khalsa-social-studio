@@ -26,8 +26,8 @@
 .jaan-card b,.jaan-card em{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;display:flex;align-items:center;justify-content:center;font-style:normal}
 .jaan-card b{background:repeating-linear-gradient(45deg,#7a1f1f 0 8px,#5a1414 8px 16px);border:3px solid #f2c66a;font-size:42px}
 .jaan-card em{background:#fff8e6;color:#3a2508;transform:rotateY(180deg);padding:8px;font-size:.95rem;border:3px solid #c99a3e}
-.jaan-board{display:grid;grid-template-columns:repeat(8,1fr);max-width:260px;margin:8px auto;border:2px solid #c99a3e}
-.jaan-board span{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:20px}
+.jaan-board{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));width:100%;max-width:260px;box-sizing:border-box;margin:8px auto;border:2px solid #c99a3e}
+.jaan-board span{aspect-ratio:1;min-width:0!important;padding:0!important;margin:0!important;box-sizing:border-box;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:20px}
 .jaan-board span:nth-child(odd){background:#f5dfb2}.jaan-board span:nth-child(even){background:#8a5a2b}
 .jaan-btn{background:#efc66e;color:#25190c;border:0;border-radius:10px;padding:10px 14px;font-weight:700;cursor:pointer}
 .jaan-head{font-family:'Rozha One','Mukta',serif}
@@ -35,3 +35,11 @@
 .jaan-fun-out{font-size:1.2rem;min-height:2.4em;color:#f8dc9a}.jaan-fun-out.pop{animation:jaan-pop .5s cubic-bezier(.3,1.8,.5,1)}@keyframes jaan-pop{0%{transform:scale(.6)}100%{transform:none}}
 .jaan-shell-hero{position:relative;z-index:2;max-width:760px;margin:0 auto;padding:8px 12px}
 @media (prefers-reduced-motion:reduce){.jaan-fun-out.pop{animation:none}}
+.jaan-hero h2{display:block;width:fit-content;margin:8px auto;background:rgba(20,12,6,.82);padding:6px 16px;border-radius:14px;border:1px solid #86602e;text-shadow:0 2px 6px #000}
+.jaan-intro{position:fixed;inset:0;z-index:9999;background:radial-gradient(circle at 50% 30%,rgba(60,38,14,.96),rgba(10,7,4,.97));display:flex;align-items:center;justify-content:center;padding:16px;overflow:auto;transition:opacity .4s}
+.jaan-intro[hidden]{display:none}.jaan-intro.bye{opacity:0}
+.jaan-intro-in{max-width:520px;width:100%;text-align:center;color:#f5dfb2;animation:jaan-pop .6s cubic-bezier(.3,1.6,.5,1)}
+.jaan-intro h2{font-family:'Rozha One','Mukta',serif;color:#f2c66a;font-size:1.7rem;margin:.3em 0}
+.jaan-intro .jaan-x{position:absolute;top:12px;right:12px;width:44px;height:44px;border-radius:50%;border:1px solid #f2c66a;background:#211a15;color:#f2c66a;font-size:20px;cursor:pointer}
+.jaan-emo-row{font-size:30px;letter-spacing:6px}.jaan-emo-row span{display:inline-block;animation:jaan-bob 2.4s ease-in-out infinite}.jaan-emo-row span:nth-child(2n){animation-delay:.4s}
+@media (prefers-reduced-motion:reduce){.jaan-intro-in,.jaan-emo-row span{animation:none}}
