@@ -36,7 +36,10 @@ jobs:
           node --check assets/world-core.js
           node --check assets/world.js
           node --check assets/falcons.js
-          node --check assets/kingdom/v012/kingdom-core.js
-          node --check assets/kingdom/v012/kingdom.js
+          node --check assets/kingdom/v013/kingdom-core.js
+          node --check assets/kingdom/v013/kingdom.js
+          node --check assets/palace/v013/palace-core.js
+          node --check assets/palace/v013/palace.js
+          node --check assets/palace/v013/falcons.js
           node --check sw.js
           node --test tests/*.test.cjs

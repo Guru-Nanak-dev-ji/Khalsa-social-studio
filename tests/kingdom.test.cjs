@@ -1,4 +1,4 @@
-const test=require('node:test'),assert=require('node:assert/strict'),K=require('../assets/kingdom/v012/kingdom-core.js');
+const test=require('node:test'),assert=require('node:assert/strict'),K=require('../assets/kingdom/v013/kingdom-core.js');
 const memory=()=>{const map=new Map([['kdn-news-social-creator-v1','draft'],['kdn-community-local-v1','seva']]);return {map,getItem:k=>map.get(k)??null,setItem:(k,v)=>map.set(k,v),removeItem:k=>map.delete(k)};};
 test('aliases share six gifts; every named coin is represented and repeat claims give nothing',()=>{
  for(const p of ['','index.html','enter.html','world.html','kingdom.html','maze.html?test=1'])assert.equal(K.roomFor(p).id,'pran');
