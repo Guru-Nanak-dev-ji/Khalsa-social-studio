@@ -30,3 +30,16 @@ test('/draft wrong key 401, wrong origin 403, no APP_KEY 503, empty 400, long 41
 test('/draft preflight and rate limit',async()=>{const p=await handleDraft(new Request('https://w/draft',{method:'OPTIONS',headers:{Origin:O}}),denv);assert.equal(p.status,204);assert.match(p.headers.get('Access-Control-Allow-Headers'),/x-kdn-app-key/);
   const [c,s]=rec();const st=[];for(let i=0;i<7;i++)st.push((await handleDraft(dreq(O,'k-123',{text:'t'+i},'9.9.9.9'),denv,s)).status);assert.deepEqual(st,[200,200,200,200,200,429,429]);});
 test('worker routes /draft',async()=>{const r=await worker.fetch(new Request('https://w/draft',{method:'OPTIONS',headers:{Origin:O}}),denv);assert.equal(r.status,204);});
+import {keyboardFor,KEYBOARD} from '../bot/worker.js';
+const tenv={...env,TEST_GROUP_ID:'-1009999'};
+test('owner /id in group DMs owner title+id, nothing in group',async()=>{const [c,s]=rec();assert.equal(await handleUpdate({message:{from:{id:7812291108},chat:{id:-1009999,type:'supergroup',title:'KDN Test'},text:'/id@Khalsaworld_bot'}},env,s),'id');assert.equal(c.length,1);assert.equal(c[0][1].chat_id,7812291108);assert.match(c[0][1].text,/KDN Test[\s\S]*-1009999/);});
+test('non-owner /id ignored',async()=>{const [c,s]=rec();assert.equal(await handleUpdate({message:{from:{id:5},chat:{id:-1,type:'group',title:'x'},text:'/id'}},env,s),'ignored');assert.equal(c.length,0);});
+const mcm=(from,status)=>({my_chat_member:{from:{id:from},chat:{id:-1009999,type:'supergroup',title:'KDN Test'},new_chat_member:{status}}});
+test('bot added by owner DMs group id; non-owner/left ignored',async()=>{const [c,s]=rec();assert.equal(await handleUpdate(mcm(7812291108,'administrator'),env,s),'added');assert.match(c[0][1].text,/-1009999/);assert.equal(c[0][1].chat_id,7812291108);
+  for(const u of [mcm(5,'member'),mcm(7812291108,'left')]){const [c2,s2]=rec();assert.equal(await handleUpdate(u,env,s2),'ignored');assert.equal(c2.length,0);}});
+test('keyboard unchanged without TEST_GROUP_ID, extra button with it',()=>{assert.equal(keyboardFor(env),KEYBOARD);const k=keyboardFor(tenv);assert.equal(k.inline_keyboard.length,2);assert.equal(k.inline_keyboard[1][0].callback_data,'post_test');assert.equal(KEYBOARD.inline_keyboard.length,1);});
+test('popups (text and /draft) include test button when set',async()=>{const [c,s]=rec();await handleUpdate(msg('नमस्ते'),tenv,s);assert.equal(c[0][1].reply_markup.inline_keyboard[1][0].callback_data,'post_test');
+  const [c2,s2]=rec();await handleDraft(dreq(O,'k-123',{text:'t'},'8.8.8.8'),{...tenv,APP_KEY:'k-123'},s2);assert.equal(c2[0][1].reply_markup.inline_keyboard[1][0].callback_data,'post_test');});
+test('post_test posts to test group only; post_yes still main',async()=>{const [c,s]=rec();assert.equal(await handleUpdate(cb(7812291108,'post_test'),tenv,s),'post_test');assert.deepEqual(c[0],['sendMessage',{chat_id:-1009999,text:'ਸੇਵਾ ਲੰਗਰ 7 ਵਜੇ'}]);assert.ok(c.every(([m,b])=>b.chat_id!==-1002221114009));
+  const [c2,s2]=rec();await handleUpdate(cb(7812291108,'post_yes'),tenv,s2);assert.equal(c2[0][1].chat_id,-1002221114009);
+  const [c3,s3]=rec();await handleUpdate(cb(7812291108,'post_test'),env,s3);assert.ok(c3.every(([m,b])=>b.chat_id!==-1002221114009&&b.chat_id!==-1009999));});
