@@ -8,3 +8,4 @@ test('round 2 pages have hero, games and fun',()=>{for(const [f,k] of [['goldtv'
 test('round 3: pages, shell intro overlay dismissible',()=>{for(const k of ['naksha','takht','titli','bhav','khazana']){const s=r(k+'.html');assert.match(s,/class="jaan-slider"/,k);assert.ok(s.includes('data-jaan-fun="'+k+'"'),k);}
  for(const f of ['index','enter','world','kingdom','khalsa','maze','palace']){const s=r(f+'.html');assert.match(s,/class="jaan-intro"[^>]*hidden/,f);assert.match(s,/data-jaan-close/,f);}
  assert.match(r('assets/jaan.js'),/sessionStorage/);});
+test('jaan4a pages: hero, games, own fun',()=>{for(const k of ['langar','mala','vand','vakil','kahani','reels','newsroom',]){const s=r(k+'.html');assert.match(s,/class="jaan-slider"/,k);assert.ok(s.includes('data-jaan-fun="'+k+'"'),k);assert.ok(r('assets/jaan.js').includes("'"+k+"':["),k);}});

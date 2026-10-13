@@ -7,7 +7,9 @@ function mk(t,c,h){var e=document.createElement(t);if(c)e.className=c;if(h!=null
 function sky(){if(reduce||document.querySelector('.jaan-sky')||document.body.dataset.jaan==='off')return;var s=mk('div','jaan-sky');s.setAttribute('aria-hidden','true');
  for(var i=0;i<9;i++){var p=mk('span','jaan-p',EMO[i%EMO.length]);p.style.left=(Math.random()*95)+'%';p.style.setProperty('--d',(12+Math.random()*10).toFixed(1)+'s');p.style.setProperty('--dl',(-Math.random()*18).toFixed(1)+'s');p.style.setProperty('--dx',((Math.random()-.5)*120|0)+'px');s.appendChild(p);}
  document.body.prepend(s);var m=mk('div','jaan-motifs');m.setAttribute('aria-hidden','true');['♟️','🃏','🦅'].forEach(function(x){m.appendChild(mk('span','',x));});document.body.appendChild(m);}
-function slider(el){if(el.dataset.jaanDone)return;el.dataset.jaanDone='1';var f=[].slice.call(el.querySelectorAll('figure'));if(!f.length)return;var i=0,d=mk('div','jaan-dots');
+var IMG={city:'lworld/city',lib:'lworld/library',sun:'lworld/sun',gate:'lworld/gate',mehraab:'world/full-mehraab-ivory-v11',sfal:'world/falcon-silver-flight-v29',gfal:'world/falcon-golden-flight-v29'};'ghar kachehri pustak ghat kila network bazaar vedh meenar gurudar baag mahal darwaza kothri langar'.split(' ').forEach(function(k){IMG[k]='khoya/bg/'+k;});
+function build(el){(el.dataset.jaanSlides||'').split(';').forEach(function(p,i){var a=p.split('|');if(!IMG[a[0]])return;var f=mk('figure',i?'':'on'),im=mk('img');im.src='./assets/'+IMG[a[0]]+'.'+'webp';im.alt=a[1]||'';im.decoding='async';f.append(im,mk('figcaption','',a[1]||''));el.appendChild(f);});}
+function slider(el){if(el.dataset.jaanDone)return;el.dataset.jaanDone='1';if(el.dataset.jaanSlides)build(el);var f=[].slice.call(el.querySelectorAll('figure'));if(!f.length)return;var i=0,d=mk('div','jaan-dots');
  function go(n){f[i].classList.remove('on');d.children[i].classList.remove('on');i=(n+f.length)%f.length;f[i].classList.add('on');d.children[i].classList.add('on');}
  f.forEach(function(_,k){var b=mk('button');b.type='button';b.setAttribute('aria-label','तस्वीर '+(k+1));b.onclick=function(){go(k);};d.appendChild(b);});el.appendChild(d);f[0].classList.add('on');d.children[0].classList.add('on');
  var x0=null;el.addEventListener('touchstart',function(e){x0=e.touches[0].clientX;},{passive:true});el.addEventListener('touchend',function(e){if(x0==null)return;var dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>30)go(i+(dx<0?1:-1));x0=null;});
@@ -20,7 +22,14 @@ function games(el){if(el.dataset.jaanDone)return;el.dataset.jaanDone='1';el.clas
  btn.onclick=function(){cells[pos].textContent='';pos=(pos+1)%8;if(pos===0){cells[7].textContent='👑';}cells[pos].textContent=pos===7?'👑♟️':'♟️';msg.textContent=pos===7?'🎉 प्यादा राजा बन गया! 😁':'क़दम '+pos+' / 7';};
  g.append(bd,btn,msg);el.append(a,g);}
 
-var FUN={tv:['📺 चैनल बदलो',['📺 ख़बर: गाँव में नया लंगर 🍲','🎶 कीर्तन चैनल 🪕','⚽ खेल: पिंड का मैच 🏆','📚 ज्ञान: आज का सवाल ❓','😁 हँसी चैनल 🤣'],'📡 घुमाओ'],
+var FUN={'langar':["🫓 रोटी बेलो", ["🫓 गोल रोटी बनी!", "🫓 थोड़ी टेढ़ी — चलेगी 😁", "🍲 दाल तैयार", "🥛 खीर भी बनी", "🙏 100 लोग छके"], "🫓 बेलो"],
+'mala':["📿 मनका फेरो", ["📿 1 मनका — शांति", "📿 सुकून की साँस", "🕊️ मन हल्का हुआ", "✨ ध्यान गहरा", "🙏 108 पूरे!"], "📿 फेरो"],
+'vand':["🍬 मिठाई बाँटो", ["🍬 पड़ोसी को मिली", "🍎 बच्चों में फल", "🫓 राहगीर को रोटी", "😁 सबके चेहरे खिले", "🤝 वंड साधक!"], "🎁 बाँटो"],
+'vakil':["⚖️ तराज़ू संतुलित करो", ["⚖️ बराबर! इंसाफ़ 🙏", "📜 पहले लिखित सबूत रखो", "🆓 मुफ़्त कानूनी मदद मौजूद", "🤝 बात से सुलझाओ", "📞 Legal aid से पूछो"], "⚖️ तोलो"],
+'kahani':["🎲 कहानी का पासा", ["🎲 एक बाज़, एक राज़…", "🎲 1925 का ख़त मिला", "🎲 शीशे ने बात की 🪞", "🎲 नूर ने पुकारा", "🎲 नया द्वार खुला 🚪"], "🎲 फेंको"],
+'reels':["🎬 क्लैपर मारो", ["🎬 एक्शन!", "🎥 कट! बढ़िया शॉट", "🌟 टेक 2 — और अच्छा", "😁 बलूपर रील", "🏆 सुपरहिट!"], "🎬 एक्शन"],
+'newsroom':["🗞️ हेडलाइन बनाओ", ["🗞️ गाँव में नया पुस्तकालय", "🗞️ लंगर में 500 छके", "🗞️ बच्चों ने पेड़ लगाए", "🗞️ बुज़ुर्गों का मेला", "🗞️ सच हमेशा जीतता"], "🖨️ छापो"],
+tv:['📺 चैनल बदलो',['📺 ख़बर: गाँव में नया लंगर 🍲','🎶 कीर्तन चैनल 🪕','⚽ खेल: पिंड का मैच 🏆','📚 ज्ञान: आज का सवाल ❓','😁 हँसी चैनल 🤣'],'📡 घुमाओ'],
 mandal:['🦅 बाज़ उड़ाओ',['🦅 बाज़ ने 1 चक्कर लगाया','🦅🦅 दो बाज़ साथ उड़े','🌄 बाज़ पहाड़ तक गया','🏰 बाज़ महल पर बैठा','✨ बाज़ सुनहरा हो गया'],'🚀 उड़ान'],
 community:['🤝 हाथ मिलाओ',['🤝 1 नया साथी जुड़ा','💛 मोहब्बत फैली','🍲 लंगर में हाथ बँटाया','🌱 एक पेड़ लगाया','🎉 पूरा मोहल्ला एक'],'🤝 मिलाओ'],
 naksha:['🧭 कम्पास घुमाओ',['🧭 उत्तर: 📚 ज्ञान घर','🧭 दक्षिण: 🍲 लंगर','🧭 पूरब: ☀️ सुबह का द्वार','🧭 पश्चिम: 🏰 क़िला','🧭 बीच में: 💰 ख़ज़ाना'],'🌀 घुमाओ'],
