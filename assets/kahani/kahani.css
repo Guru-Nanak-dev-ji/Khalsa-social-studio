@@ -33,6 +33,16 @@ h2{font-family:'Rozha One',serif;font-weight:400;color:var(--g);margin:0 0 8px;f
 .msg{font-weight:700;color:#2a1407;background:linear-gradient(#ffe6a0,#f4c867);padding:10px;border-radius:10px}
 .loopt{font-size:14px;padding:2px 10px;border-radius:20px;background:#1e3a6e;color:#cfe0ff;border:1px solid #7fa8ff;vertical-align:middle}
 .end-s{text-align:center;font-family:'Rozha One',serif;font-size:24px;color:var(--g);margin:14px 0 4px}
+.hub{flex-wrap:wrap}.tile.wide{flex-basis:100%;margin-top:8px;background:linear-gradient(160deg,#f7f3ea,#cfc6b4);color:#2a1407}.tile.wide b{color:#5a3a10}
+section.card.wmc{background:linear-gradient(160deg,#fbf8f1,#e6dfd0)!important;color:#2a1407!important}.wmc p,.wmc li{color:#2a1407}.wmc h2,.wmc h3{color:#7a5214}.wmc .tag{color:#5a3a10}
+.wmp{margin:10px 0 18px;line-height:1.65}.gq{font-family:'Noto Sans Gurmukhi',sans-serif;border-left:4px solid #b8862b;margin:8px 0;padding:6px 12px;background:#fff8}
+.inbox{border:2px dashed #b8862b;border-radius:10px;padding:6px 10px;background:#fff9}.inbox p{margin:4px 0}
+.help{margin:12px 0;padding:12px;border-radius:12px;background:#e8f4ff;border:2px solid #3a7bd5;color:#0d2a4d}.help p{margin:4px 0;font-weight:700}
+.ring{position:relative;width:300px;height:300px;margin:12px auto;animation:spin 40s linear infinite}
+.emo-b{position:absolute;left:50%;top:50%;width:84px;height:40px;margin:-20px 0 0 -42px;border:0;border-radius:20px;background:var(--c);color:#fff;font:inherit;font-size:16px;font-weight:700;box-shadow:0 0 14px var(--c);transform:rotate(var(--a)) translate(110px) rotate(calc(-1*var(--a)));cursor:pointer}
+.ring-c{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:20px;font-weight:700;background:#fff;border:3px solid #f4c867;border-radius:50%;width:96px;height:96px;display:flex;align-items:center;justify-content:center;animation:spinc 40s linear infinite reverse}@keyframes spinc{from{transform:translate(-50%,-50%) rotate(0)}to{transform:translate(-50%,-50%) rotate(360deg)}}
+@keyframes spin{to{transform:rotate(360deg)}}.ring:hover{animation-play-state:paused}
+.wmc .res{color:#5a3a10;text-align:center}
 .disc{border:1px solid var(--g2);border-radius:10px;padding:10px}
 @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}.lines .br{stroke-dasharray:none}}
 h3[id]{scroll-margin-top:80px}
