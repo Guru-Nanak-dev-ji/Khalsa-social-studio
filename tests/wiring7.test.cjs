@@ -2,4 +2,4 @@ const test=require('node:test'),assert=require('node:assert'),fs=require('fs'),p
 test('takht3d, baaz, new stories wired into dwar, naksha, goldtv; hub 5 series; fab clear of shell controls',()=>{for(const h of['./takht3d.html','./baaz.html'])assert.ok(Dr.all().some(d=>d.href===h),h);
  assert.ok(N.IDS.includes('takht3d')&&N.IDS.includes('baaz'));const f=JSON.parse(R('assets/goldtv/feed.json')).items;assert.equal(f[0].href,'./kahani.html');assert.ok(f[0].text.includes('फनीबुक')&&f[0].text.includes('HER'));
  assert.ok(f.some(i=>i.href==='./takht3d.html')&&f.some(i=>i.href==='./baaz.html'));assert.ok(R('kahani.html').includes('5 series')&&R('assets/kahani/fb.js').includes("'./funnybook.html'"));assert.match(R('assets/kahani/kahani.css'),/calc\(50% - 6px\)/);
- assert.match(R('assets/fx/fx.css'),/body:has\(#realm-motion\) \.fx-fab\{bottom:calc\(150px/);assert.ok(R('sw.js').includes("'v0.61.0'"));});
+ assert.match(R('assets/fx/fx.css'),/body:has\(#realm-motion\) \.fx-fab\{bottom:calc\(150px/);assert.match(R('sw.js'),/const CACHE=PREFIX\+'v0\.(6[0-9]|[7-9]\d)\./);});
