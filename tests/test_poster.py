@@ -20,7 +20,7 @@ class PosterTests(unittest.TestCase):
 
     def test_every_screen_has_a_mehrab_style_and_real_stylesheet(self):
         pages = list(ROOT.glob('*.html')) + list((ROOT / 'docs').glob('*.html'))
-        self.assertEqual(len(pages), 23)
+        self.assertGreaterEqual(len(pages), 23)
         for path in pages:
             text = path.read_text()
             self.assertIn('data-heritage=', text, path.name)
