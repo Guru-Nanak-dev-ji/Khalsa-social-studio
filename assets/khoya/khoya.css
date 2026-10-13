@@ -51,3 +51,10 @@ body{margin:0;min-height:100vh;color:var(--ink);background:radial-gradient(ellip
 .bg-bazaar{background:url(./bg/bazaar.webp) center/cover no-repeat,#2a1407}
 .bg-vedh{background:url(./bg/vedh.webp) center/cover no-repeat,#2a1407}
 .bg-meenar{background:url(./bg/meenar.webp) center/cover no-repeat,#2a1407}
+
+.how{font-size:18px;color:#ffe6a0;margin:4px 0}
+#tiles.pz-gears{grid-template-columns:repeat(3,1fr)}.gear{position:relative;aspect-ratio:1;font-size:64px;border:3px solid var(--g);border-radius:50%;background:radial-gradient(#6b3f12,#2a1407);transform:rotate(var(--r));transition:transform .4s}
+.gear .mark{position:absolute;top:2px;left:50%;translate:-50% 0;font-size:22px;font-style:normal}
+#tiles.pz-runes{grid-template-columns:repeat(3,1fr)}.clue{grid-column:1/-1;margin:0;font-size:21px;font-weight:700;text-align:center;color:#ffe6a0;padding:8px;border:2px dashed var(--g2);border-radius:10px;background:#0006}.clue2{grid-column:1/-1;margin:0;text-align:center}
+.rune{aspect-ratio:1;font-size:44px;border:3px solid var(--g);border-radius:14px;background:linear-gradient(#4a3a2a,#2a1e14);box-shadow:inset 0 0 12px #f4c86744}
+.card2{aspect-ratio:.8;font-size:38px;border:3px solid var(--g);border-radius:10px;background:repeating-linear-gradient(45deg,#6b3f12 0 8px,#2a1407 8px 16px)}.card2.open{background:#ffe6a0}

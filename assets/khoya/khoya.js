@@ -13,6 +13,19 @@ function drawScene(){const sc=C.SCENES[cur],box=$('scene');box.textContent='';bo
   b.onclick=ev=>{ev.stopPropagation();pick(o.id,b);};box.append(b);});
  for(let i=0;i<14;i++){const f=el('i','fly');f.style.left=(r()*100)+'%';f.style.top=(r()*100)+'%';f.style.animationDelay=(-r()*8).toFixed(1)+'s';box.append(f);}
  box.append(el('div','fog'),el('div','fog f2'));}
+let flipA=-1,flipB=-1;
+function solvedGo(sc){toast('🚪 '+sc.item.e+' से अगला दरवाज़ा खुला!');setTimeout(()=>{cur++;st.scene=cur;save(C.KEY,st);drawScene();paint();},900);}
+function apply(r,sc){st=r.state;save(C.KEY,st);if(r.solved)solvedGo(sc);paint();}
+const HOW={tiles:['🧩 टाइल घुमाओ','हर टाइल छूकर घुमाइए — सारे तीर ⬆️ ऊपर।'],gears:['⚙️ गियर मिलाओ','गियर छूने पर वह और उसके साथ जुड़े गियर घूमते हैं। सारे निशान 🔺 ऊपर लाइए।'],runes:['🔣 चिह्नों का क्रम','प्राचीन पत्थर पर लिखा क्रम पढ़िए और उसी क्रम में चिह्न छूइए। गलती हुई तो फिर से शुरू।'],match:['🃏 जोड़ी मिलाओ','दो पत्ते पलटिए — एक जैसे हों तो खुले रहेंगे। सारी जोड़ियाँ मिलाइए।']};
+function drawPuz(sc){const p=cur,t=C.ptype(p),G=$('tiles'),z=st.pz[p];G.textContent='';G.className='pz-'+t;$('puz-title').textContent=HOW[t][0];$('puz-how').textContent=HOW[t][1];$('puz-item').textContent=sc.item.e+' '+sc.item.name;
+ const btn=(cls,txt,lab,fn)=>{const b=el('button',cls,txt);b.type='button';b.setAttribute('aria-label',lab);b.onclick=fn;G.append(b);return b;};
+ if(t==='tiles')st.tiles[p].forEach((v,i)=>{btn('tile','⬆️','टाइल '+(i+1),()=>apply(C.rotate(st,p,i),sc)).style.transform=`rotate(${v*90}deg)`;});
+ if(t==='gears')z.g.forEach((v,i)=>{const b=btn('gear','⚙️','गियर '+(i+1),()=>apply(C.gear(st,p,i),sc));b.style.setProperty('--r',(v*60)+'deg');b.append(el('i','mark','🔺'));});
+ if(t==='runes'){const seq=C.runeSeq(p);G.append(el('p','clue','📜 '+seq.map(i=>C.RUNE_SET[i].n).join(' → ')));const pr=el('p','clue2',(z.k?'✅ '.repeat(z.k):'')+'('+z.k+'/4)');G.append(pr);
+  C.RUNE_SET.forEach((r,i)=>btn('rune',r.e,r.n,()=>{const x=C.rune(st,p,i);if(x.wrong)toast('❌ गलत क्रम — फिर से');apply(x,sc);}));}
+ if(t==='match')C.matchCards(p).forEach((c,i)=>{const open=z.m.includes(i)||i===flipA||i===flipB;btn('card2'+(open?' open':''),open?c:'❔','पत्ता '+(i+1),()=>{
+   if(open||flipB>=0)return;if(flipA<0){flipA=i;return paint();}flipB=i;paint();const a=flipA,b=i;setTimeout(()=>{flipA=flipB=-1;const r=C.match(st,p,a,b);apply(r,sc);},r0(a,b)?250:800);});});}
+const r0=(a,b)=>C.matchCards(cur)[a]===C.matchCards(cur)[b];
 function paint(){$('h-koins').textContent=K.fmt(K.total(kst));const sc=C.SCENES[cur];
  const T=$('tabs');T.textContent='';C.SCENES.forEach((s,i)=>{if(i===0||i===C.CH1)T.append(el('span','chap','📜 अध्याय '+s.ch));const b=el('button','tab'+(i===cur?' on':'')+(st.cleared.includes(i)?' done':''),(st.cleared.includes(i)?'✅ ':C.unlocked(st,i)?'':'🔒 ')+(i<C.CH1?i+1:i-C.CH1+1));b.type='button';b.setAttribute('aria-label',s.name);b.disabled=!C.unlocked(st,i);b.onclick=()=>{cur=i;st.scene=i;save(C.KEY,st);drawScene();paint();};T.append(b);});
  $('s-name').textContent='अध्याय '+sc.ch+' · '+(cur+1)+'. '+sc.name;$('s-story').textContent='🧭 '+sc.guide+': '+sc.story;
@@ -20,8 +33,7 @@ function paint(){$('h-koins').textContent=K.fmt(K.total(kst));const sc=C.SCENES[
  $('count').textContent=`${st.found[cur].length}/${sc.objs.length} मिलीं`;
  const I=$('inv');I.textContent='';C.SCENES.forEach(s=>{if(st.inv.includes(s.item.id))I.append(el('span','it',s.item.e+' '+s.item.name));});if(!st.inv.length)I.textContent='अभी खाली — दृश्य पूरा करो तो चीज़ मिलेगी';
  const p=$('puz'),needP=st.cleared.includes(cur)&&cur<C.SCENES.length-1&&!st.puzzles.includes(cur);p.hidden=!needP;
- if(needP){const G=$('tiles');G.textContent='';st.tiles[cur].forEach((v,t)=>{const b=el('button','tile','⬆️');b.type='button';b.setAttribute('aria-label','टाइल '+(t+1));b.style.transform=`rotate(${v*90}deg)`;
-   b.onclick=()=>{const r=C.rotate(st,cur,t);st=r.state;save(C.KEY,st);if(r.solved){toast('🚪 '+sc.item.e+' से अगला दरवाज़ा खुला!');setTimeout(()=>{cur++;st.scene=cur;save(C.KEY,st);drawScene();paint();},900);}paint();};G.append(b);});$('puz-item').textContent=sc.item.e+' '+sc.item.name;}
+ if(needP)drawPuz(sc);
  $('next').hidden=!(st.cleared.includes(cur)&&st.puzzles.includes(cur)&&cur<C.SCENES.length-1);
  $('badge').hidden=!st.badge;$('badge2').hidden=!st.badge2;$('city').classList.toggle('lit',st.badge);const pr=C.progress(st);$('prog').textContent=`🌟 नगर की रोशनी: ${pr.pct}% (${pr.got}/${pr.tot})`;$('bar').style.width=pr.pct+'%';}
 function pick(id,b){const r=C.tap(st,cur,id);if(!r.ok)return;st=r.state;save(C.KEY,st);b.classList.add('got','pop');

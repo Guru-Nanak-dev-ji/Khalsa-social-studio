@@ -5,7 +5,7 @@ test('5 scenes, 8 unique Hindi objects each, items',()=>{assert.equal(C.SCENES.l
 test('full playthrough: tap, lock, puzzle, badge, junk safe',()=>{let s=C.fresh();assert.ok(!C.unlocked(s,1));assert.ok(!C.tap(s,1,'roti').ok);assert.ok(C.tap(s,0,'nope').wrong);
  let badges=0,b2=0;for(let i=0;i<10;i++){for(const o of C.SCENES[i].objs){assert.equal(C.hint(s,i).id,o.id);const r=C.tap(s,i,o.id);assert.ok(r.ok);s=r.state;if(r.badgeNew)badges++;if(r.badge2New)b2++;}if(i===4){assert.ok(s.badge&&!s.badge2);}
   assert.ok(s.cleared.includes(i)&&s.inv.includes(C.SCENES[i].item.id));assert.ok(!C.tap(s,i,C.SCENES[i].objs[0].id).ok);
-  if(i<9){assert.ok(!C.unlocked(s,i+1));let solved=false;for(let t=0;t<4;t++)while(s.tiles[i][t]!==0){const r=C.rotate(s,i,t);s=r.state;solved=solved||r.solved;}assert.ok(solved&&C.unlocked(s,i+1));}}
+  if(i<9){assert.ok(!C.unlocked(s,i+1));s=solve(s,i);assert.ok(C.unlocked(s,i+1),'puz '+i);}}
  assert.equal(badges,1);assert.equal(b2,1);assert.ok(s.badge&&s.badge2);assert.ok(Z.GAMES.some(g=>g.id==='khoya2'&&g.badge===C.BADGE2&&g.got(s)));assert.equal(C.progress(s).pct,100);assert.deepEqual(C.validate(JSON.parse(JSON.stringify(s))),s);
  assert.deepEqual(C.validate(null),C.fresh());assert.deepEqual(C.validate({v:1,found:[['x','ghanti','ghanti']],cleared:[0,9],scene:3}).found[0],['ghanti']);
  assert.ok(C.canHint(0,5));assert.ok(!C.canHint(1000,1000+C.HINT_MS-1));assert.ok(C.canHint(1000,1000+C.HINT_MS));
@@ -17,3 +17,15 @@ test('page, door, khazana, naksha, sw, no Khanda, no Lost Lands copy',()=>{const
  assert.ok(Z.GAMES.some(g=>g.id==='khoya'&&g.badge===C.BADGE&&g.key===C.KEY&&g.badge==='खोजी सिंह'));assert.ok(N.IDS.includes('kingdom-lands'));
  const sw=R('sw.js');assert.equal((sw.match(/const CACHE/g)||[]).length,1);for(const a of['./kingdom-lands.html','./assets/khoya/khoya-core.js','./assets/khoya/khoya.js','./assets/khoya/khoya.css'])assert.ok(sw.includes(a),a);});
 test('land art: 5 webp < 250KB, wired in css + sw',()=>{const css=R('assets/khoya/khoya.css'),sw=R('sw.js');for(const s of C.SCENES){const f='assets/khoya/bg/'+s.bg+'.webp';const st=fs.statSync(path.join(__dirname,'..',f));assert.ok(st.size>1000&&st.size<250000,f);assert.ok(css.includes('./bg/'+s.bg+'.webp'));assert.ok(sw.includes('./'+f));}});
+
+function solve(s,p){const t=C.ptype(p);let solved=false,g=0;
+ if(t==='tiles')for(let k=0;k<4;k++)while(s.tiles[p][k]!==0){const r=C.rotate(s,p,k);s=r.state;solved=solved||r.solved;}
+ if(t==='gears'){for(let a=0;a<6&&!solved;a++)for(let b=0;b<6&&!solved;b++)for(let c=0;c<6&&!solved;c++){let x=s;for(const[i,n]of[[0,a],[1,b],[2,c]])for(let k=0;k<n;k++)x=C.gear(x,p,i).state;if(x.puzzles.includes(p)){s=x;solved=true;}}}
+ if(t==='runes'){const w=C.rune(s,p,(C.runeSeq(p)[0]+1)%6);assert.ok(w.wrong);for(const i of C.runeSeq(p)){const r=C.rune(s,p,i);s=r.state;solved=r.solved;}}
+ if(t==='match'){const c=C.matchCards(p);assert.ok(!C.match(s,p,0,0).ok);for(let a=0;a<12;a++)for(let b=a+1;b<12;b++)if(c[a]===c[b]){const r=C.match(s,p,a,b);assert.ok(r.ok);s=r.state;solved=solved||r.solved;}}
+ assert.ok(solved,t+' '+p);return s;}
+test('puzzle types: all four used, gears solvable, wrong rune resets, junk pz safe',()=>{assert.deepEqual([...new Set([0,1,2,3,4,5,6,7,8].map(C.ptype))].sort(),['gears','match','runes','tiles']);
+ for(let p=0;p<9;p++)if(C.ptype(p)==='gears')assert.ok(C.gearStart(p).some(x=>x));
+ for(let p=0;p<9;p++){const c=C.matchCards(p);if(C.ptype(p)==='match'){assert.equal(c.length,12);for(const x of new Set(c))assert.equal(c.filter(y=>y===x).length,2);}}
+ const v=C.validate({v:1,found:[],pz:[{},{g:[9,'x']},{k:99},{m:[1,1,'z']}]});assert.deepEqual(v.pz[1],{g:C.gearStart(1)});assert.deepEqual(v.pz[2],{k:0});assert.deepEqual(v.pz[3],{m:[1]});
+ const h=R('kingdom-lands.html');assert.ok(h.includes('id="puz-how"'));});
