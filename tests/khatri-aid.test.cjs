@@ -1,0 +1,12 @@
+const test=require('node:test'),assert=require('node:assert'),A=require('../assets/khatri-aid/khatri-aid-core.js'),Dr=require('../assets/doors-core.js'),N=require('../assets/naksha/naksha-core.js'),fs=require('fs'),path=require('path');
+const R=f=>fs.readFileSync(path.join(__dirname,'..',f),'utf8');
+test('7 help categories, legal links vakil, equal groups',()=>{assert.equal(A.CATS.length,7);assert.equal(A.catOf('kanooni').href,'./vakil.html');for(const g of['किसान','मज़दूर','व्यापारी','विद्यार्थी','माँएँ','बुज़ुर्ग','कलाकार','सेवादार'])assert.ok(A.GROUPS.includes(g),g);
+ const p=A.ring(8,100);const d=p.map(q=>Math.round(Math.hypot(q.x,q.y)));assert.ok(d.every(x=>x===100));});
+test('Gurbani line exactly as BaniDB (Ang 15)',()=>{assert.equal(A.BANI.text,'नीचा अंदरि नीच जाति नीची हू अति नीचु ॥ नानकु तिन कै संगि साथि वडिआ सिउ किआ रीस ॥');assert.equal(A.BANI.ang,15);assert.ok(A.BANI.src.includes('BaniDB'));});
+test('forms tagged, share links, no personal data stored',()=>{assert.ok(!A.validForm('need',{cat:'ilaj',name:'a',city:'b',contact:'c'}).ok);const r=A.validForm('give',{cat:'padhai',name:'a',city:'b',contact:'c',note:'x',agree:true});assert.ok(r.ok);
+ assert.ok(A.message(r.item).startsWith('[मदद-करूँगा]'));assert.ok(A.message(A.validForm('need',{cat:'ilaj',name:'a',city:'b',contact:'c',agree:true}).item).startsWith('[मदद-चाहिए]'));
+ assert.ok(A.waLink('x').startsWith('https://wa.me/?text='));assert.deepEqual(Object.keys(A.record(A.fresh(),r.item,1).sent[0]).sort(),['cat','mode','ts']);assert.deepEqual(A.validate(null),A.fresh());});
+test('page wiring, door/naksha/feed/sw, no Khanda',()=>{const h=R('khatri-aid.html'),js=R('assets/khatri-aid/khatri-aid.js'),all=h+js+R('assets/khatri-aid/khatri-aid-core.js');
+ assert.ok(h.includes('lang="hi"')&&h.includes('न छोटा, न बड़ा')&&h.includes('goldtv.js'));assert.ok(!/innerHTML/.test(js));assert.ok(!/☬/.test(all));assert.ok(R('assets/khatri-aid/khatri-aid.css').includes('prefers-reduced-motion'));
+ assert.ok(Dr.all().some(d=>d.href==='./khatri-aid.html'));assert.ok(N.IDS.includes('khatri-aid'));assert.ok(JSON.parse(R('assets/goldtv/feed.json')).items.some(i=>i.href==='./khatri-aid.html'));
+ const sw=R('sw.js');assert.equal((sw.match(/const CACHE/g)||[]).length,1);for(const a of['./khatri-aid.html','./assets/khatri-aid/khatri-aid-core.js','./assets/khatri-aid/khatri-aid.js','./assets/khatri-aid/khatri-aid.css'])assert.ok(sw.includes(a),a);});
