@@ -22,7 +22,8 @@ function games(el){if(el.dataset.jaanDone)return;el.dataset.jaanDone='1';el.clas
  btn.onclick=function(){cells[pos].textContent='';pos=(pos+1)%8;if(pos===0){cells[7].textContent='👑';}cells[pos].textContent=pos===7?'👑♟️':'♟️';msg.textContent=pos===7?'🎉 प्यादा राजा बन गया! 😁':'क़दम '+pos+' / 7';};
  g.append(bd,btn,msg);el.append(a,g);}
 
-var FUN={'baaz':["🦅 बाज उड़ा", ["🦅 बाज ऊँचा उड़ा!", "💰 सिक्का पकड़ा!", "🌅 सूरज तक पहुँचा", "🪶 पंख थक गए 😁", "🏅 सीधा badge की ओर"], "🦅 उड़ाओ"],'gyan':["🧠 पहेली बूझो", ["🧠 बिना पैरों के चलती? — घड़ी ⏰", "🧠 जितना खींचो उतना छोटा? — पेंसिल ✏️", "🧠 सबसे तेज़? — मन 💭", "🧠 बाँटने से बढ़े? — ज्ञान 📚", "🧠 बिना पंख उड़े? — ख़बर 📰"], "🧠 बूझो"],
+var FUN={'shell':['🎲 नगर का पासा',['🎲 1 — लंगर में सेवा 🍲','🎲 2 — पुस्तकालय में 1 पन्ना 📚','🎲 3 — बाज़ के साथ उड़ान 🦅','🎲 4 — महल में दीया 🪔','🎲 5 — किसी को मुस्कान 😁','🎲 6 — ख़ज़ाने का सिक्का 💰'],'🎲 फेंको'],
+'baaz':["🦅 बाज उड़ा", ["🦅 बाज ऊँचा उड़ा!", "💰 सिक्का पकड़ा!", "🌅 सूरज तक पहुँचा", "🪶 पंख थक गए 😁", "🏅 सीधा badge की ओर"], "🦅 उड़ाओ"],'gyan':["🧠 पहेली बूझो", ["🧠 बिना पैरों के चलती? — घड़ी ⏰", "🧠 जितना खींचो उतना छोटा? — पेंसिल ✏️", "🧠 सबसे तेज़? — मन 💭", "🧠 बाँटने से बढ़े? — ज्ञान 📚", "🧠 बिना पंख उड़े? — ख़बर 📰"], "🧠 बूझो"],
 'avatar':["🎭 रूप बदलो", ["🦸 योद्धा", "🧙 ज्ञानी", "👩‍🍳 सेवादार", "🧑‍🚀 खोजी", "🦅 बाज़-सवार"], "🎭 बदलो"],
 'audiobook':["🎧 धुन चुनो", ["🎧 धीमी धुन", "🎶 कीर्तन धुन", "🌧️ बारिश की आवाज़", "🌊 नदी की आवाज़", "🐦 सुबह की चिड़िया"], "🎧 चुनो"],
 'akarshan':["🧲 चुंबक चलाओ", ["🧲 अच्छी सोच खिंची", "✨ मौक़ा आया", "💰 मेहनत का फल", "😁 ख़ुशी पास आई", "🤝 सही लोग मिले"], "🧲 खींचो"],
@@ -70,5 +71,5 @@ function intro(){var o=document.querySelector('.jaan-intro');if(!o)return;var k=
  o.hidden=false;var close=function(){try{sessionStorage.setItem(k,'1');}catch(e){}o.classList.add('bye');setTimeout(function(){o.remove();},reduce?0:400);};
  [].forEach.call(o.querySelectorAll('[data-jaan-close]'),function(b){b.addEventListener('click',close);});document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});var f=o.querySelector('[data-jaan-close]');if(f)f.focus();}
 function init(){intro();sky();[].forEach.call(document.querySelectorAll('.jaan-slider'),slider);[].forEach.call(document.querySelectorAll('[data-jaan-games]'),games);[].forEach.call(document.querySelectorAll('[data-jaan-fun]'),fun);reveal();}
-if(typeof window!=='undefined'){window.KDNJaan={slider:slider,games:games};if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();}
+if(typeof window!=='undefined'){window.KDNJaan={slider:slider,games:games,fun:fun};if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();}
 })();

@@ -17,3 +17,4 @@
 @media (max-width:600px){.fx-sheet,.fx-fab{backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}}
 @media (prefers-reduced-motion:reduce){.fx-sheet{animation:none}.fx-card{transform:none;opacity:1;transition:none}}
 body:has(#realm-motion) .fx-fab{bottom:calc(150px + env(safe-area-inset-bottom))}
+.fx-gh{margin:18px 4px 6px;color:#f2c66a;font-size:1.1rem}.fx-games{margin-bottom:12px}

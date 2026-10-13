@@ -7,4 +7,7 @@ test('cube: front face math, order, reset on wrong, solve once koins',()=>{asser
 test('pages wired, reduced motion, safe DOM, sw',()=>{const g=R('gyan.html'),k=R('kahani.html'),js=R('assets/gyan-cube/cube.js')+R('assets/kahani/wm-scroll.js');
  assert.ok(g.includes('id="gur-cube"')&&g.includes('cube.js')&&g.includes('koins-core.js'));assert.ok(k.includes('id="wms"')&&k.includes('wm-scroll.js'));
  assert.ok(R('assets/gyan-cube/cube.css').includes('prefers-reduced-motion')&&R('assets/kahani/wm-scroll.css').includes('prefers-reduced-motion')&&R('assets/kahani/wm-scroll.css').includes('position:sticky'));
- assert.ok(!/innerHTML|fetch\(|☬/.test(js));const sw=R('sw.js');assert.ok(sw.includes("'v0.61.0'")&&sw.includes('./assets/gyan-cube/cube.js')&&sw.includes('./assets/kahani/wm-scroll.js'));});
+ assert.ok(!/innerHTML|fetch\(|☬/.test(js));const sw=R('sw.js');assert.ok(/const CACHE=PREFIX\+'v0\.(6[1-9]|[7-9]\d)\./.test(sw)&&sw.includes('./assets/gyan-cube/cube.js')&&sw.includes('./assets/kahani/wm-scroll.js'));});
+test('cube badge in khazana + shell 🎮 games via fx sheet',()=>{assert.equal(G.BADGE,'अक्षर साधक');const Z=require('../assets/khazana/khazana-core.js');const g=Z.GAMES.find(x=>x.id==='gurcube');assert.ok(g&&g.key===G.KEY&&g.got({v:1,badge:true})&&!g.got(G.validate(null)));
+ assert.ok(R('assets/gyan-cube/cube.js').includes('G.KEY'));const fx=R('assets/fx/fx.js');assert.ok(fx.includes('🎮 खेल')&&fx.includes('KDNJaan.games(games)')&&fx.includes("jaanFun='shell'"));assert.ok(R('assets/jaan.js').includes("'shell':[")&&R('assets/jaan.js').includes('fun:fun'));
+ for(const f of['index','enter','world','kingdom','khalsa','maze','palace'])assert.ok(R(f+'.html').includes('fx/fx.js')&&R(f+'.html').includes('assets/jaan.js'),f);});
