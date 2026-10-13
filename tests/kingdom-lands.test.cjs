@@ -29,3 +29,10 @@ test('puzzle types: all four used, gears solvable, wrong rune resets, junk pz sa
  for(let p=0;p<9;p++){const c=C.matchCards(p);if(C.ptype(p)==='match'){assert.equal(c.length,12);for(const x of new Set(c))assert.equal(c.filter(y=>y===x).length,2);}}
  const v=C.validate({v:1,found:[],pz:[{},{g:[9,'x']},{k:99},{m:[1,1,'z']}]});assert.deepEqual(v.pz[1],{g:C.gearStart(1)});assert.deepEqual(v.pz[2],{k:0});assert.deepEqual(v.pz[3],{m:[1]});
  const h=R('kingdom-lands.html');assert.ok(h.includes('id="puz-how"'));});
+
+test('sound: procedural only, off by default, remembered, wired',()=>{const S=require('../assets/khoya/khoya-sound.js'),src=R('assets/khoya/khoya-sound.js'),js=R('assets/khoya/khoya.js'),h=R('kingdom-lands.html');
+ assert.equal(S.parsePref(null),false);assert.equal(S.parsePref('off'),false);assert.equal(S.parsePref('on'),true);assert.equal(S.isOn(),false);
+ assert.equal(S.set(true,null),false);S.sfx('find');for(const k of['find','wrong','hint','open','clear'])assert.ok(S.SFX[k].length);assert.ok(Math.abs(S.freq(0)-261.62)<.1);
+ assert.ok(!/\.mp3|\.ogg|\.wav|new Audio\(|fetch\(/.test(src));assert.ok(src.includes('createOscillator'));
+ for(const k of['find','wrong','hint','open','clear'])assert.ok(js.includes("sfx('"+k+"')"),k);assert.ok(js.includes('pointerdown')&&h.includes('id="snd"')&&h.includes('khoya-sound.js'));
+ assert.ok(R('sw.js').includes('./assets/khoya/khoya-sound.js'));});
