@@ -1,0 +1,504 @@
+{
+"v": 1,
+"max": 1001,
+"cats": [
+{
+"id": "k",
+"name": "कहानी"
+},
+{
+"id": "g",
+"name": "खेल"
+},
+{
+"id": "j",
+"name": "गुरबाणी/ज्ञान"
+},
+{
+"id": "n",
+"name": "न्यूज़"
+},
+{
+"id": "s",
+"name": "सेवा"
+},
+{
+"id": "m",
+"name": "संगीत"
+},
+{
+"id": "c",
+"name": "कॉमेडी"
+},
+{
+"id": "t",
+"name": "टूल्स"
+}
+],
+"pages": [
+{
+"id": "index",
+"icon": "🏠",
+"name": "KDN घर",
+"sub": "किरत करो वंड छक्को",
+"cat": "t",
+"href": "./index.html"
+},
+{
+"id": "enter",
+"icon": "🚪",
+"name": "प्रवेश द्वार",
+"sub": "नगर में प्रवेश",
+"cat": "t",
+"href": "./enter.html"
+},
+{
+"id": "world",
+"icon": "🌏",
+"name": "KDN संसार",
+"sub": "पूरा नगर",
+"cat": "t",
+"href": "./world.html"
+},
+{
+"id": "kingdom",
+"icon": "👑",
+"name": "राज दरबार",
+"sub": "राज्य का नगर",
+"cat": "t",
+"href": "./kingdom.html"
+},
+{
+"id": "khalsa",
+"icon": "🦅",
+"name": "खालसा नगर",
+"sub": "सुनहरा नगर",
+"cat": "t",
+"href": "./khalsa.html"
+},
+{
+"id": "maze",
+"icon": "🌀",
+"name": "भूलभुलैया",
+"sub": "रास्ता खोजो",
+"cat": "g",
+"href": "./maze.html"
+},
+{
+"id": "palace",
+"icon": "🏯",
+"name": "सुनहरा महल",
+"sub": "महल के द्वार",
+"cat": "t",
+"href": "./palace.html"
+},
+{
+"id": "dwar",
+"icon": "📜",
+"name": "ज्ञान का दरवाज़ा",
+"sub": "पढ़ो और विचारो",
+"cat": "j",
+"href": "./dwar.html"
+},
+{
+"id": "gyan",
+"icon": "📚",
+"name": "ज्ञान मंडल",
+"sub": "सवाल से चानण तक",
+"cat": "j",
+"href": "./gyan.html"
+},
+{
+"id": "sakhi",
+"icon": "📖",
+"name": "आज की साखी",
+"sub": "रोज़ एक साखी",
+"cat": "j",
+"href": "./sakhi.html"
+},
+{
+"id": "gun",
+"icon": "🌟",
+"name": "आज का गुण",
+"sub": "रोज़ एक गुण",
+"cat": "j",
+"href": "./gun.html"
+},
+{
+"id": "mala",
+"icon": "📿",
+"name": "सिमरन माला",
+"sub": "नाम सिमरन",
+"cat": "j",
+"href": "./mala.html"
+},
+{
+"id": "sankalp",
+"icon": "🪔",
+"name": "आज का संकल्प",
+"sub": "रोज़ एक प्रण",
+"cat": "j",
+"href": "./sankalp.html"
+},
+{
+"id": "kyon",
+"icon": "❓",
+"name": "क्यों?",
+"sub": "सत्ता, समाज और सवाल",
+"cat": "j",
+"href": "./kyon.html"
+},
+{
+"id": "Begampura_FAQ_542_Offline_Reader",
+"icon": "🏙️",
+"name": "बेगमपुरा FAQ",
+"sub": "542 उत्तर",
+"cat": "j",
+"href": "./Begampura_FAQ_542_Offline_Reader.html"
+},
+{
+"id": "study",
+"icon": "🎓",
+"name": "स्टडी स्टूडियो",
+"sub": "ऑडियो-वीडियो पढ़ाई",
+"cat": "j",
+"href": "./study.html"
+},
+{
+"id": "ai-samvidhan",
+"icon": "📜",
+"name": "AI का खुला संविधान",
+"sub": "AI के नियम",
+"cat": "j",
+"href": "./ai-samvidhan.html"
+},
+{
+"id": "akarshan",
+"icon": "🧲",
+"name": "आकर्षण का नियम",
+"sub": "सोच और कर्म",
+"cat": "j",
+"href": "./akarshan.html"
+},
+{
+"id": "kahani",
+"icon": "📖",
+"name": "कहानी घर",
+"sub": "5 series",
+"cat": "k",
+"href": "./kahani.html"
+},
+{
+"id": "shakha",
+"icon": "🌳",
+"name": "कहानी की शाखाएँ",
+"sub": "कहानी आगे बढ़ाओ",
+"cat": "k",
+"href": "./shakha.html"
+},
+{
+"id": "chakravyuh",
+"icon": "🏹",
+"name": "चक्रव्यूह कथा",
+"sub": "चुनो और सीखो",
+"cat": "k",
+"href": "./chakravyuh.html"
+},
+{
+"id": "titli",
+"icon": "🦋",
+"name": "Butterfly चुनाव",
+"sub": "हर चुनाव का असर",
+"cat": "k",
+"href": "./titli.html"
+},
+{
+"id": "scroll-dwar",
+"icon": "🚪",
+"name": "Scroll से खुलता द्वार",
+"sub": "scroll कहानी",
+"cat": "k",
+"href": "./scroll-dwar.html"
+},
+{
+"id": "promo",
+"icon": "✨",
+"name": "KDN परिचय",
+"sub": "हम कौन हैं",
+"cat": "k",
+"href": "./promo.html"
+},
+{
+"id": "baaz",
+"icon": "🦅",
+"name": "बाज उड़ान",
+"sub": "उड़ो, 💰 पकड़ो",
+"cat": "g",
+"href": "./baaz.html"
+},
+{
+"id": "takht",
+"icon": "🧊",
+"name": "तख़्त Cube",
+"sub": "घुमाओ और जानो",
+"cat": "g",
+"href": "./takht.html"
+},
+{
+"id": "takht3d",
+"icon": "🏛️",
+"name": "3D तख़्त दरबार",
+"sub": "3D दरबार",
+"cat": "g",
+"href": "./takht3d.html"
+},
+{
+"id": "chabi",
+"icon": "🗝️",
+"name": "चाबी वाला द्वार",
+"sub": "पहेली",
+"cat": "g",
+"href": "./chabi.html"
+},
+{
+"id": "patta",
+"icon": "🍃",
+"name": "पत्ता उड़ाओ",
+"sub": "हल्का खेल",
+"cat": "g",
+"href": "./patta.html"
+},
+{
+"id": "khel-banao",
+"icon": "🎮",
+"name": "खेल बनाओ",
+"sub": "अपना खेल",
+"cat": "g",
+"href": "./khel-banao.html"
+},
+{
+"id": "khazana",
+"icon": "🏆",
+"name": "मेरा खज़ाना",
+"sub": "सब badges",
+"cat": "g",
+"href": "./khazana.html"
+},
+{
+"id": "naksha",
+"icon": "🌍",
+"name": "KDN नक्शा",
+"sub": "दुनिया घूमो",
+"cat": "g",
+"href": "./naksha.html"
+},
+{
+"id": "kingdom-lands",
+"icon": "🏰",
+"name": "My Kingdom Lands",
+"sub": "खोजी सफ़र",
+"cat": "g",
+"href": "./kingdom-lands.html"
+},
+{
+"id": "mandal",
+"icon": "⭕",
+"name": "मंडल",
+"sub": "KDN World",
+"cat": "g",
+"href": "./mandal.html"
+},
+{
+"id": "newsroom",
+"icon": "🎙",
+"name": "KNN न्यूज़ स्टूडियो",
+"sub": "ख़बर बनाओ",
+"cat": "n",
+"href": "./newsroom.html"
+},
+{
+"id": "news-channels",
+"icon": "📡",
+"name": "KNN News चैनल",
+"sub": "चैनल",
+"cat": "n",
+"href": "./news-channels.html"
+},
+{
+"id": "goldtv",
+"icon": "📺",
+"name": "Golden TV",
+"sub": "सुनहरा TV",
+"cat": "n",
+"href": "./goldtv.html"
+},
+{
+"id": "creator",
+"icon": "✍️",
+"name": "News & Social Creator",
+"sub": "post बनाओ",
+"cat": "n",
+"href": "./creator.html"
+},
+{
+"id": "langar",
+"icon": "🍛",
+"name": "लंगर रसोई",
+"sub": "रोटी बेलो, सेवा करो",
+"cat": "s",
+"href": "./langar.html"
+},
+{
+"id": "vand",
+"icon": "🍲",
+"name": "वंड छक्को",
+"sub": "बाँटकर खाओ",
+"cat": "s",
+"href": "./vand.html"
+},
+{
+"id": "nanak-ghar",
+"icon": "🏠",
+"name": "नानक घर सेवा",
+"sub": "सेवा",
+"cat": "s",
+"href": "./nanak-ghar.html"
+},
+{
+"id": "khatri-aid",
+"icon": "🤝",
+"name": "Khatri Aid",
+"sub": "न छोटा न बड़ा",
+"cat": "s",
+"href": "./khatri-aid.html"
+},
+{
+"id": "vakil",
+"icon": "⚖️",
+"name": "कानूनी साथी",
+"sub": "वकील सूची",
+"cat": "s",
+"href": "./vakil.html"
+},
+{
+"id": "sehat",
+"icon": "🧡",
+"name": "सेहत Control Room",
+"sub": "सेहत",
+"cat": "s",
+"href": "./sehat.html"
+},
+{
+"id": "community",
+"icon": "🫂",
+"name": "संगत दरबार",
+"sub": "संगत",
+"cat": "s",
+"href": "./community.html"
+},
+{
+"id": "virsa",
+"icon": "🎙️",
+"name": "पंजाब दा विरसा",
+"sub": "माणक और चमकीला",
+"cat": "m",
+"href": "./virsa.html"
+},
+{
+"id": "audiobook",
+"icon": "🎧",
+"name": "ऑडियोबुक",
+"sub": "सुनो किताब",
+"cat": "m",
+"href": "./audiobook.html"
+},
+{
+"id": "saathi",
+"icon": "🗣️",
+"name": "बोलने वाले AI साथी",
+"sub": "आवाज़ साथी",
+"cat": "m",
+"href": "./saathi.html"
+},
+{
+"id": "funnybook",
+"icon": "🤣",
+"name": "फनीबुक",
+"sub": "हँसी का द्वार",
+"cat": "c",
+"href": "./funnybook.html"
+},
+{
+"id": "studio",
+"icon": "🎛️",
+"name": "KDN Social Studio",
+"sub": "सब साधन",
+"cat": "t",
+"href": "./studio.html"
+},
+{
+"id": "ai",
+"icon": "🤖",
+"name": "AI साथी",
+"sub": "AI से बात",
+"cat": "t",
+"href": "./ai.html"
+},
+{
+"id": "ai-tools",
+"icon": "🧰",
+"name": "Free AI Tools",
+"sub": "मुफ़्त AI",
+"cat": "t",
+"href": "./ai-tools.html"
+},
+{
+"id": "poster",
+"icon": "🖼️",
+"name": "Poster Creator",
+"sub": "poster बनाओ",
+"cat": "t",
+"href": "./poster.html"
+},
+{
+"id": "reels",
+"icon": "🎬",
+"name": "Reel Studio",
+"sub": "reel बनाओ",
+"cat": "t",
+"href": "./reels.html"
+},
+{
+"id": "avatar",
+"icon": "😀",
+"name": "मेरा अवतार",
+"sub": "अवतार बनाओ",
+"cat": "t",
+"href": "./avatar.html"
+},
+{
+"id": "aaj-bhav",
+"icon": "🌸",
+"name": "आज का भाव",
+"sub": "मन का मौसम",
+"cat": "t",
+"href": "./aaj-bhav.html"
+},
+{
+"id": "bhav",
+"icon": "🎭",
+"name": "मेरे भाव",
+"sub": "अनेक होकर भी एक",
+"cat": "t",
+"href": "./bhav.html"
+},
+{
+"id": "sab",
+"icon": "🗂️",
+"name": "सब कुछ एक जगह",
+"sub": "हर पेज यहाँ",
+"cat": "t",
+"href": "./sab.html"
+}
+]
+}

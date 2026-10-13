@@ -1,0 +1,11 @@
+const test=require('node:test'),assert=require('node:assert'),fs=require('fs'),path=require('path');
+const ROOT=path.join(__dirname,'..'),R=f=>fs.readFileSync(path.join(ROOT,f),'utf8'),P=JSON.parse(R('assets/pages.json'));
+test('every root html page is in the registry, and every entry exists',()=>{const ids=P.pages.map(p=>p.id);assert.strictEqual(new Set(ids).size,ids.length);
+ for(const f of fs.readdirSync(ROOT).filter(f=>f.endsWith('.html')))assert.ok(ids.includes(f.slice(0,-5)),'missing in assets/pages.json: '+f);
+ for(const p of P.pages){assert.ok(fs.existsSync(path.join(ROOT,p.id+'.html')),p.id);assert.equal(p.href,'./'+p.id+'.html');assert.ok(p.icon&&p.name&&p.sub)}});
+test('8 categories, valid cats, max 1001',()=>{assert.equal(P.max,1001);assert.deepStrictEqual(P.cats.map(c=>c.name),['कहानी','खेल','गुरबाणी/ज्ञान','न्यूज़','सेवा','संगीत','कॉमेडी','टूल्स']);
+ const c=P.cats.map(c=>c.id);for(const p of P.pages)assert.ok(c.includes(p.cat),p.id);assert.ok(P.pages.length<=P.max);});
+test('sab page wiring + virsa koins fix',()=>{const h=R('sab.html');for(const x of['🗂️ सब कुछ एक जगह','sab-q','sab-count','assets/sab/sab.js'])assert.ok(h.includes(x),x);assert.ok(R('assets/sab/sab.js').includes("' / '+R.max"));
+ for(const f of['index.html','dwar.html','assets/fx/fx.js'])assert.ok(R(f).includes('./sab.html'),f);
+ const v=R('assets/virsa/virsa.js');assert.ok(v.includes("bonus('virsa:badge')")&&v.includes('K.claimSpot(ks,id)')&&!v.includes("claimSpot('virsa-badge',25)"));assert.ok(R('virsa.html').includes('koins-core.js'));
+ assert.ok(JSON.parse(R('assets/i18n/en.json')).t['🗂️ सब कुछ एक जगह']);assert.match(R('sw.js'),/const CACHE=PREFIX\+'v0\.(6[7-9]|[7-9]\d)\./);});
