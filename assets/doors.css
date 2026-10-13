@@ -1,0 +1,16 @@
+#palace{background:radial-gradient(circle at 50% 0,#5a0f14,#140607 70%);border:3px solid #f2c66a;border-radius:220px 220px 20px 20px;padding:34px 14px 18px}
+#palace h2{text-align:center;color:#f2c66a;font-size:26px;margin:0 0 6px}
+#door-crumb{font-size:18px;font-weight:700;text-align:center;margin:8px 0 14px;line-height:2.2}#door-crumb a{color:#f2c66a}
+.door-back{display:inline-block;background:#f2c66a;color:#250d06!important;border-radius:12px;padding:6px 14px;text-decoration:none}
+#doors{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:16px}
+.door{position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;min-height:220px;padding:16px 8px;text-decoration:none;color:#fff8e8;text-align:center;
+ border:4px solid #f2c66a;border-radius:90px 90px 12px 12px;background:linear-gradient(#3a0a0e,#120607);box-shadow:inset 0 0 0 6px #5a0f14,0 6px 18px #0009;perspective:600px}
+.door-ic{font-size:56px;line-height:1;margin-bottom:8px;z-index:2}.door b{font-size:20px;z-index:2;color:#f2c66a}.door small{font-size:16px;color:#f5dfb2;z-index:2}
+.door-cat{background:linear-gradient(#6b1219,#1c0708)}.door-soon{opacity:.6}
+.leaf{position:absolute;top:0;bottom:0;width:50%;background:repeating-linear-gradient(0deg,#4a1a0c 0 30px,#3a120a 30px 32px);border:2px solid #b8893c;opacity:.55;transition:transform .45s ease;z-index:1}
+.leaf.l{left:0;transform-origin:left;border-radius:86px 0 0 8px}.leaf.r{right:0;transform-origin:right;border-radius:0 86px 8px 0}
+.door:hover .leaf.l,.door:focus-visible .leaf.l{transform:rotateY(-35deg)}.door:hover .leaf.r,.door:focus-visible .leaf.r{transform:rotateY(35deg)}
+.door.opening .leaf.l{transform:rotateY(-95deg)}.door.opening .leaf.r{transform:rotateY(95deg)}.door.opening{box-shadow:0 0 40px #f2c66a}
+.door-in .door{animation:doorIn .45s both}@keyframes doorIn{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:none}}
+.door:focus-visible{outline:4px solid #fff;outline-offset:3px}
+@media (prefers-reduced-motion:reduce){.leaf,.door-in .door{transition:none;animation:none}}
