@@ -1,0 +1,25 @@
+(function(){'use strict';var C=window.KDNKshetra;function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e}
+function btn(t,f,c){var b=el('button','gu-b'+(c?' '+c:''),t);b.type='button';b.addEventListener('click',f);return b}
+function load(){try{return C.validate(JSON.parse(localStorage.getItem(C.KEY)))}catch(e){return C.fresh()}}
+function save(s){try{localStorage.setItem(C.KEY,JSON.stringify(s))}catch(e){}}
+function koins(id){var K=window.KDNKoins;if(!K)return 0;try{var s=K.validate(JSON.parse(localStorage.getItem(K.KEY)||'null')),r=K.claimSpot(s,id);localStorage.setItem(K.KEY,JSON.stringify(r.state));return r.added}catch(e){return 0}}
+var st,prog;function bump(kind,val){var r=C.step(st,kind,val);st=r.state;save(st);showProg();if(r.badgeNew){var k=koins('kshetra:malwa');var m=el('p','ks-win','🏅 badge मिला: '+C.BADGE+' · 💰 +'+(k||5)+' koins');prog.appendChild(m)}}
+function showProg(){if(!prog)return;prog.firstChild.textContent='🧭 यात्रा: कारीगर '+Math.min(st.crafts.length,3)+'/3 · सेवा '+(st.seva?'✅':'⬜')+' · ज्ञान '+(st.quiz?'✅':'⬜')+(st.badge?' · 🏅 '+C.BADGE:'')}
+function hub(b){var g=el('div','ks-slots');var by={};C.SLOTS.forEach(function(s){(by[s.mandal]=by[s.mandal]||[]).push(s)});
+ Object.keys(by).sort(function(a,b){return (a==='0')-(b==='0')||a-b}).forEach(function(m){var sec=el('section','gu-box');sec.appendChild(el('h2',null,m==='0'?'🏛️ राजधानी':'🗺️ मंडल '+m));var ul=el('ul','ks-list');by[m].forEach(function(s){var li=el('li','ks-slot '+s.status);if(s.href){var a=el('a',null,'✅ '+s.code+' · '+s.name+' — खुला');a.href=s.href;li.appendChild(a)}else li.textContent='⏳ '+s.code+(s.name?' · '+s.name:'')+' — योजना में';ul.appendChild(li)});sec.appendChild(ul);g.appendChild(sec)});b.appendChild(g)}
+function malwa(){st=load();prog=document.getElementById('ks-prog');if(prog){prog.textContent='';prog.appendChild(el('p'));showProg()}
+ [].forEach.call(document.querySelectorAll('[data-craft]'),function(d){d.addEventListener('toggle',function(){if(d.open)bump('craft',d.dataset.craft)})});
+ var sv=document.getElementById('ks-seva');if(sv){var go=btn('👟 सेवा शुरू करो',function(){seva(sv)});sv.appendChild(go)}
+ var qz=document.getElementById('ks-quiz');if(qz)quiz(qz);
+ var plain=document.getElementById('ks-plain');if(plain)plain.addEventListener('click',function(){var on=document.body.classList.toggle('ks-plainmode');plain.textContent=on?'✨ सजावट वाला मोड':'📄 सादी सूची'});
+ var rm=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;var secs=document.querySelectorAll('.ks-stop');
+ if(!rm&&'IntersectionObserver' in window){document.body.classList.add('ks-anim');var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.15});[].forEach.call(secs,function(s){io.observe(s)})}}
+function seva(box){box.textContent='';var n=C.SEVA_N,left=[],placed=0,pick=null,paused=false;for(var i=1;i<=n;i++)left.push(i);left.sort(function(){return Math.random()-.5});
+ box.appendChild(el('p',null,'संगत अपने जूते देती है — टोकन नंबर देखकर सही रैक में रखो 🙏'));var info=el('p','ks-info');var q=el('div','ks-queue'),rack=el('div','ks-rack');var ctl=el('p');var pb=btn('⏸️ रोको',function(){paused=!paused;pb.textContent=paused?'▶️ चलाओ':'⏸️ रोको';box.classList.toggle('ks-paused',paused)});ctl.append(pb,btn('🔁 फिर से',function(){seva(box)}));box.append(info,q,rack,ctl);
+ function upd(){info.textContent='👟 '+placed+'/'+n+(pick?' · हाथ में: टोकन '+pick:'')}
+ function drawQ(){q.textContent='';left.slice(0,3).forEach(function(t){q.appendChild(btn('👟 '+t,function(){if(paused)return;pick=t;upd()},'ks-shoe'))})}
+ for(var r=1;r<=n;r++)(function(r){var b=btn('🗄️ '+r,function(){if(paused||!pick)return;if(pick===r){b.textContent='✅ '+r;b.disabled=true;left=left.filter(function(x){return x!==r});placed++;pick=null;drawQ();upd();if(placed===n){box.appendChild(el('p','ks-win','🎉 जोड़ा घर की सेवा पूरी — वाहेगुरु!'));bump('seva')}}else{b.classList.add('ks-no');setTimeout(function(){b.classList.remove('ks-no')},300)}},'ks-slotb');rack.appendChild(b)})(r);drawQ();upd()}
+function quiz(box){var i=0,right=0,qb=el('div');box.appendChild(qb);(function ask(){qb.textContent='';if(i>=C.QUIZ.length){qb.appendChild(el('p','ks-win','🏁 '+right+'/'+C.QUIZ.length+' सही'));bump('quiz',right);if(right<2)qb.appendChild(btn('🔁 फिर से',function(){i=0;right=0;ask()}));return}
+ var q=C.QUIZ[i];qb.appendChild(el('p','gu-q',(i+1)+'. '+q[0]));q[1].map(function(o,j){return[o,j]}).sort(function(){return Math.random()-.5}).forEach(function(o){qb.appendChild(btn(o[0],function(){if(o[1]===q[2])right++;qb.appendChild(el('p','gu-fb',o[1]===q[2]?'✅ सही':'📘 सही: '+q[1][q[2]]));[].forEach.call(qb.querySelectorAll('button'),function(y){y.disabled=true});i++;setTimeout(ask,800)}))})})()}
+function init(){if(!C)return;var h=document.getElementById('ks-hub');if(h)hub(h);if(document.getElementById('ks-malwa'))malwa()}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();})();

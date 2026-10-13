@@ -557,6 +557,26 @@
 "status": "published"
 },
 {
+"id": "kshetra",
+"icon": "🗺️",
+"name": "KDN क्षेत्र — 101 स्लॉट",
+"sub": "प्रस्तावित डिजिटल क्षेत्र; मालवा खुला",
+"cat": "g",
+"href": "./kshetra.html",
+"group": "region",
+"status": "published"
+},
+{
+"id": "kshetra-malwa",
+"icon": "🌾",
+"name": "मालवा यात्रा",
+"sub": "KDN-S-060 · पहला पूरा क्षेत्र",
+"cat": "g",
+"href": "./kshetra-malwa.html",
+"group": "region",
+"status": "published"
+},
+{
 "id": "kingdom-lands",
 "icon": "🏰",
 "name": "My Kingdom Lands",
