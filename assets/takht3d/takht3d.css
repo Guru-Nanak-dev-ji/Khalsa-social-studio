@@ -1,0 +1,22 @@
+body{margin:0;min-height:100vh;background:radial-gradient(circle at 50% 20%,#4a2f12,#120c07 70%);color:#f5dfb2;font-family:'Mukta',system-ui,sans-serif;overflow-x:hidden}
+.t3-top{display:flex;justify-content:space-between;align-items:center;padding:12px 16px}.t3-top a{color:#f2c66a}
+h1{font-family:'Rozha One','Mukta',serif;color:#f2c66a;text-align:center;margin:.2em 0;font-size:1.8rem}
+.t3-sub{text-align:center;margin:0 16px 8px;color:#e8cfa0}
+.t3-stage{height:440px;overflow:hidden;perspective:900px;perspective-origin:50% 30%;touch-action:none;cursor:grab;user-select:none;position:relative}
+.t3-stage:active{cursor:grabbing}
+.t3-world{position:absolute;left:50%;top:58%;width:0;height:0;transform-style:preserve-3d;transform:scale3d(var(--s,1),var(--s,1),var(--s,1)) rotateX(var(--rx,-18deg)) rotateY(var(--ry,25deg));transition:transform .08s linear}
+.t3-world *{transform-style:preserve-3d;position:absolute}
+.t3-floor{width:440px;height:440px;left:-220px;top:-220px;transform:rotateX(90deg);background:repeating-conic-gradient(#f5dfb2 0 25%,#8a5a2b 0 50%) 0 0/55px 55px;border:6px solid #c99a3e;box-shadow:0 0 60px rgba(242,198,106,.5)}
+.t3-box{left:0;top:0}
+.t3-box>i{display:block;position:absolute;background:linear-gradient(#f2c66a,#b07a2a);border:1px solid #7a4f17;font-style:normal;backface-visibility:visible}
+.t3-wall{width:440px;height:260px;left:-220px;top:-260px;transform:translateZ(-220px);background:url(../world/full-mehraab-ivory-v11.webp) center/cover;border:4px solid #c99a3e;filter:brightness(.85)}
+.t3-wall.l{transform:rotateY(90deg) translateZ(-220px)}.t3-wall.r{transform:rotateY(-90deg) translateZ(-220px)}
+.t3-banner{left:-90px;top:-250px;width:180px;padding:6px;text-align:center;background:#7a1f1f;border:2px solid #f2c66a;border-radius:8px;font:700 1.1rem 'Rozha One',serif;color:#ffe9b0;transform:translateZ(-210px)}
+.t3-sprite{font-size:46px;left:-23px;top:-23px;animation:t3-float 4s ease-in-out infinite}
+.t3-sprite.click{cursor:pointer}
+@keyframes t3-float{50%{margin-top:-14px}}
+.t3-ctrl{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:8px}
+.t3-ctrl button{background:#efc66e;color:#25190c;border:0;border-radius:10px;padding:10px 14px;font-weight:700;cursor:pointer;font-family:inherit}
+.t3-msg{text-align:center;min-height:1.6em;font-size:1.1rem;color:#f8dc9a}
+@media (prefers-reduced-motion:reduce){.t3-sprite{animation:none}.t3-world{transition:none}}
+@media (max-width:560px){.t3-world{--s:.72}}
