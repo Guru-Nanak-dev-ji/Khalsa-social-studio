@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#1a0d06">
+<meta name="description" content="🍲 वंड छक्को — किरत करो, वंड छक्को। रोज़ चुनिए आज क्या बाँटा, सुनहरी थाली भरिए और koins पाइए।">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icons/khalsa-v1-32.png" sizes="32x32" type="image/png">
+<link rel="stylesheet" href="./assets/heritage.css">
+<link rel="stylesheet" href="./assets/hindi-fonts.css">
+<link rel="stylesheet" href="./assets/vand/vand.css">
+<title>🍲 वंड छक्को · KDN</title>
+<script defer src="./assets/koins-core.js"></script>
+<script defer src="./assets/vand/vand-core.js"></script>
+<script defer src="./assets/vand/vand.js"></script>
+<script defer src="./assets/goldtv/goldtv.js"></script></head>
+<body class="kdn-hindi" data-heritage="immersive">
+<div class="heritage-banner" aria-hidden="true"></div>
+<header class="hud" role="status" aria-live="polite">
+<a href="./studio.html#door=games">← द्वार</a>
+<div class="big">💰 <span id="h-koins">0</span><small>game koins, असली पैसा नहीं</small></div>
+</header>
+<section class="head"><h1>🍲 वंड छक्को</h1><p class="motto">किरत करो, वंड छक्को</p><p>आज आपने क्या बाँटा? चुनिए और ✅ आज बाँटा दबाइए — सुनहरी थाली भर जाएगी, हर दिन +5 koins।</p></section>
+<section class="card" aria-live="polite">
+<p class="orn">✦ आज की थाली ✦</p>
+<div id="thali" class="thali" aria-hidden="true"><span id="t-food"></span></div>
+<div id="kinds" role="group" aria-label="आज क्या बाँटा"></div>
+<p id="pick-msg"></p>
+<button type="button" class="btn" id="done" disabled>✅ आज बाँटा</button><p id="done-msg" hidden></p>
+<button type="button" class="btn ghost" id="say">🔊 सुनें</button>
+<p class="honest">🙏 सच से दबाएँ — ✅ तभी दबाइए जब आज सच में कुछ बाँटा हो।</p>
+</section>
+<section class="card bani"><p class="orn">✦ गुरबाणी ✦</p><p class="line" id="b-line"></p><p class="mean" id="b-mean"></p><p class="src" id="b-src"></p></section>
+<section class="card"><p id="streak"></p><div id="week" aria-label="पिछले 7 दिन"></div><p class="note">चिह्न = उस दिन क्या बाँटा · ○ = नहीं बाँटा</p></section>
+<p id="badge" class="badge" hidden>🏅 वंड साधक — 7 दिन बाँटा!</p>
+<p class="note">दिन में एक बार दबा सकते हैं। सब कुछ इसी phone में रहता है, कोई server नहीं। Koins game के हैं, असली पैसा नहीं। "Reduce motion" setting में थाली स्थिर रहती है।</p>
+</body>
+</html>

@@ -13,6 +13,7 @@ const GAMES=[
  {id:'sankalp',icon:'🪔',game:'आज का संकल्प',badge:'संकल्प दीप',key:'kdn-sankalp-v1',href:'./sankalp.html',got:s=>s.badge===true},
  {id:'mala',icon:'📿',game:'सिमरन माला',badge:'सिमरन साधक',key:'kdn-mala-v1',href:'./mala.html',got:s=>s.badge===true},
  {id:'gun',icon:'📜',game:'आज का गुण',badge:'गुण साधक',key:'kdn-gun-v1',href:'./gun.html',got:s=>s.badge===true||(Array.isArray(s.done)&&s.done.length>=7)},
+ {id:'vand',icon:'🍲',game:'वंड छक्को',badge:'वंड साधक',key:'kdn-vand-v1',href:'./vand.html',got:s=>s.badge===true||(Array.isArray(s.done)&&s.done.length>=7)},
  {id:'akarshan',icon:'🧲',game:'आकर्षण का नियम',badge:'आकर्षण साधक',key:'kdn-akarshan-v1',href:'./akarshan.html',got:s=>s.badge===true},
  {id:'khoya',icon:'🏰',game:'My Kingdom Lands',badge:'खोजी सिंह',key:'kdn-khoya-v1',href:'./kingdom-lands.html',got:s=>s.badge===true},
  {id:'khoya2',icon:'👑',game:'My Kingdom Lands · अध्याय 2',badge:'राज्य रक्षक',key:'kdn-khoya-v1',href:'./kingdom-lands.html',got:s=>s.badge2===true},
