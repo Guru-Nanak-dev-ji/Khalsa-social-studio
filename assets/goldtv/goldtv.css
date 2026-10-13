@@ -1,11 +1,16 @@
-#goldtv{position:fixed;left:8px;right:8px;bottom:calc(8px + env(safe-area-inset-bottom));z-index:9000;display:flex;align-items:center;gap:8px;max-width:520px;margin:0 auto;padding:6px 8px 6px 10px;border-radius:14px;background:linear-gradient(135deg,#2a1606ee,#4a2a08ee);border:1.5px solid #e2b04a;box-shadow:0 4px 18px #0008,inset 0 0 12px #e2b04a33;font-family:Mukta,'Noto Sans Devanagari',sans-serif;color:#fff1c8;font-size:14px;line-height:1.25}
-#goldtv a.gt-story{flex:1;min-width:0;color:inherit;text-decoration:none;display:block}
-#goldtv .gt-tag{display:block;font-size:11px;color:#ffd76a;font-weight:700}
-#goldtv .gt-text{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+:root{--kdn-dock-h:40px;--kdn-dock-off:0px}
+#goldtv{position:fixed;left:8px;right:8px;bottom:calc(6px + var(--kdn-dock-off) + env(safe-area-inset-bottom));z-index:9000;display:flex;align-items:center;gap:6px;height:var(--kdn-dock-h);box-sizing:border-box;max-width:520px;margin:0 auto;padding:4px 5px 4px 9px;border-radius:20px;background:linear-gradient(135deg,#2a1606f2,#4a2a08f2);border:1.5px solid #e2b04a;box-shadow:0 3px 12px #0008;font-family:Mukta,'Noto Sans Devanagari',sans-serif;color:#fff1c8;font-size:13px;line-height:1.2;transition:left .25s,right .25s,width .25s,opacity .25s}
+#goldtv a.gt-story{flex:1;min-width:0;color:inherit;text-decoration:none;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#goldtv .gt-tag{font-size:11px;color:#ffd76a;font-weight:700;margin-right:5px}
 #goldtv .gt-in{animation:gtIn .45s ease-out}
-@keyframes gtIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-#goldtv button{flex:none;width:30px;height:30px;border-radius:50%;border:1px solid #e2b04a;background:#1a0e05;color:#ffd76a;font-size:14px;cursor:pointer}
-#goldtv .gt-logo{flex:none;font-size:18px}
-#goldtv-min{position:fixed;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));z-index:9000;border-radius:50%;width:38px;height:38px;border:1.5px solid #e2b04a;background:#2a1606;color:#ffd76a;font-size:18px}
-@media (prefers-reduced-motion:reduce){#goldtv .gt-in{animation:none}}
-#goldtv button{display:inline-flex;align-items:center;justify-content:center;padding:0}
+@keyframes gtIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+#goldtv button{flex:none;width:28px;height:28px;border-radius:50%;border:1px solid #e2b04a;background:#1a0e05;color:#ffd76a;font-size:13px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;padding:0}
+#goldtv .gt-logo{flex:none;font-size:16px;cursor:pointer}
+#goldtv #kdn-sg-b{position:static;width:30px;height:30px;padding:0;border-radius:50%;font-size:15px;box-shadow:none;background:#3a2410;line-height:1}
+/* pill: user scrolling/touching, or page controls near bottom */
+#goldtv.gt-pill{left:auto;right:8px;width:auto;padding:4px;gap:4px;opacity:.92}
+#goldtv.gt-pill .gt-story,#goldtv.gt-pill .gt-pp,#goldtv.gt-pill .gt-x{display:none}
+#goldtv-min{position:fixed;right:10px;bottom:calc(8px + var(--kdn-dock-off) + env(safe-area-inset-bottom));z-index:9000;border-radius:50%;width:36px;height:36px;border:1.5px solid #e2b04a;background:#2a1606;color:#ffd76a;font-size:17px}
+@media (prefers-reduced-motion:reduce){#goldtv .gt-in{animation:none}#goldtv{transition:none}}
+#goldtv.gt-pill.gt-left{left:8px;right:auto}
+#goldtv.gt-pill.gt-ghost{opacity:.18;pointer-events:none}
