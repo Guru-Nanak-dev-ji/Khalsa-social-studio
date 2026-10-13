@@ -1,6 +1,7 @@
 (function(){if(window.__goldtv)return;window.__goldtv=1;
 const base=(document.currentScript&&document.currentScript.src)?new URL('./',document.currentScript.src).href:'./assets/goldtv/';
 if(window.GoldTVCore)run();else{const s=document.createElement('script');s.src=base+'goldtv-core.js';s.onload=run;document.head.appendChild(s);}
+{const nv=document.createElement('script');nv.src=base+'../naksha/visit.js';nv.defer=true;document.head.appendChild(nv);}
 if(!window.__kdnSuggest){const sg=document.createElement('script');sg.src=base+'../suggest/suggest.js';sg.defer=true;document.head.appendChild(sg);}
 function run(){const C=window.GoldTVCore;
 const css=document.createElement('link');css.rel='stylesheet';css.href=base+'goldtv.css';document.head.appendChild(css);

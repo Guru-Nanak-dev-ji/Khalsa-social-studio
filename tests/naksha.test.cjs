@@ -1,0 +1,12 @@
+const test=require('node:test'),assert=require('node:assert'),N=require('../assets/naksha/naksha-core.js'),Dr=require('../assets/doors-core.js'),fs=require('fs'),path=require('path');
+const R=f=>fs.readFileSync(path.join(__dirname,'..',f),'utf8');
+test('every node page exists and records visits',()=>{for(const n of N.NODES){assert.ok(fs.existsSync(path.join(__dirname,'..',n.href.slice(2))),n.href);const h=R(n.href.slice(2));assert.ok(h.includes('goldtv/goldtv.js')||h.includes('naksha/visit.js'),n.id);}});
+test('visit, progress, badge, junk safe',()=>{let s=N.validate({junk:1});assert.deepEqual(s.seen,[]);let r=N.visit(s,'takht');assert.ok(r.isNew);r=N.visit(r.state,'takht');assert.ok(!r.isNew);assert.ok(!N.visit(s,'nope').isNew);
+ s=N.validate({v:1,seen:['takht','takht','x'],badge:false});assert.deepEqual(s.seen,['takht']);let st=N.fresh(),bn=0;for(const id of N.IDS){const v=N.visit(st,id);st=v.state;if(v.badgeNew)bn++;}assert.equal(bn,1);assert.ok(st.badge);assert.equal(N.progress(st).pct,100);
+ assert.equal(N.idFromPath('/Khalsa-social-studio/takht.html'),'takht');assert.equal(N.idFromPath('/x/'),null);});
+test('page, door, feed, sw, khazana, no Khanda',()=>{const h=R('naksha.html'),j=R('assets/naksha/naksha.js')+R('assets/naksha/visit.js')+R('assets/naksha/naksha-core.js');
+ assert.ok(h.includes('lang="hi"')&&h.includes('data-heritage')&&h.includes('goldtv.js')&&h.includes('असली पैसा नहीं'));assert.ok(!/fetch\(|XMLHttpRequest|innerHTML/.test(j));assert.ok(!/☬/.test(h+j));
+ assert.ok(R('assets/naksha/naksha.css').includes('prefers-reduced-motion'));assert.ok(R('assets/goldtv/goldtv.js').includes('naksha/visit.js'));assert.ok(j.includes("'kdn-naksha-v1'"));
+ assert.ok(Dr.all().some(d=>d.href==='./naksha.html'));assert.ok(JSON.parse(R('assets/goldtv/feed.json')).items.some(i=>i.href==='./naksha.html'));
+ assert.ok(require('../assets/khazana/khazana-core.js').GAMES.some(g=>g.id==='naksha'&&g.badge===N.BADGE));
+ const sw=R('sw.js');assert.equal((sw.match(/const CACHE/g)||[]).length,1);for(const a of['./naksha.html','./assets/naksha/naksha-core.js','./assets/naksha/naksha.js','./assets/naksha/naksha.css','./assets/naksha/visit.js'])assert.ok(sw.includes(a),a);});
