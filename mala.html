@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#1a0d06">
+<meta name="description" content="📿 सिमरन माला — 108 सुनहरे मनके, हर tap पर एक बार नाम। पूरी माला पर koins।">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icons/khalsa-v1-32.png" sizes="32x32" type="image/png">
+<link rel="stylesheet" href="./assets/heritage.css">
+<link rel="stylesheet" href="./assets/hindi-fonts.css">
+<link rel="stylesheet" href="./assets/mala/mala.css">
+<title>📿 सिमरन माला · KDN</title>
+<script defer src="./assets/koins-core.js"></script>
+<script defer src="./assets/mala/mala-core.js"></script>
+<script defer src="./assets/mala/mala.js"></script>
+<script defer src="./assets/goldtv/goldtv.js"></script></head>
+<body class="kdn-hindi" data-heritage="immersive">
+<div class="heritage-banner" aria-hidden="true"></div>
+<header class="hud" role="status" aria-live="polite">
+<a href="./studio.html#door=games">← द्वार</a>
+<div class="big">💰 <span id="h-koins">0</span><small>game koins, असली पैसा नहीं</small></div>
+</header>
+<section class="head"><h1>📿 सिमरन माला</h1><p>हर tap पर एक मनका आगे — धीरे से एक बार नाम लीजिए। 108 मनके = एक माला।</p></section>
+<section class="card">
+<p class="orn">✦ नाम चुनिए ✦</p><div id="naams" role="group" aria-label="नाम चुनिए"></div>
+<button type="button" id="mala" aria-label="अगला मनका — tap कीजिए"><svg viewBox="0 0 340 340" aria-hidden="true"><g id="ring"></g></svg>
+<span class="mid"><span id="naam"></span><span id="count" aria-live="polite"></span><span id="tapme">👆 यहाँ tap कीजिए</span></span><span id="pulse" aria-hidden="true"></span></button>
+<p id="todaym" aria-live="polite"></p>
+<button type="button" class="btn ghost" id="voice" aria-pressed="false">🔇 हर मनके पर नाम बोले: बंद</button>
+<button type="button" class="btn ghost" id="restart">🔄 माला फिर से शुरू</button>
+</section>
+<section class="card"><p id="days"></p><div id="week" aria-label="पिछले 7 दिन"></div><p class="note">📿 = उस दिन पूरी हुई मालाएँ · · = खाली</p></section>
+<p id="badge" class="badge" hidden>🏅 सिमरन साधक — 7 दिन माला पूरी!</p>
+<p class="note">🙏 गिनती से ज़्यादा ध्यान ज़रूरी है — जल्दी नहीं, प्रेम से। सब कुछ इसी phone में रहता है, कोई server नहीं। Koins game के हैं, असली पैसा नहीं — हर दिन की पहली पूरी माला पर +5। "Reduce motion" setting में मनके नहीं चमकते।</p>
+</body>
+</html>
