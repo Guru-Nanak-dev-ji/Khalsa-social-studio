@@ -5,7 +5,8 @@
   "license": "Public domain",
   "author": "अज्ञात चित्रकार (Unknown artist)",
   "asset": "assets/palace/v014/pran/nanak-pathshala.webp",
-  "caption": "गुरु नानक देव जी · पाठशाला में (जनमसाखी चित्र)"
+  "caption": "गुरु नानक देव जी · पाठशाला में (जनमसाखी चित्र)",
+  "figure": "nanak"
  },
  {
   "file": "Guru Nanak seated on a terrace with Bala & Mardana (night version).jpg",
@@ -13,7 +14,8 @@
   "license": "Public domain",
   "author": "अज्ञात चित्रकार (Unknown artist)",
   "asset": "assets/palace/v014/pran/nanak-bala-mardana.webp",
-  "caption": "गुरु नानक देव जी · भाई बाला और भाई मरदाना के साथ"
+  "caption": "गुरु नानक देव जी · भाई बाला और भाई मरदाना के साथ",
+  "figure": "nanak"
  },
  {
   "file": "Guru Angad taking-leave of Guru Nanak, painting from an 1830's Janamsakhi (life stories) 05.jpg",
@@ -21,7 +23,8 @@
   "license": "Public domain",
   "author": "अज्ञात चित्रकार (Unknown artist)",
   "asset": "assets/palace/v014/pran/nanak-angad.webp",
-  "caption": "गुरु नानक देव जी · भाई लहणा (गुरु अंगद) को आशीर्वाद"
+  "caption": "गुरु नानक देव जी · भाई लहणा (गुरु अंगद) को आशीर्वाद",
+  "figure": "nanak"
  },
  {
   "file": "Shiva Parvati Ganesha.jpg",
@@ -29,7 +32,8 @@
   "license": "Public domain",
   "author": "Raja Ravi Varma",
   "asset": "assets/palace/v014/pran/shiv-parivar-ravivarma.webp",
-  "caption": "शिव जी · परिवार सहित (राजा रवि वर्मा)"
+  "caption": "शिव जी · परिवार सहित (राजा रवि वर्मा)",
+  "figure": "shiva"
  },
  {
   "file": "6 Śiva and Pārvatī seated on a terrace. 1800 (circa) BM.jpg",
@@ -37,7 +41,8 @@
   "license": "Public domain",
   "author": "अज्ञात चित्रकार (Unknown artist)",
   "asset": "assets/palace/v014/pran/shiv-parvati-chhat.webp",
-  "caption": "शिव जी और पार्वती · छत पर (पहाड़ी चित्र, लगभग 1800)"
+  "caption": "शिव जी और पार्वती · छत पर (पहाड़ी चित्र, लगभग 1800)",
+  "figure": "shiva"
  },
  {
   "file": "Shiva parvati chaupar 1694–95.jpg",
@@ -45,6 +50,142 @@
   "license": "Public domain",
   "author": "Devidasa of Nurpur",
   "asset": "assets/palace/v014/pran/shiv-parvati-chaupar.webp",
-  "caption": "शिव जी और पार्वती · चौपड़ (देवीदास, नूरपुर 1694–95)"
+  "caption": "शिव जी और पार्वती · चौपड़ (देवीदास, नूरपुर 1694–95)",
+  "figure": "shiva"
+ },
+ {
+  "file": "Guru Gobind Singh painting by Nainsukh of Guler.jpg",
+  "source": "https://commons.wikimedia.org/wiki/File:Guru_Gobind_Singh_painting_by_Nainsukh_of_Guler.jpg",
+  "license": "Public domain",
+  "author": "Nainsukh of Guler",
+  "asset": "assets/palace/v014/pran/gobind-nainsukh.webp",
+  "caption": "गुरु गोबिंद सिंह जी · पहाड़ी चित्र (गुलेर शैली)",
+  "figure": "gobind"
+ },
+ {
+  "file": "Miniature painting of Guru Gobind Singh on horseback, Punjab Plains, mid-19th century.jpg",
+  "source": "https://commons.wikimedia.org/wiki/File:Miniature_painting_of_Guru_Gobind_Singh_on_horseback,_Punjab_Plains,_mid-19th_century.jpg",
+  "license": "Public domain",
+  "author": "अज्ञात चित्रकार (Unknown artist)",
+  "asset": "assets/palace/v014/pran/gobind-ghoda.webp",
+  "caption": "गुरु गोबिंद सिंह जी · घोड़े पर (पंजाब, 19वीं सदी)",
+  "figure": "gobind"
+ },
+ {
+  "file": "Rama Returns in Victory to Ayodhya, Pahari, Kangra, Fitzwilliam Museum.jpg",
+  "source": "https://commons.wikimedia.org/wiki/File:Rama_Returns_in_Victory_to_Ayodhya,_Pahari,_Kangra,_Fitzwilliam_Museum.jpg",
+  "license": "Public domain",
+  "author": "अज्ञात चित्रकार (Unknown artist)",
+  "asset": "assets/palace/v014/pran/ram-ayodhya.webp",
+  "caption": "श्री राम जी · अयोध्या वापसी (कांगड़ा चित्र)",
+  "figure": "ram"
+ },
+ {
+  "file": "Rama, Sita, Lakshmana in exile in forest having a meal, pahari painting.jpg",
+  "source": "https://commons.wikimedia.org/wiki/File:Rama,_Sita,_Lakshmana_in_exile_in_forest_having_a_meal,_pahari_painting.jpg",
+  "license": "Public domain",
+  "author": "Unknown pahari painter, ca. 1780-1815.",
+  "asset": "assets/palace/v014/pran/ram-van.webp",
+  "caption": "श्री राम जी · सीता जी, लक्ष्मण जी के साथ वनवास में",
+  "figure": "ram"
+ },
+ {
+  "file": "Fresco depicting Krishna playing the flute from Thakurdwara Dariana Mal in Amritsar.jpg",
+  "source": "https://commons.wikimedia.org/wiki/File:Fresco_depicting_Krishna_playing_the_flute_from_Thakurdwara_Dariana_Mal_in_Amritsar.jpg",
+  "license": "Public domain",
+  "author": "अज्ञात चित्रकार (Unknown artist)",
+  "asset": "assets/palace/v014/pran/krishna-bansuri.webp",
+  "caption": "श्री कृष्ण जी · बाँसुरी (अमृतसर ठाकुरद्वारा भित्तिचित्र)",
+  "figure": "krishna"
+ },
+ {
+  "file": "Unknown (Indian) - Worship of Krishna and His Flute - 69.411 - Detroit Institute of Arts.jpg",
+  "source": "https://commons.wikimedia.org/wiki/File:Unknown_(Indian)_-_Worship_of_Krishna_and_His_Flute_-_69.411_-_Detroit_Institute_of_Arts.jpg",
+  "license": "Public domain",
+  "author": "अज्ञात चित्रकार (Unknown artist)",
+  "asset": "assets/palace/v014/pran/krishna-pooja.webp",
+  "caption": "श्री कृष्ण जी · बाँसुरी की पूजा",
+  "figure": "krishna"
+ },
+ {
+  "file": "Standing Buddha Gandhara. Musée des arts asiatiques Guimet.jpg",
+  "source": "https://commons.wikimedia.org/wiki/File:Standing_Buddha_Gandhara._Mus%C3%A9e_des_arts_asiatiques_Guimet.jpg",
+  "license": "Public domain",
+  "author": "अज्ञात गांधार शिल्पी (photo: Ismoon)",
+  "asset": "assets/palace/v014/pran/buddha-guimet.webp",
+  "caption": "महात्मा बुद्ध · गांधार प्रतिमा",
+  "figure": "buddha"
+ },
+ {
+  "file": "Labit - Sitting Buddha meditating - Swat Valley, Gandhara, Pakistan D. 70.1.2.jpg",
+  "source": "https://commons.wikimedia.org/wiki/File:Labit_-_Sitting_Buddha_meditating_-_Swat_Valley,_Gandhara,_Pakistan_D._70.1.2.jpg",
+  "license": "Public domain",
+  "author": "अज्ञात गांधार शिल्पी (photo: Didier Descouens)",
+  "asset": "assets/palace/v014/pran/buddha-dhyan.webp",
+  "caption": "महात्मा बुद्ध · ध्यान मुद्रा (स्वात, गांधार)",
+  "figure": "buddha"
+ },
+ {
+  "file": "Painting of a haloed Baba Farid seated on a carpet holding prayer-beads.jpg",
+  "source": "https://commons.wikimedia.org/wiki/File:Painting_of_a_haloed_Baba_Farid_seated_on_a_carpet_holding_prayer-beads.jpg",
+  "license": "Public domain",
+  "author": "अज्ञात चित्रकार (Unknown artist)",
+  "asset": "assets/palace/v014/pran/farid-mala.webp",
+  "caption": "बाबा फ़रीद जी · माला के साथ",
+  "figure": "farid"
+ },
+ {
+  "file": "Painting of Bhagat Kabir weaving with two attendants, Mughal Empire, circa early 18th century.jpg",
+  "source": "https://commons.wikimedia.org/wiki/File:Painting_of_Bhagat_Kabir_weaving_with_two_attendants,_Mughal_Empire,_circa_early_18th_century.jpg",
+  "license": "Public domain",
+  "author": "अज्ञात चित्रकार (Unknown artist)",
+  "asset": "assets/palace/v014/pran/kabir-julaha.webp",
+  "caption": "भगत कबीर जी · करघे पर बुनाई",
+  "figure": "kabir"
+ },
+ {
+  "file": "Painting of Kabir, Amber, ca.1750–1800.jpg",
+  "source": "https://commons.wikimedia.org/wiki/File:Painting_of_Kabir,_Amber,_ca.1750%E2%80%931800.jpg",
+  "license": "Public domain",
+  "author": "Qa’im Khan Bin Zafar Bahadur",
+  "asset": "assets/palace/v014/pran/kabir-amber.webp",
+  "caption": "भगत कबीर जी · आमेर चित्र (लगभग 1750–1800)",
+  "figure": "kabir"
+ },
+ {
+  "file": "Bhagat Ravidas at work as a shoemaker. Folio from a series featuring Bhakti saints. Master of the first generation after Manaku and Nainsukh of Guler, Pahari region, ca.1800–1810.jpg",
+  "source": "https://commons.wikimedia.org/wiki/File:Bhagat_Ravidas_at_work_as_a_shoemaker._Folio_from_a_series_featuring_Bhakti_saints._Master_of_the_first_generation_after_Manaku_and_Nainsukh_of_Guler,_Pahari_region,_ca.1800%E2%80%931810.jpg",
+  "license": "Public domain",
+  "author": "Master of the first generation after Manaku and Nainsukh of Guler",
+  "asset": "assets/palace/v014/pran/ravidas-kirat.webp",
+  "caption": "भगत रविदास जी · अपनी किरत करते हुए",
+  "figure": "ravidas"
+ },
+ {
+  "file": "Manuscript folio painting of Bhagats Ravidas (left) and Kabir (right) seated under a tree.jpg",
+  "source": "https://commons.wikimedia.org/wiki/File:Manuscript_folio_painting_of_Bhagats_Ravidas_(left)_and_Kabir_(right)_seated_under_a_tree.jpg",
+  "license": "Public domain",
+  "author": "अज्ञात चित्रकार (Unknown artist)",
+  "asset": "assets/palace/v014/pran/ravidas-kabir.webp",
+  "caption": "भगत रविदास जी और भगत कबीर जी",
+  "figure": "ravidas"
+ },
+ {
+  "file": "Painting of Bhagat Namdev, from a folio within an illustrated manuscript of the Prem Ambodh Pothi.jpg",
+  "source": "https://commons.wikimedia.org/wiki/File:Painting_of_Bhagat_Namdev,_from_a_folio_within_an_illustrated_manuscript_of_the_Prem_Ambodh_Pothi.jpg",
+  "license": "Public domain",
+  "author": "अज्ञात चित्रकार (Unknown artist)",
+  "asset": "assets/palace/v014/pran/namdev-prem.webp",
+  "caption": "भगत नामदेव जी · हस्तलिखित ग्रंथ का चित्र",
+  "figure": "namdev"
+ },
+ {
+  "file": "Zhang Lu-Laozi Riding an Ox (cropped).jpg",
+  "source": "https://commons.wikimedia.org/wiki/File:Zhang_Lu-Laozi_Riding_an_Ox_(cropped).jpg",
+  "license": "Public domain",
+  "author": "Zhang Lu",
+  "asset": "assets/palace/v014/pran/laozi-bael.webp",
+  "caption": "लाओ त्ज़ु · बैल पर सवार (झांग लू)",
+  "figure": "laozi"
  }
 ]
