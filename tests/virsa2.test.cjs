@@ -1,0 +1,4 @@
+const test=require('node:test'),assert=require('node:assert'),V=require('../assets/virsa/virsa-core.js'),fs=require('fs'),path=require('path');
+test('5 new virsa artists, 5–8 oEmbed-verified songs each, ids unique',()=>{for(const id of['surinder','yamla','mastana','prakash','maan']){const a=V.ARTISTS.find(x=>x.id===id);assert.ok(a,id);assert.ok(a.songs.length>=5&&a.songs.length<=8,id);for(const s of a.songs){assert.ok(V.valid(s),s.id);assert.ok(s.by&&s.t)}}
+ assert.equal(new Set(V.ALL).size,V.ALL.length);assert.equal(V.ARTISTS[0].id,'manak');assert.equal(V.ARTISTS[1].id,'chamkila');
+ assert.doesNotMatch(JSON.stringify(V.ARTISTS),/sharab|whisk|botal|शराब|बोतल|daru|दारू/i);assert.match(fs.readFileSync(path.join(__dirname,'..','sw.js'),'utf8'),/const CACHE=PREFIX\+'v0\.(7[6-9]|[89]\d)\./);});
