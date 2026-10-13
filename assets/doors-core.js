@@ -32,6 +32,7 @@ const TREE={id:'root',icon:'🏰',title:'द्वार महल · ਦਰਵ�
   {icon:'🧊',title:'तख़्त Cube',sub:'घुमाओ · 6 द्वार · koins',href:'./takht.html'},
   {icon:'🧡',title:'सेहत Control Room',sub:'दवाई · नींद · anxiety · निजी',href:'./sehat.html'},
   {icon:'🪔',title:'आज का संकल्प',sub:'सुबह संकल्प · शाम ✅ · दीप',href:'./sankalp.html'},
+  {icon:'📜',title:'आज का गुण',sub:'रोज़ एक गुण · छोटा काम · koins',href:'./gun.html'},
   {icon:'📿',title:'सिमरन माला',sub:'108 मनके · tap · नाम · koins',href:'./mala.html'},
   {icon:'📖',title:'आज की साखी',sub:'रोज़ एक साखी · सुनो · quiz',href:'./sakhi.html'},
   {icon:'🌸',title:'मेरा आज का भाव',sub:'रोज़ का भाव · बाणी · डायरी',href:'./aaj-bhav.html'},
