@@ -25,7 +25,7 @@ Deploy के बाद एक URL मिलेगा, जैसे `https://kdn
 curl "https://api.telegram.org/bot<TOKEN>/setWebhook" \
   -d "url=https://kdn-telegram-bot.<आपका-नाम>.workers.dev" \
   -d "secret_token=<WEBHOOK_SECRET>" \
-  -d 'allowed_updates=["message","callback_query"]'
+  -d 'allowed_updates=["message","callback_query","my_chat_member"]'
 ```
 जाँच: `https://api.telegram.org/bot<TOKEN>/getWebhookInfo` में आपका URL दिखना चाहिए।
 
@@ -44,3 +44,9 @@ curl "https://api.telegram.org/bot<TOKEN>/setWebhook" \
 4. "Telegram पर मंज़ूरी के लिए भेजें" दबाएँ → Telegram में ✅/✏️/❌ popup आएगा। ✅ के बिना group में कुछ नहीं जाता।
 
 सुरक्षा: key सिर्फ़ उसी फ़ोन के localStorage में रहती है; worker key को constant-time से जाँचता है, सिर्फ़ `https://guru-nanak-dev-ji.github.io` से CORS देता है, प्रति IP 5 requests/मिनट की सीमा है, post 3500 अक्षर तक।
+
+## 6. Test group (🧪)
+1. Bot को नए group में जोड़ें (मालिक खुद जोड़े) → bot private chat में group का नाम और ID भेजेगा। या group में `/id` लिखें → ID private chat में आएगी (group में कुछ नहीं लिखा जाता)।
+2. वह ID `wrangler.toml` में `TEST_GROUP_ID = "-100..."` डालें और deploy करें।
+3. अब हर popup में चौथा button **🧪 Test group में डालो** आएगा → post सिर्फ़ test group में जाएगी। ✅ पहले जैसा Khalsa konnect में ही डालता है।
+> जुड़ने की सूचना के लिए webhook में `my_chat_member` भी होना चाहिए (ऊपर step 3 देखें)।

@@ -6,3 +6,6 @@ compatibility_date = "2026-10-01"
 [vars]
 OWNER_ID = "7812291108"
 GROUP_ID = "-1002221114009"
+# Optional: test group id. When set, popups get a "🧪 Test group में डालो" button (callback post_test).
+# Find the id: owner types /id in the group (bot DMs it). Uncomment and set:
+# TEST_GROUP_ID = "-100xxxxxxxxxx"
