@@ -11,6 +11,6 @@ GROUP_ID = "-1002221114009"
 TEST_GROUP_ID = "-1004340734853"
 
 # YouTube OAuth: secrets YT_CLIENT_ID, YT_CLIENT_SECRET (wrangler secret put). Refresh token stored in KV:
-# [[kv_namespaces]]
-# binding = "KDN_KV"
-# id = "<KDN_KV namespace id>"
+[[kv_namespaces]]
+binding = "KDN_KV"
+id = "0b9d3ff65e384f52b886854af5e11d5f"
