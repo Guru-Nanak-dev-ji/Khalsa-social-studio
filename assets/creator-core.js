@@ -73,6 +73,8 @@
       instagram:'https://www.instagram.com/'
     };
   }
-  const api={KEY,uid,safeUrl,validate,parse,serialize,compose,Store,legacy,shareLinks,waLink};
+  function igTargets(mobile){return mobile?['instagram://camera','https://www.instagram.com/']:['https://www.instagram.com/'];}
+  function wrapLines(text,max){const out=[];for(const para of String(text||'').split('\n')){let line='';for(const w of para.split(/\s+/)){if(!w)continue;const n=line?line+' '+w:w;if(Array.from(n).length>max&&line){out.push(line);line=w;}else line=n;}out.push(line);}return out;}
+  const api={igTargets,wrapLines,KEY,uid,safeUrl,validate,parse,serialize,compose,Store,legacy,shareLinks,waLink};
   if(typeof module==='object'&&module.exports)module.exports=api;else root.KDNCreator=api;
 })(typeof globalThis!=='undefined'?globalThis:this);
