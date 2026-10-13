@@ -493,6 +493,78 @@
 "href": "./vand.html"
 },
 {
+"id": "swad",
+"icon": "🍲",
+"name": "हर राज्य का स्वाद",
+"sub": "शाकाहारी, लंगर के लायक",
+"cat": "s",
+"href": "./swad.html"
+},
+{
+"id": "swad-punjab",
+"icon": "🌾",
+"name": "पंजाब का स्वाद",
+"sub": "🥬🫓🍛🫘🍚",
+"cat": "s",
+"href": "./swad-punjab.html"
+},
+{
+"id": "swad-haryana",
+"icon": "🥛",
+"name": "हरियाणा का स्वाद",
+"sub": "🥣🍲🫓🌿🍮",
+"cat": "s",
+"href": "./swad-haryana.html"
+},
+{
+"id": "swad-rajasthan",
+"icon": "🏜️",
+"name": "राजस्थान का स्वाद",
+"sub": "🟤🍛🫓🌵🍯",
+"cat": "s",
+"href": "./swad-rajasthan.html"
+},
+{
+"id": "swad-gujarat",
+"icon": "🪁",
+"name": "गुजरात का स्वाद",
+"sub": "🟨🍚🫓🥘🥣",
+"cat": "s",
+"href": "./swad-gujarat.html"
+},
+{
+"id": "swad-maharashtra",
+"icon": "🌶️",
+"name": "महाराष्ट्र का स्वाद",
+"sub": "🍚🥣🫓⚪🥞",
+"cat": "s",
+"href": "./swad-maharashtra.html"
+},
+{
+"id": "swad-bengal",
+"icon": "🪷",
+"name": "बंगाल का स्वाद",
+"sub": "🥕🫘🥔🫓🍮",
+"cat": "s",
+"href": "./swad-bengal.html"
+},
+{
+"id": "swad-tamilnadu",
+"icon": "🍃",
+"name": "तमिलनाडु का स्वाद",
+"sub": "🍲🥣🍚🍋🥛",
+"cat": "s",
+"href": "./swad-tamilnadu.html"
+},
+{
+"id": "swad-kashmir",
+"icon": "🏔️",
+"name": "कश्मीर का स्वाद",
+"sub": "🥔🪷🫘🥬🍵",
+"cat": "s",
+"href": "./swad-kashmir.html"
+},
+{
 "id": "nanak-ghar",
 "icon": "🏠",
 "name": "नानक घर सेवा",
