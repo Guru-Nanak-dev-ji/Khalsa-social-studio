@@ -39,6 +39,7 @@ const TREE={id:'root',icon:'🏰',title:'द्वार महल · ਦਰਵ�
   {icon:'🧲',title:'आकर्षण का नियम',sub:'जैसी भावना वैसा फल · 3 कदम · koins',href:'./akarshan.html'},
   {icon:'📜',title:'आज का गुण',sub:'रोज़ एक गुण · छोटा काम · koins',href:'./gun.html'},
   {icon:'📖',title:'कहानी घर',sub:'चेतना का सफ़र · अज्ञात अवतार · चुनो',href:'./kahani.html'},
+  {icon:'🤣',title:'फनीबुक',sub:'हँसी से सच · बिना चोट · koins',href:'./funnybook.html'},
   {icon:'🍲',title:'वंड छक्को',sub:'रोज़ बाँटो · थाली · koins',href:'./vand.html'},
   {icon:'📿',title:'सिमरन माला',sub:'108 मनके · tap · नाम · koins',href:'./mala.html'},
   {icon:'📖',title:'आज की साखी',sub:'रोज़ एक साखी · सुनो · quiz',href:'./sakhi.html'},

@@ -17,6 +17,7 @@ const GAMES=[
  {id:'her',icon:'👽',game:'HER — आवाज़ें',badge:'आवाज़ सुनने वाला',key:'kdn-fbher-v1',href:'./kahani.html#her',got:s=>s.her===true},
  {id:'whitemirror',icon:'🤍',game:'White Mirror',badge:'सफ़ेद शीशा',key:'kdn-whitemirror-v1',href:'./kahani.html',got:s=>s.badge===true},
  {id:'kahani',icon:'📖',game:'कहानी घर',badge:'कथा यात्री',key:'kdn-kahani-v1',href:'./kahani.html',got:s=>s.badge===true},
+ {id:'funny',icon:'🤣',game:'फनीबुक',badge:'फनी साधक',key:'kdn-funny-v1',href:'./funnybook.html',got:s=>s.badge===true||(Array.isArray(s.done)&&s.done.length>=7)},
  {id:'vand',icon:'🍲',game:'वंड छक्को',badge:'वंड साधक',key:'kdn-vand-v1',href:'./vand.html',got:s=>s.badge===true||(Array.isArray(s.done)&&s.done.length>=7)},
  {id:'akarshan',icon:'🧲',game:'आकर्षण का नियम',badge:'आकर्षण साधक',key:'kdn-akarshan-v1',href:'./akarshan.html',got:s=>s.badge===true},
  {id:'khoya',icon:'🏰',game:'My Kingdom Lands',badge:'खोजी सिंह',key:'kdn-khoya-v1',href:'./kingdom-lands.html',got:s=>s.badge===true},
