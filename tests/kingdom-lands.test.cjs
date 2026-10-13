@@ -44,3 +44,19 @@ test('sound: procedural only, off by default, remembered, wired',()=>{const S=re
  for(const k of['find','wrong','hint','open','clear'])assert.ok(js.includes("sfx('"+k+"')"),k);assert.ok(js.includes('pointerdown')&&h.includes('id="snd"')&&h.includes('khoya-sound.js'));
  assert.ok(R('sw.js').includes('./assets/khoya/khoya-sound.js'));});
 test('drag ghost class does not hide .btn.ghost buttons',()=>{const css=R('assets/khoya/khoya.css');assert.ok(!/(^|\n)\.ghost\{position:fixed/.test(css));assert.ok(css.includes('.dragghost{'));});
+
+test('inventory: defs, 12 slots, stacks, use tags, full, migration',()=>{const I=C.ITEMS;for(const id in I){const d=I[id];assert.ok(d.itemId===id&&/[\u0900-\u097F]/.test(d.displayName)&&d.icon&&typeof d.stackable==='boolean'&&d.maxStack>=1&&Array.isArray(d.usableTags));}
+ assert.equal(C.CAP,12);let b=[];b=C.addItem(b,C.KAN,5).bag;b=C.addItem(b,C.KAN,3).bag;assert.deepEqual(b,[{id:C.KAN,n:8}]);assert.ok(!C.addItem(b,'nope').ok);
+ b=C.addItem(b,C.KAN,200).bag;assert.equal(b.length,3);assert.ok(C.hasItem(b,C.KAN,208));b=C.removeItem(b,C.KAN,108).bag;assert.ok(C.hasItem(b,C.KAN,100)&&!C.hasItem(b,C.KAN,101));
+ let f=[];const ids=Object.keys(I).filter(i=>!I[i].stackable);for(const id of ids.slice(0,12))f=C.addItem(f,id).bag;const r=C.addItem(f,ids[12]);assert.ok(r.full&&!r.ok&&r.bag.length===12);
+ let u=C.useItem([{id:'surya-tukda',n:1}],'surya-tukda','lock:9');assert.equal(u.reason,'tag');u=C.useItem([{id:'surya-tukda',n:1}],'surya-tukda','lock:4');assert.ok(u.ok&&u.bag.length===0);assert.equal(C.useItem([],'chabi','door:0').reason,'none');
+ let s=C.fresh();for(const o of C.SCENES[0].objs)s=C.tap(s,0,o.id).state;assert.ok(C.hasItem(s.bag,'chabi')&&C.hasItem(s.bag,C.KAN,8));
+ const old=JSON.parse(JSON.stringify(s));delete old.bag;assert.deepEqual(C.validate(old).bag.map(x=>x.id).sort(),['chabi',C.KAN].sort());
+ for(let t=0;t<4;t++)while(s.tiles[0][t]!==0)s=C.rotate(s,0,t).state;assert.ok(!C.hasItem(s.bag,'chabi'),'key used on door');
+ const k=C.useKan(s,3);assert.ok(k.ok&&C.hasItem(k.state.bag,C.KAN,5));assert.deepEqual(C.validate({v:1,found:[],bag:[{id:'x',n:1},{id:'chabi',n:7}]}).bag,[{id:'chabi',n:1}]);
+ const js=R('assets/khoya/khoya.js');assert.ok(js.includes("'kl-bag-change'")&&js.includes('झोला भर गया')&&js.includes("sfx('pickup')"));assert.ok(require('../assets/khoya/khoya-sound.js').SFX.pickup);});
+
+test('lock manager: requiredItemIds, wrong item, tap fallback, reward',()=>{assert.deepEqual(C.requiredItemIds(4),['surya-tukda','chandra-lens']);assert.deepEqual(C.requiredItemIds(0),[]);
+ let s=C.fresh();for(let i=0;i<=4;i++){for(const o of C.SCENES[i].objs)s=C.tap(s,i,o.id).state;if(i<4)s.puzzles.push(i);}s=C.validate(s);
+ assert.ok(!C.place(s,4,'agni').ok);let r=C.place(s,4,'surya-tukda');assert.ok(r.ok&&!r.ready);r=C.place(r.state,4,'chandra-lens');assert.ok(r.ready&&!C.hasItem(r.state.bag,'chandra-lens'));
+ const js=R('assets/khoya/khoya.js');assert.ok(js.includes('यह यहाँ फिट नहीं होता')&&js.includes("'khoya-lock:'")&&js.includes('selItem'));});
