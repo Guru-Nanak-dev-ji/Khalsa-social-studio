@@ -14,4 +14,11 @@ test('page, door, feed, khazana, naksha, sw, no Khanda, safe DOM',()=>{const h=R
  assert.ok(h.includes('lang="hi"')&&h.includes('hindi-fonts.css')&&h.includes('goldtv.js')&&h.includes('चेतना का धागा')&&h.includes('असली पैसा नहीं'));assert.ok(!/☬/.test(all));assert.ok(!/<img|selfie/i.test(h+js));
  assert.ok(!/innerHTML|outerHTML|insertAdjacentHTML|fetch\(/.test(js));assert.ok(css.includes('prefers-reduced-motion')&&css.includes('@keyframes draw'));
  assert.ok(Dr.all().some(d=>d.href==='./kahani.html'));assert.equal(JSON.parse(R('assets/goldtv/feed.json')).items[0].href,'./kahani.html');assert.ok(N.IDS.includes('kahani'));
- const sw=R('sw.js');assert.equal((sw.match(/const CACHE/g)||[]).length,1);assert.ok(sw.includes("const CACHE=PREFIX+'v0.45.0'"));assert.ok(sw.includes("const ASSETS=['./kahani.html','./assets/kahani/kahani-core.js'"));});
+ const sw=R('sw.js');assert.equal((sw.match(/const CACHE/g)||[]).length,1);assert.ok(sw.includes("const CACHE=PREFIX+'v0.46.0'"));assert.ok(sw.includes("const ASSETS=['./kahani.html','./assets/kahani/kahani-core.js'"));});
+test('White Mirror: parts, ring, help verified, exclusions',()=>{const W=C.WM,all=JSON.stringify(W)+R('kahani.html');assert.equal(W.tag,'विश्वास 100%, तर्क 100% — दोनों सच');assert.ok(W.disclaimer.includes('काल्पनिक'));
+ assert.deepEqual(W.parts.map(p=>p.id),['wm1','wm3','wm4','wm45']);assert.deepEqual(W.emotions.map(e=>e.n),['गुस्सा','खुशी','उदासी','नफ़रत','डर','शर्म','ईर्ष्या','बोरियत']);
+ for(const w of['मैं काफ़िर हूँ','मैं दयालू हूँ','पापा, आ जाओ','मैं ख़ुद को कभी नहीं मारूँगा','मैं जलाऊँगा नहीं, बनाऊँगा','वह लिख जो किसी को बचाए','काफ़िर वह है जो सीखता है','अब नफ़रत नहीं','भाग 5 जल्द','14416','9-8-8'])assert.ok(all.includes(w),w);
+ assert.ok(W.quote===undefined&&W.parts[3].quote.length<=2);
+ for(const bad of['ਨਾਨਕ ਨਾਲ ਦਗਾ','नानक नाल दगा','ਸਿੱਖੀ ਹੱਥ','सिख्खी हथ','Deep Sidhu','दीप सिद्धू','Bhindranwale','भिंडरांवाले','ਭਿੰਡਰਾਂਵਾਲੇ','खालिस्तान','Khalistan','☬','खंडा','सीक्रेट खालसा','तर्क सिंह','भावना कौर','क्यों?','मारो','शिकार'])assert.ok(!all.includes(bad),bad);
+ assert.ok(!/\+?\d{10}|@[a-z0-9_]{3,}/i.test(JSON.stringify(W.parts[3].inbox)));
+ const css=R('assets/kahani/kahani.css');assert.ok(css.includes('.ring{')&&css.includes('@keyframes spin'));});

@@ -9,6 +9,14 @@ C.MAP.forEach(m=>{const li=el('li');li.append(el('b',null,m.title+' — '),el('s
 const A=C.AVATAR;$('av-tag').textContent=A.tag;$('av-teaser').textContent=A.teaser;$('av-msg').textContent=A.msg;$('disc').textContent='⚠️ '+C.DISCLAIMER;
 A.cast.forEach(c=>{const li=el('li');li.append(el('b',null,c.n+': '),el('span',null,c.r));$('cast').append(li);});
 for(const [id,arr] of [['ep1',A.ep1],['ep2',A.ep2],['ep3',A.ep3],['ep4',A.ep4],['ep5',A.ep5],['ep6',A.ep6],['ep7',A.ep7],['ep8',A.ep8],['ep9',A.ep9],['ep10',A.ep10]])arr.forEach(l=>{const p=el('p',l.who?'line':'dir');if(l.who)p.append(el('b',null,l.who+': '));p.append(el('span',null,l.t));$(id).append(p);});
+const W=C.WM;$('wm-tag').textContent=W.tag;$('wm-disc').textContent='⚠️ '+W.disclaimer;$('wm-next').textContent=W.next;
+function helpBox(){const d=el('div','help');d.setAttribute('role','note');d.append(el('b',null,W.help.title));W.help.lines.forEach(l=>d.append(el('p',null,l)));d.append(el('small',null,W.help.src));return d;}
+W.parts.forEach(pt=>{const sec=el('div','wmp');sec.id=pt.id;sec.append(el('h3',null,pt.title));pt.p.forEach((t,i)=>{sec.append(el('p',null,t));
+ if(pt.quote&&i===0){const q=el('blockquote','gq');q.lang='pa';pt.quote.forEach(l=>q.append(el('p',null,l)));q.append(el('small',null,'— "कनेडा है बरो" से'));sec.append(q);}
+ if(pt.inbox&&i===2){const ib=el('div','inbox');pt.inbox.forEach(m=>ib.append(el('p',null,m)));sec.append(ib);}
+ if(pt.ring&&i===1){const r=el('div','ring');r.setAttribute('role','list');W.emotions.forEach((e,j)=>{const b=el('button','emo-b',e.n);b.type='button';b.setAttribute('role','listitem');b.style.setProperty('--c',e.c);b.style.setProperty('--a',(j*45)+'deg');b.onclick=()=>{$('emo-o').textContent=e.n+': "'+e.o+'"';};r.append(b);});
+  r.append(el('span','ring-c','🤍 दयालू'));sec.append(r,el('p','res','भाव पर tap करें, वह अपनी जड़ बताएगा'));sec.lastChild.id='emo-o';}});
+ if(pt.help)sec.append(helpBox());$('wm-parts').append(sec);});
 const Y=[40,100,160];
 function lines(){const s=$('lines');s.replaceChildren();C.TIMES.forEach((t,i)=>{s.append(sv('path',{d:`M10 ${Y[i]} H330`,class:'base'}));const tx=sv('text',{x:12,y:Y[i]-10,class:'lbl'});tx.textContent=t.icon+' '+t.name;s.append(tx);});
  st.picks.forEach((p,i)=>{const y=Y[i],x=90+i*0;const up=p==='a';s.append(sv('path',{d:`M90 ${y} C150 ${y} 170 ${y+(up?-22:22)} 320 ${y+(up?-22:22)}`,class:'br '+(up?'good':'bad')}));
