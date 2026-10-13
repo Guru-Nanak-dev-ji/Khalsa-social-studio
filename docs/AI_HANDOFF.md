@@ -3,6 +3,14 @@
 Updated: 2026-10-13
 Repository: https://github.com/Guru-Nanak-dev-ji/Khalsa-social-studio
 
+## Latest milestone — v0.13 cinematic palace
+- Latest user corrections: engraved gold opening doors + camera push, TV stand, quick feedback, automatic full-screen Pran after five questions, recovered blue/gold spiritual stage, large speaking guides, 16-door Control Room, new 3-step forms, Zoho removal, connected mandals and last-place resume.
+- Preserve all old tools. Fresh palace.html is cache-safe alias; six opening aliases stay equal. Versioned world/v013, kingdom/v013, palace/v013, SW v0.13.0.
+- Local profile bonus +25 game points/+10 Khalsa coins once; full exit ledger and clearly DEMO rupees. Social URLs are shortcuts, not OAuth. Chess/card reactions and consented notes are local demos, not a real social backend.
+- New games save progress locally by default for resume, with profile save opt-out. Existing keys/records retained. No actual payments, job placement, ownership or live AI.
+- User requires FREE-ONLY solutions: no paid plan, credits or upgrades. Accurate lip-sync is not yet implemented; body animation and distinct existing AI voices are present. Native OS splash cannot be made animated with page CSS.
+- 51 Node + 17 Python checks, full flow/all 20 HTML/canvas mobile falcon simulations pass; actual Android visual/audio checks outstanding. See docs/PALACE_V013_HANDOFF.md. Verify deployment status in PR/Pages before asserting live.
+
 ## Latest milestone — v0.12 shared living kingdom
 - Preserve all old functions while redesigning every page. Shared kingdom/device layer covers 17 retained HTML pages plus the cache-safe kingdom.html entry alias; 13 catalog destinations, not 500 completed pages.
 - Gold arches, two recovered flying/perching falcons, moving chess/cards, phone/TV/laptop/pager/LED/book frames, two-door cross-page navigation and room search.

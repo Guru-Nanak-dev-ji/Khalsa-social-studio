@@ -5,7 +5,7 @@
   if(!check||!reload||!status||!('serviceWorker'in navigator))return;
   const sw=navigator.serviceWorker;let registration=null,starting=null,changed=false;
   check.hidden=false;
-  function ready(){changed=true;status.textContent='नया पन्ना तैयार है। खोलने पर इस यात्रा के अस्थायी जवाब रीसेट होंगे।';reload.hidden=false;}
+  function ready(){changed=true;status.textContent='नया पन्ना तैयार है। सेव की हुई यात्रा वहीं से जारी रहेगी।';reload.hidden=false;}
   function watch(worker){
     if(!worker)return;
     const report=()=>{

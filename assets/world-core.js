@@ -1,7 +1,7 @@
 (function(root,factory){const content=typeof module==='object'&&module.exports?require('./world-content.js'):root.KDNWorldContent;const api=factory(content);if(typeof module==='object'&&module.exports)module.exports=api;else root.KDNWorld=api;})(typeof globalThis!=='undefined'?globalThis:this,function(C){
 'use strict';
 const KEY='kdn-immersive-world-v1',categories=['JK','IQ','Study','Work','Seva'];
-const empty=()=>({version:1,phase:'gates',gate:0,route:'light',pledgeChoice:null,profile:null,history:[],reflections:[],activeMs:0,hourlyDone:0,steps:0,avatars:[],traits:{},tasks:[],saved:false});
+const empty=()=>({version:1,phase:'gates',gate:0,route:'light',pledgeChoice:null,profile:null,history:[],reflections:[],activeMs:0,hourlyDone:0,steps:0,avatars:[],traits:{},tasks:[],saved:false,introIndex:0,scene:null,pending:null});
 function score(state){const result=Object.fromEntries(categories.map(c=>[c,{points:0,correct:0,attempts:0,percent:0}]));for(const h of state.history){const q=C.quiz.find(q=>q.id===h.id);if(!q)continue;const row=result[q.category];row.attempts++;if(h.choice===q.correct){row.correct++;row.points+=10;}else if(h.choice!==null)row.points-=3;}for(const row of Object.values(result))row.percent=row.attempts?Math.round(100*row.correct/row.attempts):0;return result;}
 function reward(kind,id,choice){
  if(kind==='reflection'){const r=C.gateRubric[id];if(!r||!Number.isInteger(choice)||choice<0||choice>3)return null;const value=r.values[choice];return {points:value/10,positive:Math.max(0,value),negative:Math.max(0,-value),reason:r.reasons[choice],category:r.category};}
@@ -35,7 +35,12 @@ function validate(data){
  if(!Array.isArray(data.avatars)||data.avatars.length>12)throw Error('Invalid avatars');for(const a of data.avatars){if(!a||typeof a.name!=='string'||!a.name.trim()||a.name.length>30||!['family','friend','fictional'].includes(a.relation)||a.consent!==true)throw Error('Consent required');out.avatars.push({name:a.name.trim(),relation:a.relation,consent:true});}
  if(!data.traits||typeof data.traits!=='object'||Array.isArray(data.traits))throw Error('Invalid reflections');for(const [key,value]of Object.entries(data.traits)){if(!C.traits.includes(key)||!Number.isInteger(value)||value<0||value>100)throw Error('Invalid percentage');out.traits[key]=value;}
  if(!Array.isArray(data.tasks)||data.tasks.length>3)throw Error('Invalid tasks');const used=new Set();for(const t of data.tasks){if(!Number.isInteger(t.id)||t.id<0||t.id>=C.tasks.length||used.has(t.id)||typeof t.done!=='boolean')throw Error('Invalid task');used.add(t.id);out.tasks.push({id:t.id,done:t.done});}
- out.saved=data.saved===true;return out;
+ out.saved=data.saved===true;
+ out.introIndex=Number.isInteger(data.introIndex)&&data.introIndex>=0&&data.introIndex<C.intro.length?data.introIndex:0;
+ out.scene=['pledge','intro','profile','control','score','meter','people','traits','work','menu','matches'].includes(data.scene)?data.scene:null;
+ out.pending=null;
+ if(data.pending){const p=data.pending;if(p.kind==='reflection'&&out.phase==='gates'&&p.id===out.gate||p.kind==='knowledge'&&C.quiz.some(q=>q.id===p.id)&&!out.history.some(h=>h.id===p.id)){out.pending={kind:p.kind,id:p.id,remaining:Number.isFinite(p.remaining)?Math.max(0,Math.min(30000,p.remaining)):30000,paused:p.paused===true,path:p.path==='shadow'?'shadow':'light'};}}
+ return out;
 }
 class Store{constructor(storage){this.storage=storage;this.raw=null;this.data=null;this.error=null;try{this.raw=storage.getItem(KEY);if(this.raw)this.data=validate(JSON.parse(this.raw));}catch(e){this.error=e;}}
  save(state){if(this.error)throw Error('पुराना सेव रिकॉर्ड पढ़ा नहीं जा सका; उसे नहीं बदला गया।');if(this.storage.getItem(KEY)!==this.raw)throw Error('दूसरे टैब में प्रगति बदली है। पहले इस यात्रा का backup लें।');const valid=validate(state),raw=JSON.stringify(valid);this.storage.setItem(KEY,raw);this.raw=raw;this.data=valid;}

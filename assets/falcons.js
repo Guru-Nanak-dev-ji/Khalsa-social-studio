@@ -19,7 +19,7 @@
   const pointer = {x: -1000, y: -1000};
 
   // Visible flights alternate with short perching stops.
-  function restDuration() { return random(5, 12);
+  function restDuration() { return random(3, 7);
   }
   const birds = ['silver', 'golden'].map((name, index) => {
     const element = document.createElement('span');
@@ -49,8 +49,8 @@
   function measure() {
     const width = document.documentElement.clientWidth || innerWidth;
     const height = window.visualViewport?.height || innerHeight;
-    const top = Math.max(0, document.querySelector('.hud')?.getBoundingClientRect().bottom || 0);
-    const size = clamp(width * .25, 92, 150);
+    const top = document.querySelector('#popup[open]:not([data-view=quiz])')?58:Math.max(58, document.querySelector('.hud')?.getBoundingClientRect().bottom || 0);
+    const size = clamp(width * .22, 76, 130);
     viewport = {width, height, top, size, halfPerch: size * .28, perchHeight: size * .40};
     birds.forEach(bird => { if (bird.ready) resizeCanvas(bird); });
     environmentAt = -1;
@@ -100,7 +100,7 @@
     const b = perchBox(point), v = viewport;
     const approach = flightBox({x: point.x, y: point.y - v.perchHeight * .52});
     return b.left >= 3 && b.right <= v.width - 3 && b.top >= v.top + 8 &&
-      b.bottom <= v.height - 10 && !obstacles.some(r => overlap(b, r)) &&
+      b.bottom <= v.height - 10 && (point.kind==='rail'||!obstacles.some(r => overlap(b, r))) &&
       !coversKhanda(b) && !coversKhanda(approach);
   }
   function refreshEnvironment() {
@@ -137,6 +137,8 @@
         }
       }
     });
+    // Reserved sky rail stays clear of form fields on small screens.
+    for(const side of [0,1])for(const slot of [0,1]){const p={key:'rail:'+side+':'+slot,node:null,kind:'rail',x:side?width-viewport.size*.65-slot*width*.24:viewport.size*.65+slot*width*.24,y:top+52+slot*12};if(clearSpot(p))perches.push(p);}
     // Safe edge docking also works on views with no currently visible flag.
     for (const side of [0, 1]) {
       const x = side ? width - viewport.halfPerch - 5 : viewport.halfPerch + 5;
@@ -149,7 +151,8 @@
   }
   function choosePerch(bird, initial = false) {
     const other = birds[1 - bird.index];
-    const choices = perches.filter(p => p.key !== bird.target?.key &&
+    const pool=document.querySelector('#popup[open]')?perches.filter(p=>p.kind==='rail'):perches;
+    const choices = pool.filter(p => p.key !== bird.target?.key &&
       (!other.target || (p.key !== other.target.key && distance(p, other.target) > viewport.halfPerch * 3)));
     return choices.map(p => ({...p, score: random(0, 3) + (p.kind === 'arch' ? (initial ? 8 : 1) : 0) +
       ((bird.index ? p.x > viewport.width / 2 : p.x < viewport.width / 2) ? .7 : 0) -
@@ -253,7 +256,7 @@
       }
       if ((!anchor || due) && !readingInteraction() && !occupiedFlight()) {
         const next = choosePerch(bird);
-        if (!anchor && !clearSpot(bird.point) && next) {
+        if (!anchor && !clearSpot({...bird.point,kind:bird.target?.kind}) && next) {
           // A scroll or door change can leave the old perch inside protected art.
           // Recover onto a clear perch, then resume visible flights.
           settle(bird, next); bird.restUntil = elapsed + 1.5;
@@ -304,7 +307,7 @@
       if (progress >= 1) { settle(bird, f.destination, bird.direction); paintImage(bird, 'poses', 0, bird.direction); depth = 1; }
     }
     // Final per-frame guard covers scroll/resize while a flight is already underway.
-    bird.element.hidden = bird.state === 'resting' ? !clearSpot(bird.point) : coversKhanda(flightBox(bird.point));
+    bird.element.hidden = bird.state === 'resting' ? !clearSpot({...bird.point,kind:bird.target?.kind}) : coversKhanda(flightBox(bird.point));
     bird.element.style.transform = `translate3d(${bird.point.x}px,${bird.point.y}px,0)`;
     bird.canvas.style.transform = `translate(-50%,-60%) scale(${depth})`;
     bird.element.dataset.state = bird.state;
@@ -315,18 +318,20 @@
   function tick(stamp) {
     raf = null;
     if (document.hidden) {root.hidden=true;return;}
-    if (document.body.classList.contains('motion-off')) {root.hidden=false;return;}
+    const still=document.body.classList.contains('motion-off');
     const delta = Math.min(.1, Math.max(0, (stamp - previous) / 1000)); previous = stamp;
-    if (!document.querySelector('dialog[open]') && !document.documentElement.classList.contains('q-paused67')) elapsed += delta;
-    root.hidden = !!document.querySelector('dialog[open]') || !!document.querySelector('#boot:not([hidden])');
+    if (!still && !document.documentElement.classList.contains('q-paused67')) elapsed += delta;
+    root.hidden = !!document.querySelector('#boot:not([hidden])');
+    const full=document.querySelector('#popup[open]:is([data-view=pledge],[data-view=intro],[data-view=profile],[data-view=control])');
+    const parent=full||document.body;if(root.parentElement!==parent){parent.append(root);measure();birds.forEach(b=>{if(b.ready)b.state='loading';});}
     refreshEnvironment();
     const moving = occupiedFlight();
-    if (moving || elapsed - lastPaint >= .08 || reduced.matches) {
+    if (moving || elapsed - lastPaint >= .08 || reduced.matches || still) {
       const animationDelta = Math.min(.15, elapsed - lastPaint);
       lastPaint = elapsed;
       birds.forEach(bird => renderBird(bird, animationDelta));
     }
-    if (!reduced.matches) raf = requestAnimationFrame(tick);
+    if (!reduced.matches&&!still) raf = requestAnimationFrame(tick);
   }
   function pause() { if (raf !== null) cancelAnimationFrame(raf); raf = null; }
   function wake() {
