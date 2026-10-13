@@ -32,6 +32,7 @@ const TREE={id:'root',icon:'🏰',title:'द्वार महल · ਦਰਵ�
   {icon:'🧊',title:'तख़्त Cube',sub:'घुमाओ · 6 द्वार · koins',href:'./takht.html'},
   {icon:'🍛',title:'लंगर रसोई',sub:'किरत करो, वंड छको · koins',href:'./langar.html'},
   {icon:'🏹',title:'चक्रव्यूह कथा',sub:'7 घेरे · Quiz · अभिमन्यु',href:'./chakravyuh.html'},
+  {icon:'🦋',title:'Butterfly चुनाव',sub:'One click · छोटे चुनाव बड़ा असर',href:'./titli.html'},
   {icon:'♞',title:'शतरंज Quiz',sub:'जल्द आ रहा · Soon',soon:true},
   {icon:'🃏',title:'ताश पत्ते Quiz',sub:'जल्द आ रहा · Soon',soon:true}]},
  {id:'gyan',icon:'🏛',title:'Gyan',sub:'ज्ञान मंडल · ਗਿਆਨ',doors:[
