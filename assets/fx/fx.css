@@ -16,3 +16,4 @@
 @keyframes fx-up{from{transform:translateY(40%);opacity:0}to{transform:none;opacity:1}}
 @media (max-width:600px){.fx-sheet,.fx-fab{backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}}
 @media (prefers-reduced-motion:reduce){.fx-sheet{animation:none}.fx-card{transform:none;opacity:1;transition:none}}
+body:has(#realm-motion) .fx-fab{bottom:calc(150px + env(safe-area-inset-bottom))}
