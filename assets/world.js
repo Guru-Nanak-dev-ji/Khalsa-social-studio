@@ -26,13 +26,14 @@ function renderScene(){
  document.body.dataset.room=String((state.phase==='gates'?state.gate:state.steps+5)%4);$('world-stage').dataset.depth=String(state.gate+state.steps);$('scene-question').textContent=title;$('scene-label').textContent=label;$('scene-note').textContent=note;$('scene-location').textContent=place;$('light-label').textContent=left;$('shadow-label').textContent=right;storageStatus();money();
 }
 function openView(name,title,eyebrow='KDN · सवाल मंडल'){
+ document.dispatchEvent(new Event('kdn:stop-guide-voice'));
  if(busy)finishTravel();
  dialog.classList.remove('tv-leaving');document.body.classList.toggle('tv-open',name==='quiz');view=name;for(const id of views)$(id+'-view').hidden=id!==name;
  $('popup-title').textContent=title;$('popup-eyebrow').textContent=eyebrow;$('popup-status').textContent='';
  if(!dialog.open)dialog.showModal();dialog.scrollTop=0;$('popup-title').focus();
 }
-function closePopup(){clearTimeout(slideTimer);dialog.classList.remove('tv-leaving');document.body.classList.remove('tv-open');if(dialog.open)dialog.close();view=null;if(current&&current.answered)current=null;renderScene();}
-dialog.addEventListener('close',()=>{document.body.classList.remove('tv-open');view=null;if(current&&current.answered)current=null;renderScene();});
+function closePopup(){document.dispatchEvent(new Event('kdn:stop-guide-voice'));clearTimeout(slideTimer);dialog.classList.remove('tv-leaving');document.body.classList.remove('tv-open');if(dialog.open)dialog.close();view=null;if(current&&current.answered)current=null;renderScene();}
+dialog.addEventListener('close',()=>{document.dispatchEvent(new Event('kdn:stop-guide-voice'));document.body.classList.remove('tv-open');view=null;if(current&&current.answered)current=null;renderScene();});
 $('popup-close').addEventListener('click',closePopup);
 function finishTravel(){clearTimeout(journeyTimer);clearTimeout(walkingTimer);$('world-stage').classList.remove('walking');$('world-stage').classList.remove('travelling');$('gate-light').classList.remove('open');$('gate-shadow').classList.remove('open');busy=false;renderScene();}
 function travel(path,after){if(busy||dialog.open)return;busy=true;route=path;const selected=$(path==='light'?'gate-light':'gate-shadow');selected.classList.add('open');const a=$('world-stage').getBoundingClientRect(),b=selected.getBoundingClientRect();$('world-stage').style.setProperty('--travel-x',((a.left+a.width/2-b.left-b.width/2)*4.5)+'px');renderScene();if(reduced||motionOff){finishTravel();after();return;}
@@ -79,8 +80,8 @@ $('ask-ai').addEventListener('click',()=>{if(!help('hint'))return;$('quiz-help')
 $('fifty').addEventListener('click',()=>{if(!help('fifty'))return;current.removed=[0,1,2,3].filter(i=>i!==current.q.correct).slice(0,2);paintQuiz();$('quiz-help').textContent='दो गलत विकल्प हटे। समय रुका है; तैयार होने पर समय चलाएँ।';});
 $('poll').addEventListener('click',()=>{if(!help('poll'))return;let index=0;const other=[20,15,10];const values=[0,1,2,3].map(i=>i===current.q.correct?55:other[index++]);$('quiz-help').textContent='DEMO Audience Poll — कोई वास्तविक दर्शक नहीं। '+values.map((v,i)=>String.fromCharCode(65+i)+': '+v+'%').join(' · ')+'. यह सिर्फ lifeline का उदाहरण है। समय रुका है।';});
 function openPledge(){openView('pledge','क्या तुम यह प्रण ईमानदारी से आज से लागू कर सकते हो?','पाँच प्रण द्वार · संकल्प');$('full-pledge').textContent=C.pledge;}
-function openIntro(reset=true){if(reset)introIndex=0;const item=C.intro[introIndex];openView('intro',item.title,'KDN · प्रस्ताव और संभावना');$('intro-copy').textContent=item.text;$('intro-question').textContent=item.question;$('intro-progress').textContent=(introIndex+1)+' / '+C.intro.length;$('intro-next').textContent=introIndex===C.intro.length-1?'अपना परिचय खोलें →':'आगे समझें →';}
-for(const [id,choice]of [['pledge-accept','accept'],['pledge-consider','consider']])$(id).addEventListener('click',()=>{state.pledgeChoice=choice;state.phase='profile';persist();renderScene();openProfile();});
+function openIntro(reset=true){if(reset)introIndex=0;const item=C.intro[introIndex];$('guide-welcome').hidden=introIndex!==0;openView('intro',item.title,'KDN · प्रस्ताव और संभावना');$('intro-copy').textContent=item.text;$('intro-question').textContent=item.question;$('intro-progress').textContent=(introIndex+1)+' / '+C.intro.length;$('intro-next').textContent=introIndex===C.intro.length-1?'अपना परिचय खोलें →':'आगे समझें →';}
+for(const [id,choice]of [['pledge-accept','accept'],['pledge-consider','consider']])$(id).addEventListener('click',()=>{state.pledgeChoice=choice;state.phase='intro';persist();renderScene();openIntro();});
 $('intro-next').addEventListener('click',()=>{if(introIndex<C.intro.length-1){introIndex++;openIntro(false);}else{if(state.phase==='intro'){state.phase='profile';persist();}openProfile();renderScene();}});
 function openProfile(){openView('profile','अपना परिचय पूरा करें','Game of Takhats · प्रवेश');$('profile-name').value=state.profile?state.profile.name:'';$('profile-language').value=state.profile?state.profile.language:'hi';$('profile-interest').value=state.profile?state.profile.interest:'JK';$('save-consent').checked=state.saved;
  const w=state.profile&&state.profile.work;
@@ -116,7 +117,7 @@ $('trait-name').addEventListener('change',traitSelected);$('trait-value').addEve
 function renderTraits(){traitSelected();$('trait-list').replaceChildren(...Object.entries(state.traits).map(([name,value])=>{const row=document.createElement('div');row.className='trait-entry';const label=document.createElement('span');label.textContent=name;const num=document.createElement('b');num.textContent=value+'%';row.append(label,num);return row;}));}
 $('trait-save').addEventListener('click',()=>{state.traits[$('trait-name').value]=Number($('trait-value').value);persist();renderTraits();$('popup-status').textContent='आपका अपना अनुमान दर्ज हुआ। अगला छोटा, संतुलित कदम क्या होगा?';});
 function openWork(){openView('work','Likes से आगे · मेरा अगला काम','अपना रिकॉर्ड · अभी सत्यापित नहीं');$('task-list').replaceChildren(...C.tasks.map((text,id)=>{const task=state.tasks.find(t=>t.id===id);const row=document.createElement('div');row.className='task-item';const label=document.createElement('p');label.textContent=text;const button=document.createElement('button');button.type='button';button.textContent=!task?'यह काम चुनूँगा':task.done?'पूरा बताया गया · वापस योजना करें':'मैंने यह काम किया';button.addEventListener('click',()=>{const currentTask=state.tasks.find(t=>t.id===id);if(currentTask)currentTask.done=!currentTask.done;else state.tasks.push({id,done:false});persist();openWork();});row.append(label,button);return row;}));}
-function menu(){openView('menu','यात्रा के साधन','KDN World · v0.11.0');storageStatus();}
+function menu(){openView('menu','यात्रा के साधन','KDN World · v0.12.0');storageStatus();}
 function enter(path){if(busy)return;if(current&&!current.answered){showQuiz();return;}
  travel(path,()=>{state.route=path;if(state.phase==='gates')reflection(path);else if(state.phase==='pledge')openPledge();else if(state.phase==='intro')openIntro();else if(state.phase==='profile'){if(path==='light')openProfile();else openIntro();}else{state.steps++;persist();newQuiz('door',path==='light'?'knowledge':state.steps%2?'work':'seva');renderScene();}});
 }
