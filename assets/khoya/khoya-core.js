@@ -36,13 +36,38 @@ const SCENES=[
 const N=SCENES.length,CH1=5;SCENES.forEach(x=>{x.ch=x.ch||1;});const BADGE2='राज्य रक्षक';
 // पहेली: 4 टाइल घुमाओ, सबका तीर ऊपर (0) करो. शुरुआत तय है ताकि हल हमेशा हो.
 const PUZ_START=[[1,2,3,1],[2,1,3,2],[3,3,1,2],[1,3,2,2],[2,2,1,3],[3,1,2,1],[1,1,3,2],[2,3,3,1],[3,2,1,1]];
-const fresh=()=>({v:1,scene:0,found:SCENES.map(()=>[]),cleared:[],puzzles:[],inv:[],tiles:PUZ_START.map(t=>t.slice()),badge:false,badge2:false});
+
+// नई पहेलियाँ: p%4 → 0 टाइल घुमाओ, 1 गियर मिलाओ, 2 चिह्न क्रम, 3 जोड़ी मिलाओ
+const PTYPES=['tiles','gears','runes','match'],ptype=p=>PTYPES[p%4];
+const GEAR_LINKS=[[0,1],[0,1,2],[1,2]],GEAR_MOVES=[[0,2,2],[1,0,2,2],[2,2,1],[0,0,2]];
+const gearStart=p=>{const g=[0,0,0];GEAR_MOVES[p%4].forEach(m=>GEAR_LINKS[m].forEach(j=>g[j]=(g[j]+1)%6));return g;};
+const RUNE_SET=[{e:'☀️',n:'सूरज'},{e:'🌙',n:'चाँद'},{e:'⭐',n:'तारा'},{e:'🪔',n:'दीया'},{e:'💧',n:'पानी'},{e:'🌱',n:'बीज'}];
+const RUNE_SEQ=[[0,4,5,3],[1,2,3,0],[5,4,0,2],[3,0,1,2]],runeSeq=p=>RUNE_SEQ[Math.floor(p/4)%4];
+const MATCH_SET=['🗝️','🪔','👑','🌸','🦚','🐚'],MATCH_ORDER=[[0,3,1,4,2,5,1,0,5,3,4,2],[2,0,5,1,3,4,0,2,4,5,1,3]];
+const matchCards=p=>MATCH_ORDER[Math.floor(p/4)%2].map(i=>MATCH_SET[i]);
+const pzFresh=p=>({tiles:{},gears:{g:gearStart(p)},runes:{k:0},match:{m:[]}})[ptype(p)];
+function pzValid(p,z){const t=ptype(p),f=pzFresh(p);if(!z||typeof z!=='object')return f;
+ if(t==='gears')return Array.isArray(z.g)&&z.g.length===3&&z.g.every(x=>Number.isInteger(x)&&x>=0&&x<6)?{g:z.g.slice()}:f;
+ if(t==='runes')return Number.isInteger(z.k)&&z.k>=0&&z.k<4?{k:z.k}:f;
+ if(t==='match')return Array.isArray(z.m)?{m:z.m.filter((x,i,a)=>Number.isInteger(x)&&x>=0&&x<12&&a.indexOf(x)===i)}:f;return f;}
+const canPz=(s,p)=>p>=0&&p<N-1&&s.cleared.includes(p)&&!s.puzzles.includes(p);
+function pzSet(s,p,z,solved){const pz=s.pz.slice();pz[p]=z;return{state:{...s,pz,puzzles:solved?[...s.puzzles,p]:s.puzzles},solved};}
+function gear(s,p,i){s=validate(s);if(!canPz(s,p)||ptype(p)!=='gears'||!GEAR_LINKS[i])return{state:s,solved:false};
+ const g=s.pz[p].g.slice();GEAR_LINKS[i].forEach(j=>g[j]=(g[j]+1)%6);return pzSet(s,p,{g},g.every(x=>x===0));}
+function rune(s,p,idx){s=validate(s);if(!canPz(s,p)||ptype(p)!=='runes')return{state:s,solved:false};
+ const seq=runeSeq(p),k=s.pz[p].k;if(seq[k]!==idx){const r=pzSet(s,p,{k:0},false);r.wrong=true;return r;}
+ return k+1===seq.length?pzSet(s,p,{k:0},true):pzSet(s,p,{k:k+1},false);}
+function match(s,p,a,b){s=validate(s);if(!canPz(s,p)||ptype(p)!=='match'||a===b)return{state:s,solved:false,ok:false};
+ const c=matchCards(p),m=s.pz[p].m;if(!(a>=0&&a<12&&b>=0&&b<12)||m.includes(a)||m.includes(b)||c[a]!==c[b])return{state:s,solved:false,ok:false};
+ const nm=[...m,a,b];const r=pzSet(s,p,{m:nm},nm.length===12);r.ok=true;return r;}
+const fresh=()=>({v:1,scene:0,found:SCENES.map(()=>[]),cleared:[],puzzles:[],inv:[],tiles:PUZ_START.map(t=>t.slice()),badge:false,badge2:false,pz:SCENES.slice(1).map((x,p)=>pzFresh(p))});
 function validate(s){if(!s||s.v!==1||!Array.isArray(s.found))return fresh();const f=fresh();
  f.found=SCENES.map((sc,i)=>Array.isArray(s.found[i])?s.found[i].filter((id,j,a)=>sc.objs.some(o=>o.id===id)&&a.indexOf(id)===j):[]);
  const idx=a=>Array.isArray(a)?a.filter((x,j,b)=>Number.isInteger(x)&&x>=0&&x<N&&b.indexOf(x)===j):[];
  f.cleared=idx(s.cleared).filter(i=>f.found[i].length===SCENES[i].objs.length);f.puzzles=idx(s.puzzles).filter(i=>i<N-1&&f.cleared.includes(i));
  f.inv=SCENES.filter((sc,i)=>f.cleared.includes(i)).map(sc=>sc.item.id);
  if(Array.isArray(s.tiles)&&s.tiles.length===N-1)f.tiles=s.tiles.map((t,i)=>Array.isArray(t)&&t.length===4&&t.every(x=>Number.isInteger(x)&&x>=0&&x<4)?t.slice():PUZ_START[i].slice());
+ f.pz=SCENES.slice(1).map((x,p)=>pzValid(p,Array.isArray(s.pz)?s.pz[p]:null));
  f.scene=Number.isInteger(s.scene)&&s.scene>=0&&s.scene<N&&unlocked(f,s.scene)?s.scene:0;f.badge=[0,1,2,3,4].every(i=>f.cleared.includes(i));f.badge2=f.cleared.length===N;return f;}
 // दृश्य i खुला है अगर i=0, या पिछला साफ़ + पहेली हल (पिछली चीज़ inventory में)
 function unlocked(s,i){return i===0||(s.cleared.includes(i-1)&&s.puzzles.includes(i-1));}
@@ -53,8 +78,8 @@ function tap(s,i,id){s=validate(s);const sc=SCENES[i];if(!sc||!unlocked(s,i))ret
  return{state:st,ok:true,clearedNew,badgeNew,badge2New,item:clearedNew?sc.item:null};}
 function hint(s,i){s=validate(s);const sc=SCENES[i];return sc?sc.objs.find(o=>!s.found[i].includes(o.id))||null:null;}
 function canHint(last,now){return !last||now-last>=HINT_MS;}
-function rotate(s,p,t){s=validate(s);if(!(p>=0&&p<N-1)||!(t>=0&&t<4)||!s.cleared.includes(p)||s.puzzles.includes(p))return{state:s,solved:false};
+function rotate(s,p,t){s=validate(s);if(ptype(p)!=='tiles'||!(p>=0&&p<N-1)||!(t>=0&&t<4)||!s.cleared.includes(p)||s.puzzles.includes(p))return{state:s,solved:false};
  const tiles=s.tiles.map(a=>a.slice());tiles[p][t]=(tiles[p][t]+1)%4;const solved=tiles[p].every(x=>x===0);
  return{state:{...s,tiles,puzzles:solved?[...s.puzzles,p]:s.puzzles},solved};}
 const progress=s=>{s=validate(s);const tot=SCENES.reduce((a,sc)=>a+sc.objs.length,0),got=s.found.reduce((a,f)=>a+f.length,0);return{got,tot,pct:Math.round(got*100/tot),cleared:s.cleared.length};};
-return{KEY,BADGE,BADGE2,CH1,HINT_MS,WRONG_MS,SCENES,PUZ_START,fresh,validate,unlocked,tap,hint,canHint,rotate,progress};});
+return{PTYPES,ptype,GEAR_LINKS,gearStart,RUNE_SET,runeSeq,matchCards,gear,rune,match,KEY,BADGE,BADGE2,CH1,HINT_MS,WRONG_MS,SCENES,PUZ_START,fresh,validate,unlocked,tap,hint,canHint,rotate,progress};});
