@@ -565,6 +565,78 @@
 "href": "./swad-kashmir.html"
 },
 {
+"id": "neta-rajya",
+"icon": "🗳️",
+"name": "My Neta — राज्य",
+"sub": "शासन-ढाँचा, सीटें, अपना MLA/MP — निष्पक्ष",
+"cat": "s",
+"href": "./neta-rajya.html"
+},
+{
+"id": "neta-punjab",
+"icon": "🌾",
+"name": "पंजाब — शासन ढाँचा",
+"sub": "सीटें, आधिकारिक लिंक, RTI",
+"cat": "s",
+"href": "./neta-punjab.html"
+},
+{
+"id": "neta-haryana",
+"icon": "🌻",
+"name": "हरियाणा — शासन ढाँचा",
+"sub": "सीटें, आधिकारिक लिंक, RTI",
+"cat": "s",
+"href": "./neta-haryana.html"
+},
+{
+"id": "neta-delhi",
+"icon": "🏙️",
+"name": "दिल्ली — शासन ढाँचा",
+"sub": "सीटें, आधिकारिक लिंक, RTI",
+"cat": "s",
+"href": "./neta-delhi.html"
+},
+{
+"id": "neta-rajasthan",
+"icon": "🏜️",
+"name": "राजस्थान — शासन ढाँचा",
+"sub": "सीटें, आधिकारिक लिंक, RTI",
+"cat": "s",
+"href": "./neta-rajasthan.html"
+},
+{
+"id": "neta-up",
+"icon": "🛕",
+"name": "उत्तर प्रदेश — शासन ढाँचा",
+"sub": "सीटें, आधिकारिक लिंक, RTI",
+"cat": "s",
+"href": "./neta-up.html"
+},
+{
+"id": "neta-himachal",
+"icon": "🏔️",
+"name": "हिमाचल प्रदेश — शासन ढाँचा",
+"sub": "सीटें, आधिकारिक लिंक, RTI",
+"cat": "s",
+"href": "./neta-himachal.html"
+},
+{
+"id": "neta-jk",
+"icon": "🍁",
+"name": "जम्मू-कश्मीर — शासन ढाँचा",
+"sub": "सीटें, आधिकारिक लिंक, RTI",
+"cat": "s",
+"href": "./neta-jk.html"
+},
+{
+"id": "neta-chandigarh",
+"icon": "🌳",
+"name": "चंडीगढ़ — शासन ढाँचा",
+"sub": "सीटें, आधिकारिक लिंक, RTI",
+"cat": "s",
+"href": "./neta-chandigarh.html"
+},
+{
 "id": "nanak-ghar",
 "icon": "🏠",
 "name": "नानक घर सेवा",
