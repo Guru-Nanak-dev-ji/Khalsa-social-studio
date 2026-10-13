@@ -14,7 +14,7 @@ function drawScene(){const sc=C.SCENES[cur],box=$('scene');box.textContent='';bo
  for(let i=0;i<14;i++){const f=el('i','fly');f.style.left=(r()*100)+'%';f.style.top=(r()*100)+'%';f.style.animationDelay=(-r()*8).toFixed(1)+'s';box.append(f);}
  box.append(el('div','fog'),el('div','fog f2'));}
 let flipA=-1,flipB=-1;
-function solvedGo(sc){if(cur===C.SCENES.length-1){(window.KLSound||{sfx(){}}).sfx('clear');const E=$('ending');E.hidden=false;E.classList.add('play');setTimeout(()=>E.scrollIntoView({block:'center'}),300);return;}(window.KLSound||{sfx(){}}).sfx('open');toast('🚪 '+sc.item.e+' से अगला दरवाज़ा खुला!');setTimeout(()=>{cur++;st.scene=cur;save(C.KEY,st);drawScene();paint();},900);}
+function solvedGo(sc){if(cur===14){(window.KLSound||{sfx(){}}).sfx('clear');paint();setTimeout(()=>$('ending3').scrollIntoView({block:'center'}),300);return;}if(cur===9){(window.KLSound||{sfx(){}}).sfx('clear');const E=$('ending');E.hidden=false;E.classList.add('play');setTimeout(()=>E.scrollIntoView({block:'center'}),300);return;}(window.KLSound||{sfx(){}}).sfx('open');toast('🚪 '+sc.item.e+' से अगला दरवाज़ा खुला!');setTimeout(()=>{cur++;st.scene=cur;save(C.KEY,st);drawScene();paint();},900);}
 function apply(r,sc){st=r.state;save(C.KEY,st);if(r.solved)solvedGo(sc);paint();}
 const HOW_EXTRA={rings:['☀️🌙 सूरज-चाँद द्वार','दीवार पर लिखा है: "ऊपर बाहर सूरज जागे, भीतर चाँद उसके आगे।" बाहरी और भीतरी छल्ला छूकर घुमाइए — ऊपर के ▼ निशान पर सूरज और चाँद लाइए।'],
  scale:['⚖️ तराज़ू संतुलन','डायरी का पन्ना: "अग्नि जल से भारी, वायु सबसे हल्की। बाएँ पलड़े का पत्थर 4 तोले का।" शीशियाँ छूकर दाएँ पलड़े पर रखिए/हटाइए — तराज़ू बराबर करो तो संदूक खुलेगा।'],
@@ -68,19 +68,19 @@ let selItem=null;
 function useOnLock(id){selItem=null;const p=cur,d=C.ITEMS[id];if(!st.cleared.includes(p)||C.ready(st,p)||!C.requiredItemIds(p).includes(id)){(window.KLSound||{sfx(){}}).sfx('wrong');lastBag=null;bagSync();return toast('🚫 यह यहाँ फिट नहीं होता');}
  const r=C.place(st,p,id);if(r.ok){st=r.state;save(C.KEY,st);(window.KLSound||{sfx(){}}).sfx('find');toast('🔓 '+d.displayName+' लग गया');if(r.ready){const g=K.claimSpot(kst,'khoya-lock:'+p);kst=g.state;save(K.KEY,kst);(window.KLSound||{sfx(){}}).sfx('open');setTimeout(()=>toast('🔓✨ ताला खुला! अब पहेली'+(g.added?' · +'+g.added+' 💰':'')),1500);document.getElementById('puz').classList.add('unlock');setTimeout(()=>document.getElementById('puz').classList.remove('unlock'),1300);}paint();}}
 function paint(){$('h-koins').textContent=K.fmt(K.total(kst));const sc=C.SCENES[cur];
- const T=$('tabs');T.textContent='';C.SCENES.forEach((s,i)=>{if(i===0||i===C.CH1)T.append(el('span','chap','📜 अध्याय '+s.ch));const b=el('button','tab'+(i===cur?' on':'')+(st.cleared.includes(i)?' done':''),(st.cleared.includes(i)?'✅ ':C.unlocked(st,i)?'':'🔒 ')+(i<C.CH1?i+1:i-C.CH1+1));b.type='button';b.setAttribute('aria-label',s.name);b.disabled=!C.unlocked(st,i);b.onclick=()=>{cur=i;st.scene=i;save(C.KEY,st);drawScene();paint();};T.append(b);});
- $('s-name').textContent='अध्याय '+sc.ch+' · '+(cur+1)+'. '+sc.name;$('s-story').textContent='🧭 '+sc.guide+': '+sc.story;
+ const T=$('tabs');T.textContent='';C.SCENES.forEach((s,i)=>{if(!i||C.SCENES[i-1].ch!==s.ch)T.append(el('span','chap','📜 अध्याय '+s.ch+(s.ch===3?' · काफ़िर से खालसा':'')));const b=el('button','tab'+(i===cur?' on':'')+(st.cleared.includes(i)?' done':''),(st.cleared.includes(i)?'✅ ':C.unlocked(st,i)?'':'🔒 ')+(i-C.CH[s.ch-1][0]+1));b.type='button';b.setAttribute('aria-label',s.name);b.disabled=!C.unlocked(st,i);b.onclick=()=>{cur=i;st.scene=i;save(C.KEY,st);drawScene();paint();};T.append(b);});
+ $('s-name').textContent='अध्याय '+sc.ch+' · '+(cur-C.CH[sc.ch-1][0]+1)+'. '+sc.name;$('s-story').textContent='🧭 '+sc.guide+': '+sc.story;
  const L=$('list');L.textContent='';sc.objs.forEach(o=>{const li=el('li',st.found[cur].includes(o.id)?'got':'',o.name);L.append(li);});
  $('count').textContent=`${st.found[cur].length}/${sc.objs.length} मिलीं`;
  bagSync();
  const p=$('puz'),needP=st.cleared.includes(cur)&&!st.puzzles.includes(cur);p.hidden=!needP;
  if(needP)drawPuz(sc);
  $('next').hidden=!(st.cleared.includes(cur)&&st.puzzles.includes(cur)&&cur<C.SCENES.length-1);
- $('badge').hidden=!st.badge;$('ending').hidden=!C.ending(st);$('badge2').hidden=!st.badge2;$('city').classList.toggle('lit',st.badge);const pr=C.progress(st);$('prog').textContent=`🌟 नगर की रोशनी: ${pr.pct}% (${pr.got}/${pr.tot})`;$('bar').style.width=pr.pct+'%';}
+ $('badge').hidden=!st.badge;$('ending').hidden=!(C.ending(st)&&cur===9);$('ending3').hidden=!(C.ending3(st)&&cur===14);$('badge3').hidden=!st.badge3;const SC=$('storycard'),showCard=!!sc.card&&!st.cards.includes(cur);SC.hidden=!showCard;$('scene').hidden=showCard;if(showCard){$('sc-text').textContent=sc.card;$('sc-title').textContent='📖 कहानी · '+sc.name;}$('badge2').hidden=!st.badge2;$('city').classList.toggle('lit',st.badge);const pr=C.progress(st);$('prog').textContent=`🌟 नगर की रोशनी: ${pr.pct}% (${pr.got}/${pr.tot})`;$('bar').style.width=pr.pct+'%';}
 function pick(id,b){const r=C.tap(st,cur,id);if(!r.ok)return;st=r.state;save(C.KEY,st);b.classList.add('got','pop');
  const o=C.SCENES[cur].objs.find(x=>x.id===id);toast('✨ '+o.name+' मिला!');(window.KLSound||{sfx(){}}).sfx('find');
  if(r.full)setTimeout(()=>toast('🎒 झोला भर गया! (12 खाने) — पहले कुछ इस्तेमाल करो'),2600);if(r.clearedNew){setTimeout(()=>(window.KLSound||{sfx(){}}).sfx('clear'),600);const g=K.claimSpot(kst,'khoya:'+C.SCENES[cur].id);kst=g.state;save(K.KEY,kst);
-  setTimeout(()=>toast(r.item.e+' '+r.item.name+' मिली'+(g.added?' · +'+g.added+' 💰':'')),1700);if(r.badge2New)setTimeout(()=>toast('👑 '+C.BADGE2+' — पूरा राज्य रोशन!'),3400);if(r.badgeNew)setTimeout(()=>toast('🏅 '+C.BADGE+' — बेगमपुरा रोशन! अध्याय 2 खुला'),3400);}
+  setTimeout(()=>toast(r.item.e+' '+r.item.name+' मिली'+(g.added?' · +'+g.added+' 💰':'')),1700);if(r.badge3New)setTimeout(()=>toast('🦁 '+C.BADGE3+'!'),3600);if(r.badge2New)setTimeout(()=>toast('👑 '+C.BADGE2+' — पूरा राज्य रोशन!'),3400);if(r.badgeNew)setTimeout(()=>toast('🏅 '+C.BADGE+' — बेगमपुरा रोशन! अध्याय 2 खुला'),3400);}
  paint();}
 $('scene').onclick=()=>{penalty=C.WRONG_MS;$('scene').classList.remove('shake');void $('scene').offsetWidth;$('scene').classList.add('shake');((window.KLSound||{sfx(){}}).sfx('wrong'),toast('❌ यहाँ नहीं · संकेत 4 सेकंड देर से'));};
 $('hint').onclick=()=>{const now=Date.now();const wait=lastHint?C.HINT_MS+penalty-(now-lastHint):penalty;if(wait>0){const u=C.useKan(st,3);if(!u.ok)return toast('⏳ संकेत '+Math.ceil(wait/1000)+' सेकंड में (या 3 ✨ कण)');st=u.state;save(C.KEY,st);toast('✨ 3 रोशनी के कण से संकेत');}
@@ -91,4 +91,6 @@ const SB=$('snd'),L=window.KLSound;if(L&&SB){let want=false;try{want=L.parsePref
  const lab=()=>{SB.textContent=L.isOn()?'🎵 संगीत चालू':'🔇 संगीत बंद';SB.setAttribute('aria-pressed',String(L.isOn()));};
  if(want){SB.textContent='🎵 छूकर संगीत शुरू करें';document.addEventListener('pointerdown',function f(){document.removeEventListener('pointerdown',f,true);L.set(true,localStorage);lab();},true);}else lab();
  SB.onclick=e=>{e.stopPropagation();L.set(!L.isOn(),localStorage);lab();};}
+$('sc-go').onclick=()=>{st=C.seeCard(st,cur);save(C.KEY,st);(window.KLSound||{sfx(){}}).sfx('open');paint();$('scene').scrollIntoView({block:'center'});};
+$('sc-say').onclick=()=>{if(!('speechSynthesis'in window))return toast('इस phone में आवाज़ नहीं है');speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(C.SCENES[cur].card.replace('📖','')+'');u.lang='hi-IN';u.rate=.9;speechSynthesis.speak(u);};
 drawScene();paint();window.__khoya={state:()=>st,koins:()=>K.total(kst),scene:()=>cur};})();

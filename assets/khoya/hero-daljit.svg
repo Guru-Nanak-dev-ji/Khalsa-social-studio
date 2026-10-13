@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 240" role="img" aria-label="नायक दलजीत (चित्र)">
+<defs><radialGradient id="bg" cx=".5" cy=".4"><stop offset="0" stop-color="#ffe6a0"/><stop offset="1" stop-color="#b8862b"/></radialGradient>
+<linearGradient id="dast" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3b6fd8"/><stop offset="1" stop-color="#1d3f8f"/></linearGradient>
+<linearGradient id="beard" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d9d9d9"/><stop offset=".5" stop-color="#8f8f8f"/><stop offset="1" stop-color="#e8e8e8"/></linearGradient></defs>
+<circle cx="100" cy="110" r="96" fill="url(#bg)"/>
+<path d="M30 240 Q40 170 100 165 Q160 170 170 240Z" fill="#f2efe6"/>
+<path d="M100 165 L88 200 L100 240 L112 200Z" fill="#e0dccf"/>
+<ellipse cx="100" cy="102" rx="38" ry="44" fill="#c98b5e"/>
+<path d="M58 92 Q56 40 100 34 Q146 38 142 92 Q132 66 100 62 Q70 64 58 92Z" fill="url(#dast)"/>
+<path d="M62 84 Q100 50 140 82" stroke="#2a56b8" stroke-width="5" fill="none"/><path d="M60 76 Q100 42 142 74" stroke="#5b8ef0" stroke-width="3" fill="none"/>
+<path d="M64 112 Q62 170 100 188 Q138 170 136 112 Q128 140 100 142 Q72 140 64 112Z" fill="url(#beard)"/>
+<path d="M78 120 Q90 112 100 118 Q110 112 122 120 Q110 124 100 122 Q90 124 78 120Z" fill="#9a9a9a"/>
+<path d="M86 128 Q100 138 114 128" stroke="#5a2a18" stroke-width="3" fill="none" stroke-linecap="round"/>
+<ellipse cx="84" cy="98" rx="4" ry="4.5" fill="#2a1407"/><ellipse cx="116" cy="98" rx="4" ry="4.5" fill="#2a1407"/>
+<path d="M76 88 Q84 84 92 88M108 88 Q116 84 124 88" stroke="#5a5a5a" stroke-width="3" fill="none" stroke-linecap="round"/>
+<g fill="#8a5a2b" stroke="#5a3510" stroke-width="1"><circle cx="76" cy="186" r="5"/><circle cx="84" cy="196" r="5"/><circle cx="94" cy="203" r="5"/><circle cx="106" cy="203" r="5"/><circle cx="116" cy="196" r="5"/><circle cx="124" cy="186" r="5"/><circle cx="100" cy="214" r="6"/></g>
+<g transform="translate(150 170) rotate(-10)"><rect x="-14" y="0" width="28" height="30" rx="8" fill="#c98b5e"/><rect x="-6" y="-26" width="12" height="30" rx="6" fill="#c98b5e"/><path d="M-14 8 H14 M-14 16 H14" stroke="#a06a40" stroke-width="2"/></g>
+</svg>

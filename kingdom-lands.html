@@ -21,11 +21,12 @@
 <a href="./studio.html#door=games">← द्वार</a>
 <div class="big">💰 <span id="h-koins">0</span><small>game koins, असली पैसा नहीं</small></div>
 </header>
-<section class="head"><h1>🏰 My Kingdom Lands</h1><p class="sub">मेरा राज्य · खोई हुई ज़मीनें</p><p>आपके राज्य की 10 ज़मीनें (2 अध्याय) और सुनहरा नगर बेगमपुरा कोहरे में खो गए हैं। हर ज़मीन में छिपी चीज़ें ढूँढो और नगर की रोशनी लौटाओ।</p></section>
+<section class="head"><h1>🏰 My Kingdom Lands</h1><p class="sub">मेरा राज्य · खोई हुई ज़मीनें</p><p>आपके राज्य की 15 ज़मीनें (3 अध्याय) और सुनहरा नगर बेगमपुरा कोहरे में खो गए हैं। हर ज़मीन में छिपी चीज़ें ढूँढो और नगर की रोशनी लौटाओ।</p></section>
 <div class="guides"><img src="./assets/world/kdn-nihang-guides-v22.webp" alt="गाइड तरक सिंह और भावना कौर" width="84" height="84"><p>🙏 हम तरक सिंह और भावना कौर हैं — आपके साथ चलेंगे। सूची की चीज़ें दृश्य में छूकर ढूँढिए।</p></div>
 <p id="prog"></p><div id="city"><div id="bar"></div></div>
 <nav id="tabs" aria-label="ज़मीनें"></nav>
 <h2 id="s-name"></h2><p id="s-story"></p>
+<section id="storycard" class="storycard" hidden aria-live="polite"><img src="./assets/khoya/hero-daljit.svg" alt="नायक दलजीत का चित्र" width="150" height="180"><h3 id="sc-title"></h3><p id="sc-text"></p><div class="row"><button type="button" class="btn" id="sc-go">▶ आगे बढ़ो</button><button type="button" class="btn ghost" id="sc-say">🔊 सुनें</button></div><p class="how">यह एक काल्पनिक कहानी है — सब खलनायक काल्पनिक हैं।</p></section>
 <div id="scene" class="scene" role="group" aria-label="खोज का दृश्य"></div>
 <div class="row"><button type="button" class="btn" id="hint">✨ संकेत</button><button type="button" class="btn ghost" id="say">🔊 सुनें</button></div>
 <div class="row"><button type="button" class="btn ghost" id="snd" aria-pressed="false">🔇 संगीत बंद</button></div>
@@ -34,7 +35,9 @@
 <div class="row"><button type="button" class="btn" id="next" hidden>🚪 अगले दृश्य में चलो</button></div>
 <section class="card"><h3>🎒 झोला <span id="bag-n" class="bagn"></span></h3><div id="inv" class="bag"></div><p class="how">ताले/पहेली वाली चीज़ को खींचकर 🔒 पर छोड़िए या छू दीजिए। ✨ कण से संकेत जल्दी मिलता है।</p></section>
 <section id="ending" class="ending" hidden aria-live="polite"><div class="burst" aria-hidden="true">🔆✨🌟✨🔆</div><h3>🗿 ज्योति-मूर्ति जुड़ गई!</h3><p>प्रकाश मीनार से सुनहरी रोशनी पूरे राज्य में फैल गई। बेगमपुरा — जहाँ कोई ग़म नहीं — फिर से जाग उठा। 🙏 धन्यवाद, राज्य के रक्षक!</p></section>
-<section class="card teaser"><h3>🔜 जल्द आ रहे अध्याय</h3><ul><li>🌀 <b>Harsheen Loops</b></li><li>🛤️ <b>काफ़िर से खत्री, खत्री से खालसा — एक सफ़र</b></li></ul><p class="how">इन पर काम जल्द शुरू होगा।</p></section>
+<section class="card teaser"><h3>🔜 जल्द आ रहे अध्याय</h3><ul><li>🌀 <b>Harsheen Loops</b></li></ul><p class="how">इस पर काम जल्द शुरू होगा। ✅ "काफ़िर से खत्री, खत्री से खालसा — एक सफ़र" अब अध्याय 3 में खेलिए!</p></section>
+<section id="ending3" class="ending" hidden aria-live="polite"><img src="./assets/khoya/hero-daljit.svg" alt="नायक दलजीत" width="140" height="168"><div class="burst" aria-hidden="true">🦁✨🌅✨🦁</div><h3>काफ़िर → खत्री → खालसा</h3><p id="end3-text">🦁 काफ़िर → खालसा। दलजीत ने दुश्मनों की सूची फाड़ दी और उसकी जगह लिखी "इंसाफ़ की सूची"। सबूत अदालत तक गए, सच media में आया, माँ का घर बचा। ग़ुस्सा इंसाफ़ में बदल गया — बिना किसी को मारे, सिर्फ़ सच, कानून और हिम्मत से। बेगमपुरा खालसा राज का सपना अब हर ग़रीब के हक़ का सपना है — जहाँ कोई ग़म नहीं।</p><p><b>"मैं ज़िंदगी नहीं, एक कहानी जी रहा हूँ!"</b></p></section>
+<p id="badge3" class="badge" hidden>🦁 खालसा योद्धा — ग़ुस्से को इंसाफ़ में बदला!</p>
 <p id="badge" class="badge" hidden>🏅 खोजी सिंह — बेगमपुरा फिर से रोशन हो गया!</p>
 <p id="badge2" class="badge" hidden>👑 राज्य रक्षक — अध्याय 2 पूरा, पूरा राज्य रोशन!</p>
 <p class="note">यह KDN की अपनी कहानी और अपने चित्र हैं। गलत जगह छूने पर संकेत 4 सेकंड देर से मिलता है। हर दृश्य पहली बार पूरा करने पर koins। 🎵 संगीत और आवाज़ें इसी phone पर बनती हैं (कोई गाना copy नहीं), पहले से बंद रहती हैं। सब कुछ इसी phone में रहता है। Koins game के हैं, असली पैसा नहीं।</p>

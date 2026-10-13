@@ -32,15 +32,37 @@ const SCENES=[
   decoys:['✨','⭐','🌟','✨','💫','⭐','✨','🌟','💫','✨','⭐','🌟']},
  {id:'meenar',ch:2,name:'प्रकाश मीनार',bg:'meenar',guide:'तरक सिंह और भावना कौर',story:'आख़िरी ज़मीन! प्रकाश मीनार की लौ से पूरा राज्य जुड़ा है। आख़िरी 8 चीज़ें खोजो — "जहाँ ग़म नहीं, वह बेगमपुरा" — और पूरे राज्य को रोशन करो!',item:{id:'lau',e:'🔆',name:'राज्य की लौ'},
   objs:[O('ghanta','बड़ा घंटा','🛎️',50,14,.65,0,.85),O('kalash','कलश','⚱️',22,50,.65,-10,.8),O('mor2','मोरपंख','🪶',76,40,.6,30,.75),O('dhoop','धूप','🪔',40,70,.6,0,.85),O('phool','गेंदा','🌼',84,78,.6,0,.8),O('sitar','सितार','🪕',14,78,.7,-20,.85),O('kabutar2','शांति का कबूतर','🕊️',62,24,.6,15,.8),O('ratna','रत्न','💠',56,86,.55,0,.75)],
-  decoys:['🏛️','✨','🟨','🏺','✨','🟧','🏛️','✨','🟨','🏺','✨','🟧']}];
-const N=SCENES.length,CH1=5;SCENES.forEach(x=>{x.ch=x.ch||1;});const BADGE2='राज्य रक्षक';
+  decoys:['🏛️','✨','🟨','🏺','✨','🟧','🏛️','✨','🟨','🏺','✨','🟧']},
+ {id:'toota-ghar',ch:3,name:'टूटा घर',bg:'ghar',guide:'दलजीत',story:'बचपन का टूटा घर। यहाँ की हर चीज़ में एक याद छिपी है। 8 यादें ढूँढो।',item:{id:'ghar-kagaz',e:'📜',name:'घर के कागज़'},
+  card:'📖 कहानी शुरू होती है… एक कच्चा, टूटा घर। रात को पिता शराब पीकर लौटते, और घर में डर फैल जाता। गली के बच्चे फटे कपड़ों पर हँसते। छोटा दलजीत चुपचाप सब सहता — पर उसके भीतर एक सवाल जलता रहा: "क्या ग़रीब होना गुनाह है?"',
+  objs:[O('chappal','टूटी चप्पल','🩴',18,80,.7,25,.8),O('katora','खाली कटोरा','🥣',62,74,.7,0,.85),O('mombatti2','बुझी मोमबत्ती','🕯️',84,30,.65,-10,.75),O('khilona2','पुराना खिलौना','🧸',30,40,.65,15,.8),O('copy','स्कूल की कॉपी','📒',50,56,.6,-20,.8),O('roti2','सूखी रोटी','🍞',12,22,.6,10,.8),O('jhadu','झाड़ू','🧹',74,86,.7,40),O('moza','फटा मोज़ा','🧦',44,18,.55,-30,.75)],
+  decoys:['🧱','🕸️','🪨','🧱','🪵','🕸️','🧱','🪨','🪵','🍂','🧱','🕸️']},
+ {id:'kachehri',ch:3,name:'कचहरी',bg:'kachehri',guide:'दलजीत',story:'कचहरी की धूल भरी फ़ाइलों में माँ के घर का सच छिपा है। सबूत ढूँढो!',item:{id:'sach-dastavez',e:'📑',name:'सच्चा दस्तावेज़'},
+  card:'📖 सालों बाद… एक लालची रिश्तेदार ने वकीलों और कुछ बिके हुए अफ़सरों के साथ मिलकर अनपढ़ माँ का इकलौता घर हड़पने की चाल चली। तारीख़ पर तारीख़। कचहरी के चक्करों ने दलजीत का मन हिला दिया — पर उसने ठान लिया: "माँ का घर कोई नहीं छीनेगा।"',
+  objs:[O('file','फ़ाइल','📁',20,30,.65,-15,.8),O('kalam2','कलम','🖋️',70,64,.6,30,.8),O('hathoda','हथौड़ा','🔨',52,16,.6,0,.85),O('pin','पिन','📎',84,46,.5,20,.75),O('register','रजिस्टर','🗂️',34,74,.65,0,.8),O('ghadi2','दीवार घड़ी','🕰️',12,58,.6,0,.85),O('raseed','रसीद','🧾',62,36,.55,-25,.75),O('muhar','मुहर','🔏',86,82,.55,0,.8)],
+  decoys:['📄','📃','📄','🗃️','📃','📄','🗃️','📃','📄','📄','📃','🗃️']},
+ {id:'kothri',ch:3,name:'किताबों की कोठरी',bg:'kothri',guide:'दलजीत',story:'अँधेरी कोठरी, जहाँ रात-रात भर पढ़ाई हुई। ज्ञान के 8 औज़ार ढूँढो।',item:{id:'gyan-chabi',e:'🧠',name:'ज्ञान की चाबी'},
+  card:'📖 फिर सबसे बड़ा दुख आया — छोटा भाई इस दुनिया से चला गया। टूटे मन ने गुरु महाराज की शरण ली। उसी अँधेरे में दलजीत ने किताबें उठाईं: मन का विज्ञान (dark psychology), सिस्टम कैसे चलता है (UPSC जितनी गहराई से), और कानों में 2x पर चलती audiobooks। "अगर सिस्टम से लड़ना है, तो सिस्टम को समझना होगा।"',
+  objs:[O('headphone','हेडफ़ोन','🎧',22,24,.65,-10,.85),O('torch','टॉर्च','🔦',74,70,.6,30,.8),O('chai2','चाय का कप','☕',48,82,.6,0,.85),O('phone','फ़ोन','📱',84,24,.55,15,.75),O('notes','नोट्स','🗒️',14,66,.6,-20,.8),O('aage','2x बटन','⏩',60,44,.5,0,.7),O('diya2','दीया','🪔',36,50,.6,0,.8),O('chashma2','चश्मा','👓',30,12,.55,20,.75)],
+  decoys:['📚','📕','📗','📘','📙','📚','📒','📕','📗','📘','📚','📙']},
+ {id:'network',ch:3,name:'छिपा नेटवर्क',bg:'network',guide:'दलजीत',story:'शहर के नीचे छिपे एक काले नेटवर्क का अड्डा। सबूत की 8 चीज़ें ढूँढो — सावधान!',item:{id:'sach-saboot',e:'📹',name:'सच का सबूत'},
+  card:'📖 दलजीत ने NGO खोले, अपने media channels शुरू किए, और भेस बदलकर उस छिपे नेटवर्क में घुस गया जो ग़रीबों का हक़ खाता था। ख़तरा हर कदम पर था — धमकियाँ, पीछा, और एक रात गोलियों की आवाज़। उसके दिमाग़ में दुश्मनों की एक सूची बन चुकी थी… और ग़ुस्सा कह रहा था: "बदला लो!"',
+  objs:[O('laptop','लैपटॉप','💻',20,64,.65,0,.8),O('camera','कैमरा','🎥',72,28,.6,-15,.8),O('mic','माइक','🎙️',50,14,.55,0,.85),O('antenna','एंटीना','📡',86,60,.6,20,.75),O('gupt','गुप्त फ़ाइल','📂',34,36,.55,-20,.75),O('taar','तार','🔌',58,78,.55,30,.8),O('tape','पुराना टेप','📼',12,30,.55,10,.75),O('nakshe','शहर का नक्शा','🗺️',80,86,.55,0,.8)],
+  decoys:['🌑','🕶️','🧱','🌑','⬛','🕸️','🌑','⬛','🧱','🕶️','🌑','🕸️']},
+ {id:'guru-dar',ch:3,name:'गुरु दा दर',bg:'gurudar',guide:'दलजीत',story:'गुरु दे दर पर मन का आख़िरी युद्ध। शांति की 8 चीज़ें ढूँढो।',item:{id:'naya-savera',e:'🌅',name:'नया सवेरा'},
+  card:'📖 सबूत हाथ में था, दुश्मन सामने। ग़ुस्से ने आख़िरी बार पुकारा: "अब बदला!" — पर गुरु दे दर पर दलजीत रुक गया। उसने महसूस किया: बदला अँधेरा बढ़ाता है, इंसाफ़ रोशनी। वह मुस्कुराया — "मैं ज़िंदगी नहीं, एक कहानी जी रहा हूँ!"',
+  objs:[O('diya3','दीया','🪔',22,40,.6,0,.85),O('phool2','फूल','🌸',70,70,.6,15,.8),O('kabootar3','कबूतर','🕊️',80,20,.6,-10,.8),O('mala2','लकड़ी की माला','📿',44,84,.6,20,.8),O('haath','जुड़े हाथ','🙏',56,30,.55,0,.75),O('jal2','जल','💧',12,76,.55,0,.8),O('langar3','लंगर की थाली','🍛',34,62,.6,-15,.8),O('tara3','तारा','⭐',30,14,.5,0,.75)],
+  decoys:['✨','🟨','🌼','✨','🟧','🌼','✨','🟨','🌼','✨','🟧','🌼']}];
+const STORY_END='🦁 काफ़िर → खालसा। दलजीत ने दुश्मनों की सूची फाड़ दी और उसकी जगह लिखी "इंसाफ़ की सूची"। सबूत अदालत तक गए, सच media में आया, माँ का घर बचा। ग़ुस्सा इंसाफ़ में बदल गया — बिना किसी को मारे, सिर्फ़ सच, कानून और हिम्मत से। बेगमपुरा खालसा राज का सपना अब हर ग़रीब के हक़ का सपना है — जहाँ कोई ग़म नहीं।';
+const N=SCENES.length,CH1=5;SCENES.forEach(x=>{x.ch=x.ch||1;});const BADGE2='राज्य रक्षक',BADGE3='खालसा योद्धा',CH=[[0,5],[5,10],[10,15]],inCh=(f,c)=>{for(let i=CH[c][0];i<CH[c][1];i++)if(!f.cleared.includes(i))return false;return true;};
 // पहेली: 4 टाइल घुमाओ, सबका तीर ऊपर (0) करो. शुरुआत तय है ताकि हल हमेशा हो.
-const PUZ_START=[[1,2,3,1],[2,1,3,2],[3,3,1,2],[1,3,2,2],[2,2,1,3],[3,1,2,1],[1,1,3,2],[2,3,3,1],[3,2,1,1]];
+const PUZ_START=[[1,2,3,1],[2,1,3,2],[3,3,1,2],[1,3,2,2],[2,2,1,3],[3,1,2,1],[1,1,3,2],[2,3,3,1],[3,2,1,1],[1,2,1,2],[2,1,1,3],[3,3,2,1],[1,2,3,3],[2,3,1,1],[3,1,1,2]];
 
 // नई पहेलियाँ: p%4 → 0 टाइल घुमाओ, 1 गियर मिलाओ, 2 चिह्न क्रम, 3 जोड़ी मिलाओ
-const PTYPES=['tiles','gears','runes','match','rings','scale','veena','beam','runes','jigsaw'],ptype=p=>PTYPES[p]||'tiles';
+const PTYPES=['tiles','gears','runes','match','rings','scale','veena','beam','runes','jigsaw','runes','match','gears','beam','tiles'],ptype=p=>PTYPES[p]||'tiles';
 // नई पहेलियों के हिस्से: दृश्य पूरा करने पर झोले में आते हैं, फिर ताले पर खींचकर (या छूकर) रखो
 const PARTS={4:[{id:'surya-tukda',e:'☀️',name:'सूरज का टुकड़ा'},{id:'chandra-lens',e:'🌙',name:'चाँद का लेंस'}],5:[{id:'agni',e:'🔥',name:'अग्नि की शीशी'},{id:'jal',e:'💧',name:'जल की शीशी'},{id:'vayu',e:'🌬️',name:'वायु की शीशी'}],
+ 10:[{id:'maa-chabi',e:'🔑',name:'माँ के घर की चाबी'}],11:[{id:'asli-raseed',e:'🧾',name:'असली रजिस्ट्री'}],12:[{id:'samvidhan-pothi',e:'📘',name:'संविधान की पोथी'}],13:[{id:'password',e:'📝',name:'गुप्त पासवर्ड'}],14:[{id:'dushman-suchi',e:'📃',name:'दुश्मनों की सूची (फाड़ने के लिए)'}],
  6:[{id:'chandi-taar',e:'🪡',name:'चाँदी के तार'}],7:[{id:'sheesha',e:'🪞',name:'जादुई शीशा'}],9:[{id:'jyoti-tukde',e:'🧩',name:'ज्योति-मूर्ति के टुकड़े'}]};
 const partsFor=p=>PARTS[p]||[];
 const RING=['☀️','🌙','⭐','🪔','💧','🌱'],RING_START=[3,4],RING_GOAL=[0,1];
@@ -107,27 +129,27 @@ function rune(s,p,idx){s=validate(s);if(!canPz(s,p)||ptype(p)!=='runes'||!ready(
 function match(s,p,a,b){s=validate(s);if(!canPz(s,p)||ptype(p)!=='match'||a===b)return{state:s,solved:false,ok:false};
  const c=matchCards(p),m=s.pz[p].m;if(!ready(s,p)||!(a>=0&&a<12&&b>=0&&b<12)||m.includes(a)||m.includes(b)||c[a]!==c[b])return{state:s,solved:false,ok:false};
  const nm=[...m,a,b];const r=pzSet(s,p,{m:nm},nm.length===12);r.ok=true;return r;}
-const fresh=()=>({v:1,scene:0,found:SCENES.map(()=>[]),cleared:[],puzzles:[],inv:[],tiles:PUZ_START.map(t=>t.slice()),badge:false,badge2:false,bag:[],pz:SCENES.map((x,p)=>pzFresh(p))});
+const fresh=()=>({v:1,scene:0,found:SCENES.map(()=>[]),cleared:[],puzzles:[],inv:[],tiles:PUZ_START.map(t=>t.slice()),badge:false,badge2:false,badge3:false,cards:[],bag:[],pz:SCENES.map((x,p)=>pzFresh(p))});
 function validate(s){if(!s||s.v!==1||!Array.isArray(s.found))return fresh();const f=fresh();
  f.found=SCENES.map((sc,i)=>Array.isArray(s.found[i])?s.found[i].filter((id,j,a)=>sc.objs.some(o=>o.id===id)&&a.indexOf(id)===j):[]);
  const idx=a=>Array.isArray(a)?a.filter((x,j,b)=>Number.isInteger(x)&&x>=0&&x<N&&b.indexOf(x)===j):[];
  f.cleared=idx(s.cleared).filter(i=>f.found[i].length===SCENES[i].objs.length);f.puzzles=idx(s.puzzles).filter(i=>i<N&&f.cleared.includes(i));
  f.inv=SCENES.flatMap((sc,i)=>f.cleared.includes(i)?[sc.item.id,...partsFor(i).map(x=>x.id)]:[]);
- if(Array.isArray(s.tiles)&&s.tiles.length===N-1)f.tiles=s.tiles.map((t,i)=>Array.isArray(t)&&t.length===4&&t.every(x=>Number.isInteger(x)&&x>=0&&x<4)?t.slice():PUZ_START[i].slice());
+ if(Array.isArray(s.tiles)&&s.tiles.length>=N-1)f.tiles=PUZ_START.map((d,i)=>{const t=s.tiles[i];return Array.isArray(t)&&t.length===4&&t.every(x=>Number.isInteger(x)&&x>=0&&x<4)?t.slice():d.slice();});if(0)f.tiles=s.tiles.map((t,i)=>Array.isArray(t)&&t.length===4&&t.every(x=>Number.isInteger(x)&&x>=0&&x<4)?t.slice():PUZ_START[i].slice());
  f.pz=SCENES.map((x,p)=>pzValid(p,Array.isArray(s.pz)?s.pz[p]:null));
   f.bag=Array.isArray(s.bag)?bagValid(s.bag):bagFromState(f);
- f.scene=Number.isInteger(s.scene)&&s.scene>=0&&s.scene<N&&unlocked(f,s.scene)?s.scene:0;f.badge=[0,1,2,3,4].every(i=>f.cleared.includes(i));f.badge2=f.cleared.length===N;return f;}
+ f.scene=Number.isInteger(s.scene)&&s.scene>=0&&s.scene<N&&unlocked(f,s.scene)?s.scene:0;f.badge=[0,1,2,3,4].every(i=>f.cleared.includes(i));f.badge2=inCh(f,1)&&inCh(f,0);f.badge3=inCh(f,2);f.cards=Array.isArray(s.cards)?s.cards.filter((x,i,a)=>Number.isInteger(x)&&SCENES[x]&&SCENES[x].card&&a.indexOf(x)===i):[];return f;}
 // दृश्य i खुला है अगर i=0, या पिछला साफ़ + पहेली हल (पिछली चीज़ inventory में)
 function unlocked(s,i){return i===0||(s.cleared.includes(i-1)&&s.puzzles.includes(i-1));}
 function tap(s,i,id){s=validate(s);const sc=SCENES[i];if(!sc||!unlocked(s,i))return{state:s,ok:false};
  if(!sc.objs.some(o=>o.id===id))return{state:s,ok:false,wrong:true};if(s.found[i].includes(id))return{state:s,ok:false,again:true};
- const found=s.found.map((a,j)=>j===i?[...a,id]:a.slice()),st={...s,found};const ka=addItem(s.bag,KAN);st.bag=ka.bag;let full=false;let clearedNew=false,badgeNew=false,badge2New=false;
- if(found[i].length===sc.objs.length&&!s.cleared.includes(i)){clearedNew=true;st.cleared=[...s.cleared,i];st.inv=[...s.inv,sc.item.id,...partsFor(i).map(x=>x.id)];for(const id2 of[sc.item.id,...partsFor(i).map(x=>x.id)]){const a=addItem(st.bag,id2);st.bag=a.bag;if(a.full)full=true;}if(!s.badge&&[0,1,2,3,4].every(j=>st.cleared.includes(j))){badgeNew=true;st.badge=true;}if(!s.badge2&&st.cleared.length===N){st.badge2=true;badge2New=true;}}
- return{state:st,ok:true,full,clearedNew,badgeNew,badge2New,item:clearedNew?sc.item:null};}
+ const found=s.found.map((a,j)=>j===i?[...a,id]:a.slice()),st={...s,found};const ka=addItem(s.bag,KAN);st.bag=ka.bag;let full=false;let clearedNew=false,badgeNew=false,badge2New=false,badge3New=false;
+ if(found[i].length===sc.objs.length&&!s.cleared.includes(i)){clearedNew=true;st.cleared=[...s.cleared,i];st.inv=[...s.inv,sc.item.id,...partsFor(i).map(x=>x.id)];for(const id2 of[sc.item.id,...partsFor(i).map(x=>x.id)]){const a=addItem(st.bag,id2);st.bag=a.bag;if(a.full)full=true;}if(!s.badge&&[0,1,2,3,4].every(j=>st.cleared.includes(j))){badgeNew=true;st.badge=true;}if(!s.badge2&&inCh(st,0)&&inCh(st,1)){st.badge2=true;badge2New=true;}if(!s.badge3&&inCh(st,2)){st.badge3=true;badge3New=true;}}
+ return{state:st,ok:true,full,clearedNew,badgeNew,badge2New,badge3New,item:clearedNew?sc.item:null};}
 function hint(s,i){s=validate(s);const sc=SCENES[i];return sc?sc.objs.find(o=>!s.found[i].includes(o.id))||null:null;}
 function canHint(last,now){return !last||now-last>=HINT_MS;}
-function rotate(s,p,t){s=validate(s);if(ptype(p)!=='tiles'||!(p>=0&&p<N-1)||!(t>=0&&t<4)||!s.cleared.includes(p)||s.puzzles.includes(p))return{state:s,solved:false};
+function rotate(s,p,t){s=validate(s);if(ptype(p)!=='tiles'||!(p>=0&&p<N)||!(t>=0&&t<4)||!s.cleared.includes(p)||s.puzzles.includes(p))return{state:s,solved:false};
  const tiles=s.tiles.map(a=>a.slice());tiles[p][t]=(tiles[p][t]+1)%4;const solved=tiles[p].every(x=>x===0);
  let bag=s.bag;if(solved){const u=useItem(bag,SCENES[p].item.id,'door:'+p);if(u.ok)bag=u.bag;}return{state:{...s,tiles,bag,puzzles:solved?[...s.puzzles,p]:s.puzzles},solved};}
 const progress=s=>{s=validate(s);const tot=SCENES.reduce((a,sc)=>a+sc.objs.length,0),got=s.found.reduce((a,f)=>a+f.length,0);return{got,tot,pct:Math.round(got*100/tot),cleared:s.cleared.length};};
-return{requiredItemIds:p=>partsFor(p).map(x=>x.id),CAP,KAN,ITEMS,bagValid,addItem,removeItem,hasItem,useItem,bagFromState,useKan,PARTS,partsFor,ready,place,RING,RING_GOAL,VIALS,STONE,scaleSum,VEENA,BEAM,trace,JIG,ring,vial,pluck,mirror,jig,ending:s=>validate(s).puzzles.includes(N-1),PTYPES,ptype,GEAR_LINKS,gearStart,RUNE_SET,runeSeq,matchCards,gear,rune,match,KEY,BADGE,BADGE2,CH1,HINT_MS,WRONG_MS,SCENES,PUZ_START,fresh,validate,unlocked,tap,hint,canHint,rotate,progress};});
+return{requiredItemIds:p=>partsFor(p).map(x=>x.id),CAP,KAN,ITEMS,bagValid,addItem,removeItem,hasItem,useItem,bagFromState,useKan,PARTS,partsFor,ready,place,RING,RING_GOAL,VIALS,STONE,scaleSum,VEENA,BEAM,trace,JIG,ring,vial,pluck,mirror,jig,ending:s=>validate(s).puzzles.includes(9),ending3:s=>validate(s).puzzles.includes(14),STORY_END,BADGE3,CH,seeCard:(s,i)=>{s=validate(s);return SCENES[i]&&SCENES[i].card&&!s.cards.includes(i)?{...s,cards:[...s.cards,i]}:s;},PTYPES,ptype,GEAR_LINKS,gearStart,RUNE_SET,runeSeq,matchCards,gear,rune,match,KEY,BADGE,BADGE2,CH1,HINT_MS,WRONG_MS,SCENES,PUZ_START,fresh,validate,unlocked,tap,hint,canHint,rotate,progress};});
