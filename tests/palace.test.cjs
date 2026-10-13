@@ -1,5 +1,5 @@
 const test=require('node:test'),assert=require('node:assert/strict');
-const P=require('../assets/palace/v013/palace-core.js'),W=require('../assets/world-core.js'),K=require('../assets/kingdom/v013/kingdom-core.js');
+const P=require('../assets/palace/v014/palace-core.js'),W=require('../assets/world-core.js'),K=require('../assets/kingdom/v014/kingdom-core.js');
 const memory=()=>{const map=new Map();return {map,getItem:k=>map.get(k)??null,setItem:(k,v)=>map.set(k,v)};};
 test('profile bonus and reaction replacements cannot repeatedly increase rewards',()=>{
  const store=new P.Store(memory());store.edit(s=>({...s,profileBonus:true}));store.edit(s=>({...s,profileBonus:true,reactions:{welcome:'king'}}));

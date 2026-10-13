@@ -1,3 +1,7 @@
+# Current release: Free Royal World v0.14.0
+
+Read `FREE_ROYAL_WORLD_V014_HANDOFF.md` for the latest entry, visual flow, source paths and verification limits. Active assets are v014; older snapshots below are historical. Entry: `khalsa.html` (same app), seven identical opening aliases, SW v0.14.0. Preserve all existing storage and tool functions. Free/open-source presentation only; no paid video API.
+
 # KDN AI HANDOFF — CONTINUE WORK
 
 Updated: 2026-10-13

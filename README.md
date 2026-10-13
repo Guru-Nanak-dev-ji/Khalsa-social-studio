@@ -1,3 +1,7 @@
+## Free Royal World v0.14.0
+
+The opening now carries the founder’s complete **किरत करो वंड छक्को** message, the corrected Gurbani line, and a free locally rendered golden city. Open `khalsa.html` for the cache-safe entry to the same app. Intro sequences use MIT-licensed Three.js and original vector fallback art; no paid video service or runtime CDN. Existing tools and records are retained. See [v0.14 handoff](docs/FREE_ROYAL_WORLD_V014_HANDOFF.md) and [source licenses](assets/realm/v014/OPEN_SOURCE.md). Real Android visual/touch/GPU QA remains pending; DOM simulations are not a device test.
+
 # Khalsa Social Studio 🌍
 
 A free and open-source social media management platform.
