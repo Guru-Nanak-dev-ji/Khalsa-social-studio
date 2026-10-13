@@ -575,16 +575,16 @@
 {
 "id": "khatri-aid",
 "icon": "🤝",
-"name": "Khatri Aid",
-"sub": "न छोटा न बड़ा",
+"name": "खत्री Aid",
+"sub": "मदद का अनुरोध, हेल्पलाइन",
 "cat": "s",
 "href": "./khatri-aid.html"
 },
 {
 "id": "vakil",
 "icon": "⚖️",
-"name": "कानूनी साथी",
-"sub": "वकील सूची",
+"name": "वकील डायरेक्टरी",
+"sub": "मुफ़्त कानूनी मदद, अपने हक़",
 "cat": "s",
 "href": "./vakil.html"
 },

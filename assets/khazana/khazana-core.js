@@ -9,6 +9,8 @@ const GAMES=[
  {id:'guru',icon:'🙏',game:'दस गुरु साहिबान',badge:'दस गुरू यात्री',key:'kdn-guru-v1',href:'./guru.html',got:s=>s.badge===true},
  {id:'panj',icon:'🏛️',game:'पंज तख़्त',badge:'पंज तख़्त यात्री',key:'kdn-panj-v1',href:'./panj-takht.html',got:s=>s.badge===true},
  {id:'swad',icon:'🍲',game:'हर राज्य का स्वाद',badge:'स्वाद यात्री',key:'kdn-swad-v1',href:'./swad.html',got:s=>s.badge===true},
+ {id:'haq',icon:'📜',game:'वकील डायरेक्टरी',badge:'हक़ जानकार',key:'kdn-sewa-v1',href:'./vakil.html',got:s=>s.rightsBadge===true},
+ {id:'madad',icon:'⛑️',game:'खत्री Aid',badge:'मदद साथी',key:'kdn-sewa-v1',href:'./khatri-aid.html',got:s=>s.aidBadge===true},
  {id:'virsa',icon:'🎙️',game:'पंजाब दा विरसा',badge:'विरसा सुनने वाला',key:'kdn-virsa-v1',href:'./virsa.html',got:s=>s.badge===true},
  {id:'takht',icon:'🧊',game:'तख़्त Cube',badge:'तख़्त परिक्रमा',key:'kdn-takht-v1',href:'./takht.html',got:s=>s.badge===true},
  {id:'langar',icon:'🍛',game:'लंगर रसोई',badge:'लंगर सेवादार',key:'kdn-langar-v1',href:'./langar.html',got:s=>s.badge===true},
