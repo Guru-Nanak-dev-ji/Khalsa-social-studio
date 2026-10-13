@@ -1,0 +1,11 @@
+const test=require('node:test'),assert=require('node:assert'),C=require('../assets/chakravyuh/chakravyuh-core.js'),K=require('../assets/koins-core.js'),Dr=require('../assets/doors-core.js'),fs=require('fs'),path=require('path');
+const R=f=>fs.readFileSync(path.join(__dirname,'..',f),'utf8');
+test('7 rings, valid answers',()=>{assert.equal(C.RINGS.length,7);C.RINGS.forEach(r=>{assert.equal(r.opts.length,4);assert.ok(r.a>=0&&r.a<4);assert.equal(new Set(r.opts).size,4);});});
+test('wrong keeps ring, right advances, badge once',()=>{let s=C.fresh();let r=C.answer(s,(C.RINGS[0].a+1)%4);assert.equal(r.right,false);assert.equal(r.state.ring,0);s=r.state;let b=0;
+ for(let i=0;i<7;i++){r=C.answer(s,C.RINGS[i].a);assert.ok(r.right);s=r.state;if(r.badgeNew)b++;}assert.equal(b,1);assert.ok(s.done&&s.badge);assert.equal(C.answer(s,0).right,null);
+ s=C.restart(s);assert.equal(s.ring,0);assert.ok(s.badge);assert.ok(!C.answer(s,C.RINGS[0].a).badgeNew);assert.equal(C.BADGE,'चक्रव्यूह भेदक');
+ assert.equal(K.quiz(K.fresh(),true).added,10);assert.equal(K.quiz(K.fresh(),false).added,-3);assert.equal(C.validate({v:1,ring:50}).ring,7);});
+test('page, door, feed, sw, no Khanda',()=>{const h=R('chakravyuh.html');assert.ok(h.includes('lang="hi"')&&h.includes('data-heritage')&&h.includes('goldtv.js'));
+ assert.ok(!/☬/.test(h+R('assets/chakravyuh/chakravyuh.js')+R('assets/chakravyuh/chakravyuh-core.js')));assert.ok(R('assets/chakravyuh/chakravyuh.css').includes('prefers-reduced-motion'));
+ assert.ok(Dr.all().some(d=>d.href==='./chakravyuh.html'));assert.ok(JSON.parse(R('assets/goldtv/feed.json')).items.some(i=>i.href==='./chakravyuh.html'));
+ const sw=R('sw.js');assert.equal((sw.match(/const CACHE/g)||[]).length,1);assert.ok(sw.includes('./chakravyuh.html')&&sw.includes('./assets/chakravyuh/chakravyuh.js'));});
