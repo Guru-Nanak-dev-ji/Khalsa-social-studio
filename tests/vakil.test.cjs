@@ -1,0 +1,16 @@
+const test=require('node:test'),assert=require('node:assert'),V=require('../assets/vakil/vakil-core.js'),Dr=require('../assets/doors-core.js'),N=require('../assets/naksha/naksha-core.js'),fs=require('fs'),path=require('path');
+const R=f=>fs.readFileSync(path.join(__dirname,'..',f),'utf8');
+test('7 categories, no invented lawyers, only verified+consented entries shown',()=>{assert.equal(V.CATS.length,7);for(const w of['ज़मीन','परिवार','अपराध','उपभोक्ता','RTI','नौकरी','इमिग्रेशन'])assert.ok(V.CATS.some(c=>c.name.includes(w)),w);
+ const d=JSON.parse(R('data/vakil.json'));assert.deepEqual(d.lawyers,[]);assert.deepEqual(V.lawyers(d),[]);assert.deepEqual(V.lawyers(null),[]);
+ const ok={name:'Test',city:'X',cats:['rti','zz'],verified:true,consent:true};assert.equal(V.lawyers({lawyers:[ok,{...ok,verified:false},{...ok,consent:false},{...ok,cats:['zz']}]}).length,1);
+ const L=V.lawyers({lawyers:[ok,{...ok,city:'A',cats:['parivar']}]});assert.deepEqual(V.cities(L),['A','X']);assert.equal(V.filter(L,'rti','').length,1);assert.equal(V.filter(L,'','A').length,1);assert.equal(V.filter(L,'rti','A').length,0);});
+test('free helplines only verified ones, with sources',()=>{assert.deepEqual(V.FREE.map(f=>f.tel),['15100','','1-800-668-8258']);for(const f of V.FREE)assert.ok(/^https:\/\//.test(f.src));});
+test('forms validate, tag message, share links, store no personal data',()=>{assert.ok(!V.validForm('help',{name:'a',city:'b',contact:'c',cat:'rti',agree:false}).ok);assert.ok(!V.validForm('x',{}).ok);
+ const r=V.validForm('join',{name:' <b>राम</b> ',city:'दिल्ली',contact:'9',cat:'rti',bar:'D/1',note:'n',agree:true});assert.ok(r.ok);const m=V.message(r.item);assert.ok(m.startsWith('[वकील-जुड़ें]'));assert.ok(m.includes('bराम/b'));
+ assert.ok(V.message(V.validForm('help',{name:'a',city:'b',contact:'c',cat:'zameen',agree:true}).item).startsWith('[कानूनी-मदद]'));
+ assert.ok(V.waLink(m).startsWith('https://wa.me/?text='));assert.ok(V.mailLink(m).startsWith('mailto:khatrinewsnetwork@gmail.com?subject='));
+ const s=V.record(V.fresh(),r.item,1);assert.deepEqual(Object.keys(s.sent[0]).sort(),['cat','city','ts','type']);assert.deepEqual(V.validate(null),V.fresh());});
+test('page wiring, disclaimer, door/naksha/feed/sw, no Khanda',()=>{const h=R('vakil.html'),js=R('assets/vakil/vakil.js'),all=h+js+R('assets/vakil/vakil-core.js');
+ assert.ok(h.includes('lang="hi"')&&h.includes('heritage.css')&&h.includes('goldtv.js')&&h.includes('कानूनी सलाह नहीं'));assert.ok(!/innerHTML/.test(js));assert.ok(!/☬/.test(all));assert.ok(R('assets/vakil/vakil.css').includes('prefers-reduced-motion'));
+ assert.ok(Dr.all().some(d=>d.href==='./vakil.html'));assert.ok(N.IDS.includes('vakil'));assert.ok(JSON.parse(R('assets/goldtv/feed.json')).items.some(i=>i.href==='./vakil.html'));
+ const sw=R('sw.js');assert.equal((sw.match(/const CACHE/g)||[]).length,1);for(const a of['./vakil.html','./assets/vakil/vakil-core.js','./assets/vakil/vakil.js','./assets/vakil/vakil.css','./data/vakil.json'])assert.ok(sw.includes(a),a);});
