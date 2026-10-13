@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#1a0d06">
+<meta name="description" content="🪔 आज का संकल्प — रोज़ सुबह एक छोटा अच्छा काम चुनिए, शाम को पूरा करके दीप जलाइए।">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icons/khalsa-v1-32.png" sizes="32x32" type="image/png">
+<link rel="stylesheet" href="./assets/heritage.css">
+<link rel="stylesheet" href="./assets/hindi-fonts.css">
+<link rel="stylesheet" href="./assets/sankalp/sankalp.css">
+<title>🪔 आज का संकल्प · KDN</title>
+<script defer src="./assets/koins-core.js"></script>
+<script defer src="./assets/sankalp/sankalp-core.js"></script>
+<script defer src="./assets/sankalp/sankalp.js"></script>
+<script defer src="./assets/goldtv/goldtv.js"></script></head>
+<body class="kdn-hindi" data-heritage="immersive">
+<div class="heritage-banner" aria-hidden="true"></div>
+<header class="hud" role="status" aria-live="polite">
+<a href="./studio.html#door=games">← द्वार</a>
+<div class="big">💰 <span id="h-koins">0</span><small>game koins, असली पैसा नहीं</small></div>
+</header>
+<section class="head"><h1>🪔 आज का संकल्प</h1><p>सुबह एक छोटा अच्छा काम चुनिए, दीप जलाइए। शाम को पूरा करके ✅ दबाइए, हर दिन +5 koins।</p></section>
+<section class="card" aria-live="polite">
+<div id="diya" class="diya" aria-hidden="true"><span class="halo"></span><span class="flame"></span><span class="wick"></span><span class="bowl"></span></div>
+<p id="dstate"></p>
+<div id="choose"><h2 class="orn">✦ आज क्या करेंगे? ✦</h2><div id="list"></div>
+<label for="own">या अपना संकल्प लिखिए (60 अक्षर तक)</label><input id="own" maxlength="60" autocomplete="off" placeholder="जैसे: दादी को कहानी सुनाऊँगा"><p id="cnt">0/60</p>
+<button type="button" class="btn" id="go">🪔 संकल्प लो, दीप जलाओ</button></div>
+<div id="mine" hidden><p class="orn">✦ आज का मेरा संकल्प ✦</p><p id="mine-text"></p>
+<button type="button" class="btn" id="done">✅ पूरा किया</button><p id="done-msg" hidden>✅ आज का संकल्प पूरा हुआ!</p>
+<button type="button" class="btn ghost" id="change">✏️ संकल्प बदलो</button></div>
+<button type="button" class="btn ghost" id="say">🔊 सुनें</button>
+<p class="honest">🙏 सच से दबाएँ — ✅ तभी दबाइए जब काम सच में पूरा हो। यह आपके और वाहेगुरु के बीच का वादा है।</p>
+</section>
+<section class="card"><p id="streak"></p><div id="week" aria-label="पिछले 7 दिन"></div><p class="note">✅ पूरा · 🪔 संकल्प लिया · · खाली</p></section>
+<p id="badge" class="badge" hidden>🏅 संकल्प दीप — 7 दिन लगातार संकल्प पूरा!</p>
+<p class="note">सब कुछ इसी phone में रहता है, कोई server नहीं, कोई दूसरा नहीं देखता। Koins game के हैं, असली पैसा नहीं। "Reduce motion" setting में दीप की लौ स्थिर रहती है।</p>
+</body>
+</html>
