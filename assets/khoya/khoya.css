@@ -39,3 +39,10 @@ body{margin:0;min-height:100vh;color:var(--ink);background:radial-gradient(ellip
 @keyframes pop{0%{opacity:0;transform:translate(-50%,10px) scale(.8)}20%{opacity:1;transform:translate(-50%,0) scale(1.05)}85%{opacity:1}100%{opacity:0}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 .head .sub{font-size:21px;color:#ffe6a0;font-weight:700;margin:2px 0}
+.bg-darwaza{background:url(./bg/darwaza.webp) center/cover no-repeat,#2a1407}
+.bg-langar{background:url(./bg/langar.webp) center/cover no-repeat,#2a1407}
+.bg-pustak{background:url(./bg/pustak.webp) center/cover no-repeat,#2a1407}
+.bg-baag{background:url(./bg/baag.webp) center/cover no-repeat,#2a1407}
+.bg-mahal{background:url(./bg/mahal.webp) center/cover no-repeat,#2a1407}
+.obj{filter:drop-shadow(0 0 2px #000) drop-shadow(0 2px 3px #000c) saturate(.8)}
+.decoy{filter:drop-shadow(0 2px 2px #0009) saturate(.75)}

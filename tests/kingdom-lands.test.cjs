@@ -16,3 +16,4 @@ test('page, door, khazana, naksha, sw, no Khanda, no Lost Lands copy',()=>{const
  assert.ok(R('assets/khoya/khoya.css').includes('prefers-reduced-motion'));assert.ok(Dr.all().some(d=>d.href==='./kingdom-lands.html'));
  assert.ok(Z.GAMES.some(g=>g.id==='khoya'&&g.badge===C.BADGE&&g.key===C.KEY&&g.badge==='खोजी सिंह'));assert.ok(N.IDS.includes('kingdom-lands'));
  const sw=R('sw.js');assert.equal((sw.match(/const CACHE/g)||[]).length,1);for(const a of['./kingdom-lands.html','./assets/khoya/khoya-core.js','./assets/khoya/khoya.js','./assets/khoya/khoya.css'])assert.ok(sw.includes(a),a);});
+test('land art: 5 webp < 250KB, wired in css + sw',()=>{const css=R('assets/khoya/khoya.css'),sw=R('sw.js');for(const s of C.SCENES){const f='assets/khoya/bg/'+s.bg+'.webp';const st=fs.statSync(path.join(__dirname,'..',f));assert.ok(st.size>1000&&st.size<250000,f);assert.ok(css.includes('./bg/'+s.bg+'.webp'));assert.ok(sw.includes('./'+f));}});
