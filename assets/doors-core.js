@@ -41,6 +41,7 @@ const TREE={id:'root',icon:'🏰',title:'द्वार महल · ਦਰਵ�
   {icon:'📖',title:'कहानी घर',sub:'5 series · 🤣 फनीबुक · 👽 HER · 🤍 White Mirror',href:'./kahani.html'},
   {icon:'🏛️',title:'3D तख़्त दरबार',sub:'उँगली से घुमाओ · CSS 3D',href:'./takht3d.html'},
   {icon:'🦅',title:'बाज़',sub:'सुनहरा बाज़ · उड़ान',href:'./baaz.html'},
+  {icon:'🤣',title:'फनीबुक',sub:'हँसी से सच · बिना चोट · koins',href:'./funnybook.html'},
   {icon:'🍲',title:'वंड छक्को',sub:'रोज़ बाँटो · थाली · koins',href:'./vand.html'},
   {icon:'📿',title:'सिमरन माला',sub:'108 मनके · tap · नाम · koins',href:'./mala.html'},
   {icon:'📖',title:'आज की साखी',sub:'रोज़ एक साखी · सुनो · quiz',href:'./sakhi.html'},

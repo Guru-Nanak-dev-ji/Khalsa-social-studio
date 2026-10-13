@@ -10,5 +10,5 @@ test('exclusions: no real names, threats, numbers, methods',()=>{const all=JSON.
 test('badges once + koins + khazana + page + sw',()=>{let s=F.fresh();let r=F.finish(s,'fb');assert.ok(r.badgeNew);assert.ok(!F.finish(r.state,'fb').badgeNew);r=F.finish(r.state,'her');assert.ok(r.badgeNew&&r.state.fb&&r.state.her);
  assert.deepEqual(F.validate({v:1,fb:'x'}),F.fresh());assert.ok(!F.finish(s,'evil').badgeNew);
  assert.ok(Z.GAMES.find(g=>g.id==='funnybook').got(r.state)&&Z.GAMES.find(g=>g.id==='her').got(r.state));assert.equal(K.claimSpot(K.fresh(),'fb:done').added,5);
- const h=R('kahani.html');assert.ok(h.includes('id="fb"')&&h.includes('id="her"')&&h.includes('fb-core.js'));const sw=R('sw.js');assert.ok(sw.includes("'v0.59.0'")&&sw.includes('./assets/kahani/fb.js'));
+ const h=R('kahani.html');assert.ok(h.includes('id="fb"')&&h.includes('id="her"')&&h.includes('fb-core.js'));const sw=R('sw.js');assert.match(sw,/const CACHE=PREFIX\+'v0\.(5[8-9]|[6-9]\d)\./);assert.ok(sw.includes('./assets/kahani/fb.js')&&sw.includes('./assets/kahani/fb-core.js'));
  assert.ok(R('assets/kahani/kahani.css').includes('@keyframes fbpop'));});
