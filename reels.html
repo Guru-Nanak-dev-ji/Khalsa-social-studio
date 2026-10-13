@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#24070b">
+<meta name="description" content="KDN Reel Studio — Instagram Reels मुफ़्त में phone पर बनाएँ: मेहराब, शतरंज, ताश।">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icons/khalsa-v1-32.png" sizes="32x32" type="image/png"><link rel="apple-touch-icon" href="./icons/khalsa-v1-180.png" sizes="180x180">
+<link rel="stylesheet" href="./assets/reels.css">
+<title>🎬 KDN Reel Studio</title>
+</head>
+<body>
+<div class="wrap">
+<header class="top"><a href="./studio.html">← Control Room</a> · <a href="./creator.html">✍️ Creator</a> · <a href="./ai-tools.html">🚪 AI द्वार</a></header>
+<main>
+<section class="hero">
+<p class="eyebrow">KDN · REEL STUDIO · v0.1</p>
+<div class="pieces" aria-hidden="true"><span>♜</span><span>♞</span><span>♝</span><span>♛</span><span>♚</span><span>♟</span></div>
+<h1>🎬 KDN Reel Studio</h1>
+<p class="sub">Instagram Reels बनाएँ · ਰੀਲਾਂ ਬਣਾਓ · Make reels — 1080×1920, phone में ही, मुफ़्त, बिना login।</p>
+<p class="suits" aria-hidden="true">♠ <span class="r">♥</span> <span class="r">♦</span> ♣</p>
+</section>
+<section class="card"><h2><span class="pip">♠</span>1 · पंक्तियाँ · ਲਾਈਨਾਂ · Lines</h2>
+<textarea id="rs-text" rows="5" placeholder="हर पंक्ति = एक scene (अधिकतम 12)&#10;ਹਰ ਲਾਈਨ = ਇੱਕ ਸੀਨ&#10;Each line = one scene"></textarea>
+<div class="row"><select id="rs-draft" aria-label="Creator draft"><option value="">— Creator ड्राफ्ट —</option></select><button id="rs-import" class="ghost" type="button">📥 Creator से लाओ</button></div></section>
+<section class="card"><h2><span class="pip" style="color:#b3192d">♥</span>2 · ढाँचा · Template</h2>
+<div class="tpls">
+<button class="tpl r" data-t="mehrab" aria-pressed="true" type="button"><span class="corner">A♥</span><span class="c">🕌</span><span class="n">मेहराब</span><span class="corner b">A♥</span></button>
+<button class="tpl" data-t="shatranj" aria-pressed="false" type="button"><span class="corner">K♠</span><span class="c">♞</span><span class="n">शतरंज</span><span class="corner b">K♠</span></button>
+<button class="tpl r" data-t="taash" aria-pressed="false" type="button"><span class="corner">Q♦</span><span class="c">🃏</span><span class="n">ताश</span><span class="corner b">Q♦</span></button>
+</div>
+<div class="row"><label>हर scene <input id="rs-per" type="range" min="2" max="6" step="0.2" value="3.2"> <span id="rs-perv">3.2s</span></label>
+<label class="btn ghost file">🎵 Music<input id="rs-music" type="file" accept="audio/*" hidden></label></div></section>
+<section class="card"><h2><span class="pip" style="color:#b3192d">♦</span>3 · देखें और बनाएँ · Preview &amp; Record</h2>
+<div class="stage"><canvas id="rs-canvas" aria-label="Reel preview"></canvas></div>
+<div class="row" style="justify-content:center"><button id="rs-preview" class="ghost" type="button">▶ Preview</button><button id="rs-record" type="button">⏺ Reel बनाओ</button></div>
+<video id="rs-video" controls playsinline hidden></video>
+<div class="row" style="justify-content:center"><button id="rs-dl" type="button" disabled>⬇ Download</button><button id="rs-share" type="button" disabled>📸 Instagram पर भेजो</button></div>
+<p id="status" role="status"></p>
+<p class="fine">Chrome (Android) में MP4 या WebM बनता है। Share में Instagram → Reels चुनें; caption पहले से copy होता है।</p></section>
+<section class="card"><h2><span class="pip">♣</span>4 · Hashtag बैंक</h2>
+<div id="rs-sets" class="chips"></div>
+<textarea id="rs-caption" rows="4" aria-label="Caption"></textarea>
+<div class="row"><button id="rs-copy" type="button">📋 Caption + Hashtags copy</button></div>
+<details><summary>✏️ Hashtags बदलें</summary>
+<div class="row"><select id="rs-edit-set" aria-label="Set"></select></div>
+<textarea id="rs-tags" rows="3" aria-label="Hashtags"></textarea>
+<div class="row"><button id="rs-save-tags" type="button">💾 सेव</button><button id="rs-reset-tags" class="ghost" type="button">↺ मूल</button></div></details>
+</section>
+</main></div>
+<script src="./assets/reels-core.js"></script><script src="./assets/reels.js"></script>
+</body></html>
