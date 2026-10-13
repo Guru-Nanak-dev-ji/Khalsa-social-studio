@@ -221,10 +221,47 @@ export async function handleNews(request,env){
   mine.push(c.handle);await kv.put('news_owner:'+user.id,JSON.stringify(mine));
   return json({ok:true,channel:pub(rec)},201,h);}
  return json({error:'not found'},404,h);}
+
+// ---- 💬 सुझाव: site bubble -> KV + owner Telegram. List/done need APP_KEY (or SUGGEST_KEY) ----
+export const MAX_SUGGEST=500;
+function scors(origin){return origin===ALLOWED_ORIGIN?{'Access-Control-Allow-Origin':ALLOWED_ORIGIN,'Access-Control-Allow-Methods':'GET, POST, OPTIONS','Access-Control-Allow-Headers':'content-type, x-kdn-app-key','Access-Control-Max-Age':'86400',Vary:'Origin'}:{Vary:'Origin'};}
+async function suggestAuth(env,key){if(!key)return false;for(const k of [env.APP_KEY,env.SUGGEST_KEY])if(k&&await safeEqual(String(key),k))return true;return false;}
+async function kvRate(kv,ip,now,limit=10){const k='srl:'+ip+':'+Math.floor(now/60000);const n=Number(await kv.get(k)||0);if(n>=limit)return true;await kv.put(k,String(n+1),{expirationTtl:120});return false;}
+export async function handleSuggest(request,env,send=call,now=Date.now()){
+ const url=new URL(request.url),origin=request.headers.get('Origin')||'',h=scors(origin),kv=env.KDN_KV;
+ if(request.method==='OPTIONS')return new Response(null,{status:origin===ALLOWED_ORIGIN?204:403,headers:h});
+ if(!kv)return json({ok:false,error:'storage'},503,h);
+ if(request.method==='GET'&&url.pathname==='/suggest/list'){
+  if(!(await suggestAuth(env,url.searchParams.get('key')||request.headers.get('X-KDN-App-Key'))))return json({ok:false,error:'key'},401,h);
+  const all=url.searchParams.get('all')==='1';const out=[];let cursor;
+  do{const r=await kv.list({prefix:'suggest:',cursor});for(const k of r.keys){const v=await kv.get(k.name);if(!v)continue;const it=JSON.parse(v);if(all||it.status==='new')out.push({id:k.name,...it});}cursor=r.list_complete?null:r.cursor;}while(cursor);
+  return json({ok:true,items:out},200,{...h,'Cache-Control':'no-store'});}
+ if(request.method!=='POST')return json({ok:false,error:'method'},405,h);
+ let data;try{data=JSON.parse((await request.text()).slice(0,8000));}catch{return json({ok:false,error:'json'},400,h);}
+ if(url.pathname==='/suggest/done'){
+  if(!(await suggestAuth(env,data?.key||request.headers.get('X-KDN-App-Key'))))return json({ok:false,error:'key'},401,h);
+  const id=String(data?.id||'');if(!/^suggest:\d+:[a-z0-9]+$/.test(id))return json({ok:false,error:'id'},400,h);
+  const v=await kv.get(id);if(!v)return json({ok:false,error:'not found'},404,h);
+  const it=JSON.parse(v);it.status='done';it.note=String(data?.note||'').slice(0,500);it.done=new Date(now).toISOString();
+  await kv.put(id,JSON.stringify(it));return json({ok:true,id,item:it},200,h);}
+ if(url.pathname!=='/suggest')return json({ok:false,error:'not found'},404,h);
+ if(origin!==ALLOWED_ORIGIN)return json({ok:false,error:'origin'},403,h);
+ const text=typeof data?.text==='string'?data.text.replace(/\s+/g,' ').trim():'';
+ if(!text)return json({ok:false,error:'empty'},400,h);
+ if(Array.from(text).length>MAX_SUGGEST)return json({ok:false,error:'long'},413,h);
+ const page=String(data?.page||'?').replace(/[^\w.\-\/#]/g,'').slice(0,80)||'?';
+ const ip=request.headers.get('CF-Connecting-IP')||'unknown';
+ if(await kvRate(kv,ip,now))return json({ok:false,error:'rate'},429,{...h,'Retry-After':'60'});
+ const ts=Number.isFinite(Number(data?.ts))&&Number(data.ts)>0?Math.floor(Number(data.ts)):now;
+ const id=`suggest:${ts}:${Math.random().toString(36).slice(2,8)||'x'}`;
+ await kv.put(id,JSON.stringify({text,page,ts,status:'new',created:new Date(now).toISOString()}),{expirationTtl:60*60*24*180});
+ try{await send(env,'sendMessage',{chat_id:Number(env.OWNER_ID),text:`💬 सुझाव (${page}): ${text}`});}catch(e){}
+ return json({ok:true,id},200,h);}
 export default {
   async fetch(request,env){
     const path=new URL(request.url).pathname;
     if(path==='/draft')return handleDraft(request,env);
+    if(path==='/suggest'||path.startsWith('/suggest/'))return handleSuggest(request,env);
     if(path.startsWith('/news/'))return handleNews(request,env);
     if(path==='/yt/start'||path==='/yt/callback')return handleYt(request,env);
     if(request.method!=='POST')return new Response('KDN bot OK');
