@@ -10,3 +10,4 @@ test('page, door, feed, sw, khazana, no Khanda',()=>{const h=R('naksha.html'),j=
  assert.ok(Dr.all().some(d=>d.href==='./naksha.html'));assert.ok(JSON.parse(R('assets/goldtv/feed.json')).items.some(i=>i.href==='./naksha.html'));
  assert.ok(require('../assets/khazana/khazana-core.js').GAMES.some(g=>g.id==='naksha'&&g.badge===N.BADGE));
  const sw=R('sw.js');assert.equal((sw.match(/const CACHE/g)||[]).length,1);for(const a of['./naksha.html','./assets/naksha/naksha-core.js','./assets/naksha/naksha.js','./assets/naksha/naksha.css','./assets/naksha/visit.js'])assert.ok(sw.includes(a),a);});
+test('koins toast sits above the dock, never over the header',()=>{const c=R('assets/naksha/naksha.css'),t=/#toast\{[^}]*\}/.exec(c)[0];assert.ok(/bottom:calc\(var\(--kdn-dock-h/.test(t));assert.ok(!/top:\d/.test(t));});
