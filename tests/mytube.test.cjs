@@ -1,0 +1,12 @@
+const test=require('node:test'),assert=require('node:assert'),M=require('../assets/mytube/mytube-core.js'),fs=require('fs'),path=require('path');
+const R=f=>fs.readFileSync(path.join(__dirname,'..',f),'utf8');
+test('curated: valid unique yt ids, known artists, no weapon/alcohol titles',()=>{const k=M.CURATED.map(M.key);assert.strictEqual(new Set(k).size,k.length);assert.ok(M.CURATED.length>=15);
+ for(const v of M.CURATED){assert.ok(M.ok(v),v.id);assert.ok(M.ARTISTS[v.a]);assert.doesNotMatch(v.t,/तलवार|बंदूक|शराब|दारू|पैग|गोली|हथियार/)}});
+test('parse: youtube/vimeo variants, rejects others',()=>{for(const u of['https://www.youtube.com/watch?v=d-BRyn6aS78','https://youtu.be/d-BRyn6aS78?t=3','https://m.youtube.com/watch?feature=x&v=d-BRyn6aS78','https://www.youtube.com/shorts/d-BRyn6aS78','https://music.youtube.com/watch?v=d-BRyn6aS78'])assert.deepStrictEqual(M.parse(u),{p:'yt',id:'d-BRyn6aS78'},u);
+ assert.deepStrictEqual(M.parse('https://vimeo.com/76979871'),{p:'vimeo',id:'76979871'});for(const u of['https://evil.com/watch?v=d-BRyn6aS78','javascript:alert(1)','https://youtube.com/watch?v=short','https://vimeo.com/abc'])assert.equal(M.parse(u),null,u);
+ assert.match(M.embed({p:'yt',id:'d-BRyn6aS78'}),/^https:\/\/www\.youtube-nocookie\.com\/embed\//);assert.equal(M.open({p:'yt',id:'d-BRyn6aS78'}),'https://www.youtube.com/watch?v=d-BRyn6aS78');});
+test('state: add, dup, fav, playlists, junk',()=>{let s=M.fresh();let r=M.add(s,'https://youtu.be/abcdefghijk','मेरा');s=r.state;assert.equal(s.mine.length,1);assert.ok(M.add(s,'https://youtu.be/abcdefghijk').error);assert.ok(M.add(s,'x').error);
+ s=M.fav(s,'yt:abcdefghijk');assert.deepStrictEqual(s.fav,['yt:abcdefghijk']);s=M.newList(s,'सुबह');s=M.toList(s,'सुबह','yt:d-BRyn6aS78');assert.deepStrictEqual(s.lists[0].items,['yt:d-BRyn6aS78']);assert.deepStrictEqual(M.validate('junk'),M.fresh());});
+test('wiring',()=>{const h=R('mytube.html');for(const x of['📺 MyTube','Your channel. Your world.',M.ORIGINAL,'data-mt-tab="fav"','data-mt-tab="lists"','अधिकार उनके पास'])assert.ok(h.includes(x),x);assert.ok(R('assets/mytube/mytube.js').includes('▶️ YouTube में खोलो'));
+ for(const f of['virsa.html','dwar.html','assets/fx/fx.js'])assert.ok(R(f).includes('./mytube.html'),f);const p=JSON.parse(R('assets/pages.json')).pages.find(p=>p.id==='mytube');assert.equal(p.cat,'m');
+ assert.match(R('sw.js'),/const CACHE=PREFIX\+'v0\.(6[8-9]|[7-9]\d)\./);});

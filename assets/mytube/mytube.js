@@ -1,0 +1,26 @@
+(function(){'use strict';var M=window.KDNMyTube,$=function(i){return document.getElementById(i)},st,tab='home',art='all',q='';
+function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e}
+function save(){try{localStorage.setItem(M.KEY,JSON.stringify(st))}catch(e){}}
+function card(v){var k=M.key(v),w=el('div','mt-card'),b=el('button','mt-thumb');b.type='button';b.setAttribute('aria-label','▶ '+v.t);b.appendChild(el('span','kp-e',v.e));b.appendChild(el('span','kp-play','▶'));
+ b.onclick=function(){var f=document.createElement('iframe');f.src=M.embed(v);f.title=v.t;f.allow='autoplay; encrypted-media; picture-in-picture; fullscreen';f.allowFullscreen=true;f.referrerPolicy='strict-origin-when-cross-origin';b.replaceWith(f)};
+ w.appendChild(b);w.appendChild(el('b','mt-t',v.t));w.appendChild(el('small','mt-by','📺 '+v.by));var r=el('div','mt-acts');
+ var o=el('a','mt-b','▶️ YouTube में खोलो');if(v.p==='vimeo')o.textContent='▶️ Vimeo में खोलो';o.href=M.open(v);o.target='_blank';o.rel='noopener';r.appendChild(o);
+ var f=el('button','mt-b',st.fav.includes(k)?'❤️':'🤍');f.type='button';f.setAttribute('aria-label','पसंदीदा');f.onclick=function(){st=M.fav(st,k);save();draw()};r.appendChild(f);
+ if(st.lists.length){var sel=el('select','mt-sel');sel.setAttribute('aria-label','playlist में जोड़ो');sel.appendChild(el('option',null,'➕ playlist'));st.lists.forEach(function(l){var op=el('option',null,(l.items.includes(k)?'✓ ':'')+l.name);op.value=l.name;sel.appendChild(op)});sel.onchange=function(){if(sel.value){st=M.toList(st,sel.value,k);save();draw()}};r.appendChild(sel)}
+ w.appendChild(r);return w}
+function grid(list,box){var g=el('div','mt-grid');list.forEach(function(v){g.appendChild(card(v))});if(!list.length)g.appendChild(el('p','mt-empty','😅 अभी यहाँ कुछ नहीं'));box.appendChild(g)}
+function draw(){var box=$('mt-main');box.textContent='';[].forEach.call(document.querySelectorAll('[data-mt-tab]'),function(b){b.setAttribute('aria-pressed',b.dataset.mtTab===tab)});var A=M.all(st),by=function(k){return A.find(function(v){return M.key(v)===k})};
+ if(tab==='home'){box.appendChild(el('h2',null,'🏠 Home — आज सुनो'));if(st.mine.length){box.appendChild(el('h3',null,'📺 मेरा channel'));grid(A.filter(function(v){return v.a==='mine'}).slice(0,8),box)}
+  Object.keys(M.ARTISTS).forEach(function(a){box.appendChild(el('h3',null,M.ARTISTS[a]));grid(M.CURATED.filter(function(v){return v.a===a}),box)})}
+ else if(tab==='explore'){box.appendChild(el('h2',null,'🧭 Explore'));var s=el('input','mt-in');s.type='search';s.placeholder='🔎 गीत या गायक खोजो';s.value=q;s.oninput=function(){q=s.value;draw();var n=$('mt-main').querySelector('.mt-in');n.focus();n.setSelectionRange(q.length,q.length)};box.appendChild(s);
+  var ch=el('div','mt-chips');[['all','✨ सब']].concat(Object.keys(M.ARTISTS).map(function(a){return[a,M.ARTISTS[a]]})).concat([['mine','📺 मेरा channel']]).forEach(function(x){var b=el('button','mt-chip',x[1]);b.type='button';b.setAttribute('aria-pressed',art===x[0]);b.onclick=function(){art=x[0];draw()};ch.appendChild(b)});box.appendChild(ch);
+  var qq=q.trim().toLowerCase();grid(A.filter(function(v){return(art==='all'||v.a===art)&&(!qq||(v.t+' '+v.by+' '+(M.ARTISTS[v.a]||'')).toLowerCase().indexOf(qq)>=0)}),box)}
+ else if(tab==='lists'){box.appendChild(el('h2',null,'📂 Playlists'));var f=el('form','mt-form'),i=el('input','mt-in');i.placeholder='नई playlist का नाम';i.maxLength=40;var b2=el('button','mt-b big','➕ बनाओ');f.append(i,b2);f.onsubmit=function(e){e.preventDefault();st=M.newList(st,i.value);save();draw()};box.appendChild(f);
+  if(!st.lists.length)box.appendChild(el('p','mt-empty','कोई playlist नहीं — ऊपर बनाओ, फिर हर गीत पर "➕ playlist" चुनो'));st.lists.forEach(function(l){box.appendChild(el('h3',null,'📂 '+l.name+' · '+l.items.length));grid(l.items.map(by).filter(Boolean),box)})}
+ else if(tab==='fav'){box.appendChild(el('h2',null,'❤️ Favourites'));grid(st.fav.map(by).filter(Boolean),box)}
+ else{box.appendChild(el('h2',null,'📺 मेरा channel — link जोड़ो'));var f2=el('form','mt-form'),u=el('input','mt-in'),t=el('input','mt-in'),b3=el('button','mt-b big','➕ मेरे channel में जोड़ो'),m=el('p','mt-msg');u.placeholder='YouTube या Vimeo link paste करो';u.inputMode='url';t.placeholder='नाम (वैकल्पिक)';t.maxLength=80;f2.append(u,t,b3,m);
+  f2.onsubmit=function(e){e.preventDefault();var r=M.add(st,u.value,t.value);if(r.error){m.textContent=r.error;m.className='mt-msg bad';return}st=r.state;save();u.value='';t.value='';draw();var n=$('mt-main').querySelector('.mt-msg');n.textContent='✅ जुड़ गया — सिर्फ़ इसी फ़ोन पर सेव'};box.appendChild(f2);
+  box.appendChild(el('p','mt-note','सिर्फ़ YouTube/Vimeo · ID जाँचा जाता है · कुछ भी upload या download नहीं होता · परिवार के लायक ही जोड़ें 🙏'));grid(A.filter(function(v){return v.a==='mine'}),box)}}
+function init(){if(!M||!$('mt-main'))return;try{st=M.validate(JSON.parse(localStorage.getItem(M.KEY)))}catch(e){st=M.fresh()}
+ [].forEach.call(document.querySelectorAll('[data-mt-tab]'),function(b){b.onclick=function(){tab=b.dataset.mtTab;draw();window.scrollTo({top:0,behavior:'smooth'})}});draw()}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();})();
