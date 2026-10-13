@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#1a0d06">
+<meta name="description" content="🏠 नानक घर सेवा — मदद माँगो, मदद करो। सेवा board, seva koins।">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icons/khalsa-v1-32.png" sizes="32x32" type="image/png">
+<link rel="stylesheet" href="./assets/heritage.css">
+<link rel="stylesheet" href="./assets/hindi-fonts.css">
+<link rel="stylesheet" href="./assets/nanak-ghar/nanak-ghar.css">
+<title>🏠 नानक घर सेवा · KDN</title>
+<script defer src="./assets/koins-core.js"></script>
+<script defer src="./assets/nanak-ghar/nanak-ghar-core.js"></script>
+<script defer src="./assets/nanak-ghar/nanak-ghar.js"></script>
+<script defer src="./assets/goldtv/goldtv.js"></script></head>
+<body class="kdn-hindi" data-heritage="immersive">
+<div class="heritage-banner" aria-hidden="true"></div>
+<header class="hud" role="status" aria-live="polite">
+<a href="./studio.html#door=games">← द्वार</a>
+<div class="big">💰 <span id="h-koins">0</span><small>game koins, असली पैसा नहीं</small></div>
+</header>
+<section class="head"><h1>🏠 नानक घर सेवा</h1><p>मदद माँगो, मदद करो। हर "मैं मदद करूँगा" पर +5 seva koins।</p></section>
+<div class="home" aria-hidden="true"><span class="diya d1">🪔</span><span class="h">🏠</span><span class="diya d2">🪔</span></div>
+<section class="card">
+<div class="tabs"><button type="button" class="btn on" data-kind="maang">🙏 मदद माँगो</button><button type="button" class="btn" data-kind="madad">🤲 मदद करो</button></div>
+<label for="cat">किस तरह की सेवा?</label><select id="cat"></select>
+<label for="text">पर्ची लिखिए</label><textarea id="text" maxlength="140" placeholder="आपको किस चीज़ की ज़रूरत है?"></textarea><span id="left"></span>
+<button type="button" class="btn" id="post">📌 Board पर लगाएँ</button>
+<p class="note">⚠️ यह board अभी सिर्फ़ आपके इसी phone में रहता है, किसी और को नहीं दिखता। अपना पता या phone नंबर मत लिखिए।</p>
+</section>
+<div class="tabs" style="margin:0 12px"><button type="button" class="btn on" data-f="all">सब</button><button type="button" class="btn" data-f="maang">🙏 माँग</button><button type="button" class="btn" data-f="madad">🤲 सेवा</button></div>
+<p id="stat"></p>
+<main id="board" aria-live="polite" aria-label="सेवा board"></main>
+<p id="badge" class="badge" hidden>🏅 नानक घर सेवादार — आपने 3 बार हाथ बढ़ाया!</p>
+<p class="note">कोई server नहीं, कोई login नहीं: सब कुछ localStorage में। "Reduce motion" setting में दीये स्थिर रहते हैं।</p>
+</body>
+</html>

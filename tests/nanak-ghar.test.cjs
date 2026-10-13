@@ -1,0 +1,14 @@
+const test=require('node:test'),assert=require('node:assert'),N=require('../assets/nanak-ghar/nanak-ghar-core.js'),K=require('../assets/koins-core.js'),Dr=require('../assets/doors-core.js'),fs=require('fs'),path=require('path');
+const R=f=>fs.readFileSync(path.join(__dirname,'..',f),'utf8');
+test('add, clean, help once, badge at 3',()=>{let s=N.fresh();assert.equal(N.add(s,'maang','x','   ').post,null);assert.equal(N.add(s,'zz','x','hi').post,null);
+ const r=N.add(s,'maang','📚 पढ़ाई','<b>किताबें</b>\n चाहिए'+'x'.repeat(300),1);assert.ok(!/[<>]/.test(r.post.text));assert.equal(r.post.text.length,140);assert.equal(r.post.cat,'📚 पढ़ाई');s=r.state;
+ s=N.add(s,'madad','bad','मैं पढ़ा सकता हूँ',2).state;assert.equal(s.posts[1].cat,'🔧 और कुछ');assert.ok(!N.help(s,2).ok);
+ let h=N.help(s,1);assert.ok(h.ok);s=h.state;assert.ok(!N.help(s,1).ok);assert.equal(s.posts[0].helpers,1);
+ let b=0;for(let i=0;i<2;i++){s=N.add(s,'maang','🍛 खाना','रोटी',3).state;h=N.help(s,s.seq);s=h.state;if(h.badgeNew)b++;}assert.equal(b,1);assert.ok(s.badge);assert.equal(N.BADGE,'नानक घर सेवादार');
+ s=N.done(s,1);assert.ok(s.posts[0].done);s=N.remove(s,1);assert.equal(s.posts.length,3);assert.ok(!s.helped.includes(1));assert.ok(s.badge);});
+test('validate junk',()=>{assert.deepEqual(N.validate(null),N.fresh());const s=N.validate({v:1,posts:[{id:5,kind:'maang',text:'a'},{kind:'x',text:'b'},null]});assert.equal(s.posts.length,1);assert.equal(s.seq,5);
+ assert.equal(K.ring(K.fresh()).added,5);});
+test('page, door, feed, sw, no backend, no Khanda',()=>{const h=R('nanak-ghar.html'),j=R('assets/nanak-ghar/nanak-ghar.js');assert.ok(h.includes('lang="hi"')&&h.includes('data-heritage')&&h.includes('goldtv.js'));
+ assert.ok(!/fetch\(|XMLHttpRequest|innerHTML=[^']/.test(j));assert.ok(!/☬/.test(h+j));assert.ok(R('assets/nanak-ghar/nanak-ghar.css').includes('prefers-reduced-motion'));
+ assert.ok(Dr.all().some(d=>d.href==='./nanak-ghar.html'));assert.ok(JSON.parse(R('assets/goldtv/feed.json')).items.some(i=>i.href==='./nanak-ghar.html'));
+ const sw=R('sw.js');assert.equal((sw.match(/const CACHE/g)||[]).length,1);assert.ok(sw.includes('./nanak-ghar.html')&&sw.includes('./assets/nanak-ghar/nanak-ghar.js'));});
