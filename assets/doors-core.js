@@ -38,6 +38,7 @@ const TREE={id:'root',icon:'🏰',title:'द्वार महल · ਦਰਵ�
   {icon:'⚖️',title:'कानूनी साथी',sub:'वकील सूची · मुफ़्त कानूनी मदद · फ़ॉर्म',href:'./vakil.html'},
   {icon:'🧲',title:'आकर्षण का नियम',sub:'जैसी भावना वैसा फल · 3 कदम · koins',href:'./akarshan.html'},
   {icon:'📜',title:'आज का गुण',sub:'रोज़ एक गुण · छोटा काम · koins',href:'./gun.html'},
+  {icon:'🍲',title:'वंड छक्को',sub:'रोज़ बाँटो · थाली · koins',href:'./vand.html'},
   {icon:'📿',title:'सिमरन माला',sub:'108 मनके · tap · नाम · koins',href:'./mala.html'},
   {icon:'📖',title:'आज की साखी',sub:'रोज़ एक साखी · सुनो · quiz',href:'./sakhi.html'},
   {icon:'🌸',title:'मेरा आज का भाव',sub:'रोज़ का भाव · बाणी · डायरी',href:'./aaj-bhav.html'},
