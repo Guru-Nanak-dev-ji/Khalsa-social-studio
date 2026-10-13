@@ -19,8 +19,17 @@ function games(el){if(el.dataset.jaanDone)return;el.dataset.jaanDone='1';el.clas
  var msg=mk('p','','प्यादा 7 क़दम चले तो राजा!'),btn=mk('button','jaan-btn','आगे बढ़ो ➜');btn.type='button';msg.setAttribute('aria-live','polite');
  btn.onclick=function(){cells[pos].textContent='';pos=(pos+1)%8;if(pos===0){cells[7].textContent='👑';}cells[pos].textContent=pos===7?'👑♟️':'♟️';msg.textContent=pos===7?'🎉 प्यादा राजा बन गया! 😁':'क़दम '+pos+' / 7';};
  g.append(bd,btn,msg);el.append(a,g);}
+
+var FUN={tv:['📺 चैनल बदलो',['📺 ख़बर: गाँव में नया लंगर 🍲','🎶 कीर्तन चैनल 🪕','⚽ खेल: पिंड का मैच 🏆','📚 ज्ञान: आज का सवाल ❓','😁 हँसी चैनल 🤣'],'📡 घुमाओ'],
+mandal:['🦅 बाज़ उड़ाओ',['🦅 बाज़ ने 1 चक्कर लगाया','🦅🦅 दो बाज़ साथ उड़े','🌄 बाज़ पहाड़ तक गया','🏰 बाज़ महल पर बैठा','✨ बाज़ सुनहरा हो गया'],'🚀 उड़ान'],
+community:['🤝 हाथ मिलाओ',['🤝 1 नया साथी जुड़ा','💛 मोहब्बत फैली','🍲 लंगर में हाथ बँटाया','🌱 एक पेड़ लगाया','🎉 पूरा मोहल्ला एक'],'🤝 मिलाओ'],
+kyon:['❓ सवाल का पासा',['❓ आसमान नीला क्यों?','❓ हम सपने क्यों देखते हैं?','❓ सच कड़वा क्यों लगता है?','❓ माफ़ी से हल्कापन क्यों?','❓ किताबें दोस्त क्यों?'],'🎲 फेंको']};
+function fun(el){if(el.dataset.jaanFunDone)return;el.dataset.jaanFunDone='1';var c=FUN[el.dataset.jaanFun];if(!c)return;var b=mk('div','jaan-box jaan-fun');b.appendChild(mk('h3','jaan-head',c[0]));
+ var out=mk('p','jaan-fun-out',c[1][0]),n=0,cnt=mk('small','','0'),btn=mk('button','jaan-btn',c[2]);btn.type='button';out.setAttribute('aria-live','polite');
+ btn.onclick=function(){n++;out.textContent=c[1][Math.random()*c[1].length|0];cnt.textContent=n+' बार 😁';out.classList.remove('pop');void out.offsetWidth;out.classList.add('pop');};
+ b.append(out,btn,mk('br'),cnt);el.appendChild(b);}
 function reveal(){var els=document.querySelectorAll('main section,.panel,.card,article');if(reduce||!('IntersectionObserver'in window))return;var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('jaan-on');io.unobserve(e.target);}});},{threshold:.08});
  [].forEach.call(els,function(e){if(e.getBoundingClientRect().top>innerHeight){e.classList.add('jaan-in');io.observe(e);}});}
-function init(){sky();[].forEach.call(document.querySelectorAll('.jaan-slider'),slider);[].forEach.call(document.querySelectorAll('[data-jaan-games]'),games);reveal();}
+function init(){sky();[].forEach.call(document.querySelectorAll('.jaan-slider'),slider);[].forEach.call(document.querySelectorAll('[data-jaan-games]'),games);[].forEach.call(document.querySelectorAll('[data-jaan-fun]'),fun);reveal();}
 if(typeof window!=='undefined'){window.KDNJaan={slider:slider,games:games};if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();}
 })();
