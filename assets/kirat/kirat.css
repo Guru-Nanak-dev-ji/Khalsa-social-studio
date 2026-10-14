@@ -1,0 +1,6 @@
+.kr-note{border:1px dashed #f2c66a;border-radius:10px;padding:8px;background:rgba(242,198,106,.08)}.kr-toast{color:#9fe09f;font-weight:700}
+.kr-l{display:block;margin:6px 0}.kr-l span{display:block;font-size:.9rem;color:#f2c66a}.kr-in{width:100%;max-width:420px;min-height:44px;padding:8px;border-radius:8px;border:1px solid rgba(242,198,106,.5);background:#1a0d06;color:#fff;font-size:1rem}
+.kr-t{width:100%;border-collapse:collapse;font-size:.9rem;margin:8px 0}.kr-t th,.kr-t td{padding:5px;border-bottom:1px solid rgba(242,198,106,.25);text-align:left}.kr-t th{color:#f2c66a}.kr-del{min-height:32px;padding:2px 8px}
+.kr-sum{font-weight:700;color:#f7e3b0}.kr-chips{display:flex;flex-wrap:wrap;gap:6px}.kr-bar{height:10px;border-radius:6px;background:rgba(242,198,106,.15);overflow:hidden;max-width:420px}.kr-bar i{display:block;height:100%;background:#f2c66a}
+.kr-steps{list-style:none;padding:0}.kr-steps li{padding:4px 0}.kr-links{list-style:none;padding:0;display:grid;gap:6px}.kr-links a{color:#f2c66a}
+@media print{.hud,.kr-note,.kr-msg,button,.gu-box:not(:has(.kr-plan)),.jaan-hero,.heritage-banner{display:none!important}body{background:#fff;color:#000}.kr-sum{color:#000}}

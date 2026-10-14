@@ -1,0 +1,28 @@
+(function(root,f){const m=f();if(typeof module==='object'&&module.exports)module.exports=m;else root.KDNKirat=m;})(this,function(){'use strict';
+// 🛠️ किरत करो — on-device tools only (localStorage, this phone). NOT jobs, NOT vacancies, no data sent anywhere.
+const KEY='kdn-kirat-v1',BADGE='किरत साधक';
+const NOTE='ये सिर्फ़ औज़ार (tools) हैं — नौकरी या भर्ती नहीं। आपका सारा डेटा सिर्फ़ इसी फ़ोन में रहता है; कहीं भेजा नहीं जाता।';
+const TOOLS=[{id:'khet',e:'🌾',n:'खेत की बही',d:'ख़र्च, बीज, पैदावार — CSV निकालो'},{id:'dhanda',e:'🏪',n:'धंधा योजना',d:'लागत, दाम, मुनाफ़ा — प्रिंट करो'},{id:'hunar',e:'🧰',n:'हुनर प्रोफ़ाइल',d:'हुनर चुनो, क़दम तय करो, प्रगति देखो'},{id:'digital',e:'📱',n:'डिजिटल साक्षरता',d:'UPI सुरक्षा, ठगी, पासवर्ड — quiz'},{id:'hisab',e:'📒',n:'रोज़ का हिसाब',d:'आमदनी-ख़र्च की बही'}];
+const PORTALS=[{t:'Skill India Digital Hub (कौशल विकास, भारत सरकार)',u:'https://www.skillindiadigital.gov.in/'},{t:'SWAYAM — मुफ़्त ऑनलाइन कोर्स (शिक्षा मंत्रालय)',u:'https://swayam.gov.in/'},{t:'SWAYAM Plus — हुनर/रोज़गार-योग्य कोर्स',u:'https://swayamplus.education.gov.in/'}];
+const SAFE=[{t:'Sanchar Saathi — चक्षु: संदिग्ध ठगी कॉल/SMS/WhatsApp की रिपोर्ट',u:'https://www.sancharsaathi.gov.in/sfc/'},{t:'पैसा गया? तुरंत 1930 या cybercrime.gov.in',u:'https://cybercrime.gov.in/'}];
+const SKILLS=['सिलाई-कढ़ाई','बिजली का काम','प्लंबिंग','मोबाइल रिपेयर','कंप्यूटर बेसिक','खेती-बाड़ी तकनीक','खाना/हलवाई','ड्राइविंग','ब्यूटी-केयर','हिसाब-किताब'];
+const LESSONS=[
+ {id:'upi',e:'💸',t:'UPI सुरक्षा',pts:['पैसे लेने के लिए कभी PIN नहीं डालना पड़ता — PIN सिर्फ़ भेजने के लिए है।','"Collect request" आए तो ध्यान से पढ़ो — अनजान हो तो Decline।','QR कोड स्कैन करना = पैसे भेजना। पैसे पाने के लिए QR स्कैन मत करो।'],quiz:[['पैसे पाने के लिए UPI PIN डालना पड़ता है?',['नहीं, कभी नहीं','हाँ, हमेशा'],0],['अनजान "collect request" आए तो?',['Decline करो','Approve करो'],0]]},
+ {id:'scam',e:'🚨',t:'ठगी पहचानो',pts:['बैंक/पुलिस/कंपनी कभी OTP नहीं माँगते।','"लॉटरी लगी", "KYC बंद हो जाएगा", "बिजली कटेगी" — जल्दबाज़ी कराने वाले मैसेज ठगी के आम तरीक़े हैं।','स्क्रीन-शेयर ऐप (जैसे रिमोट ऐप) अनजान के कहने पर कभी मत डालो।','पैसा गया? तुरंत 1930 पर कॉल या cybercrime.gov.in पर शिकायत।'],quiz:[['कोई "बैंक से" बनकर OTP माँगे तो?',['मत बताओ, फ़ोन काटो','बता दो'],0],['पैसे की ठगी हो जाए तो हेल्पलाइन?',['1930','100 नंबर पर SMS'],0]]},
+ {id:'pass',e:'🔐',t:'पासवर्ड और फ़ोन',pts:['लंबा पासवर्ड (कम से कम 12 अक्षर) — शब्द + अंक + चिह्न।','हर ऐप/खाते का अलग पासवर्ड; जन्मतिथि या 123456 नहीं।','दो-चरण सत्यापन (2-step) चालू रखो; फ़ोन पर स्क्रीन-लॉक।'],quiz:[['अच्छा पासवर्ड कौन-सा?',['लंबा, अलग-अलग अक्षर-अंक-चिह्न','123456'],0],['सब खातों में एक ही पासवर्ड रखना ठीक है?',['नहीं','हाँ'],0]]}];
+const fresh=()=>({v:1,khet:[],hisab:[],dhanda:null,hunar:{skills:[],steps:[]},digital:[],used:[],badge:false});
+const num=x=>{const n=Number(x);return isFinite(n)?Math.round(n*100)/100:0};
+const cl=(x,n)=>String(x==null?'':x).replace(/[\u0000-\u001f]/g,' ').trim().slice(0,n);
+function validate(s){if(!s||s.v!==1)return fresh();const o=fresh();o.khet=Array.isArray(s.khet)?s.khet.slice(-500):[];o.hisab=Array.isArray(s.hisab)?s.hisab.slice(-1000):[];o.dhanda=s.dhanda&&typeof s.dhanda==='object'?s.dhanda:null;
+ o.hunar={skills:Array.isArray(s.hunar&&s.hunar.skills)?s.hunar.skills.filter(x=>SKILLS.includes(x)):[],steps:Array.isArray(s.hunar&&s.hunar.steps)?s.hunar.steps.slice(0,50):[]};o.digital=Array.isArray(s.digital)?s.digital.filter(x=>LESSONS.some(l=>l.id===x)):[];o.used=Array.isArray(s.used)?[...new Set(s.used.filter(x=>TOOLS.some(t=>t.id===x)))]:[];o.badge=s.badge===true||o.used.length===TOOLS.length;return o;}
+function use(s,tool){s=validate(s);if(!TOOLS.some(t=>t.id===tool)||s.used.includes(tool))return{state:s,first:false,badgeNew:false};const used=[...s.used,tool],all=used.length===TOOLS.length;return{state:{...s,used,badge:s.badge||all},first:true,badgeNew:all&&!s.badge};}
+const KHET_TYPES=['ख़र्च','बीज','पैदावार','बिक्री'];
+function khetRow(r){const type=KHET_TYPES.includes(r.type)?r.type:null;if(!type)return null;const date=/^\d{4}-\d{2}-\d{2}$/.test(r.date)?r.date:null;if(!date)return null;return{date,type,item:cl(r.item,60),qty:cl(r.qty,30),amt:num(r.amt)};}
+function khetTotals(rows){const t={kharch:0,bikri:0};rows.forEach(r=>{if(r.type==='ख़र्च'||r.type==='बीज')t.kharch+=r.amt;if(r.type==='बिक्री')t.bikri+=r.amt});t.kharch=num(t.kharch);t.bikri=num(t.bikri);t.bachat=num(t.bikri-t.kharch);return t;}
+function csvCell(v){let s=String(v);if(/^[=+\-@]/.test(s))s="'"+s;return /[",\n]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s;}
+function csv(rows,cols,head){return '\uFEFF'+[head.map(csvCell).join(','),...rows.map(r=>cols.map(c=>csvCell(r[c]==null?'':r[c])).join(','))].join('\n');}
+function hisabRow(r){const kind=r.kind==='in'||r.kind==='out'?r.kind:null;const date=/^\d{4}-\d{2}-\d{2}$/.test(r.date)?r.date:null;const amt=num(r.amt);if(!kind||!date||!(amt>0))return null;return{date,kind,note:cl(r.note,80),amt};}
+function hisabTotals(rows,date){const f=date?rows.filter(r=>r.date===date):rows;let i=0,o=0;f.forEach(r=>{if(r.kind==='in')i+=r.amt;else o+=r.amt});return{in:num(i),out:num(o),net:num(i-o)};}
+function plan(p){const fixed=num(p.fixed),unit=num(p.unit),price=num(p.price),qty=num(p.qty);const margin=num(price-unit),profit=num(margin*qty-fixed);const be=margin>0?Math.ceil(fixed/margin):null;return{fixed,unit,price,qty,margin,profit,breakeven:be,ok:margin>0};}
+function hunarPct(steps){if(!steps.length)return 0;return Math.round(100*steps.filter(s=>s.done).length/steps.length);}
+return{KEY,BADGE,NOTE,TOOLS,PORTALS,SAFE,SKILLS,LESSONS,KHET_TYPES,fresh,validate,use,khetRow,khetTotals,csv,csvCell,hisabRow,hisabTotals,plan,hunarPct,cl,num};});
