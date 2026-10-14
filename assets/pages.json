@@ -1067,6 +1067,16 @@
 "status": "published"
 },
 {
+"id": "nyay",
+"icon": "🕊️",
+"name": "डिजिटल न्याय मंडल",
+"sub": "सामुदायिक मध्यस्थता · विचार/प्रस्ताव",
+"cat": "s",
+"href": "./nyay.html",
+"group": "rights",
+"status": "published"
+},
+{
 "id": "sehat",
 "icon": "🧡",
 "name": "सेहत Control Room",
