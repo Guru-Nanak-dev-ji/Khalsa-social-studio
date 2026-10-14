@@ -14,6 +14,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Pages manifest + internal link check
+        run: |
+          python3 scripts/build-pages.py --check
+          python3 scripts/check-links.py
       - name: Run local UI smoke tests
         run: python -m unittest discover -s tests -v
       - uses: actions/setup-node@v4
