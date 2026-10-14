@@ -1057,6 +1057,46 @@
 "status": "published"
 },
 {
+"id": "sehat-first-aid",
+"icon": "🩹",
+"name": "First Aid की बुनियाद",
+"sub": "CPR, जलना, खून बहना, गला अटकना",
+"cat": "s",
+"href": "./sehat-first-aid.html",
+"group": "rights",
+"status": "published"
+},
+{
+"id": "sehat-man",
+"icon": "💚",
+"name": "मन की सेहत",
+"sub": "तनाव, साँस, Tele-MANAS 14416",
+"cat": "s",
+"href": "./sehat-man.html",
+"group": "rights",
+"status": "published"
+},
+{
+"id": "sehat-poshan",
+"icon": "🥗",
+"name": "पोषण — लंगर थाली",
+"sub": "शाकाहारी संतुलित थाली",
+"cat": "s",
+"href": "./sehat-poshan.html",
+"group": "rights",
+"status": "published"
+},
+{
+"id": "sehat-yoga",
+"icon": "🧘",
+"name": "रोज़ की हलचल",
+"sub": "आसान कसरत + टाइमर",
+"cat": "s",
+"href": "./sehat-yoga.html",
+"group": "rights",
+"status": "published"
+},
+{
 "id": "community",
 "icon": "🫂",
 "name": "संगत दरबार",

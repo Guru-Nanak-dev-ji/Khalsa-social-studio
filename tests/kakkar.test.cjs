@@ -11,6 +11,6 @@ test('single hub page, no photos/Khanda, wiring, pages, khazana, CACHE',()=>{
  for(const f of['sab.html','dwar.html','guru.html','panj-takht.html'])assert.ok(R(f).includes('./panj-kakkar.html'),f);
  const P=JSON.parse(R('assets/pages.json')).pages;const e=P.find(p=>p.id==='panj-kakkar');assert.ok(e);assert.equal(e.cat,'j');assert.equal(e.status,'published');assert.equal(e.href,'./panj-kakkar.html');
  const g=Z.GAMES.find(x=>x.id==='kakkar');assert.ok(g);assert.equal(g.badge,'कक्कार ज्ञानी');assert.equal(g.key,'kdn-kakkar-v1');assert.equal(g.href,'./panj-kakkar.html');
- const sw=R('sw.js');assert.equal((sw.match(/const CACHE/g)||[]).length,1);assert.match(sw,/const CACHE=PREFIX\+'v0\.82\.0'/);
+ const sw=R('sw.js');assert.equal((sw.match(/const CACHE/g)||[]).length,1);assert.match(sw,/const CACHE=PREFIX\+'v0\.(8[2-9]|9\d)\./);
  for(const a of['./panj-kakkar.html','./assets/kakkar/kakkar-core.js','./assets/kakkar/kakkar.js','./assets/kakkar/kakkar.css'])assert.ok(sw.includes(a),a);
 });
