@@ -36,6 +36,7 @@ const TREE={id:'root',icon:'🏰',title:'द्वार महल · ਦਰਵ�
   {icon:'📚',title:'क्यों? सत्ता, समाज और साझा संसार',sub:'16 अध्यायों की सचित्र पुस्तक · पढ़ें, सुनें, PDF',href:'./kyon.html'},
   {icon:'🤝',title:'Khatri Aid',sub:'न छोटा न बड़ा · मदद माँगो · मदद करो',href:'./khatri-aid.html'},
   {icon:'⚖️',title:'कानूनी साथी',sub:'वकील सूची · मुफ़्त कानूनी मदद · फ़ॉर्म',href:'./vakil.html'},
+  {icon:'🕊️',title:'डिजिटल न्याय मंडल',sub:'सामुदायिक मध्यस्थता · विचार/प्रस्ताव',href:'./nyay.html'},
   {icon:'🧲',title:'आकर्षण का नियम',sub:'जैसी भावना वैसा फल · 3 कदम · koins',href:'./akarshan.html'},
   {icon:'📜',title:'आज का गुण',sub:'रोज़ एक गुण · छोटा काम · koins',href:'./gun.html'},
   {icon:'📖',title:'कहानी घर',sub:'5 series · 🤣 फनीबुक · 👽 HER · 🤍 White Mirror',href:'./kahani.html'},
