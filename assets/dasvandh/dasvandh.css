@@ -1,0 +1,10 @@
+.dv-note{border:1px dashed #f2c66a;border-radius:10px;padding:10px;background:rgba(242,198,106,.08)}
+.dv-bani{text-align:center;border:1px solid rgba(242,198,106,.6);border-radius:14px;padding:12px;background:linear-gradient(160deg,rgba(242,198,106,.14),rgba(26,13,6,.4))}
+.dv-bani .g{font-family:'KDN Gurmukhi','Noto Sans Gurmukhi',serif;font-size:1.25rem;color:#f7e3b0}.dv-bani .h{font-size:1.15rem;color:#f2c66a}.dv-bani small{display:block;opacity:.8;margin-top:6px}
+.dv-in{width:100%;max-width:420px;min-height:44px;padding:8px;border-radius:8px;border:1px solid rgba(242,198,106,.5);background:#1a0d06;color:#fff;font-size:1rem;box-sizing:border-box}
+.dv-l{display:block;margin:6px 0}.dv-l span{display:block;font-size:.9rem;color:#f2c66a}
+.dv-meter{margin:10px 0}.dv-bar{height:14px;border-radius:8px;background:rgba(242,198,106,.15);overflow:hidden;max-width:440px}.dv-bar i{display:block;height:100%;background:linear-gradient(90deg,#c8962e,#f6d27a);transition:width .6s}
+.dv-jar{font-size:3rem;text-align:center;animation:dvBob 3s ease-in-out infinite}@keyframes dvBob{50%{transform:translateY(-6px)}}
+.dv-t{width:100%;border-collapse:collapse;font-size:.9rem}.dv-t td,.dv-t th{padding:5px;border-bottom:1px solid rgba(242,198,106,.25);text-align:left}.dv-t th{color:#f2c66a}
+.dv-toast{color:#9fe09f;font-weight:700}.dv-ideas{padding-left:18px}.dv-ideas li{margin:4px 0}
+@media (prefers-reduced-motion:reduce){.dv-jar{animation:none}.dv-bar i{transition:none}}

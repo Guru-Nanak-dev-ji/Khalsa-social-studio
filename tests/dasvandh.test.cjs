@@ -1,0 +1,12 @@
+const test=require('node:test'),assert=require('node:assert'),D=require('../assets/dasvandh/dasvandh-core.js'),V=require('../assets/vand/vand-core.js'),Z=require('../assets/khazana/khazana-core.js'),Dr=require('../assets/doors-core.js'),fs=require('fs'),path=require('path'),R=f=>fs.readFileSync(path.join(__dirname,'..',f),'utf8');
+test('Gurbani identical to verified vand-core (Ang 1245); voluntary, no payments',()=>{assert.deepStrictEqual(D.BANI,V.BANI);assert.equal(D.BANI.ang,1245);assert.match(D.NOTE,/स्वेच्छा/);assert.match(D.NOTE,/किसी संस्था की सिफ़ारिश/);
+ const js=R('assets/dasvandh/dasvandh.js');assert.doesNotMatch(js,/innerHTML|fetch\(|XMLHttpRequest|sendBeacon|upi:|https?:/);assert.ok(!/☬|<img/.test(R('dasvandh.html')+js));});
+test('10% target, seva hours, badge once, validate',()=>{let s=D.setIncome(D.fresh(),'2026-10',20000);assert.equal(D.progress(s,'2026-10').target,2000);
+ let r=D.give(s,{d:'2026-10-14',kind:'paisa',amt:500,note:'<b>x'});assert.ok(r.added&&r.firstToday&&!r.badgeNew);s=r.state;assert.ok(!s.months['2026-10'].gave[0].note.includes('<'));
+ r=D.give(s,{d:'2026-10-14',kind:'cheez',amt:1500});assert.ok(!r.firstToday&&r.badgeNew);s=r.state;assert.equal(D.progress(s,'2026-10').pctRs,100);assert.ok(!D.give(s,{d:'2026-10-15',kind:'paisa',amt:1}).badgeNew);
+ let t=D.fresh();for(let i=1;i<=10;i++)t=D.give(t,{d:'2026-11-'+String(i).padStart(2,'0'),kind:'seva',amt:1}).state;assert.equal(D.progress(t,'2026-11').pctSeva,100);assert.ok(t.badge);
+ assert.ok(!D.give(D.fresh(),{d:'bad',kind:'paisa',amt:5}).added);assert.ok(!D.give(D.fresh(),{d:'2026-10-14',kind:'x',amt:5}).added);assert.ok(!D.give(D.fresh(),{d:'2026-10-14',kind:'paisa',amt:-5}).added);
+ assert.deepStrictEqual(D.validate(null),D.fresh());assert.equal(D.remove(s,'2026-10',0).months['2026-10'].gave.length,1);});
+test('wiring: pages, doors, khazana, sab, dwar, sw',()=>{const p=JSON.parse(R('assets/pages.json')).pages.find(x=>x.id==='dasvandh');assert.equal(p.group,'seva');assert.equal(p.status,'published');
+ assert.ok(Dr.all().some(d=>d.href==='./dasvandh.html'));assert.ok(Z.GAMES.some(g=>g.id==='dasvandh'&&g.badge===D.BADGE&&g.key===D.KEY));for(const f of['sab.html','dwar.html'])assert.ok(R(f).includes('./dasvandh.html'));
+ const sw=R('sw.js');assert.ok(sw.includes('./dasvandh.html')&&sw.includes('./assets/dasvandh/dasvandh-core.js'));assert.match(sw,/const CACHE=PREFIX\+'v0\.(8[7-9]|9\d)\./);});
