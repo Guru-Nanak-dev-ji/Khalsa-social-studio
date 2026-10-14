@@ -457,6 +457,76 @@
 "status": "published"
 },
 {
+"id": "itihas",
+"icon": "📜",
+"name": "सिख इतिहास",
+"sub": "6 पन्ने — जीवन, महत्व, समय-रेखा",
+"cat": "j",
+"href": "./itihas.html",
+"group": "history",
+"status": "published"
+},
+{
+"id": "itihas-sahibzade",
+"icon": "🌟",
+"name": "चार साहिबज़ादे",
+"sub": "गुरु गोबिंद सिंह जी के चार पुत्र",
+"cat": "j",
+"href": "./itihas-sahibzade.html",
+"group": "history",
+"status": "published"
+},
+{
+"id": "itihas-mata-gujri",
+"icon": "🪔",
+"name": "माता गुजरी जी",
+"sub": "गुरु तेग़ बहादुर जी की पत्नी, गुरु गोबिं",
+"cat": "j",
+"href": "./itihas-mata-gujri.html",
+"group": "history",
+"status": "published"
+},
+{
+"id": "itihas-banda-singh",
+"icon": "⚖️",
+"name": "बाबा बंदा सिंह बहादुर",
+"sub": "गुरु गोबिंद सिंह जी से प्रेरित सिख सेनाप",
+"cat": "j",
+"href": "./itihas-banda-singh.html",
+"group": "history",
+"status": "published"
+},
+{
+"id": "itihas-deep-singh",
+"icon": "📖",
+"name": "बाबा दीप सिंह जी",
+"sub": "विद्वान, ग्रंथ-लेखक और शहीद",
+"cat": "j",
+"href": "./itihas-deep-singh.html",
+"group": "history",
+"status": "published"
+},
+{
+"id": "itihas-kanhaiya",
+"icon": "💧",
+"name": "भाई कन्हैया जी",
+"sub": "सबकी सेवा — दुश्मन के घायलों की भी",
+"cat": "j",
+"href": "./itihas-kanhaiya.html",
+"group": "history",
+"status": "published"
+},
+{
+"id": "itihas-ranjit-singh",
+"icon": "👑",
+"name": "महाराजा रणजीत सिंह",
+"sub": "शेर-ए-पंजाब — सिख राज के महाराजा",
+"cat": "j",
+"href": "./itihas-ranjit-singh.html",
+"group": "history",
+"status": "published"
+},
+{
 "id": "kahani",
 "icon": "📖",
 "name": "कहानी घर",
