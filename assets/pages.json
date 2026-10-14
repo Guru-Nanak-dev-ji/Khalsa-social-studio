@@ -837,6 +837,16 @@
 "status": "published"
 },
 {
+"id": "pathey",
+"icon": "⚖️",
+"name": "पाथेय",
+"sub": "किरत + सेवा का संतुलन",
+"cat": "s",
+"href": "./pathey.html",
+"group": "seva",
+"status": "published"
+},
+{
 "id": "swad",
 "icon": "🍲",
 "name": "हर राज्य का स्वाद",
