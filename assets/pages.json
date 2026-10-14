@@ -327,6 +327,76 @@
 "status": "published"
 },
 {
+"id": "bhagat",
+"icon": "🪔",
+"name": "भगत बाणी",
+"sub": "6 भगत — जीवन, सीख, गुरबाणी",
+"cat": "j",
+"href": "./bhagat.html",
+"group": "gurbani",
+"status": "published"
+},
+{
+"id": "bhagat-kabir",
+"icon": "🧵",
+"name": "भगत कबीर जी",
+"sub": "काशी (वाराणसी), उत्तर प्रदेश",
+"cat": "j",
+"href": "./bhagat-kabir.html",
+"group": "gurbani",
+"status": "published"
+},
+{
+"id": "bhagat-ravidas",
+"icon": "🏙️",
+"name": "भगत रविदास जी",
+"sub": "सीर गोवर्धनपुर, काशी (वाराणसी)",
+"cat": "j",
+"href": "./bhagat-ravidas.html",
+"group": "gurbani",
+"status": "published"
+},
+{
+"id": "bhagat-namdev",
+"icon": "🪡",
+"name": "भगत नामदेव जी",
+"sub": "नरसी बामणी (महाराष्ट्र)",
+"cat": "j",
+"href": "./bhagat-namdev.html",
+"group": "gurbani",
+"status": "published"
+},
+{
+"id": "bhagat-farid",
+"icon": "🌙",
+"name": "बाबा शेख़ फ़रीद जी",
+"sub": "पाकपट्टन (आज पाकिस्तान) से जुड़े; जन्म म",
+"cat": "j",
+"href": "./bhagat-farid.html",
+"group": "gurbani",
+"status": "published"
+},
+{
+"id": "bhagat-dhanna",
+"icon": "🌾",
+"name": "भगत धन्ना जी",
+"sub": "धुआँ कलाँ, टोंक ज़िला (राजस्थान)",
+"cat": "j",
+"href": "./bhagat-dhanna.html",
+"group": "gurbani",
+"status": "published"
+},
+{
+"id": "bhagat-trilochan",
+"icon": "🕯️",
+"name": "भगत त्रिलोचन जी",
+"sub": "महाराष्ट्र (परंपरा अनुसार)",
+"cat": "j",
+"href": "./bhagat-trilochan.html",
+"group": "gurbani",
+"status": "published"
+},
+{
 "id": "panj-takht",
 "icon": "🏛️",
 "name": "पंज तख़्त",
