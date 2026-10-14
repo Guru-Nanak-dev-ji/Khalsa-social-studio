@@ -847,6 +847,16 @@
 "status": "published"
 },
 {
+"id": "dasvandh",
+"icon": "🪙",
+"name": "दसवंध",
+"sub": "कमाई या समय का दसवाँ हिस्सा बाँटो",
+"cat": "s",
+"href": "./dasvandh.html",
+"group": "seva",
+"status": "published"
+},
+{
 "id": "swad",
 "icon": "🍲",
 "name": "हर राज्य का स्वाद",
