@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#1a0d06">
+<meta name="description" content="⚖️ पाथेय — किरत करो, वंड छक्को: जीवन का पाथेय। रोज़ किरत और सेवा दबाइए, सुनहरा तराज़ू संतुलन दिखाता है, koins पाइए।">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icons/khalsa-v1-32.png" sizes="32x32" type="image/png">
+<link rel="stylesheet" href="./assets/heritage.css">
+<link rel="stylesheet" href="./assets/hindi-fonts.css">
+<link rel="stylesheet" href="./assets/pathey/pathey.css">
+<title>⚖️ पाथेय · KDN</title>
+<script defer src="./assets/koins-core.js"></script>
+<script defer src="./assets/pathey/pathey-core.js"></script>
+<script defer src="./assets/pathey/pathey.js"></script>
+<script defer src="./assets/goldtv/goldtv.js"></script><link rel="stylesheet" href="./assets/jaan.css"><script defer src="./assets/jaan.js"></script><link rel="stylesheet" href="./assets/i18n/i18n.css"><script defer src="./assets/i18n/i18n.js"></script>
+</head>
+<body class="kdn-hindi" data-heritage="immersive">
+<div class="heritage-banner" aria-hidden="true"></div>
+<header class="hud" role="status" aria-live="polite">
+<a href="./studio.html#door=games">← द्वार</a>
+<div class="big">💰 <span id="h-koins">0</span><small>game koins, असली पैसा नहीं</small></div>
+</header>
+<section class="head"><h1>⚖️ पाथेय</h1><p class="motto">किरत करो, वंड छक्को — जीवन का पाथेय</p>
+<p class="what">मनुष्य ही असली पूँजी है। <b>पाथेय = किरत + सेवा का संतुलन</b> — उम्र भर की ईमानदार मेहनत और बाँटने का हिसाब।</p>
+<p class="what">पहली बार आने पर <b>1,25,000 गुरु कोइन्स</b> स्वागत में (game koins, असली पैसा नहीं)। रोज़ पहले निशान पर +5 koins।</p></section>
+<section class="card" aria-live="polite">
+<p class="orn">✦ आज का तराज़ू ✦</p>
+<div id="scale" class="scale" aria-hidden="true"><div class="post"></div><div class="top"></div><div class="beam">
+<div class="pan left"><div class="rope"></div><div class="dish"><span>⚒️</span><b id="n-kirat">0</b></div><div class="lbl">किरत</div></div>
+<div class="pan right"><div class="rope"></div><div class="dish"><span>🤲</span><b id="n-seva">0</b></div><div class="lbl">सेवा</div></div>
+</div><div class="base"></div></div>
+<p id="bal-msg"></p>
+<div id="sides" role="group" aria-label="आज का पाथेय">
+<button type="button" class="side" id="b-kirat" aria-pressed="false"><span class="si">⚒️</span><span class="st">किरत</span><span class="ss" id="s-kirat"></span></button>
+<button type="button" class="side" id="b-seva" aria-pressed="false"><span class="si">🤲</span><span class="st">सेवा</span><span class="ss" id="s-seva"></span></button>
+</div>
+<p id="pick-msg">👆 आज जो सच में किया, उस पलड़े को दबाइए — एक या दोनों। दबाते ही सहेजा जाता है।</p>
+<p id="today-msg" hidden></p>
+<button type="button" class="btn ghost" id="say">🔊 सुनें</button>
+<p class="honest">🙏 सच से दबाएँ — हर पलड़ा दिन में एक बार, तभी जब आज सच में किया हो।</p>
+</section>
+<section class="card bani"><p class="orn">✦ गुरबाणी ✦</p><p class="line" id="b-line"></p><p class="mean" id="b-mean"></p><p class="src" id="b-src"></p></section>
+<section class="card"><p id="streak"></p><div id="week" aria-label="पिछले 7 दिन"></div><p class="note">⚖️ = किरत + सेवा दोनों · ⚒️ = सिर्फ़ किरत · 🤲 = सिर्फ़ सेवा · ○ = कुछ नहीं</p></section>
+<p id="badge" class="badge" hidden>🏅 पाथेय साधक — 7 दिन किरत + सेवा दोनों!</p>
+<nav class="links" aria-label="द्वार के अंदर द्वार">
+<a class="link" href="./kirat.html"><b>🛠️ किरत करो</b><small>5 औज़ार · ईमानदार काम</small></a>
+<a class="link" href="./vand.html"><b>🍲 वंड छक्को</b><small>रोज़ बाँटो · सुनहरी थाली</small></a>
+</nav>
+<p class="note">हर पलड़ा दिन में एक बार दबा सकते हैं। सब कुछ इसी phone में रहता है, कोई server नहीं। Koins game के हैं, असली पैसा नहीं। "Reduce motion" setting में तराज़ू बिना हिले सीधे झुकता है।</p>
+<section class="jaan-hero jaan-shell-hero" style="padding-top:16px"><h2 class="jaan-head" style="color:#f2c66a;text-align:center">⚖️ किरत + सेवा = पाथेय</h2><div class="jaan-slider" aria-label="तस्वीरें" data-jaan-slides="bazaar|🛍️ किरत का बाज़ार;langar|🍲 सेवा का लंगर;ghar|🏠 घर"></div><div data-jaan-games data-jaan-fun="pathey"></div></section></body>
+</html>

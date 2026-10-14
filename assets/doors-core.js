@@ -43,6 +43,7 @@ const TREE={id:'root',icon:'🏰',title:'द्वार महल · ਦਰਵ�
   {icon:'🦅',title:'बाज़',sub:'सुनहरा बाज़ · उड़ान',href:'./baaz.html'},
   {icon:'🤣',title:'फनीबुक',sub:'हँसी से सच · बिना चोट · koins',href:'./funnybook.html'},
   {icon:'🍲',title:'वंड छक्को',sub:'रोज़ बाँटो · थाली · koins',href:'./vand.html'},
+  {icon:'⚖️',title:'पाथेय',sub:'किरत+सेवा संतुलन · तराज़ू · koins',href:'./pathey.html'},
   {icon:'📿',title:'सिमरन माला',sub:'108 मनके · tap · नाम · koins',href:'./mala.html'},
   {icon:'📖',title:'आज की साखी',sub:'रोज़ एक साखी · सुनो · quiz',href:'./sakhi.html'},
   {icon:'🌸',title:'मेरा आज का भाव',sub:'रोज़ का भाव · बाणी · डायरी',href:'./aaj-bhav.html'},
