@@ -48,3 +48,6 @@ body.realm-still .realm-fallback,body.realm-still .realm-yin,body.realm-still .r
 @media(max-width:760px){.boot.realm-opening .realm-bottom button{font-size:8px;max-width:150px}.realm-opening .realm-bani{margin-left:0;margin-right:0}}
 
 body[data-heritage]:not([data-heritage="immersive"]){background:radial-gradient(ellipse at 15% 0,#23414b,#0c1b25 60%,#09141e);color:#eee6d6}body[data-heritage]:not([data-heritage="immersive"]) h1,body[data-heritage]:not([data-heritage="immersive"]) h2{color:#efd49a}body[data-heritage]:not([data-heritage="immersive"]) .panel{background:#102733;border-color:#a38c5670}
+/* F2: सारे द्वार entry link (Royal Gold pill, wraps under the CTAs on phones) */
+.realm-cta a.realm-all-doors{display:inline-flex;align-items:center;min-height:43px;padding:8px 12px;border-radius:4px;border:1px solid #f4c867;color:#f4c867;background:rgba(16,15,13,.55);font:600 12px KDNHindi,Mukta,system-ui;text-decoration:none;box-sizing:border-box}
+.realm-cta a.realm-all-doors:focus-visible{outline:2px solid #ffd76a;outline-offset:2px}

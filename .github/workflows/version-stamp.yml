@@ -13,6 +13,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with: { fetch-depth: 50 }
+      - name: Sync pages manifest (सारे द्वार)
+        run: python3 scripts/build-pages.py
       - name: Stamp version
         run: |
           V=$(./scripts/stamp-version.sh "${{ github.sha }}")
@@ -21,7 +23,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/version.js sw.js *.html
+          git add assets/version.js assets/pages.json sw.js *.html
           git diff --cached --quiet && exit 0
           git commit -m "chore: stamp v${V}"
           git pull --rebase origin main && git push origin HEAD:main
