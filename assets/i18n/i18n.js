@@ -31,13 +31,15 @@
     cur=l;try{localStorage.setItem(KEY,l)}catch(e){}
     document.documentElement.lang=l;
     var p=document.querySelector('.kdn-lang');
-    if(p)p.querySelectorAll('button').forEach(function(b){var on=b.dataset.l===l;b.setAttribute('aria-pressed',on);b.textContent=(on?'🔘 ':'')+b.dataset.label});
+    if(p)p.querySelectorAll('button[data-l]').forEach(function(b){var on=b.dataset.l===l;b.setAttribute('aria-pressed',on);b.textContent=(on?'🔘 ':'')+b.dataset.label});
     return load(l).then(apply);
   }
   function pill(){
     var d=document.createElement('div');d.className='kdn-lang';d.setAttribute('role','group');d.setAttribute('aria-label','भाषा / ਭਾਸ਼ਾ / Language');
     LANGS.forEach(function(x){var b=document.createElement('button');b.type='button';b.dataset.l=x[0];b.dataset.label=x[1];b.lang=x[0];b.textContent=x[1];b.onclick=function(){set(x[0])};d.appendChild(b)});
-    document.body.appendChild(d);
+    var t=document.createElement('button');t.type='button';t.className='kdn-lang-t';t.textContent='🌐';t.setAttribute('aria-label','भाषा बदलें / Change language');t.setAttribute('aria-expanded','false');t.onclick=function(){var o=d.classList.toggle('open');t.setAttribute('aria-expanded',o)};d.insertBefore(t,d.firstChild);
+    d.addEventListener('click',function(e){if(e.target!==t&&e.target.dataset&&e.target.dataset.l){d.classList.remove('open');t.setAttribute('aria-expanded','false')}});
+    document.body.appendChild(d);document.body.classList.add('kdn-has-lang');
   }
   function init(){
     pill();set(get());

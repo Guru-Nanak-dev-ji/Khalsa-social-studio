@@ -1,9 +1,16 @@
 @font-face{font-family:'KDN Gurmukhi';src:url(./NotoSansGurmukhi-sub.woff2) format('woff2');font-display:swap;unicode-range:U+0A00-0A7F,U+200C-200D,U+25CC}
 html[lang=pa] body,html[lang=pa] button,html[lang=pa] h1,html[lang=pa] h2,html[lang=pa] h3{font-family:'KDN Gurmukhi','Noto Sans Gurmukhi','Mukta',system-ui,sans-serif}
-.kdn-lang{position:fixed;left:10px;bottom:calc(96px + env(safe-area-inset-bottom));z-index:10001;display:flex;gap:2px;padding:4px;border-radius:999px;border:1px solid rgba(255,214,120,.6);background:rgba(36,20,50,.62);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 6px 22px rgba(0,0,0,.35)}
+.kdn-lang{position:fixed;left:6px;bottom:calc(96px + env(safe-area-inset-bottom));z-index:900;display:flex;gap:2px;padding:4px;border-radius:999px;border:1px solid rgba(255,214,120,.6);background:rgba(36,20,50,.62);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 6px 22px rgba(0,0,0,.35)}
 .kdn-lang button{all:unset;cursor:pointer;font:700 12px/1 'KDN Gurmukhi','Mukta',system-ui,sans-serif;color:#fff2cc;padding:7px 9px;border-radius:999px;white-space:nowrap}
 .kdn-lang button[aria-pressed=true]{background:linear-gradient(135deg,#f6d27a,#c8962e);color:#2a1606}
 .kdn-lang button:focus-visible{outline:2px solid #ffd76a}
-body:has(#realm-motion) .kdn-lang{bottom:calc(150px + env(safe-area-inset-bottom))}
+/* v0.84: collapsed pill (🌐 + current language), low z-index under modals, reserved bottom space so it never covers page content */
+.kdn-lang:not(.open) button[data-l]{display:none}
+.kdn-lang button{min-height:32px;box-sizing:border-box}
+.kdn-lang-t{font-size:18px!important;min-width:36px;min-height:36px!important;text-align:center;padding:6px!important}
+body.kdn-has-lang{padding-bottom:calc(150px + env(safe-area-inset-bottom))}
+body:has(dialog[open]) .kdn-lang{display:none}
 .kdn-lang-note{margin:8px auto;max-width:720px;padding:8px 12px;border-radius:10px;font:600 13px/1.4 system-ui,sans-serif;color:#2a1606;background:#f6d27a;text-align:center}
 @media (max-width:360px){.kdn-lang button{padding:6px 6px;font-size:11px}}
+/* v0.84: comfortable 44px touch targets for small motion/sound toggles */
+#motion-toggle,#sound-toggle,#realm-motion,#realm-quality,#app-update-check,#app-update-reload{min-height:44px;min-width:44px;box-sizing:border-box}

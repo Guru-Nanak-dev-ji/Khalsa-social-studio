@@ -3,7 +3,7 @@ var CE={k:'📖',g:'🎮',j:'📚',n:'📰',s:'🙏',m:'🎵',c:'😂',t:'🧰'}
 function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e}
 function init(){var grid=document.getElementById('sab-grid');if(!grid)return;
  fetch('./assets/pages.json').then(function(r){return r.json()}).then(function(R){var cat='all',q='',chips=document.getElementById('sab-chips'),inp=document.getElementById('sab-q');
-  document.getElementById('sab-count').textContent=R.pages.length+' / '+R.max;document.getElementById('sab-bar').style.width=Math.max(2,R.pages.length*100/R.max)+'%';
+  document.getElementById('sab-count').textContent=R.pages.length+' दरवाज़े सूची में · लक्ष्य '+R.max;document.getElementById('sab-bar').style.width=Math.max(2,R.pages.length*100/R.max)+'%';
   function chip(id,label){var b=el('button','sab-chip',label);b.type='button';b.dataset.c=id;b.onclick=function(){cat=id;draw()};chips.appendChild(b)}
   chip('all','✨ सब');R.cats.forEach(function(c){chip(c.id,CE[c.id]+' '+c.name)});
   function draw(){[].forEach.call(chips.children,function(b){b.setAttribute('aria-pressed',b.dataset.c===cat)});grid.textContent='';var n=0,s=q.trim().toLowerCase();
