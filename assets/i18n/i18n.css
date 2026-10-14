@@ -20,3 +20,5 @@ body.kdn-has-lang{padding-bottom:env(safe-area-inset-bottom)}
 @media (max-width:600px){body.kdn-has-lang{padding-top:calc(52px + env(safe-area-inset-top))}}
 body:has(.jaan-intro:not([hidden])) .kdn-lang{display:none}
 body.kdn-has-lang .ctl:has(#pp){right:calc(60px + env(safe-area-inset-right))}
+/* v0.87: world pages — keep masthead links clear of the top-right 🌐 pill */
+body.kdn-has-lang .realm-masthead{padding-right:calc(56px + env(safe-area-inset-right))}
