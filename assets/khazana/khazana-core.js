@@ -9,6 +9,8 @@ const GAMES=[
  {id:'guru',icon:'🙏',game:'दस गुरु साहिबान',badge:'दस गुरू यात्री',key:'kdn-guru-v1',href:'./guru.html',got:s=>s.badge===true},
  {id:'panj',icon:'🏛️',game:'पंज तख़्त',badge:'पंज तख़्त यात्री',key:'kdn-panj-v1',href:'./panj-takht.html',got:s=>s.badge===true},
  {id:'kakkar',icon:'🛡️',game:'पंज कक्कार',badge:'कक्कार ज्ञानी',key:'kdn-kakkar-v1',href:'./panj-kakkar.html',got:s=>s.badge===true},
+ {id:'kirat',icon:'🛠️',game:'किरत करो',badge:'किरत साधक',key:'kdn-kirat-v1',href:'./kirat.html',got:s=>s.badge===true},
+ {id:'itihas',icon:'📜',game:'सिख इतिहास',badge:'इतिहास यात्री',key:'kdn-itihas-v1',href:'./itihas.html',got:s=>s.badge===true},
  {id:'bhagat',icon:'🪔',game:'भगत बाणी',badge:'भगत बाणी यात्री',key:'kdn-bhagat-v1',href:'./bhagat.html',got:s=>s.badge===true},
  {id:'kshetra',icon:'🌾',game:'मालवा यात्रा',badge:'मालवा यात्री',key:'kdn-kshetra-v1',href:'./kshetra-malwa.html',got:s=>s.badge===true},
  {id:'majha',icon:'🛕',game:'माझा यात्रा',badge:'माझा यात्री',key:'kdn-kshetra-majha-v1',href:'./kshetra-majha.html',got:s=>s.badge===true},

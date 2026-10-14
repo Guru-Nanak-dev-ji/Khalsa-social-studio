@@ -467,6 +467,76 @@
 "status": "published"
 },
 {
+"id": "itihas",
+"icon": "📜",
+"name": "सिख इतिहास",
+"sub": "6 पन्ने — जीवन, महत्व, समय-रेखा",
+"cat": "j",
+"href": "./itihas.html",
+"group": "history",
+"status": "published"
+},
+{
+"id": "itihas-sahibzade",
+"icon": "🌟",
+"name": "चार साहिबज़ादे",
+"sub": "गुरु गोबिंद सिंह जी के चार पुत्र",
+"cat": "j",
+"href": "./itihas-sahibzade.html",
+"group": "history",
+"status": "published"
+},
+{
+"id": "itihas-mata-gujri",
+"icon": "🪔",
+"name": "माता गुजरी जी",
+"sub": "गुरु तेग़ बहादुर जी की पत्नी, गुरु गोबिं",
+"cat": "j",
+"href": "./itihas-mata-gujri.html",
+"group": "history",
+"status": "published"
+},
+{
+"id": "itihas-banda-singh",
+"icon": "⚖️",
+"name": "बाबा बंदा सिंह बहादुर",
+"sub": "गुरु गोबिंद सिंह जी से प्रेरित सिख सेनाप",
+"cat": "j",
+"href": "./itihas-banda-singh.html",
+"group": "history",
+"status": "published"
+},
+{
+"id": "itihas-deep-singh",
+"icon": "📖",
+"name": "बाबा दीप सिंह जी",
+"sub": "विद्वान, ग्रंथ-लेखक और शहीद",
+"cat": "j",
+"href": "./itihas-deep-singh.html",
+"group": "history",
+"status": "published"
+},
+{
+"id": "itihas-kanhaiya",
+"icon": "💧",
+"name": "भाई कन्हैया जी",
+"sub": "सबकी सेवा — दुश्मन के घायलों की भी",
+"cat": "j",
+"href": "./itihas-kanhaiya.html",
+"group": "history",
+"status": "published"
+},
+{
+"id": "itihas-ranjit-singh",
+"icon": "👑",
+"name": "महाराजा रणजीत सिंह",
+"sub": "शेर-ए-पंजाब — सिख राज के महाराजा",
+"cat": "j",
+"href": "./itihas-ranjit-singh.html",
+"group": "history",
+"status": "published"
+},
+{
 "id": "kahani",
 "icon": "📖",
 "name": "कहानी घर",
@@ -1123,6 +1193,66 @@
 "sub": "अनेक होकर भी एक",
 "cat": "t",
 "href": "./bhav.html",
+"group": "work",
+"status": "published"
+},
+{
+"id": "kirat",
+"icon": "🛠️",
+"name": "किरत करो",
+"sub": "5 मुफ़्त औज़ार — नौकरी नहीं",
+"cat": "t",
+"href": "./kirat.html",
+"group": "work",
+"status": "published"
+},
+{
+"id": "kirat-khet",
+"icon": "🌾",
+"name": "खेत की बही",
+"sub": "ख़र्च, बीज, पैदावार — CSV निकालो",
+"cat": "t",
+"href": "./kirat-khet.html",
+"group": "work",
+"status": "published"
+},
+{
+"id": "kirat-dhanda",
+"icon": "🏪",
+"name": "धंधा योजना",
+"sub": "लागत, दाम, मुनाफ़ा — प्रिंट करो",
+"cat": "t",
+"href": "./kirat-dhanda.html",
+"group": "work",
+"status": "published"
+},
+{
+"id": "kirat-hunar",
+"icon": "🧰",
+"name": "हुनर प्रोफ़ाइल",
+"sub": "हुनर चुनो, क़दम तय करो, प्रगति देखो",
+"cat": "t",
+"href": "./kirat-hunar.html",
+"group": "work",
+"status": "published"
+},
+{
+"id": "kirat-digital",
+"icon": "📱",
+"name": "डिजिटल साक्षरता",
+"sub": "UPI सुरक्षा, ठगी, पासवर्ड — quiz",
+"cat": "t",
+"href": "./kirat-digital.html",
+"group": "work",
+"status": "published"
+},
+{
+"id": "kirat-hisab",
+"icon": "📒",
+"name": "रोज़ का हिसाब",
+"sub": "आमदनी-ख़र्च की बही",
+"cat": "t",
+"href": "./kirat-hisab.html",
 "group": "work",
 "status": "published"
 },
