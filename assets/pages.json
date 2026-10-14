@@ -407,6 +407,16 @@
 "status": "published"
 },
 {
+"id": "panj-kakkar",
+"icon": "🛡️",
+"name": "पंज कक्कार",
+"sub": "पाँच कक्कार, quiz",
+"cat": "j",
+"href": "./panj-kakkar.html",
+"group": "history",
+"status": "published"
+},
+{
 "id": "takht-1",
 "icon": "🏛️",
 "name": "श्री अकाल तख़्त साहिब",

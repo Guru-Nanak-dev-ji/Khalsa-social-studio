@@ -1,0 +1,4 @@
+/* 🛡️ पंज कक्कार — thin extras on top of guru.css */
+.gu-card{cursor:pointer;font:inherit}
+.gu-card small{opacity:.85;font-size:12px}
+.gu-fb{margin:8px 0;font-weight:700;color:#ffe3a3}
