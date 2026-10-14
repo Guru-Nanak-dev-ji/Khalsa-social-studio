@@ -14,3 +14,9 @@ body:has(dialog[open]) .kdn-lang{display:none}
 @media (max-width:360px){.kdn-lang button{padding:6px 6px;font-size:11px}}
 /* v0.84: comfortable 44px touch targets for small motion/sound toggles */
 #motion-toggle,#sound-toggle,#realm-motion,#realm-quality,#app-update-check,#app-update-reload{min-height:44px;min-width:44px;box-sizing:border-box}
+/* v0.86: language pill moved to top-right (was bottom-left, touched ✧खोजो / Game coins dock on phones) */
+.kdn-lang{left:auto;bottom:auto;right:calc(8px + env(safe-area-inset-right));top:calc(8px + env(safe-area-inset-top));flex-direction:row-reverse}
+body.kdn-has-lang{padding-bottom:env(safe-area-inset-bottom)}
+@media (max-width:600px){body.kdn-has-lang{padding-top:calc(52px + env(safe-area-inset-top))}}
+body:has(.jaan-intro:not([hidden])) .kdn-lang{display:none}
+body.kdn-has-lang .ctl:has(#pp){right:calc(60px + env(safe-area-inset-right))}
