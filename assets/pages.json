@@ -1187,6 +1187,66 @@
 "status": "published"
 },
 {
+"id": "kirat",
+"icon": "🛠️",
+"name": "किरत करो",
+"sub": "5 मुफ़्त औज़ार — नौकरी नहीं",
+"cat": "t",
+"href": "./kirat.html",
+"group": "work",
+"status": "published"
+},
+{
+"id": "kirat-khet",
+"icon": "🌾",
+"name": "खेत की बही",
+"sub": "ख़र्च, बीज, पैदावार — CSV निकालो",
+"cat": "t",
+"href": "./kirat-khet.html",
+"group": "work",
+"status": "published"
+},
+{
+"id": "kirat-dhanda",
+"icon": "🏪",
+"name": "धंधा योजना",
+"sub": "लागत, दाम, मुनाफ़ा — प्रिंट करो",
+"cat": "t",
+"href": "./kirat-dhanda.html",
+"group": "work",
+"status": "published"
+},
+{
+"id": "kirat-hunar",
+"icon": "🧰",
+"name": "हुनर प्रोफ़ाइल",
+"sub": "हुनर चुनो, क़दम तय करो, प्रगति देखो",
+"cat": "t",
+"href": "./kirat-hunar.html",
+"group": "work",
+"status": "published"
+},
+{
+"id": "kirat-digital",
+"icon": "📱",
+"name": "डिजिटल साक्षरता",
+"sub": "UPI सुरक्षा, ठगी, पासवर्ड — quiz",
+"cat": "t",
+"href": "./kirat-digital.html",
+"group": "work",
+"status": "published"
+},
+{
+"id": "kirat-hisab",
+"icon": "📒",
+"name": "रोज़ का हिसाब",
+"sub": "आमदनी-ख़र्च की बही",
+"cat": "t",
+"href": "./kirat-hisab.html",
+"group": "work",
+"status": "published"
+},
+{
 "id": "sab",
 "icon": "🗂️",
 "name": "सब कुछ एक जगह",
