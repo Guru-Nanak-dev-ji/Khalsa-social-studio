@@ -1,0 +1,11 @@
+/* KDN free share buttons — mobile-first, Royal Gold */
+.kdn-share{font-family:'Mukta','Noto Sans Devanagari','Noto Sans Gurmukhi',system-ui,sans-serif}
+.kdn-share h2{font-family:'Rozha One','Noto Sans Devanagari',serif;font-weight:400}
+.kdn-share .post{background:#1a140f;border:1px solid #86602e;border-radius:14px;padding:14px;margin:12px 0}
+.kdn-share .post .lang{display:inline-block;border:1px solid #efc66e;color:#f2c66a;border-radius:999px;padding:2px 10px;font-size:.85rem;margin-bottom:6px}
+.kdn-share textarea{width:100%;min-height:120px;background:#120f0c;color:#f5dfb2;border:1px solid #604628;border-radius:10px;padding:10px;font:inherit;font-size:1rem;line-height:1.5;resize:vertical}
+.kdn-share .row{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:10px}
+.kdn-share .row button{margin:0;width:100%;min-height:46px;font:700 1rem/1.2 'Mukta','Noto Sans Devanagari',sans-serif;background:linear-gradient(#f6d58a,#d9a94a);color:#25190c;border:1px solid #8a6326;border-radius:12px;box-shadow:0 2px 0 #6b4a1c}
+.kdn-share .row button.native{grid-column:1/-1;background:linear-gradient(#ffe7a8,#efc66e)}
+.kdn-share .msg{min-height:1.4em;color:#c7b79a;font-size:.9rem;margin:6px 0 0}
+@media(min-width:560px){.kdn-share .row{grid-template-columns:repeat(3,1fr)}}
