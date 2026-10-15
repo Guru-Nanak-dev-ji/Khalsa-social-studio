@@ -17,6 +17,7 @@ import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -32,11 +33,18 @@ public class SetupActivity extends Activity {
         ScrollView scroll = new ScrollView(this);
         scroll.setFillViewport(true);
         scroll.setBackgroundColor(0xFF171D27);
-        // Consume system bars on Android 15's enforced edge-to-edge; resize still handles IME.
-        scroll.setOnApplyWindowInsetsListener((v, insets) -> {
+        FrameLayout frame = new FrameLayout(this);
+        frame.setBackgroundColor(0xFF171D27);
+        frame.addView(scroll, new FrameLayout.LayoutParams(-1, -1));
+        if (android.os.Build.VERSION.SDK_INT >= 30) getWindow().setDecorFitsSystemWindows(false);
+        // Resize the scrolling viewport explicitly: Android 15 is edge-to-edge.
+        frame.setOnApplyWindowInsetsListener((v, insets) -> {
             if (android.os.Build.VERSION.SDK_INT >= 30) {
-                android.graphics.Insets bars = insets.getInsets(WindowInsets.Type.systemBars());
-                v.setPadding(bars.left, bars.top, bars.right, bars.bottom);
+                android.graphics.Insets bars = insets.getInsets(WindowInsets.Type.systemBars() | WindowInsets.Type.displayCutout());
+                int ime = insets.getInsets(WindowInsets.Type.ime()).bottom;
+                v.setPadding(bars.left, bars.top, bars.right, Math.max(bars.bottom, ime));
+                if (ime > 0 && test != null && test.hasFocus()) test.post(() ->
+                    test.requestRectangleOnScreen(new android.graphics.Rect(0, 0, test.getWidth(), test.getHeight()), false));
             }
             return insets;
         });
@@ -45,7 +53,7 @@ public class SetupActivity extends Activity {
         body.setPadding(dp(22), dp(22), dp(22), dp(18));
         body.setFocusableInTouchMode(true);
         scroll.addView(body);
-        setContentView(scroll);
+        setContentView(frame);
 
         text(body, "KDN  /  KEYBOARD", 12, TEAL, 0);
         TextView title = text(body, "ਆਪਣੀ ਬੋਲੀ,\nਆਪਣਾ ਕੀਬੋਰਡ।", 30, Color.WHITE, 12);

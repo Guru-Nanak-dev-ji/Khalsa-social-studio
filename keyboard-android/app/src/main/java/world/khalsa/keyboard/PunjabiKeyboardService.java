@@ -46,6 +46,15 @@ public class PunjabiKeyboardService extends InputMethodService {
         keyboard.setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
         keyboard.setBackgroundColor(BG);
         keyboard.setPadding(dp(3), 0, dp(3), dp(4));
+        keyboard.setOnApplyWindowInsetsListener((v, insets) -> {
+            if (android.os.Build.VERSION.SDK_INT >= 30) {
+                android.view.WindowInsets full = v.getRootWindowInsets();
+                android.graphics.Insets bars = (full == null ? insets : full).getInsets(
+                    android.view.WindowInsets.Type.systemBars() | android.view.WindowInsets.Type.displayCutout());
+                v.setPadding(dp(3) + bars.left, 0, dp(3) + bars.right, dp(4) + bars.bottom);
+            }
+            return insets;
+        });
         if (android.os.Build.VERSION.SDK_INT >= 26)
             keyboard.setImportantForAutofill(View.IMPORTANT_FOR_AUTOFILL_NO_EXCLUDE_DESCENDANTS);
         render();
