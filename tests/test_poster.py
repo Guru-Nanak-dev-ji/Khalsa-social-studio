@@ -21,8 +21,13 @@ class PosterTests(unittest.TestCase):
     def test_every_screen_has_a_mehrab_style_and_real_stylesheet(self):
         pages = list(ROOT.glob('*.html')) + list((ROOT / 'docs').glob('*.html'))
         self.assertGreaterEqual(len(pages), 23)
+        # Intentional legacy redirects (632f486) are thin stubs → creator; skip heritage chrome
+        def is_creator_redirect(text: str) -> bool:
+            return ('url=../creator.html' in text or "location.replace('../creator.html')" in text)
         for path in pages:
             text = path.read_text()
+            if is_creator_redirect(text):
+                continue
             self.assertIn('data-heritage=', text, path.name)
             self.assertIn('aria-hidden="true"', text, path.name)
             self.assertIn('assets/heritage.css', text, path.name)

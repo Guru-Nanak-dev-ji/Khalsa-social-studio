@@ -11,12 +11,14 @@ test('sleep hours, anxiety, calm card, week, summary, validate',()=>{let s=S.fre
  const sum=S.summary(s,T(13,12));assert.ok(sum.includes('doctor की जगह नहीं')&&sum.includes('tight')&&!sum.includes('<'));
  assert.deepEqual(S.validate(null),S.fresh());assert.equal(S.cleanPhone('+1 (555) abc'),'+1555');assert.deepEqual(S.validate({v:1,anx:[{l:99,t:1}],sleep:[{type:'x',t:1}]}).anx,[]);});
 test('nothing personal hardcoded: no phone numbers or medicine names',()=>{const all=FILES.map(R).join('\n');
- assert.ok(!/(\+?\d[\d\s().-]{6,}\d)/.test(all.replace(/tel:911/g,'').replace(/viewBox="[^"]*"|\d+(\.\d+)?(px|ms|s|%)|#[0-9a-f]{3,8}|36e5|hsl\([^)]*\)/gi,'')) ,'phone-like number');
+ // Allowed public emergency numbers only: IN 112/108, CA/NA 911 (no personal mobiles)
+ const stripped=all.replace(/tel:(?:911|112|108)/g,'').replace(/viewBox="[^"]*"|\d+(\.\d+)?(px|ms|s|%)|#[0-9a-f]{3,8}|36e5|hsl\([^)]*\)/gi,'');
+ assert.ok(!/(\+?\d[\d\s().-]{6,}\d)/.test(stripped),'phone-like number');
  for(const med of['venlafaxine','pregabalin','pregablin','quetiapine','quitiapine','mirtazapine','venlaflaxine'])assert.ok(!all.toLowerCase().includes(med),med);
- assert.ok(!/tel:(?!911")[+\d]/.test(all));});
+ assert.ok(!/tel:(?!(?:911|112|108)")[+\d]/.test(all));});
 test('page, privacy, safety, door, sw, not in public feed',()=>{const h=R('sehat.html'),js=R('assets/sehat/sehat.js'),css=R('assets/sehat/sehat.css');
  assert.ok(h.includes('lang="hi"')&&h.includes('data-heritage')&&h.includes('hindi-fonts.css')&&h.includes('goldtv.js')&&h.includes('One click and change your life 🧬'));
- assert.ok(h.includes('href="tel:911"')&&h.includes('सीधे')&&h.includes('doctor की जगह नहीं')&&h.includes('noindex'));
+ assert.ok(h.includes('href="tel:112"')&&h.includes('href="tel:911"')&&h.includes('सीधे')&&h.includes('doctor की जगह नहीं')&&h.includes('noindex'));
  assert.ok(!/fetch\(|XMLHttpRequest|sendBeacon|innerHTML|koins|claimSpot|badge/i.test(js));assert.ok(js.includes('localStorage')&&js.includes('Notification.requestPermission')&&js.includes('confirm('));
  assert.ok(css.includes('prefers-reduced-motion')&&css.includes('@keyframes breathe'));assert.ok(!/☬/.test(h+js));
  assert.ok(Dr.all().some(d=>d.href==='./sehat.html'));assert.ok(!R('assets/goldtv/feed.json').includes('sehat'));
