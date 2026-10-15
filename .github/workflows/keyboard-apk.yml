@@ -29,7 +29,8 @@ jobs:
       - name: Install SDK and build APKs
         working-directory: keyboard-android
         run: |
-          sdkmanager 'platforms;android-35' 'build-tools;35.0.0'
+          keyboard_sdk="${ANDROID_HOME:-/usr/local/lib/android/sdk}"
+          "$keyboard_sdk/cmdline-tools/latest/bin/sdkmanager" 'platforms;android-35' 'build-tools;35.0.0'
           gradle :app:assembleDebug :app:assembleDebugAndroidTest :app:lintDebug --no-daemon --stacktrace
           mkdir -p build/deliverables
           cp app/build/outputs/apk/debug/app-debug.apk build/deliverables/KDN-Punjabi-Keyboard-0.1.apk
