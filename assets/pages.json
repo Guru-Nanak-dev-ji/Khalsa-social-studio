@@ -1476,6 +1476,17 @@
 "group": "main",
 "status": "published",
 "topic": "साधन"
+},
+{
+"id": "directory",
+"icon": "🔟",
+"name": "10 Platforms",
+"sub": "दस मंच — My Neta, KNN, Langar, MyTube और और",
+"cat": "t",
+"href": "./directory.html",
+"group": "main",
+"status": "published",
+"topic": "साधन"
 }
 ]
 }
