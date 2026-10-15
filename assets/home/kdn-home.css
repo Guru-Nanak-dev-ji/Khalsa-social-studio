@@ -1,0 +1,9 @@
+/* KDN One — हर पन्ने पर मुख्य पृष्ठ (index.html) पर लौटने का छोटा, स्थिर लिंक */
+.kdn-home{position:fixed;left:max(10px,env(safe-area-inset-left));bottom:max(10px,env(safe-area-inset-bottom));z-index:2147483000;
+ display:inline-flex;align-items:center;gap:.3em;min-height:44px;padding:.35em .8em;border-radius:999px;
+ background:rgba(12,27,58,.88);color:#f6e7b0;border:1px solid #d4af37;font:600 14px/1.2 system-ui,"Noto Sans Devanagari",sans-serif;
+ text-decoration:none;box-shadow:0 2px 8px rgba(0,0,0,.35);opacity:.92}
+.kdn-home:hover,.kdn-home:focus-visible{opacity:1;background:#0c1b3a;color:#fff}
+.kdn-home:focus-visible{outline:3px solid #f6e7b0;outline-offset:2px}
+@media (max-width:480px){.kdn-home{font-size:13px;padding:.3em .65em}}
+@media print{.kdn-home{display:none}}
