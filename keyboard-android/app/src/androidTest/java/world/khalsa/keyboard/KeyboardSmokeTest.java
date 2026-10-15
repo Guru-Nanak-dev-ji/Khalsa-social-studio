@@ -16,6 +16,7 @@ import java.io.FileOutputStream;
 /** Runs against the real Android editor + installed IME, without external test dependencies. */
 public class KeyboardSmokeTest extends Instrumentation {
     private int checks;
+    private android.widget.EditText editor;
     @Override public void onCreate(Bundle args) { super.onCreate(args); start(); }
     @Override public void onStart() {
         Bundle result = new Bundle();
@@ -24,7 +25,9 @@ public class KeyboardSmokeTest extends Instrumentation {
             info.flags |= AccessibilityServiceInfo.FLAG_RETRIEVE_INTERACTIVE_WINDOWS;
             getUiAutomation().setServiceInfo(info);
             Intent intent = new Intent(getTargetContext(), SetupActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivitySync(intent);
+            android.app.Activity activity = startActivitySync(intent);
+            runOnMainSync(() -> editor = findEditor(activity.getWindow().getDecorView()));
+            if (editor == null) throw new AssertionError("Missing host editor");
             pause(700);
             tap("Typing test");
             waitFor("key:ਪ");
@@ -127,19 +130,27 @@ public class KeyboardSmokeTest extends Instrumentation {
         if (!expected.equals(actual)) throw new AssertionError("Expected [" + expected + "] but got [" + actual + "]");
     }
     private void replace(String value) {
-        Bundle args = new Bundle(); args.putCharSequence(AccessibilityNodeInfo.ACTION_ARGUMENT_SET_TEXT_CHARSEQUENCE, value);
-        if (!waitFor("Typing test").performAction(AccessibilityNodeInfo.ACTION_SET_TEXT, args)) throw new AssertionError("Cannot replace fixture");
-        pause(150); select(value.length(), value.length());
+        // Fixture setup runs on the host's UI thread. Actual typing still uses real touches + IME.
+        runOnMainSync(() -> { editor.setText(value); editor.setSelection(editor.length()); });
+        pause(150);
     }
     private void select(int start, int end) {
-        AccessibilityNodeInfo current = waitFor("Typing test");
-        if (current.getTextSelectionStart() == start && current.getTextSelectionEnd() == end) return;
-        Bundle args = new Bundle(); args.putInt(AccessibilityNodeInfo.ACTION_ARGUMENT_SELECTION_START_INT, start);
-        args.putInt(AccessibilityNodeInfo.ACTION_ARGUMENT_SELECTION_END_INT, end);
-        if (!waitFor("Typing test").performAction(AccessibilityNodeInfo.ACTION_SET_SELECTION, args)) throw new AssertionError("Cannot select fixture");
+        runOnMainSync(() -> {
+            editor.setSelection(start, end);
+            if (editor.getSelectionStart() != start || editor.getSelectionEnd() != end) throw new AssertionError("Selection mismatch");
+        });
         pause(100);
-        current = waitFor("Typing test");
-        if (current.getTextSelectionStart() != start || current.getTextSelectionEnd() != end) throw new AssertionError("Selection mismatch");
+    }
+    private android.widget.EditText findEditor(android.view.View view) {
+        if (view instanceof android.widget.EditText) return (android.widget.EditText)view;
+        if (view instanceof android.view.ViewGroup) {
+            android.view.ViewGroup group = (android.view.ViewGroup)view;
+            for (int i=0; i<group.getChildCount(); i++) {
+                android.widget.EditText found = findEditor(group.getChildAt(i));
+                if (found != null) return found;
+            }
+        }
+        return null;
     }
     private void screenshot(String name) throws Exception {
         Bitmap bitmap = getUiAutomation().takeScreenshot();
