@@ -1495,9 +1495,20 @@
 "sub": "KIDO Free World से जुड़ें — मुफ़्त सदस्यता, स्वैच्छिक सेवा, ",
 "cat": "t",
 "href": "./join.html",
-"group": "auto",
+"group": "main",
 "status": "published",
 "topic": "साधन"
+},
+{
+"id": "free-world",
+"icon": "🌍",
+"name": "Free World Join",
+"sub": "मुफ़्त प्रवेश · स्वैच्छिक सेवा · Founder Note 003",
+"cat": "s",
+"href": "./free-world.html",
+"group": "main",
+"status": "published",
+"topic": "सेवा"
 }
 ]
 }
