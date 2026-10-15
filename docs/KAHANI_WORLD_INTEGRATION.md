@@ -43,14 +43,14 @@ not a guarantee that every service or feature is currently available.
 - `sw.js`: new assets added to the existing shell list and cache bumped to
   `v0.87.10`. Existing service-worker cache lifecycle is unchanged. The normal
   main-branch version-stamp workflow will advance the release again on merge.
-- `tests/kahani-world.test.cjs`: five new lifecycle and integration checks.
+- `tests/kahani-world.test.cjs`: eight new lifecycle and integration checks.
 
 ## Validation
 
 - `python3 scripts/build-pages.py --check`: 131 pages, catalogue unchanged.
 - `python3 scripts/check-links.py`: 0 missing local targets.
 - `python3 -m unittest discover -s tests -v`: 17 passed.
-- `node --test tests/*.test.cjs tests/*.test.mjs`: 359 passed.
+- `node --test tests/*.test.cjs tests/*.test.mjs`: 362 passed after review hardening.
 - All 26 existing CI syntax checks plus the new controller: passed.
 - Baseline comparison: all original HTML IDs/links retained; original story
   body and nine content/storage/catalogue/registry files unchanged.
@@ -62,6 +62,28 @@ back-forward cache, horizontal drag, vertical scroll release, pointer
 cancellation, loop/resize position, repeated detail opening and original links.
 They do not replace browser rendering or a physical-phone test. Browser/mobile
 visual QA has not been performed in this environment.
+
+## Review follow-up · 2026-10-15
+
+The kingdom registry and scene controller already load in the correct order as
+classic deferred scripts. Missing or malformed registry data now shows a clear
+fallback to the original all-doors catalogue while the scenery keeps working.
+
+The controller now ignores repeated initialization and tolerates incomplete
+optional scene markup. Return links are restricted to the six original story
+sections, with an existing-link check. No duplicate nested anchors were observed
+in the original markup; this is protection against repeated initialization and
+future changes, not a claim that the previous page already had broken anchors.
+
+Pointer capture is released on cancellation, blur and visibility interruption;
+failed capture gracefully ends the gesture. Existing vertical scrolling and
+reduced-motion handling remain. The new tests exercise these failure cases.
+
+The old external worlds/network destinations are explicitly labelled as external
+sites requiring internet. They are not relabelled as demos or removed. The
+existing cache list is retained; all new artwork and controller assets remain
+covered by the offline-asset check. Physical touch/browser acceptance remains
+an outstanding release gate.
 
 ## Review and release plan
 

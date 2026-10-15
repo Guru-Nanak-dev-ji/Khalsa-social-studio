@@ -6,9 +6,9 @@ const source=fs.readFileSync(path.join(root,'assets/kahani/kahani-world.js'),'ut
 const registry=require('../assets/kingdom/v014/kingdom-core.js');
 
 // Deterministic DOM/event harness: lifecycle checks, not visual/browser QA.
-function setup({reduced=false,hash=''}={}){
+function setup({reduced=false,hash='',roomCore=registry,missing=[],existingReturn=false}={}){
  class Element{
-  constructor(tag='div'){this.tagName=tag.toUpperCase();this.children=[];this.listeners={};this.attrs={};this.style={setProperty(){}};this.box={top:100,bottom:450,width:1500,height:100};this.hidden=false;this.open=false;this.capture=null;}
+  constructor(tag='div'){this.tagName=tag.toUpperCase();this.children=[];this.listeners={};this.attrs={};this.dataset={};this.style={setProperty(){}};this.box={top:100,bottom:450,width:1500,height:100};this.hidden=false;this.open=false;this.capture=null;}
   appendChild(child){this.children.push(child);return child;}
   get firstElementChild(){return this.children[0];}
   cloneNode(){return new Element();}
@@ -17,22 +17,25 @@ function setup({reduced=false,hash=''}={}){
   fire(name,event={}){for(const fn of this.listeners[name]||[])fn(event);}
   getBoundingClientRect(){return this.box;}
   closest(selector){return selector==='.card'?this.card||null:null;}
+  querySelector(selector){return selector==='a[href="#kahani-world"]'?this.children.find(child=>child.href==='#kahani-world')||null:null;}
   scrollIntoView(){this.scrolled=true;}
   setPointerCapture(id){this.capture=id;}
   hasPointerCapture(id){return this.capture===id;}
   releasePointerCapture(){this.capture=null;}
  }
- const ids=Object.fromEntries(['kahani-world','kw-viewport','kw-track','kw-pause','kw-back','kw-forward','kw-old-rooms','kw-controls','story-doors','safar','ch1','avatar','fb','her','wm','wm5','purani-duniya','khalsa-sanskriti','sanatan-sanskriti'].map(id=>[id,new Element()]));
+ const ids=Object.fromEntries(['kahani-world','kw-viewport','kw-track','kw-pause','kw-back','kw-forward','kw-old-rooms','kw-rooms-note','kw-controls','story-doors','safar','ch1','avatar','fb','her','wm','wm5','purani-duniya','khalsa-sanskriti','sanatan-sanskriti'].map(id=>[id,new Element()]));
  const cards=['safar','ch1','avatar','fb','her','wm'].map(id=>ids[id]);cards.forEach(card=>card.card=card);ids.wm5.card=ids.wm;
  for(const id of ['purani-duniya','khalsa-sanskriti','sanatan-sanskriti'])ids[id].tagName='DETAILS';
  const group=new Element();ids['kw-track'].appendChild(group);
+ if(existingReturn){const link=new Element('a');link.href='#kahani-world';ids.safar.appendChild(link);}
+ for(const id of missing)delete ids[id];
  const hud=new Element(),body=new Element(),document=new Element(),window=new Element();
  document.hidden=false;document.body=body;document.getElementById=id=>ids[id]||null;
  document.querySelector=selector=>selector==='.kw-hud'?hud:null;
  document.querySelectorAll=selector=>selector==='section.card'?cards:[];
  document.createElement=tag=>new Element(tag);
  const media=new Element();media.matches=reduced;window.matchMedia=()=>media;window.innerHeight=800;
- window.KDNKingdomCore=registry;
+ window.KDNKingdomCore=roomCore;
  const frames=new Map();let next=0,observer;
  class IntersectionObserver{constructor(fn){observer=fn;}observe(){}}
  class ResizeObserver{constructor(fn){this.callback=fn;}observe(){}}
@@ -43,6 +46,7 @@ function setup({reduced=false,hash=''}={}){
  Object.defineProperty(window,'localStorage',{get(){throw Error('Motion must not touch saved data');}});
  vm.runInNewContext(source,context);
  return {ids,group,media,document,window,location,cards,frames,
+  rerun(){vm.runInNewContext(source,context);},
   tick(time){const callbacks=[...frames.values()];frames.clear();callbacks.forEach(fn=>fn(time));},
   hash(value){location.hash=value;window.fire('hashchange');},
   visible(value){observer([{isIntersecting:value}]);},
@@ -58,6 +62,38 @@ test('motion pauses during original stories and resumes at the same position on 
  }
  h.ids['kw-pause'].fire('click');assert.equal(h.frames.size,0);h.hash('#ch1');h.hash('#kahani-world');assert.equal(h.frames.size,0,'return respects an explicit pause');
  h.ids['kw-pause'].fire('click');assert.equal(h.frames.size,1);
+});
+
+test('missing registry or incomplete optional scenery leaves original navigation usable',()=>{
+ for(const roomCore of [null,{}, {rooms:null},{rooms:'wrong'}, {rooms:[null,{path:5}]}]){
+  const h=setup({roomCore});assert.equal(h.ids['kw-old-rooms'].children.length,0);assert.equal(h.ids['kw-rooms-note'].hidden,false);
+  assert.equal(h.frames.size,1,'scenery still works without the room registry');
+  for(const card of h.cards)assert.equal(card.children.at(-1).href,'#kahani-world');
+ }
+ for(const id of ['kw-track','kw-viewport','kw-pause','kw-back','kw-forward','kw-controls']){
+  const h=setup({missing:[id]});assert.equal(h.frames.size,0);assert.equal(h.ids['kahani-world'].dataset.kwReady,undefined);
+ }
+});
+
+test('repeated initialization does not duplicate scenes, return links, room links or handlers',()=>{
+ const h=setup({existingReturn:true});h.tick(100);h.tick(200);const before=h.position();
+ h.rerun();h.rerun();assert.equal(h.ids['kw-track'].children.length,2);assert.equal(h.frames.size,1);assert.equal(h.position(),before);
+ assert.equal(h.ids['kw-old-rooms'].children.length,registry.rooms.length);
+ for(const card of h.cards)assert.equal(card.children.filter(child=>child.href==='#kahani-world').length,1);
+ h.ids['kw-pause'].fire('click');assert.equal(h.frames.size,0,'one click invokes one pause handler');
+});
+
+test('capture failure, blur and visibility interruption release a drag without freezing it',()=>{
+ const down={pointerId:3,isPrimary:true,button:0,clientX:100,clientY:20};
+ const h=setup(),v=h.ids['kw-viewport'];
+ v.setPointerCapture=()=>{throw Error('pointer no longer active');};
+ v.fire('pointerdown',down);assert.doesNotThrow(()=>v.fire('pointermove',{...down,clientX:150}));assert.equal(h.frames.size,1);
+ v.setPointerCapture=id=>{v.capture=id;};
+ for(const interrupt of [()=>h.window.fire('blur'),()=>{h.document.hidden=true;h.document.fire('visibilitychange');}]){
+  v.fire('pointerdown',down);v.fire('pointermove',{...down,clientX:150});assert.equal(v.capture,3);
+  interrupt();assert.equal(v.capture,null);const before=h.position();v.fire('pointermove',{...down,clientX:400});assert.equal(h.position(),before);
+  h.document.hidden=false;h.document.fire('visibilitychange');assert.equal(h.frames.size,1);
+ }
 });
 
 test('offscreen, hidden, reduced-motion and BFCache lifecycle leave no animation running',()=>{

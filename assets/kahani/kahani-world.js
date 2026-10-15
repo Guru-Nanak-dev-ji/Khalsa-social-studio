@@ -2,11 +2,16 @@
 (function(){
 'use strict';
 const world=document.getElementById('kahani-world');
-if(!world)return;
+if(!world||world.dataset.kwReady==='true')return;
 const viewport=document.getElementById('kw-viewport'),track=document.getElementById('kw-track');
-const group=track.firstElementChild,copy=group.cloneNode(true);
-copy.setAttribute('aria-hidden','true');track.appendChild(copy);
 const pause=document.getElementById('kw-pause'),hud=document.querySelector('.kw-hud');
+const back=document.getElementById('kw-back'),forward=document.getElementById('kw-forward'),controls=document.getElementById('kw-controls');
+const group=track&&track.firstElementChild;
+// Leave the original reading/navigation page usable if the optional scene is incomplete.
+if(!viewport||!group||!pause||!back||!forward||!controls)return;
+world.dataset.kwReady='true';
+const copy=group.cloneNode(true);
+copy.setAttribute('aria-hidden','true');track.appendChild(copy);
 const reduce=window.matchMedia('(prefers-reduced-motion: reduce)');
 let offset=0,period=1,frame=0,last=0,manual=false,reading=false,visible=false,drag=null;
 function wrap(value){return ((value%period)+period)%period;}
@@ -38,54 +43,64 @@ function followHash(){
 }
 function step(direction){manual=true;offset=wrap(offset+direction*260);paint();sync();}
 pause.addEventListener('click',()=>{manual=!manual;sync();});
-document.getElementById('kw-back').addEventListener('click',()=>step(-1));
-document.getElementById('kw-forward').addEventListener('click',()=>step(1));
+back.addEventListener('click',()=>step(-1));
+forward.addEventListener('click',()=>step(1));
+function releaseDrag(){
+ if(!drag)return;
+ const id=drag.id;drag=null;
+ if(viewport.hasPointerCapture(id))viewport.releasePointerCapture(id);
+}
 viewport.addEventListener('pointerdown',event=>{
- if(!event.isPrimary||event.button!==0)return;
+ if(!event.isPrimary||event.button!==0||drag)return;
  drag={id:event.pointerId,x:event.clientX,y:event.clientY,start:offset,active:false};sync();
 });
 viewport.addEventListener('pointermove',event=>{
  if(!drag||event.pointerId!==drag.id)return;
  const dx=event.clientX-drag.x,dy=event.clientY-drag.y;
  if(!drag.active){
-  if(Math.abs(dy)>Math.abs(dx)&&Math.abs(dy)>8){drag=null;sync();return;}
+  if(Math.abs(dy)>Math.abs(dx)&&Math.abs(dy)>8){releaseDrag();sync();return;}
   if(Math.abs(dx)<8)return;
-  drag.active=true;viewport.setPointerCapture(event.pointerId);
+  try{viewport.setPointerCapture(event.pointerId);}catch(_e){releaseDrag();sync();return;}
+  drag.active=true;
  }
  offset=wrap(drag.start-dx);paint();
 });
 function endDrag(event){
  if(!drag||event.pointerId!==drag.id)return;
- const id=drag.id;drag=null;
- if(viewport.hasPointerCapture(id))viewport.releasePointerCapture(id);
- sync();
+ releaseDrag();sync();
 }
 // The window listener also releases a click that ends outside the scenery.
 window.addEventListener('pointerup',endDrag);
 window.addEventListener('pointercancel',endDrag);
 viewport.addEventListener('lostpointercapture',endDrag);
-window.addEventListener('blur',()=>{drag=null;sync();});
+window.addEventListener('blur',()=>{releaseDrag();sync();});
 window.addEventListener('hashchange',followHash);
 document.addEventListener('click',event=>{
  const link=event.target.closest?event.target.closest('a[href^="#"]'):null;
  if(link&&link.getAttribute('href')===location.hash)followHash();
 });
-document.addEventListener('visibilitychange',()=>{drag=null;sync();});
+document.addEventListener('visibilitychange',()=>{releaseDrag();sync();});
 if(reduce.addEventListener)reduce.addEventListener('change',sync);
 else reduce.addListener(sync);
 if('IntersectionObserver' in window){new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;sync();}).observe(viewport);}
 else window.addEventListener('scroll',checkVisible,{passive:true});
 if('ResizeObserver' in window){const observer=new ResizeObserver(measure);observer.observe(group);if(hud)observer.observe(hud);}
 window.addEventListener('resize',()=>{measure();checkVisible();},{passive:true});
-window.addEventListener('pagehide',()=>{if(frame)cancelAnimationFrame(frame);frame=0;last=0;drag=null;});
+window.addEventListener('pagehide',()=>{releaseDrag();if(frame)cancelAnimationFrame(frame);frame=0;last=0;});
 window.addEventListener('pageshow',()=>{measure();followHash();checkVisible();});
 const rooms=document.getElementById('kw-old-rooms');
-if(rooms&&window.KDNKingdomCore)window.KDNKingdomCore.rooms.forEach(room=>{
+const roomData=window.KDNKingdomCore&&window.KDNKingdomCore.rooms;
+const roomEntries=Array.isArray(roomData)?roomData.filter(room=>room&&typeof room.path==='string'&&typeof room.name==='string'):[];
+const roomsNote=document.getElementById('kw-rooms-note');
+if(roomsNote)roomsNote.hidden=roomEntries.length>0;
+if(rooms)roomEntries.forEach(room=>{
  const link=document.createElement('a');link.href='./'+room.path;link.textContent=room.name;rooms.appendChild(link);
 });
-document.querySelectorAll('section.card').forEach(section=>{
+['safar','ch1','avatar','wm','fb','her'].forEach(id=>{
+ const section=document.getElementById(id);
+ if(!section||section.querySelector('a[href="#kahani-world"]'))return;
  const link=document.createElement('a');link.href='#kahani-world';link.className='kw-return';link.textContent='↑ मेहराबों और कहानियों पर लौटें';section.appendChild(link);
 });
-document.getElementById('kw-controls').hidden=false;
+controls.hidden=false;
 measure();followHash();checkVisible();
 })();
