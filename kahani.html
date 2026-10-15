@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#1a0d06">
-<meta name="description" content="📖 कहानी घर — दो काल्पनिक series: 🐦‍🔥 चेतना का सफ़र और 🎭 अज्ञात अवतार, एक चेतना के धागे से जुड़ी।">
+<meta name="description" content="📖 कहानी घर — पाँच मूल कहानी series, चलती मेहराबें और पुराने संसार के द्वार, एक चेतना के धागे से जुड़े।">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="icon" href="./icons/khalsa-v1-32.png" sizes="32x32" type="image/png">
 <link rel="stylesheet" href="./assets/heritage.css">
@@ -15,15 +15,37 @@
 <script defer src="./assets/kahani/wm-core.js"></script>
 <script defer src="./assets/kahani/kahani.js"></script><script defer src="./assets/kahani/fb-core.js"></script><script defer src="./assets/kahani/fb.js"></script><script defer src="./assets/kahani/wm-scroll.js"></script><link rel="stylesheet" href="./assets/kahani/wm-scroll.css">
 <script defer src="./assets/goldtv/goldtv.js"></script><link rel="stylesheet" href="./assets/jaan.css"><script defer src="./assets/jaan.js"></script><link rel="stylesheet" href="./assets/i18n/i18n.css"><script defer src="./assets/i18n/i18n.js"></script>
+<link rel="stylesheet" href="./assets/kahani/kahani-world.css">
+<script defer src="./assets/kingdom/v014/kingdom-core.js"></script>
+<script defer src="./assets/kahani/kahani-world.js"></script>
 </head>
-<body class="kdn-hindi" data-heritage="immersive">
+<body class="kdn-hindi kahani-world-page" data-heritage="immersive">
 <div class="heritage-banner" aria-hidden="true"></div>
-<header class="hud" role="status" aria-live="polite">
+<header class="hud kw-hud">
+<span class="kw-simran">वाहेगुरु <span lang="pa">ਵਾਹਿਗੁਰੂ</span></span>
+<nav class="kw-nav" aria-label="कहानी घर के स्थिर बटन">
+<a href="#kahani-world">↑ मेहराबों पर लौटें</a>
+<a href="./sab.html">सारे द्वार</a>
+<a href="#purani-duniya">पुरानी दुनियाएँ</a>
 <a href="./studio.html#door=games">← द्वार</a>
-<div class="big">💰 <span id="h-koins">0</span><small>game koins, असली पैसा नहीं</small></div>
+</nav>
+<div class="big" role="status" aria-live="polite">💰 <span id="h-koins">0</span><small>game koins, असली पैसा नहीं</small></div>
 </header>
 <section class="head"><h1>📖 कहानी घर</h1><p class="motto">5 series · एक चेतना का धागा</p></section>
-<nav class="hub" aria-label="दोनों series">
+<section class="kw-world" id="kahani-world" aria-labelledby="kw-title">
+<div class="kw-heading"><p class="kw-eyebrow">NOT4YOU.WORLD · स्मृति महल</p><h2 id="kw-title">मेहराबें चलें, कहानी खुलती जाए</h2><p>नीचे बहता पुराना संसार। ऊपर आपके द्वार।</p></div>
+<nav class="kw-floating" aria-label="संसार और उपहार">
+<a href="#khalsa-sanskriti">खालसा राष्ट्र</a><a href="#sanatan-sanskriti">सनातनी राष्ट्र</a><a href="#story-doors">कहानी चुनें</a><a href="#ch1" data-kw-story>🎁 कथा उपहार</a>
+</nav>
+<div class="kw-viewport" id="kw-viewport" role="img" aria-label="पुराने चित्रों से सजी चलती मेहराबें: सुनहरा नगर, महल, पुस्तकालय, बाज़ार और घाट।">
+<div class="kw-track" id="kw-track" aria-hidden="true"><div class="kw-arch-group">
+<div class="kw-arch kw-city"><span>सुनहरा नगर</span></div><div class="kw-arch kw-palace"><span>पुराना महल</span></div><div class="kw-arch kw-book"><span>कहानी घर</span></div><div class="kw-arch kw-market"><span>संगत का बाज़ार</span></div><div class="kw-arch kw-river"><span>चेतना का सफ़र</span></div>
+</div></div>
+</div>
+<div class="kw-controls" id="kw-controls" hidden><button type="button" id="kw-back" aria-label="दृश्य को पीछे सरकाएँ">←</button><button type="button" id="kw-pause" aria-pressed="false">दृश्य रोकें</button><button type="button" id="kw-forward" aria-label="दृश्य को आगे सरकाएँ">→</button><small>दृश्य पर उँगली फेरें · पढ़ते समय गति रुकेगी</small></div>
+<p class="kw-gift-note">सुनहरी तितली का पहला अध्याय पूरा करें: पहली बार +5 game koins और कथा यात्री badge।</p>
+</section>
+<nav class="hub" id="story-doors" aria-label="पाँच मूल कहानी series">
 <a class="tile" href="#safar"><span class="ti">🐦‍🔥</span><b>चेतना का सफ़र</b><small>पुनर्जन्म · तीन समय · कई ब्रह्मांड</small></a>
 <svg class="dhaga" viewBox="0 0 60 120" aria-hidden="true"><path d="M30 0 C0 30 60 60 30 90 S30 120 30 120"/></svg>
 <a class="tile" href="#avatar"><span class="ti">🎭</span><b>अज्ञात अवतार</b><small>मनोवैज्ञानिक thriller · 10 एपिसोड · समाप्त</small></a>
@@ -31,6 +53,18 @@
 <a class="tile" href="#her"><span class="ti">👽🛸</span><b>HER — आवाज़ें</b><small>sci-fi · 8 अध्याय · समाप्त</small></a>
 <a class="tile wide wmt" href="#wm"><span class="ti">🤍🪞</span><b>White Mirror</b><small>विश्वास 100%, तर्क 100% — दोनों सच · समाप्त</small></a>
 </nav>
+<section class="kw-heritage" aria-label="संस्कृति और पुराने संसार">
+<details id="khalsa-sanskriti"><summary>खालसा राष्ट्र · ज्ञान और सेवा</summary><p>वाहेगुरु की याद, इतिहास और संगत के डिजिटल संसार में आपका स्वागत है।</p><nav aria-label="खालसा संस्कृति"><a href="./guru.html">दस गुरु साहिब</a><a href="./panj-takht.html">पंज तख़्त</a><a href="./nanak-ghar.html">नानक घर</a><a href="./langar.html">लंगर</a></nav></details>
+<details id="sanatan-sanskriti"><summary>सनातनी राष्ट्र · ज्ञान और परंपरा</summary><p>साझी विरासत, भक्ति और विचार के पाठ खोजें।</p><nav aria-label="सनातनी संस्कृति"><a href="./gyan.html">ज्ञान मंडल</a><a href="./bhagat.html">भक्तों की वाणी</a><a href="./itihas.html">इतिहास</a><a href="./sehat-yoga.html">योग</a></nav></details>
+<details id="purani-duniya"><summary>पुरानी दुनियाएँ और सभी द्वार खोलें</summary>
+<p><a href="./sab.html">🗂️ सारे द्वार — पूरा मूल पन्ना संग्रह</a> · <a href="./kingdom.html">पुराना मुख्य संसार</a> · <a href="./studio.html">राजसभा</a></p>
+<nav class="kw-room-grid" id="kw-old-rooms" aria-label="पुराने मुख्य संसार के कमरे"></nav>
+<p id="kw-rooms-note" hidden>कमरों की सूची नहीं खुली। ऊपर “सारे द्वार” से पूरा पुराना संग्रह खोलें।</p>
+<p>नीचे की पुरानी दुनियाएँ और Network द्वार बाहरी साइटों पर खुलते हैं; इनके लिए internet चाहिए।</p>
+<h3>जुड़ी पुरानी दुनियाएँ</h3><nav aria-label="अलग पुरानी दुनियाएँ"><a href="https://khalsa.khatri-news-8960.chatgpt.site/">NOVA संसार ↗</a><a href="https://khalsa-world.khatri-news-8960.chatgpt.site/world/">Khalsa Game संसार ↗</a><a href="https://not4you.khatri-news-8960.chatgpt.site/world/">Golden संसार ↗</a><a href="https://kdn-control-room.khatri-news-8960.chatgpt.site/">Control Room ↗</a></nav>
+<h3>छह Network द्वार</h3><nav aria-label="मूल छह Network द्वार"><a href="https://guru-nanak-kitchen.grok.me/">Guru Nanak Kitchen ↗</a><a href="https://khatri-konnect.grok.me/">Khatri Konnect ↗</a><a href="https://khatri-aid.grok.me/">Khatri Aid ↗</a><a href="https://khatrinewsnetworks.grok.me/">Khatri News ↗</a><a href="https://myneta.grok.me/">My Neta ↗</a><a href="https://kdn-one.grok.me/">KDN One ↗</a></nav>
+</details>
+</section>
 <p class="orn center">✦ चेतना का धागा ✦</p>
 <p style="text-align:center;margin:10px 0"><a class="jaan-endlink" style="color:#f2c66a;font-weight:800" href="./shakha.html">🌳 कहानी की शाखाएँ — अपनी शाखा लिखो ➜</a></p>
 <section class="card" id="safar"><h2>🐦‍🔥 चेतना का सफ़र</h2><p>एक परिवार, एक चेतना, तीन जन्म। हर चुनाव पर दुनिया बँटती है — 😇 या 😈, स्वर्ग या नर्क। 🦋</p>

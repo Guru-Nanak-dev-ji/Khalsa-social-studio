@@ -1,0 +1,42 @@
+/* The moving layer is transparent between arches; all artwork is original. */
+.kahani-world-page{--kw-gold:#edcd88;--kw-ivory:#fff4dc;--kw-navy:#101e30;--kw-hud-height:130px}
+.kahani-world-page [id]{scroll-margin-top:calc(var(--kw-hud-height) + 16px)}
+.kw-hud{z-index:12;flex-wrap:wrap;border-bottom:1px solid #c5a05e;background:#0c1526ed;backdrop-filter:blur(12px);padding:8px max(12px,env(safe-area-inset-left))}
+.kw-simran{display:flex;flex-direction:column;color:var(--kw-gold);font-weight:700;line-height:1.3;font-size:20px}
+.kw-simran span{font-size:12px;font-weight:400}
+.kw-nav{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;flex:1}
+.kw-nav a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:6px 12px;border:1px solid #c5a05e66;border-radius:30px;color:var(--kw-ivory);font-size:16px;line-height:1.4}
+.kw-hud .big{text-align:right;font-size:20px}.kw-hud .big small{max-width:130px;font-size:11px}
+.kw-world{position:relative;max-width:1280px;margin:18px auto 30px;padding:0 14px;background:transparent!important;isolation:isolate}
+.kw-heading{text-align:center}.kw-heading p{margin:6px 0;color:var(--kw-ivory)}
+.kw-heading .kw-eyebrow{font-size:12px;letter-spacing:2px;color:var(--kw-gold)}
+.kw-heading h2{font-size:clamp(28px,4vw,46px);line-height:1.35;margin:10px 0;color:var(--kw-gold)}
+.kw-floating{position:relative;z-index:2;display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:20px 0 0}
+.kw-floating a{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:9px 22px;border:1px solid var(--kw-gold);border-radius:28px;background:#132439e8;color:var(--kw-ivory);text-decoration:none;box-shadow:0 6px 20px #0005;font-weight:700}
+.kw-floating a:last-child{color:#19202b;background:linear-gradient(120deg,#fff0bc,#d6af65)}
+.kw-viewport{position:relative;overflow:hidden;margin-top:-6px;padding:28px 0 16px;touch-action:pan-y;cursor:grab;user-select:none;background:transparent;contain:layout paint}
+.kw-viewport:active{cursor:grabbing}
+.kw-viewport:before,.kw-viewport:after{content:'';position:absolute;top:20px;bottom:12px;width:2px;background:linear-gradient(transparent,#edcd88,transparent);z-index:1;pointer-events:none}
+.kw-viewport:before{left:0}.kw-viewport:after{right:0}
+.kw-track{display:flex;width:max-content;will-change:transform}
+.kw-arch-group{display:flex;gap:18px;padding-right:18px;flex:none}
+.kw-arch{position:relative;flex:none;width:clamp(240px,29vw,350px);height:clamp(310px,37vw,440px);overflow:hidden;border:2px solid #dfbf7d;border-radius:48% 48% 14px 14px / 34% 34% 14px 14px;background-color:var(--kw-navy);background-size:cover;background-position:center;box-shadow:inset 0 0 0 6px #101e3099,inset 0 0 0 8px #f0d9a3,0 7px 18px #0005}
+.kw-arch:before{content:'';position:absolute;inset:10px;border:1px solid #fce1a6aa;border-radius:inherit;pointer-events:none}
+.kw-arch span{position:absolute;bottom:0;left:0;right:0;text-align:center;padding:50px 14px 22px;background:linear-gradient(transparent,#09121fea);color:#fff0d2;font-family:'Rozha One',serif;font-size:25px;text-shadow:0 2px 5px #000}
+.kw-city{background-image:url('../kyon/city.webp')}.kw-palace{background-image:url('../khoya/bg/mahal.webp')}.kw-book{background-image:url('../khoya/bg/pustak.webp')}.kw-market{background-image:url('../khoya/bg/bazaar.webp')}.kw-river{background-image:url('../khoya/bg/ghat.webp')}
+.kw-controls{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:8px;margin:6px 0}
+.kw-controls button{min-height:44px;min-width:44px;border:1px solid #c5a05e;border-radius:30px;background:#101e30e0;color:var(--kw-ivory);font:inherit;padding:6px 16px;cursor:pointer}
+.kw-controls button:disabled{opacity:.7;cursor:default}.kw-controls small{font-size:13px;color:var(--kw-gold)}
+.kw-gift-note{font-size:14px;text-align:center;line-height:1.5;color:var(--kw-gold);margin:12px 0}
+.kw-heritage{max-width:1252px;margin:22px auto;padding:0 12px}
+.kw-heritage details{margin:10px 0;border:1px solid #b9945666;border-radius:12px;padding:10px 16px;background:#101e30cc}
+.kw-heritage summary{cursor:pointer;min-height:44px;padding:8px 0;color:var(--kw-gold);font-weight:700}
+.kw-heritage p{font-size:16px;line-height:1.6}.kw-heritage nav{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.kw-heritage a{color:var(--kw-ivory);text-underline-offset:4px}
+.kw-heritage nav a{display:flex;align-items:center;min-height:44px;padding:8px 12px;border:1px solid #b9945655;border-radius:8px;text-decoration:none;font-size:16px}
+.kw-heritage .kw-room-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))}
+.kw-return{display:inline-flex;align-items:center;min-height:44px;color:var(--g);font-size:16px;margin:10px 0;text-underline-offset:4px}.wmc .kw-return{color:#5a3a10}
+.kw-nav a:focus-visible,.kw-floating a:focus-visible,.kw-controls button:focus-visible,.kw-heritage a:focus-visible,.kw-heritage summary:focus-visible,.kw-return:focus-visible{outline:3px solid #fff4dc;outline-offset:3px}
+.kw-nav a:hover,.kw-floating a:hover{border-color:#fff4dc;box-shadow:0 0 18px #edcd8833}
+@media(max-width:600px){.kw-hud{gap:5px}.kw-simran{font-size:16px}.kw-nav{order:3;flex-basis:100%;flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto}.kw-nav a{flex:none;font-size:14px;padding:6px 10px}.kw-hud .big{margin-left:auto}.kw-hud .big small{max-width:none}.kw-floating{gap:7px}.kw-floating a{flex:1 0 44%;padding:8px 10px;font-size:16px}.kw-controls small{flex-basis:100%;text-align:center}.kw-heritage{padding:0 12px}}
+@media(prefers-reduced-motion:reduce){.kw-track{will-change:auto}}
