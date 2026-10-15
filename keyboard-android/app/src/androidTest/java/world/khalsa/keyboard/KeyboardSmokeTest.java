@@ -132,10 +132,14 @@ public class KeyboardSmokeTest extends Instrumentation {
         pause(150); select(value.length(), value.length());
     }
     private void select(int start, int end) {
+        AccessibilityNodeInfo current = waitFor("Typing test");
+        if (current.getTextSelectionStart() == start && current.getTextSelectionEnd() == end) return;
         Bundle args = new Bundle(); args.putInt(AccessibilityNodeInfo.ACTION_ARGUMENT_SELECTION_START_INT, start);
         args.putInt(AccessibilityNodeInfo.ACTION_ARGUMENT_SELECTION_END_INT, end);
         if (!waitFor("Typing test").performAction(AccessibilityNodeInfo.ACTION_SET_SELECTION, args)) throw new AssertionError("Cannot select fixture");
         pause(100);
+        current = waitFor("Typing test");
+        if (current.getTextSelectionStart() != start || current.getTextSelectionEnd() != end) throw new AssertionError("Selection mismatch");
     }
     private void screenshot(String name) throws Exception {
         Bitmap bitmap = getUiAutomation().takeScreenshot();

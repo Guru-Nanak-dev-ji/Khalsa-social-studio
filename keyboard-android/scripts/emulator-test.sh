@@ -6,7 +6,7 @@ adb install -r app/build/outputs/apk/debug/app-debug.apk
 adb install -r app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
 adb shell ime enable world.khalsa.keyboard/.PunjabiKeyboardService
 adb shell ime set world.khalsa.keyboard/.PunjabiKeyboardService
-adb shell am instrument -w world.khalsa.keyboard.test/world.khalsa.keyboard.KeyboardSmokeTest | tee build/qa/instrumentation.txt
+adb shell am instrument -w -r world.khalsa.keyboard.test/world.khalsa.keyboard.KeyboardSmokeTest | tee build/qa/instrumentation.txt
 for name in keyboard-punjabi keyboard-english keyboard-failure; do
   if adb shell run-as world.khalsa.keyboard test -f "files/$name.png"; then
     adb exec-out run-as world.khalsa.keyboard cat "files/$name.png" > "build/qa/$name.png"
