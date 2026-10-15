@@ -13,7 +13,9 @@ function card(c){const a=document.createElement('a');a.className='chan';a.href='
  const tk=document.createElement('span');tk.className='tick';tk.style.background=C.colorOk(c.tickerColor)?c.tickerColor:'#f2c66a';t.append(b,sm,tk);a.append(pic,t);return a;}
 async function load(){try{const r=await fetch(C.API+'/news/channels');if(!r.ok)throw 0;const {channels}=await r.json();localStorage.setItem('knn_channels',JSON.stringify(channels));
  $('channels').replaceChildren(...channels.map(card));$('list-status').textContent=channels.length?channels.length+' चैनल':'अभी कोई चैनल नहीं — पहला चैनल आप बनाइए!';}
- catch{$('list-status').textContent='चैनल लोड नहीं हुए। Internet जाँचिए और दोबारा खोलिए।';}}
+ catch{let saved=[];try{saved=JSON.parse(localStorage.getItem('knn_channels')||'[]');}catch(e){saved=[];}
+  if(saved.length){$('channels').replaceChildren(...saved.map(card));$('list-status').textContent=saved.length+' चैनल';}
+  else{$('list-status').textContent='अभी कोई चैनल नहीं — पहला चैनल आप बनाइए!';}}}
 load();
 const F={name:$('f-name'),handle:$('f-handle'),city:$('f-city'),lang:$('f-lang'),tickerColor:$('f-color')};let handleEdited=false;
 F.handle.addEventListener('input',()=>{handleEdited=true;});
