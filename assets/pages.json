@@ -1489,17 +1489,6 @@
 "topic": "साधन"
 },
 {
-"id": "join",
-"icon": "🚪",
-"name": "🤝 KIDO Free World",
-"sub": "KIDO Free World से जुड़ें — मुफ़्त सदस्यता, स्वैच्छिक सेवा, ",
-"cat": "t",
-"href": "./join.html",
-"group": "main",
-"status": "published",
-"topic": "साधन"
-},
-{
 "id": "free-world",
 "icon": "🌍",
 "name": "Free World Join",

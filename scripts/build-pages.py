@@ -6,7 +6,7 @@ Hand-edited fields (icon, name, sub, cat) of existing entries are kept.
 Usage: python3 scripts/build-pages.py [--check]   (--check: exit 1 if the file would change)"""
 import json,glob,os,re,sys,html
 ROOT=os.path.dirname(os.path.dirname(os.path.abspath(__file__)));os.chdir(ROOT)
-SKIP={'404.html','Begampura_FAQ_542_Offline_Reader.html'} & set()  # nothing skipped today
+SKIP={'404.html','join.html'}  # join.html = redirect stub → free-world.html (not a registry page)
 RULES=[(r'^guru',"गुरु"),(r'^itihas',"इतिहास"),(r'^bhagat',"भगत"),(r'^(takht|panj-takht)',"तख़्त"),(r'^swad',"स्वाद"),
  (r'^kirat',"किरत"),(r'^neta',"शासन"),(r'^sehat',"सेहत"),(r'^kshetra|^naksha',"नक्शा"),
  (r'^(news|newsroom|goldtv|aaj-bhav|reels|promo)',"समाचार"),(r'^(kyon|audiobook|kahani|funnybook|granth|sakhi|virsa|Begampura)',"किताब"),
