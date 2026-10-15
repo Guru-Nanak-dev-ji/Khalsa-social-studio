@@ -163,8 +163,10 @@ public class PunjabiKeyboardService extends InputMethodService {
                     int end = caption.toString().indexOf('\n');
                     caption.setSpan(new android.text.style.AbsoluteSizeSpan(10, true), 0, end, 0);
                     caption.setSpan(new android.text.style.ForegroundColorSpan(0xFFAAB2BD), 0, end, 0);
-                    letter.setText(caption);
-                    letter.setLineSpacing(dp(-3), 1);
+                    if (getResources().getConfiguration().orientation != Configuration.ORIENTATION_LANDSCAPE) {
+                        letter.setText(caption);
+                        letter.setLineSpacing(dp(-3), 1);
+                    }
                     letter.setOnLongClickListener(v -> { type(alt); return true; });
                 }
             }

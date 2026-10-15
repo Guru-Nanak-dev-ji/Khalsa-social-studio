@@ -103,16 +103,20 @@ public class KeyboardSmokeTest extends Instrumentation {
         Rect rect = new Rect(); node.getBoundsInScreen(rect);
         long time = SystemClock.uptimeMillis();
         MotionEvent down = MotionEvent.obtain(time, time, MotionEvent.ACTION_DOWN, rect.centerX(), rect.centerY(), 0);
+        down.setSource(android.view.InputDevice.SOURCE_TOUCHSCREEN);
         getUiAutomation().injectInputEvent(down, true); down.recycle();
         MotionEvent up = MotionEvent.obtain(time, time + 60, MotionEvent.ACTION_UP, rect.centerX(), rect.centerY(), 0);
+        up.setSource(android.view.InputDevice.SOURCE_TOUCHSCREEN);
         getUiAutomation().injectInputEvent(up, true); up.recycle(); pause(170);
     }
     private void longPress(String desc) {
         Rect rect = new Rect(); waitFor(desc).getBoundsInScreen(rect);
         long time = SystemClock.uptimeMillis();
         MotionEvent down = MotionEvent.obtain(time, time, 0, rect.centerX(), rect.centerY(), 0);
+        down.setSource(android.view.InputDevice.SOURCE_TOUCHSCREEN);
         getUiAutomation().injectInputEvent(down, true); down.recycle(); pause(800);
         MotionEvent up = MotionEvent.obtain(time, SystemClock.uptimeMillis(), 1, rect.centerX(), rect.centerY(), 0);
+        up.setSource(android.view.InputDevice.SOURCE_TOUCHSCREEN);
         getUiAutomation().injectInputEvent(up, true); up.recycle(); pause(200);
     }
     private void key(String value) { tap("key:" + value); }

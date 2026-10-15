@@ -61,7 +61,7 @@ public class SetupActivity extends Activity {
 
         text(body, "3  ·  यहाँ लिखकर देखें", 16, Color.WHITE, 20);
         test = new EditText(this);
-        test.setId(1001);
+        test.setId(View.generateViewId());
         test.setContentDescription("Typing test");
         test.setHint("ਪੰਜਾਬੀ · ਵਾਹਿਗੁਰੂ");
         test.setTextSize(21);
