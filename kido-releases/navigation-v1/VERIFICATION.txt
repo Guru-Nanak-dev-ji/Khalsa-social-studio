@@ -1,0 +1,49 @@
+KIDO AUTONOMOUS TEAM — NAVIGATION REPAIR VERIFICATION
+19 October 2026
+
+Final release gate: 78 passed, 0 failed, 0 skipped.
+  providers 20; research 12; autonomy 15; backend 13; installer 8; repair 10.
+
+Command (Node 20+):
+  node --test --test-reporter=tap src/*.test.cjs installer.test.cjs fixes/cross-site-navigation/repair.test.cjs
+
+The original server returned HTTP 403 to an external top-level document
+navigation. The narrow fix now permits GET / and GET /news when browser
+headers identify a document navigation. Cross-site API, POST, iframe,
+image and fetch requests, invalid Hosts and API Origin mismatches remain
+rejected. API authentication and anti-framing headers are retained.
+
+The exact repair script was exercised against a running temporary copy of
+the original server. It created five verified original-source/manifest
+backup sets, updated only the guard and manifest main.cjs entry, restarted
+a new instance, and verified HTTP 200 document routes and HTTP 403 for a
+cross-site API call. Original project sentinels, secrets and configuration
+values were preserved. A pre-paused queued task stayed byte-identical,
+QUEUED, with zero model requests. A verified rerun kept the same instance.
+
+Repair regressions additionally cover active worker/Narad refusal, unknown
+source layouts, direct and ancestor symlinks, lost stop acknowledgement,
+receipt-write failure after verification, and startup/verification failures
+when already-fixed source was initially stopped. Test services and temporary
+fixtures were cleaned up. Transport tests use injected responses or local
+fixtures; no real model credentials or Notion writes were used.
+
+The generated installer embeds the repaired main.cjs. The repair's output
+for the exact original main.cjs was byte-compared with that reviewed source.
+Existing installations should run the repair script. The full installer
+accepts new installations or existing files that exactly match its payload.
+
+Before this hotfix, a credential-free production Wikipedia transport probe
+in the authoring environment failed DNS_FAILED. Live public research,
+provider access and Android background behavior on the user's phone remain
+unverified. Rendered mobile browser QA was unavailable. This release's HTTP
+checks use real local server requests; they do not claim a phone browser test.
+
+No files on the user's phone were changed from the authoring environment.
+The phone receives the fix when the user runs the supplied command.
+
+Build:
+  node build-installer.cjs
+
+Fixed installer SHA256:
+c3d3fd3ef78fe4dcf01f945331ff1b026348b918dedb8ce6cad1ac10edb46ae0

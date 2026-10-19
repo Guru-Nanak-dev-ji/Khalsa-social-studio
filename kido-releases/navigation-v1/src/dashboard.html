@@ -1,0 +1,936 @@
+<!doctype html>
+<html lang="hi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#0a1511">
+  <meta name="referrer" content="no-referrer">
+  <title>KIDO • AUTO AGENTS</title>
+  <style>
+    :root{--bg:#09130f;--panel:#101e18;--panel-2:#15261e;--line:#2b4033;--text:#edf4ea;--muted:#a6b8ab;--green:#a2d9af;--gold:#ebc77e;--gold-ink:#2b2213;--danger:#efaaa0;--blue:#a5c6e1;--radius:22px;--shadow:0 20px 70px #00000025}
+    *{box-sizing:border-box}
+    [hidden]{display:none!important}
+    html{scroll-behavior:smooth;scroll-padding-top:24px}
+    body{margin:0;background:radial-gradient(ellipse at 85% 0,#1b34254d,transparent 46%),var(--bg);color:var(--text);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.6;min-width:300px}
+    button,input,textarea{font:inherit}
+    button{cursor:pointer;-webkit-tap-highlight-color:transparent}
+    button:disabled{cursor:not-allowed;opacity:.48}
+    button,input,textarea,summary{outline-offset:4px}
+    :focus-visible{outline:2px solid var(--gold)}
+    a{color:var(--gold)}
+    h1,h2,h3,p{margin:0}
+    button svg,svg.icon{width:19px;height:19px;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+    .icon-defs{position:absolute;width:0;height:0;overflow:hidden}
+    .shell{width:min(1180px,100%);margin:auto;padding:30px 28px max(28px,env(safe-area-inset-bottom))}
+    .topbar{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-bottom:24px;border-bottom:1px solid var(--line)}
+    .brand{display:flex;align-items:center;gap:13px;min-width:0}
+    .brand-mark{width:45px;height:45px;display:grid;place-items:center;border:1px solid #bda16866;border-radius:14px;background:linear-gradient(140deg,#e8c3761c,#27463255);color:var(--gold);font-size:25px;font-weight:700;flex-shrink:0}
+    .brand-title{font-size:16px;font-weight:750;letter-spacing:.09em;white-space:nowrap}
+    .brand-title span{color:var(--gold);margin:0 4px}
+    .eyebrow{font-size:10px;letter-spacing:.18em;color:var(--muted);text-transform:uppercase;font-weight:700}
+    .top-actions,.row,.button-row{display:flex;align-items:center;gap:10px}
+    .btn{border:1px solid var(--line);border-radius:12px;background:var(--panel-2);color:var(--text);padding:10px 15px;display:inline-flex;justify-content:center;align-items:center;gap:9px;font-size:13px;font-weight:650;line-height:1.45;min-height:43px;text-decoration:none;transition:background .18s,border-color .18s,transform .18s}
+    .btn:not(:disabled):hover{background:#223a2a;border-color:#58765b}
+    .btn:not(:disabled):active{transform:translateY(1px)}
+    .btn.primary{background:var(--gold);border-color:var(--gold);color:var(--gold-ink);box-shadow:0 4px 20px #dfb86912}
+    .btn.primary:not(:disabled):hover{background:#f4d593;border-color:#f4d593}
+    .btn.ghost{background:transparent}
+    .btn.small{padding:7px 11px;min-height:37px;font-size:12px;border-radius:10px}
+    .btn.danger{color:var(--danger);border-color:#80564b66}
+    .icon-button{height:39px;width:39px;min-width:39px;padding:0;display:grid;place-items:center;background:transparent;border:1px solid var(--line);border-radius:11px;color:var(--text)}
+    .icon-button:hover{background:var(--panel-2)}
+    .hero{padding:32px 0 27px;display:flex;justify-content:space-between;align-items:flex-end;gap:24px}
+    h1{font-size:clamp(27px,4vw,40px);line-height:1.35;letter-spacing:-.045em;font-weight:700;margin-bottom:9px}
+    h1 em{font-style:normal;color:var(--gold)}
+    .hero p{font-size:14px;color:var(--muted);max-width:580px}
+    .live-summary{text-align:right;flex-shrink:0}
+    .live-line{font-size:12px;display:flex;gap:8px;align-items:center;justify-content:flex-end}
+    .dot{width:7px;height:7px;border-radius:50%;background:var(--muted);display:inline-block;flex-shrink:0}
+    .dot.green{background:var(--green);box-shadow:0 0 0 4px #a2d9af0d}
+    .dot.warn{background:var(--gold)}
+    .dot.danger{background:var(--danger)}
+    .muted{color:var(--muted)}
+    .tiny{font-size:11px}
+    .small-copy{font-size:12px;color:var(--muted);line-height:1.65}
+    .notice{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px 19px;border:1px solid #967e4d66;border-radius:15px;background:#30291955;margin-bottom:20px}
+    .notice p{font-size:13px;color:#dcc9a5}
+    .onboarding{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:19px 22px;border:1px solid #9d895155;border-radius:18px;margin-bottom:22px;background:linear-gradient(110deg,#3e352331,#18342455)}
+    .onboarding h2{font-size:16px;margin-bottom:3px}
+    .onboarding p{font-size:12px;color:var(--muted);max-width:620px}
+    .top-grid{display:grid;grid-template-columns:minmax(0,1.58fr) minmax(290px,1fr);gap:20px;align-items:stretch}
+    .panel{border:1px solid var(--line);background:var(--panel);border-radius:var(--radius);box-shadow:var(--shadow);min-width:0}
+    .composer{padding:24px}
+    .section-kicker{color:var(--gold);font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;margin-bottom:6px}
+    h2{font-size:19px;line-height:1.45;letter-spacing:-.02em}
+    .composer textarea{width:100%;min-height:141px;resize:vertical;margin-top:18px;border:1px solid #344d3b;border-radius:14px;background:#0b1712;color:var(--text);padding:15px 16px;line-height:1.75;font-size:15px;display:block}
+    textarea::placeholder,input::placeholder{color:#84998a;opacity:1}
+    .prompt-tools{display:flex;justify-content:space-between;align-items:center;margin:9px 1px 14px;gap:10px}
+    .template-list{display:flex;gap:7px;flex-wrap:wrap}
+    .template-chip{border:1px solid #314537;background:transparent;border-radius:7px;padding:4px 8px;color:#b6c7ba;font-size:10px;line-height:1.6}
+    .template-chip:hover{border-color:var(--green);color:var(--text)}
+    .char-count{font-size:10px;color:var(--muted);white-space:nowrap}
+    .role-selection-hint{font-size:10px;color:var(--muted);line-height:1.8;margin-top:9px}
+    .compose-footer{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-top:18px}
+    .compose-footer p{font-size:11px;line-height:1.7;color:var(--muted);max-width:330px}
+    .compose-footer .btn{flex-shrink:0;min-width:145px}
+    .team-panel{padding:24px;display:flex;flex-direction:column}
+    .team-heading{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:16px}
+    .router{border:1px solid #3c5140;border-radius:6px;color:var(--muted);font-size:9px;letter-spacing:.12em;padding:4px 6px;white-space:nowrap}
+    .team-roles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;flex:1}
+    .team-role{display:flex;gap:11px;align-items:center;min-width:0}
+    .team-role>div:last-child{min-width:0}
+    .team-role.reviewer{grid-column:1/-1;padding-top:11px;border-top:1px solid var(--line)}
+    .avatar{width:37px;height:37px;border-radius:11px;display:grid;place-items:center;font-size:13px;letter-spacing:.02em;font-weight:750;background:#a2d9af12;border:1px solid #a2d9af24;color:var(--green);flex-shrink:0}
+    .avatar.mahesh{color:#d6b5a1;background:#d6b5a110;border-color:#d6b5a126}
+    .avatar.saraswati{color:var(--blue);background:#a5c6e110;border-color:#a5c6e126}
+    .avatar.vishnu{color:var(--gold);background:#ebc77e12;border-color:#ebc77e35}
+    .avatar.indra{color:#c8b7ed;background:#c8b7ed12;border-color:#c8b7ed30}
+    .avatar.thor{color:#edb29b;background:#edb29b12;border-color:#edb29b30}
+    .avatar.zeus{color:#a4d9dc;background:#a4d9dc12;border-color:#a4d9dc30}
+    .team-role-name{font-size:10px;font-weight:750;letter-spacing:.12em}
+    .team-role-subtitle{font-size:11px;color:var(--muted)}
+    .team-role-name,.team-role-subtitle{overflow-wrap:anywhere}
+    .team-foot{border-top:1px solid var(--line);margin-top:17px;padding-top:13px;font-size:10px;color:var(--muted)}
+    .workspace-heading{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:31px 0 14px}
+    .workspace-heading h2{font-size:17px}
+    .limit-line{font-size:10px;color:var(--muted);text-align:right}
+    .workspace-grid{display:grid;grid-template-columns:270px minmax(0,1fr);gap:20px;align-items:start}
+    .queue-panel{padding:18px 12px 12px;overflow:hidden}
+    .queue-heading{display:flex;justify-content:space-between;align-items:center;padding:0 7px 12px;gap:10px}
+    .queue-heading h3{font-size:12px;font-weight:650}
+    .count{font-size:10px;background:#9aba9814;border:1px solid var(--line);border-radius:7px;padding:2px 7px;color:var(--green)}
+    .task-list{list-style:none;padding:0;margin:0;display:grid;gap:7px;max-height:690px;overflow:auto}
+    .task-item{min-width:0}
+    .task-button{width:100%;text-align:left;background:transparent;color:var(--text);border:1px solid transparent;border-radius:12px;padding:13px;display:block}
+    .task-button:hover{background:#1a2b20}
+    .task-button[aria-current="true"]{background:#1c3023;border-color:#59704b}
+    .task-item-top{display:flex;justify-content:space-between;align-items:center;gap:7px;margin-bottom:8px}
+    .task-preview{font-size:12px;line-height:1.65;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}
+    .task-date{font-size:9px;color:var(--muted);margin-top:8px}
+    .status-pill{display:inline-flex;align-items:center;gap:5px;max-width:100%;font-size:9px;letter-spacing:.02em;padding:3px 7px;line-height:1.4;border-radius:6px;border:1px solid #6e887433;color:var(--muted);background:#8fb59a09}
+    .status-pill[data-tone="good"]{color:var(--green);border-color:#93ce8e40;background:#93ce8e0c}
+    .status-pill[data-tone="active"]{color:var(--gold);border-color:#d9b66344;background:#d9b6630c}
+    .status-pill[data-tone="bad"]{color:var(--danger);border-color:#d69f8e40;background:#d69f8e0b}
+    .status-pill[data-tone="blue"]{color:var(--blue);border-color:#9fc9d740;background:#9fc9d709}
+    .queue-empty{padding:23px 14px 27px;font-size:12px;line-height:1.8;color:var(--muted);text-align:center}
+    .detail-panel{overflow:hidden}
+    .empty-detail{min-height:341px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:39px 28px;text-align:center}
+    .empty-symbol{width:65px;height:65px;border:1px solid #527047;border-radius:21px;display:grid;place-items:center;color:var(--gold);background:linear-gradient(145deg,#2a3928,#101c16);margin-bottom:19px;transform:rotate(-5deg)}
+    .empty-symbol svg{width:29px;height:29px;transform:rotate(5deg)}
+    .empty-detail h3{font-size:18px;font-weight:600;margin-bottom:8px}
+    .empty-detail p{font-size:12px;color:var(--muted);max-width:360px;line-height:1.9}
+    .empty-trail{display:flex;align-items:center;gap:9px;margin-top:24px;color:#b8c4b5;font-size:9px;letter-spacing:.06em}
+    .empty-trail span{padding:5px 8px;border:1px solid var(--line);border-radius:6px}
+    .detail-head{padding:23px 24px 18px;border-bottom:1px solid var(--line)}
+    .detail-topline{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
+    .task-title{font-size:18px;line-height:1.6;overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+    .task-meta{display:flex;flex-wrap:wrap;gap:7px 16px;margin-top:10px;font-size:10px;color:var(--muted)}
+    .progress-top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:18px;margin-bottom:7px;font-size:10px;color:var(--muted)}
+    .progress-track{height:5px;background:#293b2d;border-radius:10px;overflow:hidden}
+    .progress-fill{height:100%;width:0;background:linear-gradient(90deg,#90caa1,var(--gold));transition:width .35s ease;border-radius:10px}
+    .detail-tools{display:flex;flex-wrap:wrap;gap:7px;margin-top:17px}
+    .brief{margin-top:13px;color:var(--muted);font-size:11px}
+    .brief summary{cursor:pointer;padding:5px 0;width:fit-content}
+    .brief-text{white-space:pre-wrap;overflow-wrap:anywhere;max-height:250px;overflow:auto;padding:10px 0 2px;font-size:12px;color:var(--text)}
+    .detail-body{padding:19px 24px 24px}
+    .task-error{border:1px solid #bb837444;background:#492d251f;color:#edb3a7;font-size:12px;padding:12px 14px;border-radius:10px;margin-bottom:15px;white-space:pre-wrap;overflow-wrap:anywhere}
+    .outputs-label{font-size:10px;letter-spacing:.1em;color:var(--muted);margin-bottom:11px;display:flex;align-items:center;gap:9px}
+    .outputs-label:after{content:"";height:1px;background:var(--line);flex:1}
+    .role-results{display:grid;gap:10px}
+    .role-output{border:1px solid var(--line);background:#0c1913;border-radius:13px;overflow:hidden}
+    .role-output summary{display:flex;align-items:center;gap:10px;padding:13px 14px;cursor:pointer;list-style:none}
+    .role-output summary::-webkit-details-marker{display:none}
+    .role-output .avatar{width:31px;height:31px;border-radius:9px;font-size:11px}
+    .role-output-title{font-size:10px;font-weight:750;letter-spacing:.1em}
+    .role-output-subtitle{font-size:10px;color:var(--muted)}
+    .role-output summary>div:nth-child(2){min-width:0;flex:1}
+    .role-output-title,.role-output-subtitle{overflow-wrap:anywhere}
+    .role-output .status-pill{margin-left:auto;flex-shrink:0}
+    .chevron{width:15px!important;height:15px!important;color:var(--muted);transition:transform .15s}
+    .role-output[open] .chevron{transform:rotate(180deg)}
+    .role-content{border-top:1px solid var(--line);padding:13px 15px 16px}
+    .output-model{font-size:10px;color:var(--muted);margin-bottom:10px;overflow-wrap:anywhere}
+    .output-text{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.9;font-size:13px}
+    .role-content .output-text{max-height:340px;overflow:auto;overscroll-behavior:contain}
+    .output-placeholder{font-size:12px;color:var(--muted)}
+    .output-error{font-size:12px;color:var(--danger);white-space:pre-wrap;overflow-wrap:anywhere;margin-top:8px}
+    .research-sources{margin-bottom:17px;border:1px solid var(--line);border-radius:11px;background:#0c1913;padding:11px 13px;font-size:11px}
+    .research-sources summary{cursor:pointer;color:var(--blue)}
+    .research-sources ol{padding:0;list-style:none;margin:13px 0 0;display:grid;gap:12px}
+    .research-sources a{color:#d3dfc6;overflow-wrap:anywhere;text-underline-offset:3px;line-height:1.75}
+    .source-meta{color:var(--muted);font-size:9px;line-height:1.8;margin-top:4px}
+    .truncated{font-size:10px;color:var(--gold);margin-top:10px}
+    .final-output{border:1px solid #93805266;border-radius:15px;background:linear-gradient(145deg,#332e1b33,#10211855);margin-top:19px;padding:17px}
+    .final-heading{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+    .final-heading h3{font-size:12px;font-weight:700;letter-spacing:.05em}
+    .final-heading p{font-size:10px;color:var(--muted)}
+    .final-heading .icon-button{margin-left:auto;width:33px;height:33px;min-width:33px;border-color:#796b414f}
+    .final-output .output-text{font-size:14px;line-height:1.9}
+    .footer{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-top:29px;font-size:10px;color:#91a695}
+    .footer .signature{color:var(--gold);letter-spacing:.09em;font-size:9px;white-space:nowrap}
+    .drawer{position:fixed;inset:0 0 0 auto;margin:0;width:min(610px,100vw);max-width:none;height:100dvh;max-height:100dvh;border:0;border-left:1px solid var(--line);padding:0;background:#0e1b15;color:var(--text);box-shadow:-20px 0 90px #0005;overflow:hidden}
+    .drawer[open]{display:flex;flex-direction:column}
+    .drawer:not([open]){display:none}
+    .drawer::backdrop{background:#020705a8;backdrop-filter:blur(4px)}
+    .drawer-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;padding:25px 25px 20px;border-bottom:1px solid var(--line);flex-shrink:0}
+    .drawer-head h2{font-size:23px}
+    .drawer-head p{font-size:12px;color:var(--muted);margin-top:5px;max-width:425px}
+    .drawer-body{padding:22px 25px max(30px,env(safe-area-inset-bottom));overflow:auto;overscroll-behavior:contain}
+    .connection-tools{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:19px}
+    .connection-tools p{font-size:11px;color:var(--muted)}
+    .provider-list{display:grid;gap:15px}
+    .provider-card{padding:18px;border:1px solid var(--line);border-radius:16px;background:var(--panel)}
+    .provider-card fieldset{border:0;margin:0;padding:0;min-width:0}
+    .provider-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:8px}
+    .provider-title{font-size:15px;font-weight:700}
+    .provider-kind{font-size:9px;letter-spacing:.1em;color:var(--muted);margin-top:2px}
+    .switch{position:relative;display:inline-flex;align-items:center;gap:9px;cursor:pointer;flex-shrink:0;font-size:10px;color:var(--muted);padding:4px 0}
+    .switch input{position:absolute;opacity:0;width:40px;height:24px;right:0;margin:0}
+    .switch-track{width:38px;height:22px;border-radius:20px;border:1px solid #516455;background:#293b2f;position:relative;transition:background .15s}
+    .switch-track:after{content:"";position:absolute;top:3px;left:3px;width:14px;height:14px;border-radius:50%;background:#b0bbaf;transition:transform .15s,background .15s}
+    .switch input:checked+.switch-track{background:#7eab8540;border-color:#83bc8b}
+    .switch input:checked+.switch-track:after{background:var(--green);transform:translateX(16px)}
+    .switch input:focus-visible+.switch-track{outline:2px solid var(--gold);outline-offset:3px}
+    .provider-status{display:flex;align-items:center;gap:8px;margin:11px 0 4px}
+    .provider-reason{font-size:11px;line-height:1.7;color:var(--muted);white-space:pre-wrap;overflow-wrap:anywhere;margin-bottom:14px}
+    .field{display:block;margin-top:13px}
+    .field-label{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:11px;color:#c6d4c9;margin-bottom:6px}
+    .field input,.field textarea{display:block;width:100%;border:1px solid #344c3b;border-radius:10px;background:#0a1610;color:var(--text);font-size:13px;padding:10px 12px;line-height:1.65;min-height:43px}
+    .field textarea{min-height:115px;resize:vertical}
+    .field-hint{display:block;font-size:10px;line-height:1.7;color:var(--muted);margin-top:5px}
+    .model-options{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px}
+    .model-chip{font-size:10px;color:var(--blue);border:1px solid #7a9aaa44;background:#739cac0a;border-radius:6px;padding:4px 7px;max-width:100%;overflow-wrap:anywhere}
+    .provider-actions{display:flex;justify-content:space-between;align-items:center;gap:11px;margin-top:17px;flex-wrap:wrap}
+    .provider-save-note{font-size:10px;color:var(--muted);flex:1;min-width:100px}
+    .local-tools{display:flex;align-items:center;gap:11px;margin-top:13px;padding-top:13px;border-top:1px solid var(--line)}
+    .local-tools p{font-size:10px;color:var(--muted);line-height:1.7}
+    .connection-footnote{font-size:11px;color:var(--muted);line-height:1.85;border-top:1px solid var(--line);margin-top:22px;padding-top:17px}
+    .narad-panel{margin-top:20px;padding:22px 24px;background:linear-gradient(110deg,#24322055,#101e18);border-color:#67704377}
+    .narad-heading{display:flex;align-items:center;justify-content:space-between;gap:18px}
+    .narad-identity{display:flex;align-items:center;gap:12px}
+    .narad-identity h2{font-size:15px;letter-spacing:.045em}
+    .narad-identity p{font-size:11px;color:var(--muted)}
+    .narad-actions{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+    .narad-metrics{display:grid;grid-template-columns:1.2fr 1fr .8fr;gap:18px;margin-top:19px;padding-top:16px;border-top:1px solid var(--line)}
+    .narad-metric-label{font-size:9px;letter-spacing:.07em;color:var(--muted);margin-bottom:5px}
+    .narad-metric-value{font-size:12px;color:var(--text);overflow-wrap:anywhere}
+    .narad-bottom{display:flex;justify-content:space-between;align-items:flex-start;gap:15px;margin-top:14px}
+    .narad-bottom p{font-size:10px;color:var(--muted);line-height:1.8}
+    .narad-bottom a{font-size:11px;white-space:nowrap;text-underline-offset:4px}
+    .narad-latest{font-size:11px;color:#cad7c7;margin-top:14px;padding-top:13px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .narad-latest p{overflow-wrap:anywhere}
+    .settings-block{border:1px solid var(--line);border-radius:15px;padding:17px;background:var(--panel);margin-bottom:16px}
+    .settings-block h3{font-size:14px}
+    .settings-block>p{font-size:11px;color:var(--muted);line-height:1.8;margin-top:7px}
+    .settings-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
+    .settings-checkbox{display:flex;align-items:flex-start;gap:10px;font-size:11px;color:#c5d5c6;margin-top:17px;cursor:pointer}
+    .settings-checkbox input{accent-color:var(--green);height:17px;width:17px;flex-shrink:0;margin:2px 0 0}
+    .settings-form-fieldset{border:0;padding:0;margin:0;min-width:0}
+    .settings-actions{display:flex;align-items:center;justify-content:space-between;gap:15px}
+    .settings-actions p{font-size:11px;color:var(--muted)}
+    .toast{position:fixed;bottom:max(24px,env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);z-index:1000;max-width:min(560px,calc(100vw - 32px));width:max-content;border:1px solid #668561;background:#203626;color:var(--text);box-shadow:0 10px 40px #0006;border-radius:13px;padding:12px 17px;font-size:12px;white-space:pre-wrap;overflow-wrap:anywhere}
+    .toast[data-tone="bad"]{border-color:#ae7966;background:#37261f;color:#f1d1c7}
+    .spin{animation:spin 1s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    @media(max-width:950px){.shell{padding:22px}.top-grid{grid-template-columns:minmax(0,1.3fr) minmax(265px,.9fr)}.composer,.team-panel{padding:20px}.compose-footer{align-items:flex-end}.compose-footer p{max-width:210px}.workspace-grid{grid-template-columns:230px minmax(0,1fr)}.detail-head{padding:20px}.detail-body{padding:18px 20px 20px}.hero{gap:15px}.hero p{max-width:490px}}
+    @media(max-width:740px){.shell{padding:20px 16px max(22px,env(safe-area-inset-bottom))}.topbar{gap:10px;padding-bottom:18px;flex-wrap:wrap}.brand{gap:10px}.brand-mark{width:38px;height:38px;border-radius:12px;font-size:22px}.brand-title{font-size:12px;letter-spacing:.08em}.brand .eyebrow{font-size:8px}.top-actions{gap:7px}.top-actions .btn{font-size:11px;padding:8px 10px;min-height:38px}.top-actions .btn svg{width:16px;height:16px}.top-actions .worker-label{display:none}.hero{padding:26px 0 22px;display:block}.hero h1{font-size:29px}.hero p{font-size:12px;line-height:1.85}.live-summary{margin-top:15px;text-align:left;display:flex;justify-content:space-between;gap:15px}.live-line{justify-content:flex-start;font-size:10px}.live-summary .tiny{font-size:9px}.onboarding{padding:17px;align-items:flex-start;flex-direction:column;gap:12px}.onboarding h2{font-size:15px}.onboarding p{font-size:11px}.onboarding .btn{font-size:11px;min-height:38px}.top-grid{grid-template-columns:1fr;gap:15px}.composer{padding:20px}.composer h2{font-size:19px}.composer textarea{font-size:14px;min-height:145px;margin-top:14px}.compose-footer{margin-top:15px;gap:14px}.compose-footer p{font-size:10px;max-width:none}.compose-footer .btn{min-width:133px;padding:11px 13px;font-size:12px}.prompt-tools{gap:7px;align-items:flex-end}.template-list{gap:5px}.template-chip{font-size:9px;padding:4px 6px}.char-count{font-size:9px}.team-panel{padding:18px 19px}.team-heading{margin-bottom:13px}.team-heading h2{font-size:15px}.team-roles{grid-template-columns:1fr 1fr;gap:13px 9px}.team-role{gap:9px;align-items:flex-start}.team-role .avatar{width:31px;height:33px;border-radius:9px;font-size:11px}.team-role-name{font-size:9px;letter-spacing:.1em}.team-role-subtitle{font-size:10px}.team-foot{margin-top:14px;padding-top:11px;font-size:9px}.workspace-heading{margin:25px 1px 12px;align-items:flex-start}.workspace-heading h2{font-size:16px}.limit-line{font-size:9px;max-width:180px;line-height:1.8}.workspace-grid{grid-template-columns:1fr;gap:15px}.queue-panel{padding:14px 10px 10px}.queue-heading{padding:0 7px 10px}.task-list{display:flex;overflow:auto;max-height:none;gap:7px;padding-bottom:3px;scroll-snap-type:x proximity}.task-item{flex:0 0 min(260px,78vw);scroll-snap-align:start}.task-button{height:100%;padding:11px 12px;border-color:#294131}.task-preview{font-size:11px}.task-date{font-size:9px}.queue-empty{padding:11px 14px 16px;font-size:11px}.detail-head{padding:18px}.detail-body{padding:16px 18px 19px}.task-title{font-size:17px}.task-meta{font-size:9px;gap:5px 11px}.detail-tools .btn{font-size:10px;min-height:35px;padding:7px 9px;gap:6px}.detail-tools .btn svg{width:15px;height:15px}.role-output summary{padding:12px 11px;gap:8px}.role-output-title{font-size:9px}.role-output-subtitle{font-size:9px}.role-output .status-pill{font-size:8px;padding:3px 5px}.role-output .avatar{width:28px;height:29px;font-size:10px}.role-content{padding:12px}.output-text{font-size:12px;line-height:1.85}.final-output{padding:15px}.final-output .output-text{font-size:13px}.empty-detail{min-height:280px;padding:30px 22px}.empty-detail h3{font-size:17px}.empty-detail p{font-size:11px}.footer{align-items:flex-start;padding-top:23px;gap:15px;font-size:9px}.footer .signature{font-size:8px}.notice{align-items:flex-start;padding:14px;gap:10px}.notice p{font-size:11px}.notice .btn{font-size:10px;flex-shrink:0}.drawer{inset:auto 0 0;width:100%;height:94dvh;max-height:94dvh;border:1px solid var(--line);border-radius:23px 23px 0 0}.drawer-head{padding:21px 19px 17px}.drawer-head h2{font-size:22px}.drawer-head p{font-size:11px}.drawer-body{padding:18px 17px max(28px,env(safe-area-inset-bottom))}.connection-tools{align-items:flex-start;gap:11px}.connection-tools p{font-size:10px}.connection-tools .btn{font-size:10px;flex-shrink:0}.provider-card{padding:16px}.provider-reason{font-size:10px}.local-tools{align-items:flex-start}.local-tools .btn{font-size:10px;flex-shrink:0}.toast{font-size:11px}}
+    @media(max-width:370px){.shell{padding-left:12px;padding-right:12px}.brand-title{font-size:11px}.top-actions .btn{padding:8px}.top-actions .connection-label{max-width:66px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.composer{padding:16px}.compose-footer{align-items:stretch;flex-direction:column-reverse;gap:10px}.compose-footer .btn{width:100%}.compose-footer p{font-size:9px}.template-chip{font-size:8px}.team-role-subtitle{font-size:9px}.router{font-size:8px}.detail-tools{gap:5px}}
+    @media(max-width:740px){.narad-panel{margin-top:15px;padding:18px}.narad-heading{align-items:flex-start;flex-direction:column;gap:13px}.narad-identity h2{font-size:13px}.narad-identity p{font-size:10px}.narad-actions{width:100%;gap:7px}.narad-actions .btn{font-size:10px;padding:7px 10px;min-height:36px}.narad-actions .status-pill{margin-left:auto;font-size:8px}.narad-metrics{grid-template-columns:1fr 1fr;gap:13px;margin-top:15px;padding-top:13px}.narad-metrics>div:first-child{grid-column:1/-1}.narad-metric-label{font-size:8px;margin-bottom:3px}.narad-metric-value{font-size:11px}.narad-bottom{gap:12px}.narad-bottom p{font-size:9px}.narad-bottom a{font-size:10px}.narad-latest{align-items:flex-start;font-size:10px}.narad-latest .btn{font-size:9px;padding:6px 8px;min-height:32px;flex-shrink:0}.settings-block{padding:15px}.settings-actions{align-items:flex-start}.settings-actions .btn{font-size:11px;flex-shrink:0}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important;animation:none!important}}
+  </style>
+</head>
+<body>
+  <svg class="icon-defs" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="i-settings" viewBox="0 0 24 24"><path d="M4 7h16M4 17h16"/><circle cx="9" cy="7" r="3"/><circle cx="15" cy="17" r="3"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 7v5h-5M4 17v-5h5"/><path d="M6.2 7a7 7 0 0 1 11.6-1L20 9M4 15l2.2 3a7 7 0 0 0 11.6-1"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7Z"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M5 16v5h14v-5"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="13" rx="2"/><path d="M16 8V3H3v13h5"/></symbol>
+    <symbol id="i-bolt" viewBox="0 0 24 24"><path d="m13 2-9 12h7l-1 8 10-13h-7Z"/></symbol>
+    <symbol id="i-queue" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/><path d="M14 6h4a3 3 0 0 1 3 3v1M10 18H6a3 3 0 0 1-3-3v-1"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+  </svg>
+  <div class="shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">K</div>
+        <div><div class="eyebrow">KDN · LOCAL WORKSPACE</div><div class="brand-title">KIDO <span>•</span> AUTO AGENTS</div></div>
+      </div>
+      <div class="top-actions">
+        <button type="button" class="btn ghost" id="workerButton" disabled title="Queue रोकें" aria-label="Queue रोकें"><svg class="icon"><use href="#i-pause"></use></svg><span class="worker-label" id="workerButtonLabel">Queue रोकें</span></button>
+        <button type="button" class="btn" id="connectionsButton"><svg class="icon"><use href="#i-settings"></use></svg><span class="connection-label" id="connectionButtonLabel">AI connections</span></button>
+      </div>
+    </header>
+    <section class="hero">
+      <div><h1>एक काम। <em>पूरी AI टीम।</em></h1><p>लक्ष्य लिखें। विशेषज्ञ साथ काम करेंगे, और VISHNU उनके outputs की अंतिम समीक्षा करेगा।</p></div>
+      <div class="live-summary"><div class="live-line"><span id="serverDot" class="dot"></span><span id="workerSummary" role="status" aria-live="polite">Dashboard से जुड़ रहे हैं…</span></div><p class="tiny muted" id="lastUpdated">स्थिति मिलने की प्रतीक्षा</p></div>
+    </section>
+    <div class="notice" id="connectionNotice" hidden role="alert"><p id="connectionNoticeText"></p><button class="btn small ghost" id="retryStatusButton" type="button">फिर जाँचें</button></div>
+    <section class="onboarding" id="onboarding" hidden>
+      <div><h2>पहला AI connection जोड़ें</h2><p>चल रहे Ollama में उपलब्ध local model जाँचें, या अपनी API key से cloud provider जोड़ें। एक ही provider कई भूमिकाएँ निभा सकता है।</p></div>
+      <button class="btn small primary" type="button" id="onboardingButton">AI जोड़ें <svg class="icon"><use href="#i-arrow"></use></svg></button>
+    </section>
+    <div class="top-grid">
+      <section class="panel composer" aria-labelledby="composerTitle">
+        <div class="section-kicker">A NEW MISSION</div><h2 id="composerTitle">टीम को क्या करना है?</h2>
+        <form id="taskForm">
+          <textarea id="promptInput" name="prompt" maxlength="12000" required placeholder="अपना लक्ष्य, ज़रूरी संदर्भ और अपेक्षित परिणाम लिखें…" aria-label="AI टीम के लिए काम" aria-describedby="taskDisclosure roleSelectionHint"></textarea>
+          <div class="prompt-tools"><div class="template-list"><button class="template-chip" type="button" data-template="मेरे इस विचार की व्यवहारिक योजना बनाओ: ">योजना बनाओ</button><button class="template-chip" type="button" data-template="इस समस्या के समाधान, जोखिम और अगले कदम बताओ: ">समस्या सुलझाओ</button><button class="template-chip" type="button" data-template="इस विषय पर एक स्पष्ट मसौदा तैयार करो: ">ड्राफ्ट बनाओ</button></div><span class="char-count" id="charCount">0 / 12,000</span></div>
+          <p class="role-selection-hint" id="roleSelectionHint">इन्द्र, Thor या Zeus का नाम काम में लिखकर उनकी विशेषज्ञता चुनें; हर task में 3 विशेषज्ञ + विष्णु।</p>
+          <div class="compose-footer"><p id="taskDisclosure">काम enabled providers को भेजा जाएगा। Cloud providers शुल्क ले सकते हैं।</p><button class="btn primary" id="submitButton" type="submit" disabled><span id="submitLabel">टीम शुरू करें</span><svg class="icon"><use href="#i-arrow"></use></svg></button></div>
+        </form>
+      </section>
+      <section class="panel team-panel" aria-labelledby="teamTitle">
+        <div class="team-heading"><h2 id="teamTitle">आपकी टीम</h2><span class="router">GANESH · ROUTER</span></div>
+        <div class="team-roles" id="teamRoles"></div>
+        <p class="team-foot">हर काम में 3 चुने हुए विशेषज्ञ · VISHNU अंतिम reviewer। ये कार्य-भूमिकाएँ हैं।</p>
+      </section>
+    </div>
+    <section class="panel narad-panel" id="naradSection" aria-labelledby="naradTitle" hidden>
+      <div class="narad-heading"><div class="narad-identity"><div class="avatar vishnu" aria-hidden="true">N</div><div><h2 id="naradTitle">NARAD MUNI</h2><p>स्रोत खोजे · टीम को सौंपे · शोध सहेजे</p></div></div><div class="narad-actions"><button class="btn small" type="button" id="naradRunButton"><svg class="icon"><use href="#i-bolt"></use></svg><span id="naradRunLabel">अभी शोध करें</span></button><button class="btn small ghost" type="button" id="naradSettingsButton"><svg class="icon"><use href="#i-settings"></use></svg>विषय और settings</button><span class="status-pill" id="naradStatus"></span></div></div>
+      <div class="narad-metrics"><div><p class="narad-metric-label">खोज के स्रोत</p><p class="narad-metric-value" id="naradScope">—</p></div><div><p class="narad-metric-label">अगला automatic cycle</p><p class="narad-metric-value" id="naradNextRun">—</p></div><div><p class="narad-metric-label">सहेजे research notes</p><p class="narad-metric-value" id="naradMemory">0</p></div></div>
+      <div class="narad-latest" id="naradLatest" hidden><p id="naradLatestText"></p><button class="btn small ghost" type="button" id="naradTaskButton" hidden>टीम का काम देखें</button></div>
+      <p class="output-error" id="naradError" hidden></p>
+      <div class="narad-bottom"><p id="naradScheduleNote">हर 24 घंटे में एक automatic cycle · अधिकतम 8 AI calls। Reviewed research local journal और memory में सहेजा जाता है।</p><a href="/news" target="_blank" rel="noopener noreferrer">स्थानीय news journal ↗</a></div>
+    </section>
+    <div class="workspace-heading"><h2>काम की प्रगति</h2><p class="limit-line" id="limitsSummary">काम की सीमाएँ लोड हो रही हैं…</p></div>
+    <div class="workspace-grid" id="workspace">
+      <aside class="panel queue-panel" aria-labelledby="queueTitle">
+        <div class="queue-heading"><h3 id="queueTitle">Task queue</h3><span class="count" id="taskCount">0</span></div>
+        <ol class="task-list" id="taskList"></ol><p class="queue-empty" id="queueEmpty">अभी कोई काम नहीं है। नया काम भेजते ही वह यहाँ दिखेगा।</p>
+      </aside>
+      <section class="panel detail-panel" id="detailPanel" aria-label="चुने हुए काम का परिणाम">
+        <div class="empty-detail" id="emptyDetail"><div class="empty-symbol"><svg class="icon"><use href="#i-queue"></use></svg></div><h3>अगला काम, मिलकर।</h3><p>ऊपर अपना लक्ष्य लिखें। यहाँ हर भूमिका का वास्तविक output और अंतिम जवाब दिखाई देगा।</p><div class="empty-trail" aria-hidden="true"><span>QUEUE</span>→<span>EXPERTS</span>→<span>REVIEW</span></div></div>
+        <div id="taskDetail" hidden>
+          <div class="detail-head">
+            <div class="detail-topline"><span class="section-kicker" style="margin:0">TEAM WORKSPACE</span><span class="status-pill" id="taskStatus"></span></div>
+            <h2 class="task-title" id="taskTitle"></h2>
+            <div class="task-meta"><span id="taskTime"></span><span id="taskCalls"></span><span id="taskShortId"></span></div>
+            <div class="progress-top"><span>काम के चरणों की प्रगति</span><span id="progressLabel">—</span></div>
+            <div class="progress-track" id="taskProgress" role="progressbar" aria-label="काम के चरणों की प्रगति" aria-valuemin="0" aria-valuemax="100"><div class="progress-fill" id="progressFill"></div></div>
+            <div class="detail-tools"><button type="button" class="btn small ghost" id="exportButton"><svg class="icon"><use href="#i-download"></use></svg>TXT export</button><button type="button" class="btn small ghost" id="reuseButton"><svg class="icon"><use href="#i-copy"></use></svg>निर्देश फिर इस्तेमाल करें</button><button type="button" class="btn small danger" id="cancelButton" hidden><svg class="icon"><use href="#i-close"></use></svg>काम रोकें</button></div>
+            <details class="brief" id="promptDetails"><summary>पूरा निर्देश देखें</summary><div class="brief-text" id="fullPrompt"></div></details>
+          </div>
+          <div class="detail-body">
+            <p class="task-error" id="taskError" hidden></p>
+            <details class="research-sources" id="taskSources" hidden><summary id="taskSourcesTitle">Narad के स्रोत</summary><ol id="taskSourceList"></ol></details>
+            <div class="outputs-label">SPECIALIST OUTPUTS</div><div class="role-results" id="roleResults"></div>
+            <section class="final-output" aria-labelledby="finalHeading"><div class="final-heading"><div class="avatar vishnu" aria-hidden="true">V</div><div><h3 id="finalHeading">VISHNU · अंतिम समीक्षा</h3><p id="finalState">विशेषज्ञों के outputs की प्रतीक्षा</p></div><button type="button" class="icon-button" id="copyFinalButton" aria-label="अंतिम जवाब copy करें" title="अंतिम जवाब copy करें" hidden><svg class="icon"><use href="#i-copy"></use></svg></button></div><p class="output-model" id="finalModel" hidden></p><div class="output-text" id="finalText"></div><p class="output-placeholder" id="finalPlaceholder">विशेषज्ञों के outputs आने पर final synthesis यहाँ दिखाई देगी।</p><p class="output-error" id="finalError" hidden></p><p class="truncated" id="finalTruncated" hidden>जवाब output की तय सीमा तक मिला है।</p></section>
+          </div>
+        </div>
+      </section>
+    </div>
+    <footer class="footer"><p>Background काम आगे बढ़ने के लिए Termux का KIDO server चालू रखें। Narad की खोज-सीमा उसके स्रोतों वाले भाग में दिखाई गई है।</p><span class="signature" id="versionLabel">KIDO · YOUR LOCAL TEAM</span></footer>
+  </div>
+  <dialog class="drawer" id="connectionsDialog" aria-labelledby="connectionsTitle">
+    <div class="drawer-head"><div><div class="section-kicker">YOUR AI CONNECTIONS</div><h2 id="connectionsTitle">टीम को AI से जोड़ें</h2><p>एक या अधिक providers जोड़ें। GANESH enabled connections से टीम की भूमिकाओं के लिए provider चुनेगा।</p></div><button type="button" class="icon-button" id="closeConnectionsButton" aria-label="Connections बंद करें"><svg class="icon"><use href="#i-close"></use></svg></button></div>
+    <div class="drawer-body">
+      <div class="connection-tools"><p id="providersSummary">Connections की स्थिति लोड हो रही है…</p><button type="button" class="btn small ghost" id="refreshProvidersButton"><svg class="icon" id="refreshIcon"><use href="#i-refresh"></use></svg><span id="refreshProvidersLabel">Connections जाँचें</span></button></div>
+      <div class="provider-list" id="providerList"></div>
+      <p class="connection-footnote">API key इसी device के KIDO server को भेजी जाती है। इसे ChatGPT में paste न करें। खाली key छोड़ने पर पहले से सहेजी गई key बनी रहती है। Cloud requests पर आपके provider की billing लागू हो सकती है।</p>
+    </div>
+  </dialog>
+  <dialog class="drawer" id="naradDialog" aria-labelledby="naradSettingsTitle">
+    <div class="drawer-head"><div><div class="section-kicker">NARAD MUNI · RESEARCH</div><h2 id="naradSettingsTitle">शोध की दिशा तय करें</h2><p>विषय चुनें। Narad स्रोत इकट्ठे करके review के लिए AI टीम को सौंपेगा।</p></div><button type="button" class="icon-button" id="closeNaradButton" aria-label="Narad settings बंद करें"><svg class="icon"><use href="#i-close"></use></svg></button></div>
+    <div class="drawer-body"><form id="naradForm" autocomplete="off"><fieldset class="settings-form-fieldset" id="naradFields">
+      <section class="settings-block"><div class="settings-head"><div><h3>Automatic research</h3><p class="small-copy">हर 24 घंटे में एक cycle</p></div><label class="switch"><span>Enabled</span><input type="checkbox" id="naradEnabled" aria-label="Automatic research enabled"><span class="switch-track"></span></label></div><label class="field"><span class="field-label">1–10 विषय · हर line में एक</span><textarea id="naradTopics" rows="4" placeholder="KDN के लिए AI tools&#10;Punjab और community initiatives"></textarea><span class="field-hint">हर विषय 180 characters तक रखें।</span></label><label class="field"><span class="field-label">अधिकतम 3 public HTTPS URLs · हर line में एक</span><textarea id="naradUrls" rows="3" placeholder="https://example.org/news" spellcheck="false" autocapitalize="none"></textarea><span class="field-hint">इन URLs से भी स्रोत लिए जाएँगे। अंतिम जवाब में उपलब्ध references दिखेंगे।</span></label></section>
+      <section class="settings-block"><h3>खोज का दायरा</h3><p>Brave search key न होने पर खोज Wikipedia तक सीमित है। आपके दिए source URLs भी पढ़े जाते हैं।</p><label class="field"><span class="field-label">Brave Search API key · वैकल्पिक</span><input id="naradBraveKey" type="password" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="अपनी Brave Search key डालें"><span class="field-hint" id="naradBraveHint"></span></label></section>
+      <section class="settings-block"><div class="settings-head"><h3>Notion में updates · वैकल्पिक</h3><span class="status-pill" id="notionStatus"></span></div><p>Reviewed research को अपने तय Notion page पर भेजने के लिए connection जोड़ें और automatic publishing चुनें।</p><label class="field"><span class="field-label">Notion integration key</span><input id="naradNotionKey" type="password" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="अपनी Notion integration key"><span class="field-hint" id="naradNotionHint"></span></label><label class="field"><span class="field-label">Destination page ID</span><input id="naradNotionPage" type="text" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="जिस page पर updates भेजने हैं"></label><label class="settings-checkbox"><input id="naradNotionAuto" type="checkbox"><span>इस Notion page पर reviewed research अपने आप publish करें</span></label><div class="provider-actions"><p class="provider-save-note" id="notionReason"></p><button class="btn small ghost" id="notionTestButton" type="button">सहेजा connection जाँचें</button></div></section>
+      <div class="settings-actions"><p id="naradSaveNote">हर cycle की सीमा अधिकतम 8 AI calls है।</p><button class="btn primary" id="naradSaveButton" type="submit">Settings सहेजें</button></div>
+    </fieldset></form><p class="connection-footnote">Keys इसी device के KIDO server को भेजी जाती हैं। खाली key पहले से सहेजी गई key बनाए रखती है। Local journal इस device पर खुलता है; Notion publishing के लिए ऊपर तय destination इस्तेमाल होगा।</p></div>
+  </dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+  <noscript><p style="padding:24px">KIDO dashboard इस्तेमाल करने के लिए browser में JavaScript चालू करें।</p></noscript>
+  <script>
+  (function () {
+    "use strict";
+    const TOKEN = "__KIDO_TOKEN__";
+    const $ = function (id) { return document.getElementById(id); };
+    const DEFAULT_ROLES = [
+      {id:"brahma",name:"BRAHMA",subtitle:"विचार और कार्य-योजना"},
+      {id:"mahesh",name:"MAHESH",subtitle:"जोखिम और सुधार"},
+      {id:"saraswati",name:"SARASWATI",subtitle:"ज्ञान और तथ्य की कमियाँ"},
+      {id:"indra",name:"INDRA · इन्द्र",subtitle:"वैकल्पिक विशेषज्ञ"},
+      {id:"thor",name:"THOR",subtitle:"वैकल्पिक विशेषज्ञ"},
+      {id:"zeus",name:"ZEUS",subtitle:"वैकल्पिक विशेषज्ञ"},
+      {id:"vishnu",name:"VISHNU",subtitle:"अंतिम समीक्षा और जवाब"}
+    ];
+    const TASK_STATES = {
+      QUEUED:["Queue में","blue"],RUNNING:["काम चल रहा है","active"],DONE:["पूरा हुआ","good"],
+      PARTIAL:["आंशिक परिणाम","active"],BLOCKED:["रुका हुआ","bad"],CANCELLED:["रद्द हुआ",""],
+      INTERRUPTED:["बीच में रुका","bad"]
+    };
+    const PROVIDER_STATES = {
+      AVAILABLE:["उपलब्ध","good"],CONFIGURED_UNTESTED:["जोड़ा गया · जाँच बाकी","blue"],
+      KEY_REQUIRED:["API key चाहिए","active"],MODEL_REQUIRED:["Model चाहिए","active"],
+      OFFLINE:["Offline",""],DISABLED:["बंद",""],RESPONSE_OK:["जवाब मिला","good"],
+      ERROR:["Connection error","bad"],INVALID_CONFIG:["Configuration जाँचें","bad"]
+    };
+    const state = {loaded:false,online:false,status:null,tasks:[],selectedId:null,selectedTask:null,statusBusy:false,statusPromise:null,submitting:false,workerBusy:false,refreshBusy:false,localBusy:false,naradDirty:false,naradSaving:false,naradRunBusy:false,notionTestBusy:false,providerCards:new Map(),roleCards:new Map(),detailId:null,taskListSignature:"",sourceSignature:"",teamSignature:"",toastTimer:null};
+    function element(tag, className, text) {
+      const node = document.createElement(tag);
+      if (className) node.className = className;
+      if (text !== undefined) node.textContent = String(text);
+      return node;
+    }
+    function icon(name) {
+      const svg = document.createElementNS("http://www.w3.org/2000/svg","svg");
+      svg.setAttribute("class","icon"); svg.setAttribute("aria-hidden","true");
+      const use = document.createElementNS("http://www.w3.org/2000/svg","use");
+      use.setAttribute("href","#i-" + name); svg.appendChild(use); return svg;
+    }
+    function put(node, text) { const value = String(text === undefined || text === null ? "" : text); if (node.textContent !== value) node.textContent = value; }
+    function normalized(value) { return String(value || "").toLowerCase(); }
+    function roleId(role) { return normalized(role.id || role.role || role.name); }
+    function reviewer(role) { return roleId(role) === "vishnu" || normalized(role.name) === "vishnu"; }
+    function roles() { return state.status && Array.isArray(state.status.roles) && state.status.roles.length ? state.status.roles : DEFAULT_ROLES; }
+    function safeMessage(value) {
+      let text = String(value || "");
+      document.querySelectorAll('input[type="password"]').forEach(function (input) { if (input.value.length > 3) text = text.split(input.value).join("[key hidden]"); });
+      return text;
+    }
+    function toast(message, tone) {
+      clearTimeout(state.toastTimer); put($("toast"),safeMessage(message)); $("toast").dataset.tone = tone || "good"; $("toast").hidden = false;
+      state.toastTimer = setTimeout(function () { $("toast").hidden = true; },6500);
+    }
+    async function api(path, options) {
+      options = options || {};
+      const controller = new AbortController();
+      const timer = setTimeout(function () { controller.abort(); },options.timeout || 30000);
+      const headers = {Authorization:"Bearer " + TOKEN};
+      const settings = {method:options.method || "GET",headers:headers,cache:"no-store",credentials:"same-origin",signal:controller.signal};
+      if (options.body !== undefined) { headers["Content-Type"] = "application/json"; settings.body = JSON.stringify(options.body); }
+      try {
+        const response = await fetch(path,settings);
+        if (!response.ok) {
+          let issue = {};
+          try { issue = await response.json(); } catch (_) {}
+          if (response.status === 401 || response.status === 403) throw new Error("Local access बदल गया है। KIDO का dashboard link दोबारा खोलें।");
+          const parts = [issue.error,typeof issue.detail === "string" ? issue.detail : ""].filter(Boolean);
+          throw new Error(safeMessage(parts.join(" · ") || ("Request पूरी नहीं हुई (" + response.status + ")")));
+        }
+        if (options.blob) return await response.blob();
+        if (response.status === 204) return {};
+        return await response.json();
+      } catch (error) {
+        if (error.name === "AbortError") throw new Error("Server से जवाब मिलने में समय लग रहा है। स्थिति फिर जाँचें।");
+        throw error;
+      } finally { clearTimeout(timer); }
+    }
+    function setPill(node, status, definitions) {
+      const key = String(status || "").toUpperCase();
+      const found = definitions[key] || [key || "प्रतीक्षा",""];
+      put(node,found[0]); node.dataset.tone = found[1];
+    }
+    function resultStatus(result, task) {
+      if (!result) {
+        if (["CANCELLED","INTERRUPTED","BLOCKED","DONE","PARTIAL"].includes(task.status)) return ["उपलब्ध नहीं",""];
+        return ["प्रतीक्षा",""];
+      }
+      const value = String(result.state || "").toUpperCase();
+      if (["DONE","COMPLETED","SUCCESS","RESPONSE_OK"].includes(value)) return ["जवाब मिला","good"];
+      if (["RUNNING","IN_PROGRESS","ACTIVE"].includes(value)) return ["काम जारी","active"];
+      if (["ERROR","FAILED","BLOCKED"].includes(value) || result.error) return ["जवाब में बाधा","bad"];
+      if (["CANCELLED","INTERRUPTED"].includes(value)) return ["रुका",""];
+      if (result.text) return ["Output मिला","good"];
+      return ["प्रतीक्षा",""];
+    }
+    function dateText(value,withYear) {
+      const date = new Date(value);
+      if (!value || Number.isNaN(date.getTime())) return "";
+      const options = {day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"};
+      if (withYear) options.year = "numeric";
+      return new Intl.DateTimeFormat("hi-IN",options).format(date);
+    }
+    function providerLabel(id) {
+      const providers = state.status && Array.isArray(state.status.providers) ? state.status.providers : [];
+      const provider = providers.find(function (p) { return p.id === id; });
+      return provider ? provider.label : (id || "");
+    }
+    function modelLabel(result) { return [providerLabel(result && result.provider),result && result.model].filter(Boolean).join(" · "); }
+    function updateComposer() {
+      put($("charCount"),$("promptInput").value.length.toLocaleString("en-IN") + " / 12,000");
+      $("submitButton").disabled = !state.loaded || state.submitting || !$("promptInput").value.trim();
+      put($("submitLabel"),state.submitting ? "Queue में जोड़ रहे हैं…" : "टीम शुरू करें");
+    }
+    function renderTeam() {
+      const list = roles();
+      const signature = JSON.stringify(list);
+      if (signature === state.teamSignature) return;
+      state.teamSignature = signature;
+      const fragment = document.createDocumentFragment();
+      list.forEach(function (role) {
+        if (roleId(role) === "ganesh") return;
+        const row = element("div","team-role" + (reviewer(role) ? " reviewer" : ""));
+        const avatar = element("div","avatar " + roleId(role),String(role.name || role.id || "?").charAt(0).toUpperCase());
+        avatar.setAttribute("aria-hidden","true");
+        const text = element("div");
+        text.append(element("div","team-role-name",role.name || String(role.id).toUpperCase()),element("div","team-role-subtitle",role.subtitle || ""));
+        row.append(avatar,text); fragment.appendChild(row);
+      });
+      $("teamRoles").replaceChildren(fragment);
+    }
+    function taskTitle(task) { return task.research && task.research.topic ? "NARAD · " + task.research.topic : (task.prompt || "बिना शीर्षक का काम"); }
+    function taskListRender() {
+      const signature = JSON.stringify(state.tasks.map(function (task) { return [task.id,taskTitle(task),task.status,task.createdAt]; })) + state.selectedId;
+      if (signature === state.taskListSignature) return;
+      state.taskListSignature = signature;
+      const focusedId = document.activeElement && document.activeElement.dataset ? document.activeElement.dataset.taskId : null;
+      const fragment = document.createDocumentFragment();
+      state.tasks.forEach(function (task) {
+        const item = element("li","task-item"), button = element("button","task-button");
+        button.type = "button"; button.dataset.taskId = String(task.id); button.setAttribute("aria-current",task.id === state.selectedId ? "true" : "false");
+        const top = element("div","task-item-top"), pill = element("span","status-pill");
+        setPill(pill,task.status,TASK_STATES); top.append(pill);
+        if (task.id === state.selectedId) top.append(icon("arrow"));
+        button.append(top,element("div","task-preview",taskTitle(task)),element("div","task-date",dateText(task.createdAt)));
+        button.addEventListener("click",function () { selectTask(task.id,true); });
+        item.appendChild(button); fragment.appendChild(item);
+      });
+      $("taskList").replaceChildren(fragment);
+      $("queueEmpty").hidden = state.tasks.length > 0; put($("taskCount"),state.tasks.length);
+      if (focusedId) {
+        const focusTarget = Array.from($("taskList").querySelectorAll("button")).find(function (b) { return b.dataset.taskId === focusedId; });
+        if (focusTarget) focusTarget.focus({preventScroll:true});
+      }
+    }
+    function getProgress(task) {
+      if (typeof task.progress === "number" && Number.isFinite(task.progress)) return Math.max(0,Math.min(100,Math.round(task.progress)));
+      if (task.progress && typeof task.progress.percent === "number") return Math.max(0,Math.min(100,Math.round(task.progress.percent)));
+      return null;
+    }
+    function newRoleCard(role) {
+      const details = element("details","role-output"), summary = element("summary");
+      const avatar = element("div","avatar " + roleId(role),String(role.name || role.id || "?").charAt(0).toUpperCase());
+      avatar.setAttribute("aria-hidden","true");
+      const info = element("div"), name = element("div","role-output-title",role.name || role.id), subtitle = element("div","role-output-subtitle",role.subtitle || "");
+      info.append(name,subtitle);
+      const pill = element("span","status-pill"), chevron = icon("chevron"); chevron.classList.add("chevron");
+      summary.append(avatar,info,pill,chevron);
+      const content = element("div","role-content"), model = element("p","output-model"), text = element("div","output-text"), placeholder = element("p","output-placeholder"), error = element("p","output-error"), truncated = element("p","truncated","जवाब output की तय सीमा तक मिला है।");
+      content.append(model,text,placeholder,error,truncated); details.append(summary,content);
+      const refs = {details:details,name:name,subtitle:subtitle,pill:pill,model:model,text:text,placeholder:placeholder,error:error,truncated:truncated,initialized:false,manual:false,setting:false};
+      summary.addEventListener("click",function () { refs.manual = true; });
+      return refs;
+    }
+    function renderSources(task) {
+      const sources = task.research && Array.isArray(task.research.sources) ? task.research.sources : [];
+      $("taskSources").hidden = !sources.length;
+      const signature = String(task.id) + JSON.stringify(sources);
+      if (state.sourceSignature === signature) return;
+      state.sourceSignature = signature; $("taskSourceList").replaceChildren(); $("taskSources").open = false;
+      put($("taskSourcesTitle"),"Narad के " + sources.length + " स्रोत · तारीख और links देखें");
+      sources.forEach(function (source) {
+        const item = element("li"), title = "[" + (source.id || "S") + "] " + (source.title || "स्रोत");
+        let url = null;
+        try { const parsed = new URL(source.url); if (parsed.protocol === "https:" && !parsed.username && !parsed.password) url = parsed.href; } catch (_) {}
+        const link = element(url ? "a" : "span",null,title);
+        if (url) { link.href = url; link.target = "_blank"; link.rel = "noopener noreferrer"; }
+        const published = dateText(source.publishedAt,true), retrieved = dateText(source.retrievedAt,true);
+        const kind = source.kind === "search" ? "Search snippet" : (["wikipedia","encyclopedia"].includes(source.kind) ? "Wikipedia summary" : "पृष्ठ से लिया स्रोत");
+        item.append(link,element("p","source-meta",[kind,published ? "प्रकाशित · " + published : "प्रकाशन तारीख उपलब्ध नहीं",retrieved ? "पढ़ा गया · " + retrieved : ""].filter(Boolean).join(" | ")));
+        $("taskSourceList").appendChild(item);
+      });
+    }
+    function renderDetail(task) {
+      $("emptyDetail").hidden = Boolean(task); $("taskDetail").hidden = !task;
+      if (!task) return;
+      if (state.detailId !== task.id) {
+        state.detailId = task.id; state.roleCards.clear(); $("roleResults").replaceChildren(); $("promptDetails").open = false;
+      }
+      put($("taskTitle"),taskTitle(task)); put($("fullPrompt"),task.prompt || "");
+      renderSources(task);
+      setPill($("taskStatus"),task.status,TASK_STATES);
+      put($("taskTime"),dateText(task.createdAt));
+      put($("taskShortId"),"ID · " + String(task.id).slice(-8));
+      const maxCalls = state.status && state.status.limits ? state.status.limits.maxCalls : null;
+      put($("taskCalls"),"AI calls · " + (Number.isFinite(task.requestCount) ? task.requestCount : 0) + (maxCalls ? " / " + maxCalls : ""));
+      const progress = getProgress(task);
+      put($("progressLabel"),progress === null ? "स्थिति की प्रतीक्षा" : progress + "%");
+      $("progressFill").style.width = (progress === null ? 0 : progress) + "%";
+      if (progress === null) $("taskProgress").removeAttribute("aria-valuenow"); else $("taskProgress").setAttribute("aria-valuenow",String(progress));
+      $("cancelButton").hidden = !["QUEUED","RUNNING"].includes(task.status);
+      put($("taskError"),safeMessage(task.error || "")); $("taskError").hidden = !task.error;
+      const results = Array.isArray(task.results) ? task.results : [];
+      const list = roles().filter(function (role) {
+        return !reviewer(role) && roleId(role) !== "ganesh" && results.some(function (result) { return normalized(result.role) === roleId(role) || normalized(result.name) === normalized(role.name); });
+      });
+      state.roleCards.forEach(function (refs,id) { if (!list.some(function (role) { return roleId(role) === id; })) { refs.details.remove(); state.roleCards.delete(id); } });
+      list.forEach(function (role) {
+        const id = roleId(role);
+        let refs = state.roleCards.get(id);
+        if (!refs) { refs = newRoleCard(role); state.roleCards.set(id,refs); $("roleResults").appendChild(refs.details); }
+        const result = results.find(function (r) { return normalized(r.role) === id || normalized(r.name) === normalized(role.name); });
+        const status = resultStatus(result,task);
+        put(refs.pill,status[0]); refs.pill.dataset.tone = status[1];
+        put(refs.model,modelLabel(result)); refs.model.hidden = !refs.model.textContent;
+        put(refs.text,result && result.text ? result.text : ""); refs.text.hidden = !refs.text.textContent;
+        const running = result && ["RUNNING","IN_PROGRESS","ACTIVE"].includes(String(result.state).toUpperCase());
+        put(refs.placeholder,running ? "यह भूमिका काम कर रही है…" : (["CANCELLED","INTERRUPTED","BLOCKED","DONE","PARTIAL"].includes(task.status) ? "इस भूमिका का output उपलब्ध नहीं है।" : "इस भूमिका का output यहाँ आएगा।"));
+        refs.placeholder.hidden = Boolean(refs.text.textContent) || Boolean(result && result.error);
+        put(refs.error,safeMessage(result && result.error ? result.error : "")); refs.error.hidden = !refs.error.textContent;
+        refs.truncated.hidden = !(result && result.truncated);
+        if (!refs.manual && (running || refs.text.textContent || refs.error.textContent)) refs.details.open = true;
+      });
+      const finalResult = results.find(function (result) { return normalized(result.role) === "vishnu" || normalized(result.name) === "vishnu"; });
+      const final = task.final && typeof task.final === "object" ? task.final : null;
+      const finalText = final && final.text ? final.text : "";
+      put($("finalText"),finalText); $("finalText").hidden = !finalText; $("copyFinalButton").hidden = !finalText;
+      put($("finalModel"),modelLabel(final || finalResult)); $("finalModel").hidden = !$("finalModel").textContent;
+      $("finalPlaceholder").hidden = Boolean(finalText);
+      const finalRunning = (finalResult && ["RUNNING","IN_PROGRESS","ACTIVE"].includes(String(finalResult.state).toUpperCase())) || (task.status === "RUNNING" && progress !== null && progress >= 75 && !finalText);
+      let finalState = "विशेषज्ञों के outputs की प्रतीक्षा";
+      let finalPlaceholder = "विशेषज्ञों के outputs आने पर final synthesis यहाँ दिखाई देगी।";
+      if (finalText) finalState = "अंतिम output उपलब्ध है";
+      else if (finalRunning) { finalState = "अंतिम समीक्षा जारी"; finalPlaceholder = "VISHNU विशेषज्ञों के outputs की समीक्षा कर रहा है…"; }
+      else if (["CANCELLED","INTERRUPTED","BLOCKED","DONE","PARTIAL"].includes(task.status)) { finalState = "अंतिम जवाब उपलब्ध नहीं"; finalPlaceholder = "इस काम में अंतिम synthesis नहीं मिली। उपलब्ध specialist outputs ऊपर देखें।"; }
+      put($("finalState"),finalState); put($("finalPlaceholder"),finalPlaceholder);
+      put($("finalError"),safeMessage(finalResult && finalResult.error ? finalResult.error : "")); $("finalError").hidden = !$("finalError").textContent;
+      $("finalTruncated").hidden = !(final && final.truncated);
+    }
+    function modelNames(provider) {
+      return (Array.isArray(provider.models) ? provider.models : []).map(function (model) { return typeof model === "string" ? model : (model.id || model.name || model.model || ""); }).filter(Boolean);
+    }
+    function makeField(label, type, placeholder) {
+      const wrapper = element("label","field"), title = element("span","field-label",label), input = document.createElement("input");
+      input.type = type || "text"; input.placeholder = placeholder || ""; input.autocomplete = "off"; input.spellcheck = false; input.setAttribute("autocapitalize","none");
+      wrapper.append(title,input); return {wrapper:wrapper,input:input,title:title};
+    }
+    function makeProviderCard(provider) {
+      const form = element("form","provider-card"), fields = document.createElement("fieldset");
+      form.autocomplete = "off";
+      const heading = element("div","provider-heading"), headingText = element("div"), title = element("div","provider-title",provider.label || provider.id);
+      const local = normalized(provider.id) === "ollama";
+      headingText.append(title,element("div","provider-kind",local ? "ON THIS DEVICE · LOCAL" : "YOUR ACCOUNT · CLOUD"));
+      const toggle = element("label","switch"), toggleText = element("span",null,"Enabled"), enabled = document.createElement("input");
+      enabled.type = "checkbox"; enabled.setAttribute("aria-label",(provider.label || provider.id) + " enabled");
+      toggle.append(toggleText,enabled,element("span","switch-track")); heading.append(headingText,toggle);
+      const statusRow = element("div","provider-status"), status = element("span","status-pill"), reason = element("p","provider-reason");
+      statusRow.appendChild(status);
+      const model = makeField("Model","text","Model का नाम");
+      const options = element("div","model-options"); model.wrapper.appendChild(options);
+      const endpoint = makeField("API endpoint","url",local ? "http://127.0.0.1:11434" : "Provider का API endpoint");
+      endpoint.input.required = false;
+      const key = makeField("API key","password","अपनी API key डालें");
+      const keyHint = element("span","field-hint"); key.wrapper.appendChild(keyHint);
+      if (local) key.wrapper.hidden = true;
+      fields.append(heading,statusRow,reason,model.wrapper,endpoint.wrapper,key.wrapper);
+      const actions = element("div","provider-actions"), note = element("p","provider-save-note"), save = element("button","btn small primary","बदलाव सहेजें");
+      save.type = "submit"; actions.append(note,save); fields.appendChild(actions);
+      let start = null;
+      if (local) {
+        const localTools = element("div","local-tools"); start = element("button","btn small ghost"); start.type = "button"; start.append(icon("play"),document.createTextNode("Ollama शुरू करें"));
+        localTools.append(start,element("p",null,"पहले से installed Ollama को चालू करें। उपलब्ध model connection जाँचने पर दिखेगा।")); fields.appendChild(localTools);
+        start.addEventListener("click",startLocal);
+      }
+      form.appendChild(fields);
+      const refs = {form:form,fields:fields,title:title,enabled:enabled,status:status,reason:reason,model:model.input,endpoint:endpoint.input,key:key.input,keyHint:keyHint,options:options,save:save,note:note,start:start,dirty:false,saving:false,modelsSignature:"",provider:provider};
+      form.addEventListener("input",function () { refs.dirty = true; put(note,"बदलाव सहेजना बाकी है"); });
+      form.addEventListener("change",function () { refs.dirty = true; put(note,"बदलाव सहेजना बाकी है"); });
+      form.addEventListener("submit",function (event) { event.preventDefault(); saveProvider(refs); });
+      return refs;
+    }
+    function renderProviders() {
+      const providers = state.status && Array.isArray(state.status.providers) ? state.status.providers : [];
+      const available = providers.filter(function (p) { return p.enabled && ["AVAILABLE","RESPONSE_OK"].includes(p.state); }).length;
+      const connected = providers.filter(function (p) { return p.enabled && ["AVAILABLE","RESPONSE_OK","CONFIGURED_UNTESTED"].includes(p.state); }).length;
+      put($("connectionButtonLabel"),available ? available + " उपलब्ध" : (connected ? connected + " जोड़े" : "AI जोड़ें"));
+      put($("providersSummary"),available + " उपलब्ध · " + providers.filter(function (p) { return p.enabled; }).length + " enabled");
+      $("onboarding").hidden = !state.loaded || connected > 0;
+      providers.forEach(function (provider) {
+        let refs = state.providerCards.get(provider.id);
+        if (!refs) { refs = makeProviderCard(provider); state.providerCards.set(provider.id,refs); $("providerList").appendChild(refs.form); }
+        refs.provider = provider; put(refs.title,provider.label || provider.id); setPill(refs.status,provider.state,PROVIDER_STATES);
+        let reason = provider.reason || "";
+        if (!reason && provider.state === "MODEL_REQUIRED") reason = "उपलब्ध local model चुनें, या cloud connection जोड़ें।";
+        if (!reason && provider.state === "CONFIGURED_UNTESTED") reason = "Configuration जुड़ गई है। सफल model response अभी नहीं मिला है।";
+        put(refs.reason,safeMessage(reason)); refs.reason.hidden = !reason;
+        put(refs.keyHint,provider.keyPresent ? "Key device पर सहेजी गई है। बदलने के लिए नई key डालें।" : "अपनी key यहाँ डालें। इसे browser storage में नहीं रखा जाता।");
+        if (!refs.dirty && !refs.saving) { refs.enabled.checked = Boolean(provider.enabled); refs.model.value = provider.model || ""; refs.endpoint.value = provider.endpoint || ""; }
+        const names = modelNames(provider), signature = JSON.stringify(names);
+        if (signature !== refs.modelsSignature) {
+          refs.modelsSignature = signature; refs.options.replaceChildren();
+          names.slice(0,12).forEach(function (name) {
+            const choice = element("button","model-chip",name); choice.type = "button";
+            choice.addEventListener("click",function () { refs.model.value = name; refs.dirty = true; put(refs.note,"बदलाव सहेजना बाकी है"); });
+            refs.options.appendChild(choice);
+          });
+        }
+        if (refs.start) { refs.start.disabled = state.localBusy || refs.saving; refs.start.hidden = ["AVAILABLE","RESPONSE_OK"].includes(provider.state); }
+      });
+      state.providerCards.forEach(function (refs,id) { if (!providers.some(function (p) { return p.id === id; }) && !refs.dirty && !refs.saving) { refs.form.remove(); state.providerCards.delete(id); } });
+    }
+    function renderNarad() {
+      const narad = state.status && state.status.narad;
+      $("naradSection").hidden = !narad;
+      if (!narad) return;
+      const available = (state.status.providers || []).some(function (p) { return p.enabled && ["AVAILABLE","RESPONSE_OK","CONFIGURED_UNTESTED"].includes(p.state); });
+      const latest = narad.latest, worker = state.status.worker || {};
+      const researchQueued = latest && ["QUEUED","RUNNING"].includes(latest.state);
+      let label = narad.enabled ? "Automatic चालू" : "Automatic बंद", tone = narad.enabled ? "good" : "";
+      if (narad.running) { label = "स्रोत खोज रहे हैं"; tone = "active"; }
+      else if (researchQueued) { label = latest.state === "QUEUED" ? "टीम की queue में" : "टीम काम कर रही है"; tone = "active"; }
+      else if (worker.paused && narad.enabled) { label = "Queue के साथ रुका"; tone = "active"; }
+      else if (narad.lastError) { label = "स्थिति जाँचें"; tone = "bad"; }
+      else if (narad.enabled && !available) { label = "AI की प्रतीक्षा"; tone = "blue"; }
+      put($("naradStatus"),label); $("naradStatus").dataset.tone = tone;
+      const sourceCount = Array.isArray(narad.sourceUrls) ? narad.sourceUrls.length : 0;
+      put($("naradScope"),(narad.searchMode === "brave" ? "Brave web search" : "Wikipedia खोज") + (sourceCount ? " + " + sourceCount + " चुने URLs" : ""));
+      put($("naradNextRun"),narad.enabled ? (worker.paused ? "Queue फिर चलने पर" : (dateText(narad.nextRunAt) || "AI उपलब्ध होने पर")) : "Automatic cycle बंद है");
+      put($("naradMemory"),Number.isFinite(narad.memoryCount) ? narad.memoryCount.toLocaleString("en-IN") : "0");
+      $("naradLatest").hidden = !latest;
+      if (latest) {
+        const parts = [latest.topic || "पिछला research"];
+        if (Number.isFinite(latest.sourceCount)) parts.push(latest.sourceCount + " स्रोत");
+        if (latest.state) parts.push((TASK_STATES[String(latest.state).toUpperCase()] || [String(latest.state)])[0]);
+        put($("naradLatestText"),parts.join(" · ")); $("naradTaskButton").hidden = !latest.taskId;
+      }
+      put($("naradError"),safeMessage(narad.lastError || "")); $("naradError").hidden = !narad.lastError;
+      $("naradRunButton").disabled = state.naradRunBusy || Boolean(narad.running) || Boolean(researchQueued) || Boolean(worker.paused) || Boolean(worker.activeTaskId);
+      $("naradRunButton").title = worker.paused ? "पहले Queue फिर चलाएँ" : (worker.activeTaskId ? "चलता काम पूरा होने पर नया research शुरू करें" : "अभी शोध करें");
+      put($("naradRunLabel"),state.naradRunBusy || narad.running ? "स्रोत खोज रहे हैं…" : (researchQueued ? "टीम का काम जारी" : "अभी शोध करें"));
+      const notion = narad.notion || {};
+      const notionDefinitions = Object.assign({},PROVIDER_STATES,{
+        NOT_CONFIGURED:["अभी नहीं जुड़ा",""],CONFIGURED:["जोड़ा गया","blue"],CONNECTED:["Connected","good"],
+        PAGE_REQUIRED:["Page ID चाहिए","active"],READY:["तैयार","good"],READ_OK:["Page पढ़ा जा सका","good"],WRITE_OK:["Update लिखी गई","good"],OK:["Connection सही","good"]
+      });
+      setPill($("notionStatus"),notion.state || "NOT_CONFIGURED",notionDefinitions);
+      put($("notionReason"),safeMessage(notion.reason || ""));
+      put($("naradBraveHint"),narad.braveKeyPresent ? "Brave key device पर सहेजी गई है।" : "व्यापक web search के लिए अपनी Brave Search key जोड़ें।");
+      put($("naradNotionHint"),notion.keyPresent ? "Notion key device पर सहेजी गई है।" : "Notion connection अभी key माँगता है।");
+      if (!state.naradDirty && !state.naradSaving) {
+        $("naradEnabled").checked = Boolean(narad.enabled);
+        $("naradTopics").value = (Array.isArray(narad.topics) ? narad.topics : []).join("\n");
+        $("naradUrls").value = (Array.isArray(narad.sourceUrls) ? narad.sourceUrls : []).join("\n");
+        $("naradNotionPage").value = notion.parentPageId || "";
+        $("naradNotionAuto").checked = Boolean(notion.autoPublish);
+      }
+      $("notionTestButton").disabled = state.notionTestBusy || state.naradSaving;
+    }
+    function renderStatus() {
+      const data = state.status;
+      if (!data) return;
+      renderTeam(); renderProviders(); renderNarad();
+      const worker = data.worker || {};
+      $("workerButton").disabled = state.workerBusy;
+      const pauseLabel = worker.paused ? "Queue फिर चलाएँ" : "अगले काम रोकें";
+      put($("workerButtonLabel"),pauseLabel); $("workerButton").setAttribute("aria-label",pauseLabel); $("workerButton").title = pauseLabel;
+      $("workerButton").querySelector("use").setAttribute("href",worker.paused ? "#i-play" : "#i-pause");
+      put($("workerSummary"),state.online ? (worker.paused ? "Queue रुकी है" : (worker.activeTaskId ? "टीम काम कर रही है" : "Auto queue चालू है")) : "Local server से संपर्क रुका");
+      $("serverDot").className = "dot " + (state.online ? (worker.paused ? "warn" : "green") : "danger");
+      const limits = data.limits || {}, lines = [];
+      if (limits.maxCalls !== undefined) lines.push(limits.maxCalls + " calls / काम");
+      if (limits.maxOutputTokens !== undefined) lines.push(limits.maxOutputTokens + " output tokens / call");
+      if (limits.concurrency !== undefined) lines.push(limits.concurrency + " parallel roles तक");
+      put($("limitsSummary"),lines.join(" · ") || "काम की सीमाएँ उपलब्ध नहीं");
+      put($("versionLabel"),"KIDO" + (data.version ? " · v" + data.version : "") + " · LOCAL TEAM");
+      taskListRender(); renderDetail(state.selectedTask); updateComposer();
+    }
+    function loadStatus(options) {
+      if (state.statusPromise) return state.statusPromise;
+      state.statusPromise = fetchStatus(options).finally(function () { state.statusPromise = null; });
+      return state.statusPromise;
+    }
+    async function freshStatus() {
+      if (state.statusPromise) await state.statusPromise;
+      return loadStatus({quiet:true});
+    }
+    async function fetchStatus(options) {
+      options = options || {};
+      if (state.statusBusy) return;
+      state.statusBusy = true;
+      try {
+        const data = await api("/api/status",{timeout:12000});
+        state.status = data; state.loaded = true; state.online = true;
+        state.tasks = (Array.isArray(data.tasks) ? data.tasks : []).slice().sort(function (a,b) { return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(); });
+        if (!state.selectedId && state.tasks.length) state.selectedId = data.worker && data.worker.activeTaskId ? data.worker.activeTaskId : state.tasks[0].id;
+        const selected = state.tasks.find(function (task) { return task.id === state.selectedId; });
+        if (selected) state.selectedTask = selected;
+        $("connectionNotice").hidden = true;
+        put($("lastUpdated"),"अंतिम अपडेट · " + new Intl.DateTimeFormat("hi-IN",{hour:"2-digit",minute:"2-digit",second:"2-digit"}).format(new Date()));
+        renderStatus();
+      } catch (error) {
+        state.online = false; $("serverDot").className = "dot danger"; put($("workerSummary"),"Local server से संपर्क रुका");
+        put($("connectionNoticeText"),"Termux में KIDO server चालू रखें। " + safeMessage(error.message || "Dashboard की स्थिति नहीं मिल सकी।")); $("connectionNotice").hidden = false;
+        if (!options.quiet) updateComposer();
+      } finally { state.statusBusy = false; }
+    }
+    async function selectTask(id, scroll) {
+      state.selectedId = id; state.selectedTask = state.tasks.find(function (task) { return task.id === id; }) || null;
+      taskListRender(); renderDetail(state.selectedTask);
+      if (scroll && window.matchMedia("(max-width:740px)").matches) $("detailPanel").scrollIntoView({behavior:"smooth",block:"start"});
+      try {
+        const task = await api("/api/tasks/" + encodeURIComponent(id));
+        if (state.selectedId === id) { state.selectedTask = task; renderDetail(task); }
+      } catch (error) { if (state.selectedId === id) toast(error.message,"bad"); }
+    }
+    async function submitTask(event) {
+      event.preventDefault();
+      const prompt = $("promptInput").value.trim();
+      if (!prompt || state.submitting) return;
+      if (prompt.length > 12000) { toast("निर्देश 12,000 characters तक रखें।","bad"); return; }
+      state.submitting = true; updateComposer();
+      try {
+        const response = await api("/api/tasks",{method:"POST",body:{prompt:prompt}});
+        const task = response.task || response;
+        if (task.id) { state.selectedId = task.id; state.selectedTask = task; state.tasks = [task].concat(state.tasks.filter(function (item) { return item.id !== task.id; })); taskListRender(); renderDetail(task); }
+        $("promptInput").value = "";
+        toast(state.status && state.status.worker && state.status.worker.paused ? "काम queue में जुड़ गया। आगे बढ़ाने के लिए Queue फिर चलाएँ।" : "काम queue में जुड़ गया।");
+        await freshStatus();
+        if (task.id) await selectTask(task.id,false);
+        $("detailPanel").scrollIntoView({behavior:"smooth",block:"start"});
+      } catch (error) { toast(error.message,"bad"); }
+      finally { state.submitting = false; updateComposer(); }
+    }
+    function openConnections() { if (!$("connectionsDialog").open) $("connectionsDialog").showModal(); }
+    async function saveProvider(refs) {
+      if (refs.saving) return;
+      const body = {id:refs.provider.id,enabled:refs.enabled.checked,model:refs.model.value.trim(),endpoint:refs.endpoint.value.trim()};
+      if (refs.key.value.trim()) body.key = refs.key.value.trim();
+      refs.saving = true; refs.fields.disabled = true; put(refs.note,"सहेज रहे हैं…");
+      try {
+        await api("/api/providers",{method:"POST",body:body});
+        refs.key.value = ""; refs.dirty = false; put(refs.note,"Configuration सहेजी गई"); toast((refs.provider.label || refs.provider.id) + " की configuration सहेजी गई।");
+        await freshStatus();
+      } catch (error) { put(refs.note,safeMessage(error.message)); toast(error.message,"bad"); }
+      finally { refs.key.value = ""; if (body.key) body.key = ""; refs.saving = false; refs.fields.disabled = false; renderProviders(); }
+    }
+    async function refreshProviders() {
+      if (state.refreshBusy) return;
+      state.refreshBusy = true; $("refreshProvidersButton").disabled = true; $("refreshIcon").classList.add("spin"); put($("refreshProvidersLabel"),"जाँच रहे हैं…");
+      try { await api("/api/refresh",{method:"POST",body:{},timeout:60000}); await freshStatus(); toast("Connections की स्थिति अपडेट की गई।"); }
+      catch (error) { toast(error.message,"bad"); }
+      finally { state.refreshBusy = false; $("refreshProvidersButton").disabled = false; $("refreshIcon").classList.remove("spin"); put($("refreshProvidersLabel"),"Connections जाँचें"); }
+    }
+    async function startLocal() {
+      if (state.localBusy) return;
+      state.localBusy = true; renderProviders();
+      try {
+        const response = await api("/api/local/start",{method:"POST",body:{},timeout:30000});
+        await freshStatus();
+        const outcome = response.local || {};
+        const messages = {
+          OLLAMA_NOT_INSTALLED:"इस device पर Ollama command नहीं मिली। Cloud connection जोड़ें, या अपना local Ollama setup पूरा करें।",
+          OLLAMA_START_FAILED:"Ollama शुरू नहीं हो सका। Local setup की स्थिति जाँचें।",
+          CUSTOM_LOCAL_ENDPOINT:"यह button standard local Ollama endpoint शुरू करता है। अपने configured server को चलाकर Connections जाँचें।",
+          DISABLED:"Ollama connection को Enabled करके बदलाव सहेजें।",
+          MODEL_REQUIRED:"Ollama में उपलब्ध model चुनें और बदलाव सहेजें।",
+          OFFLINE:"Ollama अभी Offline है। कुछ क्षण बाद Connections फिर जाँचें।",
+          AVAILABLE:"Ollama उपलब्ध है। उसका model connection में दिखेगा।",
+          RESPONSE_OK:"Ollama उपलब्ध है और इस session में जवाब दे चुका है।"
+        };
+        toast(messages[outcome.state] || ("Ollama की स्थिति: " + (outcome.state || "Connections जाँचें")),["OLLAMA_NOT_INSTALLED","OLLAMA_START_FAILED"].includes(outcome.state) ? "bad" : "");
+      }
+      catch (error) { toast(error.message,"bad"); }
+      finally { state.localBusy = false; renderProviders(); }
+    }
+    async function toggleWorker() {
+      if (!state.status || state.workerBusy) return;
+      state.workerBusy = true; $("workerButton").disabled = true;
+      const paused = !(state.status.worker && state.status.worker.paused);
+      try { await api("/api/worker",{method:"POST",body:{paused:paused}}); await freshStatus(); toast(paused ? "अगले काम queue में रुकेंगे। चल रहा काम जारी रहेगा।" : "Auto queue फिर चालू है।"); }
+      catch (error) { toast(error.message,"bad"); }
+      finally { state.workerBusy = false; renderStatus(); }
+    }
+    async function cancelTask() {
+      if (!state.selectedId) return;
+      const id = state.selectedId; $("cancelButton").disabled = true;
+      try { await api("/api/tasks/" + encodeURIComponent(id) + "/cancel",{method:"POST",body:{}}); await freshStatus(); if (state.selectedId === id) await selectTask(id,false); toast("काम रोकने की request भेज दी गई।"); }
+      catch (error) { toast(error.message,"bad"); }
+      finally { $("cancelButton").disabled = false; }
+    }
+    async function exportTask() {
+      if (!state.selectedId) return;
+      const id = state.selectedId; $("exportButton").disabled = true;
+      try {
+        const blob = await api("/api/tasks/" + encodeURIComponent(id) + "/export",{blob:true});
+        const url = URL.createObjectURL(blob), link = document.createElement("a");
+        link.href = url; link.download = "KIDO-" + String(id).replace(/[^a-zA-Z0-9_-]/g,"").slice(0,80) + ".txt";
+        document.body.appendChild(link); link.click(); link.remove(); setTimeout(function () { URL.revokeObjectURL(url); },1500);
+        toast("TXT download शुरू हो गया।");
+      } catch (error) { toast(error.message,"bad"); }
+      finally { $("exportButton").disabled = false; }
+    }
+    async function copyFinal() {
+      const text = $("finalText").textContent;
+      if (!text) return;
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) await navigator.clipboard.writeText(text);
+        else {
+          const input = document.createElement("textarea"); input.value = text; input.style.position = "fixed"; input.style.opacity = "0";
+          document.body.appendChild(input); input.select(); const copied = document.execCommand("copy"); input.remove(); if (!copied) throw new Error("COPY_UNAVAILABLE");
+        }
+        toast("अंतिम जवाब copy हो गया।");
+      } catch (_) { toast("Copy नहीं हो सका। जवाब का text चुनकर copy करें।","bad"); }
+    }
+    function lines(value) { return Array.from(new Set(value.split(/\r?\n/).map(function (line) { return line.trim(); }).filter(Boolean))); }
+    async function saveNarad(event) {
+      event.preventDefault(); if (state.naradSaving) return;
+      const urls = lines($("naradUrls").value), topics = lines($("naradTopics").value);
+      if (!topics.length || topics.length > 10 || topics.some(function (topic) { return topic.length > 180; })) { toast("1 से 10 विषय लिखें; हर विषय 180 characters तक रखें।","bad"); return; }
+      if (urls.length > 3) { toast("अधिकतम 3 source URLs जोड़ें।","bad"); return; }
+      for (const value of urls) {
+        try { const parsed = new URL(value); if (value.length > 1500 || parsed.protocol !== "https:" || parsed.username || parsed.password || (parsed.port && parsed.port !== "443")) throw new Error("URL"); }
+        catch (_) { toast("Source के लिए public https:// URL दें; URL में password या custom port न जोड़ें।","bad"); return; }
+      }
+      const body = {enabled:$("naradEnabled").checked,topics:topics,sourceUrls:urls,notionPageId:$("naradNotionPage").value.trim(),notionAutoPublish:$("naradNotionAuto").checked};
+      if ($("naradBraveKey").value.trim()) body.braveKey = $("naradBraveKey").value.trim();
+      if ($("naradNotionKey").value.trim()) body.notionKey = $("naradNotionKey").value.trim();
+      state.naradSaving = true; $("naradFields").disabled = true; put($("naradSaveNote"),"Settings सहेज रहे हैं…");
+      try {
+        await api("/api/narad/settings",{method:"POST",body:body});
+        $("naradBraveKey").value = ""; $("naradNotionKey").value = ""; state.naradDirty = false;
+        put($("naradSaveNote"),"Settings सहेजी गईं"); toast("Narad की research settings सहेजी गईं।"); await freshStatus();
+      } catch (error) { put($("naradSaveNote"),safeMessage(error.message)); toast(error.message,"bad"); }
+      finally { $("naradBraveKey").value = ""; $("naradNotionKey").value = ""; body.braveKey = ""; body.notionKey = ""; state.naradSaving = false; $("naradFields").disabled = false; renderNarad(); }
+    }
+    async function runNarad() {
+      if (state.naradRunBusy) return;
+      state.naradRunBusy = true; renderNarad();
+      try {
+        const response = await api("/api/narad/run",{method:"POST",body:{},timeout:90000});
+        await freshStatus();
+        const id = response.taskId || (response.task && response.task.id);
+        if (id) { await selectTask(id,false); $("detailPanel").scrollIntoView({behavior:"smooth",block:"start"}); toast("Narad का research टीम की queue में जुड़ गया।"); }
+        else toast(response.message || "Research request पूरी हुई। Narad की स्थिति देखें।");
+      } catch (error) { toast(error.message,"bad"); }
+      finally { state.naradRunBusy = false; renderNarad(); }
+    }
+    async function testNotion() {
+      if (state.notionTestBusy) return;
+      if (state.naradDirty) { toast("Connection जाँचने से पहले अपने बदलाव सहेजें।"); return; }
+      state.notionTestBusy = true; renderNarad();
+      try { await api("/api/narad/notion-test",{method:"POST",body:{}}); await freshStatus(); toast("Notion connection जाँचा गया। नीचे उसकी स्थिति देखें।"); }
+      catch (error) { toast(error.message,"bad"); }
+      finally { state.notionTestBusy = false; renderNarad(); }
+    }
+    $("taskForm").addEventListener("submit",submitTask);
+    $("promptInput").addEventListener("input",updateComposer);
+    $("promptInput").addEventListener("keydown",function (event) { if ((event.ctrlKey || event.metaKey) && event.key === "Enter") { event.preventDefault(); if (!$("submitButton").disabled) $("taskForm").requestSubmit(); } });
+    document.querySelectorAll("[data-template]").forEach(function (button) { button.addEventListener("click",function () { if (!$("promptInput").value.trim()) $("promptInput").value = button.dataset.template; $("promptInput").focus(); updateComposer(); }); });
+    $("connectionsButton").addEventListener("click",openConnections); $("onboardingButton").addEventListener("click",openConnections);
+    $("closeConnectionsButton").addEventListener("click",function () { $("connectionsDialog").close(); });
+    $("connectionsDialog").addEventListener("click",function (event) { if (event.target === $("connectionsDialog")) { const box = $("connectionsDialog").getBoundingClientRect(); if (event.clientX < box.left || event.clientX > box.right || event.clientY < box.top || event.clientY > box.bottom) $("connectionsDialog").close(); } });
+    $("connectionsDialog").addEventListener("close",function () { state.providerCards.forEach(function (refs) { refs.key.value = ""; }); });
+    $("retryStatusButton").addEventListener("click",function () { loadStatus(); }); $("refreshProvidersButton").addEventListener("click",refreshProviders);
+    $("workerButton").addEventListener("click",toggleWorker); $("cancelButton").addEventListener("click",cancelTask); $("exportButton").addEventListener("click",exportTask); $("copyFinalButton").addEventListener("click",copyFinal);
+    $("reuseButton").addEventListener("click",function () { if (!state.selectedTask) return; $("promptInput").value = state.selectedTask.prompt || ""; updateComposer(); $("composerTitle").scrollIntoView({behavior:"smooth",block:"start"}); $("promptInput").focus({preventScroll:true}); });
+    $("naradSettingsButton").addEventListener("click",function () { if (!$("naradDialog").open) $("naradDialog").showModal(); });
+    $("closeNaradButton").addEventListener("click",function () { $("naradDialog").close(); });
+    $("naradDialog").addEventListener("close",function () { $("naradBraveKey").value = ""; $("naradNotionKey").value = ""; });
+    $("naradForm").addEventListener("input",function () { state.naradDirty = true; put($("naradSaveNote"),"बदलाव सहेजना बाकी है"); });
+    $("naradForm").addEventListener("change",function () { state.naradDirty = true; put($("naradSaveNote"),"बदलाव सहेजना बाकी है"); });
+    $("naradForm").addEventListener("submit",saveNarad); $("naradRunButton").addEventListener("click",runNarad); $("notionTestButton").addEventListener("click",testNotion);
+    $("naradTaskButton").addEventListener("click",function () { const latest = state.status && state.status.narad && state.status.narad.latest; if (latest && latest.taskId) { selectTask(latest.taskId,true); if (!window.matchMedia("(max-width:740px)").matches) $("detailPanel").scrollIntoView({behavior:"smooth",block:"start"}); } });
+    document.addEventListener("visibilitychange",function () { if (!document.hidden) loadStatus({quiet:true}); });
+    renderTeam(); updateComposer(); loadStatus();
+    setInterval(function () { if (!document.hidden) loadStatus({quiet:true}); },3000);
+  }());
+  </script>
+</body>
+</html>
