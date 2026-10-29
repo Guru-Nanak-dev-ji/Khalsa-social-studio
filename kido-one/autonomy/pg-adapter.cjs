@@ -19,7 +19,12 @@ async function appendCommandEvent(pool,{projectId,eventId,idempotencyKey,command
   if(old){await c.query('COMMIT');begun=false;return {status:'ALREADY_RECORDED',...old};}
   const existing=(await c.query("SELECT payload->'command' AS command FROM kido_events WHERE project_id=$1 AND event_type='COMMAND_RECEIVED'",[projectId])).rows;
   if(existing.some(r=>r.command?.id===command.id))throw Error('DUPLICATE_COMMAND_ID');
-  if(existing.some(r=>r.command?.scope===command.scope&&r.command?.exact_text!==command.exact_text)&&!(command.conflict_id && command.approval_evidence))throw Error('POTENTIAL_CONFLICT_REQUIRES_ID');
+  const conflict=existing.some(r=>r.command?.scope===command.scope&&r.command?.exact_text!==command.exact_text);
+  if(conflict){
+   if(!command.conflict_id||!command.approval_evidence)throw Error('POTENTIAL_CONFLICT_REQUIRES_ID');
+   const grant=(await c.query("UPDATE kido_approval_grants SET consumed_at=clock_timestamp(),consumed_event_id=$5 WHERE project_id=$1 AND approval_ref=$2 AND command_id=$3 AND scope=$4 AND verified_human=true AND consumed_at IS NULL AND revoked_at IS NULL AND expires_at>clock_timestamp() RETURNING approval_ref",[projectId,command.approval_evidence,command.id,command.scope,eventId])).rows[0];
+   if(!grant)throw Error('TRUSTED_APPROVAL_REQUIRED');
+  }
   const seq=Number(stream.last_seq)+1,previousHash=stream.last_hash;
   if(!Number.isSafeInteger(seq))throw Error('SEQUENCE_OVERFLOW');
   const payload={command};const eventHash=sha(stable({projectId,seq,eventId,idempotencyKey,previousHash,payload,policyVersion}));
