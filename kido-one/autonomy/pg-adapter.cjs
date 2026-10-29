@@ -19,7 +19,7 @@ async function appendCommandEvent(pool,{projectId,eventId,idempotencyKey,command
   if(old){await c.query('COMMIT');begun=false;return {status:'ALREADY_RECORDED',...old};}
   const existing=(await c.query("SELECT payload->'command' AS command FROM kido_events WHERE project_id=$1 AND event_type='COMMAND_RECEIVED'",[projectId])).rows;
   if(existing.some(r=>r.command?.id===command.id))throw Error('DUPLICATE_COMMAND_ID');
-  if(existing.some(r=>r.command?.scope===command.scope&&r.command?.exact_text!==command.exact_text)&&!command.conflict_id)throw Error('POTENTIAL_CONFLICT_REQUIRES_ID');
+  if(existing.some(r=>r.command?.scope===command.scope&&r.command?.exact_text!==command.exact_text)&&!(command.conflict_id && command.approval_evidence))throw Error('POTENTIAL_CONFLICT_REQUIRES_ID');
   const seq=Number(stream.last_seq)+1,previousHash=stream.last_hash;
   if(!Number.isSafeInteger(seq))throw Error('SEQUENCE_OVERFLOW');
   const payload={command};const eventHash=sha(stable({projectId,seq,eventId,idempotencyKey,previousHash,payload,policyVersion}));
