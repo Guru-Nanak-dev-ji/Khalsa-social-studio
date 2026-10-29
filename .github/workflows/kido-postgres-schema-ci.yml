@@ -62,3 +62,5 @@ jobs:
         run: bash kido-one/autonomy/sql-tests/run_concurrent_claim.sh
       - name: Verify retry and stale lease fencing on PostgreSQL
         run: psql -v ON_ERROR_STOP=1 -f kido-one/autonomy/sql-tests/retry_recovery.sql
+      - name: Verify pause and claim transaction ordering
+        run: bash kido-one/autonomy/sql-tests/run_pause_claim_race.sh
