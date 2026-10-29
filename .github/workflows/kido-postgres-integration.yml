@@ -1,0 +1,46 @@
+name: KIDO PostgreSQL Integration (Manual)
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  postgres-integration:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: kido_test
+          POSTGRES_PASSWORD: local_ci_only
+          POSTGRES_DB: kido_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U kido_test -d kido_test"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      PGHOST: localhost
+      PGPORT: "5432"
+      PGUSER: kido_test
+      PGPASSWORD: local_ci_only
+      PGDATABASE: kido_test
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install PostgreSQL client
+        run: sudo apt-get update && sudo apt-get install -y postgresql-client
+      - name: Apply migrations
+        run: |
+          psql -v ON_ERROR_STOP=1 -f kido-one/autonomy/sql/001_event_store.sql
+          psql -v ON_ERROR_STOP=1 -f kido-one/autonomy/sql/002_approval_grants.sql
+          psql -v ON_ERROR_STOP=1 -f kido-one/autonomy/sql/003_worker_queue.sql
+          psql -v ON_ERROR_STOP=1 -f kido-one/autonomy/sql/004_worker_fencing.sql
+      - name: Verify tables and default-deny worker
+        run: |
+          psql -v ON_ERROR_STOP=1 -c "INSERT INTO kido_worker_control(project_id) VALUES ('CI_TEST');"
+          test "$(psql -At -c "SELECT paused FROM kido_worker_control WHERE project_id='CI_TEST'")" = t
+          psql -v ON_ERROR_STOP=1 -c "INSERT INTO kido_event_streams(project_id) VALUES ('CI_TEST');"
+          test "$(psql -At -c "SELECT count(*) FROM kido_events WHERE project_id='CI_TEST'")" = 0
+      - name: No live execution
+        run: echo "Schema smoke test only. No external AI, publishing, or production database."
