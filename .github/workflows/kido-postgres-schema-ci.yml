@@ -1,0 +1,57 @@
+name: KIDO PostgreSQL Schema CI
+on:
+  pull_request:
+    paths:
+      - 'kido-one/autonomy/sql/**'
+      - '.github/workflows/kido-postgres-schema-ci.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  postgres-schema:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: kido_test
+          POSTGRES_PASSWORD: ci_ephemeral_only
+          POSTGRES_DB: kido_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U kido_test -d kido_test"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      PGHOST: localhost
+      PGPORT: "5432"
+      PGUSER: kido_test
+      PGPASSWORD: ci_ephemeral_only
+      PGDATABASE: kido_test
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install PostgreSQL client
+        run: sudo apt-get update && sudo apt-get install -y postgresql-client
+      - name: Apply all migrations
+        run: |
+          set -eu
+          for migration in kido-one/autonomy/sql/[0-9]*.sql; do
+            psql -v ON_ERROR_STOP=1 -f "$migration"
+          done
+      - name: Verify default pause and fencing column
+        run: |
+          set -eu
+          psql -v ON_ERROR_STOP=1 -c "INSERT INTO kido_worker_control(project_id) VALUES ('CI_TEST')"
+          test "$(psql -At -c "SELECT paused FROM kido_worker_control WHERE project_id='CI_TEST'")" = t
+          test "$(psql -At -c "SELECT count(*) FROM information_schema.columns WHERE table_name='kido_tasks' AND column_name='lease_token'")" = 1
+      - name: Verify event immutability
+        run: |
+          set -eu
+          psql -v ON_ERROR_STOP=1 -c "INSERT INTO kido_event_streams(project_id) VALUES ('CI_TEST')"
+          psql -v ON_ERROR_STOP=1 -c "INSERT INTO kido_events(project_id,seq,event_id,idempotency_key,event_type,actor_id,actor_kind,source_uri,policy_version,payload,previous_hash,event_hash) VALUES('CI_TEST',1,'E1','K1','COMMAND_RECEIVED','TEST','SERVICE','ci','test','{}','GENESIS','HASH')"
+          if psql -v ON_ERROR_STOP=1 -c "DELETE FROM kido_events WHERE project_id='CI_TEST'" > /tmp/kido-delete.log 2>&1; then
+            echo "ERROR: append-only trigger failed"; exit 1
+          fi
+          grep -q KIDO_EVENT_APPEND_ONLY /tmp/kido-delete.log
