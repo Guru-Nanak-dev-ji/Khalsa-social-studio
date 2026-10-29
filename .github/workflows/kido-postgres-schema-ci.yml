@@ -58,3 +58,5 @@ jobs:
           grep -q KIDO_EVENT_APPEND_ONLY /tmp/kido-delete.log
       - name: Verify role boundaries
         run: psql -v ON_ERROR_STOP=1 -f kido-one/autonomy/sql-tests/role_grants.sql
+      - name: Verify concurrent row claim with two database sessions
+        run: bash kido-one/autonomy/sql-tests/run_concurrent_claim.sh
