@@ -4,6 +4,7 @@ on:
     paths:
       - 'kido-one/autonomy/sql/**'
       - '.github/workflows/kido-postgres-schema-ci.yml'
+      - 'kido-one/autonomy/sql-tests/**'
   workflow_dispatch:
 permissions:
   contents: read
@@ -55,3 +56,5 @@ jobs:
             echo "ERROR: append-only trigger failed"; exit 1
           fi
           grep -q KIDO_EVENT_APPEND_ONLY /tmp/kido-delete.log
+      - name: Verify role boundaries
+        run: psql -v ON_ERROR_STOP=1 -f kido-one/autonomy/sql-tests/role_grants.sql
