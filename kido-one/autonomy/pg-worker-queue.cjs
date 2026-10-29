@@ -21,9 +21,20 @@ async function claimTask(pool,{projectId,workerId,leaseSeconds=30}){
   const r=await c.query("SELECT * FROM kido_tasks WHERE project_id=$1 AND run_at<=clock_timestamp() AND (status='QUEUED' OR (status='LEASED' AND lease_until<=clock_timestamp())) AND attempts<max_attempts ORDER BY run_at,task_id FOR UPDATE SKIP LOCKED LIMIT 1",[projectId]);
   if(!r.rows.length){await c.query('COMMIT');tx=false;return null;}
   const task=r.rows[0];
-  await c.query("UPDATE kido_tasks SET status='LEASED',attempts=attempts+1,lease_owner=$3,lease_until=clock_timestamp()+($4::int * interval '1 second'),updated_at=clock_timestamp() WHERE project_id=$1 AND task_id=$2",[projectId,task.task_id,workerId,leaseSeconds]);
-  await c.query('COMMIT');tx=false;return {taskId:task.task_id,kind:task.kind,payload:task.payload,leaseOwner:workerId};
+  await c.query("UPDATE kido_tasks SET status='LEASED',attempts=attempts+1,lease_owner=$3,lease_until=clock_timestamp()+($4::int * interval '1 second'),lease_token=lease_token+1,updated_at=clock_timestamp() WHERE project_id=$1 AND task_id=$2",[projectId,task.task_id,workerId,leaseSeconds]);
+  await c.query('COMMIT');tx=false;return {taskId:task.task_id,kind:task.kind,payload:task.payload,leaseOwner:workerId,leaseToken:Number(task.lease_token)+1};
  }catch(e){if(tx)await c.query('ROLLBACK');throw e;}finally{c.release();}
+}
+async function finishTask(pool,{projectId,taskId,workerId,leaseToken,resultHash,failed=false}){
+ required(projectId,'PROJECT');required(taskId,'TASK');required(workerId,'WORKER');
+ if(!Number.isSafeInteger(leaseToken)||leaseToken<1)throw Error('INVALID_FENCING_TOKEN');
+ if(!failed && (!resultHash||typeof resultHash!=='string'))throw Error('RESULT_HASH_REQUIRED');
+ const client=await pool.connect();
+ try{
+  const r=await client.query("UPDATE kido_tasks SET status=$6, result_hash=$7, lease_owner=NULL, lease_until=NULL, updated_at=clock_timestamp() WHERE project_id=$1 AND task_id=$2 AND lease_owner=$3 AND lease_token=$4 AND status='LEASED' AND lease_until>clock_timestamp() AND EXISTS(SELECT 1 FROM kido_worker_control WHERE project_id=$1 AND paused=false) RETURNING task_id",[projectId,taskId,workerId,leaseToken,null,failed?'FAILED':'DONE',failed?null:resultHash]);
+  if(!r.rows.length)throw Error('STALE_LEASE_OR_PAUSED');
+  return {taskId,status:failed?'FAILED':'DONE'};
+ }finally{client.release();}
 }
 async function pauseWorkers(pool,{projectId,actorId}){
  required(projectId,'PROJECT');required(actorId,'ACTOR');
@@ -32,4 +43,4 @@ async function pauseWorkers(pool,{projectId,actorId}){
   return {paused:true,projectId};
  }finally{c.release();}
 }
-module.exports={enqueueTask,claimTask,pauseWorkers};
+module.exports={enqueueTask,claimTask,finishTask,pauseWorkers};
