@@ -1,0 +1,941 @@
+{
+  "version": "1.0",
+  "source": "assets/pages.json",
+  "classification_method": "heuristic by existing id/group; requires human review",
+  "catalog_count": 133,
+  "representation_units_created": 0,
+  "verified_live_pages": 0,
+  "mappings": [
+    {
+      "id": "index",
+      "href": "./index.html",
+      "pillar": "collective",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "enter",
+      "href": "./enter.html",
+      "pillar": "collective",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "world",
+      "href": "./world.html",
+      "pillar": "collective",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "kingdom",
+      "href": "./kingdom.html",
+      "pillar": "collective",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "khalsa",
+      "href": "./khalsa.html",
+      "pillar": "collective",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "maze",
+      "href": "./maze.html",
+      "pillar": "learning",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "palace",
+      "href": "./palace.html",
+      "pillar": "collective",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "dwar",
+      "href": "./dwar.html",
+      "pillar": "collective",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "gyan",
+      "href": "./gyan.html",
+      "pillar": "learning",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "sakhi",
+      "href": "./sakhi.html",
+      "pillar": "learning",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "gun",
+      "href": "./gun.html",
+      "pillar": "learning",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "mala",
+      "href": "./mala.html",
+      "pillar": "learning",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "sankalp",
+      "href": "./sankalp.html",
+      "pillar": "learning",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "kyon",
+      "href": "./kyon.html",
+      "pillar": "learning",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "Begampura_FAQ_542_Offline_Reader",
+      "href": "./Begampura_FAQ_542_Offline_Reader.html",
+      "pillar": "learning",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "study",
+      "href": "./study.html",
+      "pillar": "learning",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "ai-samvidhan",
+      "href": "./ai-samvidhan.html",
+      "pillar": "apps",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "akarshan",
+      "href": "./akarshan.html",
+      "pillar": "learning",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "guru",
+      "href": "./guru.html",
+      "pillar": "awakening",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "guru-1",
+      "href": "./guru-1.html",
+      "pillar": "awakening",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "guru-2",
+      "href": "./guru-2.html",
+      "pillar": "awakening",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "guru-3",
+      "href": "./guru-3.html",
+      "pillar": "awakening",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "guru-4",
+      "href": "./guru-4.html",
+      "pillar": "awakening",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "guru-5",
+      "href": "./guru-5.html",
+      "pillar": "awakening",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "guru-6",
+      "href": "./guru-6.html",
+      "pillar": "awakening",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "guru-7",
+      "href": "./guru-7.html",
+      "pillar": "awakening",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "guru-8",
+      "href": "./guru-8.html",
+      "pillar": "awakening",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "guru-9",
+      "href": "./guru-9.html",
+      "pillar": "awakening",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "guru-10",
+      "href": "./guru-10.html",
+      "pillar": "awakening",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "bhagat",
+      "href": "./bhagat.html",
+      "pillar": "awakening",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "bhagat-kabir",
+      "href": "./bhagat-kabir.html",
+      "pillar": "awakening",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "bhagat-ravidas",
+      "href": "./bhagat-ravidas.html",
+      "pillar": "awakening",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "bhagat-namdev",
+      "href": "./bhagat-namdev.html",
+      "pillar": "awakening",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "bhagat-farid",
+      "href": "./bhagat-farid.html",
+      "pillar": "awakening",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "bhagat-dhanna",
+      "href": "./bhagat-dhanna.html",
+      "pillar": "awakening",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "bhagat-trilochan",
+      "href": "./bhagat-trilochan.html",
+      "pillar": "awakening",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "panj-takht",
+      "href": "./panj-takht.html",
+      "pillar": "awakening",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "panj-kakkar",
+      "href": "./panj-kakkar.html",
+      "pillar": "awakening",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "takht-1",
+      "href": "./takht-1.html",
+      "pillar": "awakening",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "takht-2",
+      "href": "./takht-2.html",
+      "pillar": "awakening",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "takht-3",
+      "href": "./takht-3.html",
+      "pillar": "awakening",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "takht-4",
+      "href": "./takht-4.html",
+      "pillar": "awakening",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "takht-5",
+      "href": "./takht-5.html",
+      "pillar": "awakening",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "itihas",
+      "href": "./itihas.html",
+      "pillar": "awakening",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "itihas-sahibzade",
+      "href": "./itihas-sahibzade.html",
+      "pillar": "awakening",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "itihas-mata-gujri",
+      "href": "./itihas-mata-gujri.html",
+      "pillar": "awakening",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "itihas-banda-singh",
+      "href": "./itihas-banda-singh.html",
+      "pillar": "awakening",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "itihas-deep-singh",
+      "href": "./itihas-deep-singh.html",
+      "pillar": "awakening",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "itihas-kanhaiya",
+      "href": "./itihas-kanhaiya.html",
+      "pillar": "awakening",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "itihas-ranjit-singh",
+      "href": "./itihas-ranjit-singh.html",
+      "pillar": "awakening",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "kahani",
+      "href": "./kahani.html",
+      "pillar": "learning",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "shakha",
+      "href": "./shakha.html",
+      "pillar": "learning",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "chakravyuh",
+      "href": "./chakravyuh.html",
+      "pillar": "learning",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "titli",
+      "href": "./titli.html",
+      "pillar": "learning",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "scroll-dwar",
+      "href": "./scroll-dwar.html",
+      "pillar": "learning",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "promo",
+      "href": "./promo.html",
+      "pillar": "media",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "baaz",
+      "href": "./baaz.html",
+      "pillar": "learning",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "takht",
+      "href": "./takht.html",
+      "pillar": "learning",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "takht3d",
+      "href": "./takht3d.html",
+      "pillar": "panchayat",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "chabi",
+      "href": "./chabi.html",
+      "pillar": "learning",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "patta",
+      "href": "./patta.html",
+      "pillar": "learning",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "khel-banao",
+      "href": "./khel-banao.html",
+      "pillar": "learning",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "khazana",
+      "href": "./khazana.html",
+      "pillar": "learning",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "shabad-jod",
+      "href": "./shabad-jod.html",
+      "pillar": "learning",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "langar-rush",
+      "href": "./langar-rush.html",
+      "pillar": "learning",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "naksha-khoj",
+      "href": "./naksha-khoj.html",
+      "pillar": "panchayat",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "naksha",
+      "href": "./naksha.html",
+      "pillar": "panchayat",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "kshetra",
+      "href": "./kshetra.html",
+      "pillar": "panchayat",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "kshetra-malwa",
+      "href": "./kshetra-malwa.html",
+      "pillar": "panchayat",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "kshetra-majha",
+      "href": "./kshetra-majha.html",
+      "pillar": "panchayat",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "kshetra-doaba",
+      "href": "./kshetra-doaba.html",
+      "pillar": "panchayat",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "kshetra-puadh",
+      "href": "./kshetra-puadh.html",
+      "pillar": "panchayat",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "kingdom-lands",
+      "href": "./kingdom-lands.html",
+      "pillar": "panchayat",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "mandal",
+      "href": "./mandal.html",
+      "pillar": "panchayat",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "newsroom",
+      "href": "./newsroom.html",
+      "pillar": "media",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "news-channels",
+      "href": "./news-channels.html",
+      "pillar": "media",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "goldtv",
+      "href": "./goldtv.html",
+      "pillar": "media",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "creator",
+      "href": "./creator.html",
+      "pillar": "apps",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "langar",
+      "href": "./langar.html",
+      "pillar": "seva",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "vand",
+      "href": "./vand.html",
+      "pillar": "seva",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "pathey",
+      "href": "./pathey.html",
+      "pillar": "seva",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "dasvandh",
+      "href": "./dasvandh.html",
+      "pillar": "seva",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "swad",
+      "href": "./swad.html",
+      "pillar": "centers",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "swad-punjab",
+      "href": "./swad-punjab.html",
+      "pillar": "centers",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "swad-haryana",
+      "href": "./swad-haryana.html",
+      "pillar": "centers",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "swad-rajasthan",
+      "href": "./swad-rajasthan.html",
+      "pillar": "centers",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "swad-gujarat",
+      "href": "./swad-gujarat.html",
+      "pillar": "centers",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "swad-maharashtra",
+      "href": "./swad-maharashtra.html",
+      "pillar": "centers",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "swad-bengal",
+      "href": "./swad-bengal.html",
+      "pillar": "centers",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "swad-tamilnadu",
+      "href": "./swad-tamilnadu.html",
+      "pillar": "centers",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "swad-kashmir",
+      "href": "./swad-kashmir.html",
+      "pillar": "centers",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "neta-rajya",
+      "href": "./neta-rajya.html",
+      "pillar": "panchayat",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "neta-punjab",
+      "href": "./neta-punjab.html",
+      "pillar": "panchayat",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "neta-haryana",
+      "href": "./neta-haryana.html",
+      "pillar": "panchayat",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "neta-delhi",
+      "href": "./neta-delhi.html",
+      "pillar": "panchayat",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "neta-rajasthan",
+      "href": "./neta-rajasthan.html",
+      "pillar": "panchayat",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "neta-up",
+      "href": "./neta-up.html",
+      "pillar": "panchayat",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "neta-himachal",
+      "href": "./neta-himachal.html",
+      "pillar": "panchayat",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "neta-jk",
+      "href": "./neta-jk.html",
+      "pillar": "panchayat",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "neta-chandigarh",
+      "href": "./neta-chandigarh.html",
+      "pillar": "panchayat",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "nanak-ghar",
+      "href": "./nanak-ghar.html",
+      "pillar": "aid",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "khatri-aid",
+      "href": "./khatri-aid.html",
+      "pillar": "aid",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "vakil",
+      "href": "./vakil.html",
+      "pillar": "begumpura",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "nyay",
+      "href": "./nyay.html",
+      "pillar": "begumpura",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "sehat",
+      "href": "./sehat.html",
+      "pillar": "aid",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "sehat-first-aid",
+      "href": "./sehat-first-aid.html",
+      "pillar": "panchayat",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "sehat-man",
+      "href": "./sehat-man.html",
+      "pillar": "panchayat",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "sehat-poshan",
+      "href": "./sehat-poshan.html",
+      "pillar": "panchayat",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "sehat-yoga",
+      "href": "./sehat-yoga.html",
+      "pillar": "panchayat",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "community",
+      "href": "./community.html",
+      "pillar": "seva",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "virsa",
+      "href": "./virsa.html",
+      "pillar": "awakening",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "mytube",
+      "href": "./mytube.html",
+      "pillar": "learning",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "audiobook",
+      "href": "./audiobook.html",
+      "pillar": "learning",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "saathi",
+      "href": "./saathi.html",
+      "pillar": "apps",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "funnybook",
+      "href": "./funnybook.html",
+      "pillar": "media",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "studio",
+      "href": "./studio.html",
+      "pillar": "apps",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "ai",
+      "href": "./ai.html",
+      "pillar": "apps",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "ai-tools",
+      "href": "./ai-tools.html",
+      "pillar": "apps",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "poster",
+      "href": "./poster.html",
+      "pillar": "apps",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "reels",
+      "href": "./reels.html",
+      "pillar": "apps",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "avatar",
+      "href": "./avatar.html",
+      "pillar": "apps",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "aaj-bhav",
+      "href": "./aaj-bhav.html",
+      "pillar": "cooperative",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "bhav",
+      "href": "./bhav.html",
+      "pillar": "cooperative",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "kirat",
+      "href": "./kirat.html",
+      "pillar": "cooperative",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "kirat-khet",
+      "href": "./kirat-khet.html",
+      "pillar": "cooperative",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "kirat-dhanda",
+      "href": "./kirat-dhanda.html",
+      "pillar": "cooperative",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "kirat-hunar",
+      "href": "./kirat-hunar.html",
+      "pillar": "cooperative",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "kirat-digital",
+      "href": "./kirat-digital.html",
+      "pillar": "cooperative",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "kirat-hisab",
+      "href": "./kirat-hisab.html",
+      "pillar": "cooperative",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "sab",
+      "href": "./sab.html",
+      "pillar": "collective",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "yojana",
+      "href": "./yojana.html",
+      "pillar": "collective",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "directory",
+      "href": "./directory.html",
+      "pillar": "collective",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    },
+    {
+      "id": "free-world",
+      "href": "./free-world.html",
+      "pillar": "seva",
+      "basis": "catalog_metadata",
+      "verified_live": false
+    }
+  ]
+}
