@@ -1,0 +1,12 @@
+/* KDN Federation navigation v1: progressive enhancement, no overlays. */
+.kdn-fed{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:8px 12px;background:#111b2b;color:#f6e7b0;border-block:1px solid #b58a3c;font:600 14px/1.4 system-ui,"Noto Sans Devanagari",sans-serif}
+.kdn-fed a{display:inline-flex;align-items:center;min-height:44px;padding:8px 12px;border:1px solid #96733b;border-radius:10px;color:#f6e7b0;text-decoration:none;background:#20283a}
+.kdn-fed a:hover{background:#36405a;color:#fff}
+.kdn-fed a:focus-visible{outline:3px solid #f6e7b0;outline-offset:2px}
+.kdn-fed .kdn-home{margin:0;max-width:none;border-radius:10px;min-height:44px}
+.kdn-fed details{position:relative;max-width:100%}
+.kdn-fed summary{cursor:pointer;min-height:44px;display:flex;align-items:center;padding:8px 12px;border:1px solid #96733b;border-radius:10px}
+.kdn-fed .kdn-fed-domains{display:flex;flex-wrap:wrap;gap:8px;padding:8px 0;max-width:100%}
+.kdn-fed .kdn-fed-unavailable{opacity:.7;display:inline-flex;align-items:center;padding:8px 12px;border:1px dashed #96733b;border-radius:10px}
+@media(max-width:480px){.kdn-fed{padding:8px}.kdn-fed>a,.kdn-fed details{flex:1 1 auto}}
+@media print{.kdn-fed{display:none}}
