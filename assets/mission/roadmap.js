@@ -1,0 +1,8 @@
+(function(){'use strict';const target=document.getElementById('mission-pillars'),status=document.getElementById('mission-status'),rep=document.getElementById('mission-representation');if(!target||!status)return;
+fetch('./assets/mission/registry.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('HTTP '+r.status);return r.json()}).then(data=>{
+ if(!Array.isArray(data.pillars)||data.pillars.length!==12)throw Error('Invalid program registry');
+ const frag=document.createDocumentFragment();
+ data.pillars.forEach((p,i)=>{const article=document.createElement('article');const h=document.createElement('h3');h.textContent=String(i+1)+'. '+p.title;const line=document.createElement('p');line.textContent='स्थिति: '+(p.phase==='design'?'रूपरेखा / विकास':'समीक्षा आवश्यक');const note=document.createElement('p');note.textContent=p.verified_live===true?'सत्यापित live सेवा':'Live सेवा अभी सत्यापित नहीं';article.append(h,line,note);frag.append(article);});
+ target.replaceChildren(frag);status.textContent='12 कार्यक्रम दर्ज — सभी की वर्तमान स्थिति स्पष्ट रूप से दिखाई गई है।';
+ if(rep&&data.representation)rep.textContent='मौजूदा catalog entries: '+data.representation.catalog_entries_verified+'; प्रतिनिधित्व की परिभाषा: लंबित।';
+}).catch(()=>{status.textContent='अभी ऑनलाइन रजिस्टर लोड नहीं हुआ। मिशन चार्टर से कार्यक्रम देखें।';const a=document.createElement('a');a.href='./mission-charter.html';a.textContent='मिशन चार्टर खोलें';target.replaceChildren(a);});})();
