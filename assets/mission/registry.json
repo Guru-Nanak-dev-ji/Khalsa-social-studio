@@ -1,0 +1,105 @@
+{
+  "version": "1.0",
+  "source": "Founder-supplied Khatri Jagran Mission Sankalp, 2026-10-30",
+  "status": "working-blueprint",
+  "principles": [
+    "collective_decision",
+    "collective_leadership",
+    "collective_action",
+    "equal_dignity",
+    "voluntary_participation",
+    "service",
+    "privacy_first"
+  ],
+  "pillars": [
+    {
+      "id": "awakening",
+      "title": "खत्री जागरण",
+      "phase": "design",
+      "verified_live": false
+    },
+    {
+      "id": "begumpura",
+      "title": "बेगमपुरा सामाजिक न्याय",
+      "phase": "design",
+      "verified_live": false
+    },
+    {
+      "id": "collective",
+      "title": "सामूहिक शासन",
+      "phase": "design",
+      "verified_live": false
+    },
+    {
+      "id": "panchayat",
+      "title": "जनता सरकार पंचायत राज",
+      "phase": "design",
+      "verified_live": false
+    },
+    {
+      "id": "cooperative",
+      "title": "सहकारी अर्थव्यवस्था",
+      "phase": "design",
+      "verified_live": false
+    },
+    {
+      "id": "centers",
+      "title": "कम्यूनिटी सेंटर",
+      "phase": "design",
+      "verified_live": false
+    },
+    {
+      "id": "learning",
+      "title": "शिक्षा और प्रशिक्षण",
+      "phase": "design",
+      "verified_live": false
+    },
+    {
+      "id": "media",
+      "title": "KNN/KDN मीडिया",
+      "phase": "design",
+      "verified_live": false
+    },
+    {
+      "id": "aid",
+      "title": "खत्री ऐड",
+      "phase": "design",
+      "verified_live": false
+    },
+    {
+      "id": "seva",
+      "title": "जनता सेवक दल",
+      "phase": "design",
+      "verified_live": false
+    },
+    {
+      "id": "apps",
+      "title": "My Neta / Connect / Learn / Aid Tracker",
+      "phase": "design",
+      "verified_live": false
+    },
+    {
+      "id": "global",
+      "title": "अंतरराष्ट्रीय नेटवर्क",
+      "phase": "design",
+      "verified_live": false
+    }
+  ],
+  "representation": {
+    "target": 1430,
+    "catalog_entries_verified": 133,
+    "unit_definition": "pending",
+    "generation_enabled": false
+  },
+  "release": {
+    "production_deploy_enabled": false,
+    "required_gates": [
+      "integrity",
+      "ux_accessibility",
+      "security_privacy",
+      "content_review",
+      "staging",
+      "approval"
+    ]
+  }
+}
