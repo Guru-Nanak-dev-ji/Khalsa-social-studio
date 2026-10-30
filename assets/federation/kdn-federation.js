@@ -12,6 +12,7 @@
   nav.appendChild(home);
   const current=new URL(window.location.href);
   const add=(label,url)=>{const dest=new URL(url,current);if(dest.origin===current.origin&&dest.pathname===current.pathname)return;const a=document.createElement('a');a.href=url;a.textContent=label;nav.appendChild(a);};
+  add('✊ हमारा मिशन','./mission-charter.html');
   add('🗂️ सारे द्वार','./sab.html');
   add('🏛️ सेवाएँ','./directory.html');
   const details=document.createElement('details');
