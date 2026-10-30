@@ -10,7 +10,8 @@
   nav.setAttribute('data-kdn-federation','v1');
   home.parentNode.insertBefore(nav,home);
   nav.appendChild(home);
-  const add=(label,url)=>{const a=document.createElement('a');a.href=url;a.textContent=label;nav.appendChild(a);};
+  const current=new URL(window.location.href);
+  const add=(label,url)=>{const dest=new URL(url,current);if(dest.origin===current.origin&&dest.pathname===current.pathname)return;const a=document.createElement('a');a.href=url;a.textContent=label;nav.appendChild(a);};
   add('🗂️ सारे द्वार','./sab.html');
   add('🏛️ सेवाएँ','./directory.html');
   const details=document.createElement('details');
