@@ -1,0 +1,29 @@
+name: KDN Command Center Dry-Run Tick
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 */6 * * *'
+permissions:
+  contents: read
+jobs:
+  validate-queue:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate staged command registry (no AI calls)
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          root=Path('ai-command-center')
+          rooms=json.loads((root/'registry/rooms.json').read_text())
+          queue=json.loads((root/'tasks/queue.json').read_text())
+          assert len(rooms['official_rooms'])==11
+          assert len({r['id'] for r in rooms['official_rooms']})==11
+          assert queue['mode']=='DRY_RUN'
+          ids={t['id'] for t in queue['tasks']}
+          assert len(ids)==len(queue['tasks'])
+          for task in queue['tasks']:
+              assert set(task['after']) <= ids
+          print('VALIDATED: 11 official rooms, task graph, dry-run only')
+          PY
