@@ -1,0 +1,99 @@
+{
+  "schema_version": "1.0",
+  "official_rooms": [
+    {
+      "id": "GPT-01",
+      "name": "इंद्र",
+      "role": "coordination",
+      "transport": "human-relay-until-connected"
+    },
+    {
+      "id": "GPT-02",
+      "name": "विश्वकर्मा",
+      "role": "product-ux",
+      "transport": "human-relay-until-connected"
+    },
+    {
+      "id": "GPT-03",
+      "name": "ब्रह्मा",
+      "role": "ai-architecture",
+      "transport": "human-relay-until-connected"
+    },
+    {
+      "id": "GPT-04",
+      "name": "धर्मराज",
+      "role": "governance",
+      "transport": "human-relay-until-connected"
+    },
+    {
+      "id": "GPT-05",
+      "name": "बृहस्पति",
+      "role": "strategy",
+      "transport": "human-relay-until-connected"
+    },
+    {
+      "id": "GPT-06",
+      "name": "नारद",
+      "role": "research",
+      "transport": "human-relay-until-connected"
+    },
+    {
+      "id": "GPT-07",
+      "name": "सरस्वती",
+      "role": "localization",
+      "transport": "human-relay-until-connected"
+    },
+    {
+      "id": "GPT-08",
+      "name": "कुबेर",
+      "role": "economics",
+      "transport": "human-relay-until-connected"
+    },
+    {
+      "id": "GPT-09",
+      "name": "चित्रगुप्त",
+      "role": "qa",
+      "transport": "human-relay-until-connected"
+    },
+    {
+      "id": "GPT-10",
+      "name": "मयदानव",
+      "role": "engineering",
+      "transport": "human-relay-until-connected"
+    },
+    {
+      "id": "GPT-11",
+      "name": "हनुमान",
+      "role": "security-infra",
+      "transport": "human-relay-until-connected"
+    }
+  ],
+  "external_slots": [
+    {
+      "id": "XAI-01",
+      "platform": "Grok",
+      "models": "verify account availability"
+    },
+    {
+      "id": "GEM-01",
+      "platform": "Gemini",
+      "models": "verify account availability"
+    },
+    {
+      "id": "DS-01",
+      "platform": "DeepSeek",
+      "models": "verify account availability"
+    },
+    {
+      "id": "CLD-01",
+      "platform": "Claude",
+      "models": "verify account availability"
+    },
+    {
+      "id": "COP-01",
+      "platform": "GitHub Copilot",
+      "models": "verify account availability"
+    }
+  ],
+  "verified_live_dispatch": false
+}
