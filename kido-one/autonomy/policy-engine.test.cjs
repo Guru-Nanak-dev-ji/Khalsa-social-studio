@@ -1,0 +1,18 @@
+'use strict';
+const assert=require('node:assert/strict');
+const {appendCommand,detectConflicts,evaluatePublication}=require('./policy-engine.cjs');
+const original=Object.freeze([]);
+const a={id:'DEC-003',exact_text:'Limited autonomy in preapproved boundaries',source_uri:'founder-chat',recorded_at:'2026-10-29',issuer:'DK 01',scope:'outbound-publication',status:'APPROVED_IN_PRINCIPLE'};
+const result=appendCommand(original,a);
+assert.equal(result.ok,true);
+assert.equal(original.length,0);
+assert.equal(result.ledger.length,1);
+assert.equal(appendCommand(result.ledger,a).reason,'DUPLICATE_ID');
+assert.equal(detectConflicts(result.ledger,{...a,id:'NEW',exact_text:'Publish anything'}).length,1);
+const draft={channel:'test',topic:'project-updates',template_id:'update-v1',ai_disclosure:true,source_urls:['https://example.org'],posts_today:0};
+assert.equal(evaluatePublication(draft,{}).decision,'NEEDS_HUMAN_APPROVAL');
+const policy={enabled:true,founder_approval_ref:'EXAMPLE-NOT-A-REAL-APPROVAL',approved_at:'2026-10-29',channels:['test'],topics:['project-updates'],templates:['update-v1'],max_posts_per_day:1};
+assert.equal(evaluatePublication(draft,policy).decision,'DRY_RUN_ELIGIBLE');
+assert.equal(evaluatePublication({...draft,unverified:true},policy).decision,'NEEDS_HUMAN_APPROVAL');
+assert.equal(evaluatePublication({...draft,posts_today:1},policy).decision,'NEEDS_HUMAN_APPROVAL');
+console.log('KIDO Step 06 dry-run policy tests PASS (offline, no publication)');
