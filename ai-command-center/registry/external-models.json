@@ -1,0 +1,97 @@
+{
+  "schema_version": "1.1",
+  "slots": [
+    {
+      "id": "HF-01",
+      "platform": "Hugging Face",
+      "role": "open-model-discovery",
+      "transport": "manual-or-authorized-api",
+      "model_id": null
+    },
+    {
+      "id": "HF-02",
+      "platform": "Hugging Face Spaces",
+      "role": "demo-hosting",
+      "transport": "manual-or-authorized-api",
+      "model_id": null
+    },
+    {
+      "id": "OLLAMA-01",
+      "platform": "Ollama",
+      "role": "local-open-model-runtime",
+      "transport": "local-worker-required",
+      "model_id": null
+    },
+    {
+      "id": "VLLM-01",
+      "platform": "vLLM",
+      "role": "self-hosted-inference",
+      "transport": "server-required",
+      "model_id": null
+    },
+    {
+      "id": "LMS-01",
+      "platform": "LM Studio",
+      "role": "local-inference",
+      "transport": "local-worker-required",
+      "model_id": null
+    },
+    {
+      "id": "QWEN-01",
+      "platform": "Qwen open-weight",
+      "role": "multilingual-coding",
+      "transport": "runtime-required",
+      "model_id": null
+    },
+    {
+      "id": "LLAMA-01",
+      "platform": "Meta Llama",
+      "role": "open-weight-model",
+      "transport": "runtime-and-license-review",
+      "model_id": null
+    },
+    {
+      "id": "MISTRAL-01",
+      "platform": "Mistral open models",
+      "role": "open-model-evaluation",
+      "transport": "runtime-and-license-review",
+      "model_id": null
+    },
+    {
+      "id": "GEM-01",
+      "platform": "Gemini",
+      "role": "multimodal-review",
+      "transport": "authorized-api-required",
+      "model_id": null
+    },
+    {
+      "id": "XAI-01",
+      "platform": "Grok",
+      "role": "research-review",
+      "transport": "authorized-api-required",
+      "model_id": null
+    },
+    {
+      "id": "DS-01",
+      "platform": "DeepSeek",
+      "role": "code-reasoning",
+      "transport": "authorized-api-required",
+      "model_id": null
+    },
+    {
+      "id": "CLD-01",
+      "platform": "Claude",
+      "role": "architecture-review",
+      "transport": "authorized-api-required",
+      "model_id": null
+    },
+    {
+      "id": "COP-01",
+      "platform": "GitHub Copilot",
+      "role": "repo-coding",
+      "transport": "supported-integration-required",
+      "model_id": null
+    }
+  ],
+  "note": "Model IDs are intentionally unset until availability, price, rate limits and licenses are verified. No live API calls."
+}
