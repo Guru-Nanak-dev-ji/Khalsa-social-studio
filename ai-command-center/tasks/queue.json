@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0",
+  "mode": "DRY_RUN",
+  "tasks": [
+    {
+      "id": "KDN-QA-LAUNCH-007",
+      "owner": "GPT-09",
+      "status": "PROPOSED",
+      "after": [],
+      "requires_human_relay": true
+    },
+    {
+      "id": "KDN-AI-MVP-001",
+      "owner": "GPT-03",
+      "status": "PROPOSED",
+      "after": [],
+      "requires_human_relay": true
+    },
+    {
+      "id": "KDN-ENG-MVP-007",
+      "owner": "GPT-10",
+      "status": "PROPOSED",
+      "after": [
+        "KDN-AI-MVP-001"
+      ],
+      "requires_human_relay": true
+    },
+    {
+      "id": "KDN-UX-LAUNCH-001",
+      "owner": "GPT-02",
+      "status": "PROPOSED",
+      "after": [],
+      "requires_human_relay": true
+    },
+    {
+      "id": "KDN-RES-RECOVERY-007",
+      "owner": "GPT-06",
+      "status": "PROPOSED",
+      "after": [],
+      "requires_human_relay": true
+    }
+  ],
+  "activation_policy": "Only VERIFIED prerequisite tasks unlock dependents; no automatic execution in V1"
+}
