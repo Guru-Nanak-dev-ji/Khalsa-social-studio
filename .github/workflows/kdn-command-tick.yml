@@ -1,0 +1,34 @@
+name: KDN AI Command Center Scheduled Dry Run
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 */6 * * *'
+permissions:
+  contents: read
+jobs:
+  queue-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feature/kdn-ai-command-center-v1
+          persist-credentials: false
+      - name: Validate KDN registry and task graph
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          root=Path('ai-command-center')
+          rooms=json.loads((root/'registry/rooms.json').read_text())
+          tasks=json.loads((root/'tasks/queue.json').read_text())
+          external=json.loads((root/'registry/external-models.json').read_text())
+          assert len(rooms['official_rooms'])==11
+          assert tasks['mode']=='DRY_RUN'
+          ids={t['id'] for t in tasks['tasks']}
+          assert len(ids)==len(tasks['tasks'])
+          for t in tasks['tasks']:
+              assert set(t['after']).issubset(ids)
+              print('PENDING_HUMAN_RELAY',t['id'],t['owner'])
+          print('EXTERNAL_SLOTS',len(external['slots']))
+          print('No AI calls or messages dispatched')
+          PY
