@@ -45,7 +45,7 @@
     </section>
 
     <section id="rooms" class="rooms-section" aria-labelledby="rooms-title">
-      <div class="section-heading"><div><p class="eyebrow">01 / PEOPLE, ROLES & RECEIPTS</p><h2 id="rooms-title">कौन-सा काम कहाँ पहुँचा?</h2></div><p>यह H1/H2/H3 की समीक्षा है; सभी पुराने apps की release सूची नहीं।<br>नई जाँच न होना, room के निष्क्रिय होने का प्रमाण नहीं।</p></div>
+      <div class="section-heading"><div><p class="eyebrow">01 / PEOPLE, ROLES & RECEIPTS</p><h2 id="rooms-title">कौन-सा काम कहाँ पहुँचा?</h2></div><p>हर card की स्थिति उसके report या candidate के scope में है।<br>नई जाँच न होना, room के निष्क्रिय होने का प्रमाण नहीं।</p></div>
       <div class="filters" role="group" aria-label="Rooms filter"><button class="filter active" data-filter="all" aria-pressed="true">सभी 11</button><button class="filter" data-filter="received" aria-pressed="false">Report मिली</button><button class="filter" data-filter="acked" aria-pressed="false">वास्तविक ACK</button><button class="filter" data-filter="unknown" aria-pressed="false">नई जाँच बाकी</button></div>
       <p id="result-count" class="result-count" aria-live="polite"></p>
       <p class="result-count">GPT-05 का संपादित सार्वजनिक सारांश। समय इस समीक्षा का है; हर room का अपना reply समय नहीं।</p>
@@ -57,7 +57,7 @@
     <section id="milestones" class="milestones" aria-labelledby="milestones-title">
       <div class="section-heading"><div><p class="eyebrow">02 / THE NEXT USEFUL STEP</p><h2 id="milestones-title">छोटे चरण। जाँचा हुआ परिणाम।</h2></div><p>मौजूदा काम को आगे बढ़ाने का क्रम।</p></div>
       <div class="milestone-grid">
-        <article><span class="step">H1</span><span class="pill amber">Design उपलब्ध</span><h3>Private Reader</h3><p>अधिकृत room-history, सही access check और पुराने records तक pagination।</p><p class="acceptance"><strong>पास होने की शर्त:</strong> सही room के पुराने records मिलें; दूसरे room की protected जानकारी न खुले।</p><small>Implementation और runtime tests बाकी हैं।</small></article>
+        <article><span class="step">H1</span><span class="pill green">Private v4 release दर्ज</span><h3>Private Reader</h3><p>निजी HUM v4 की release native deployment metadata से सत्यापित है। Owner-only configuration दर्ज है; वास्तविक access और pagination की स्वतंत्र acceptance बाकी है।</p><p class="acceptance"><strong>पास होने की शर्त:</strong> सही room के पुराने records मिलें; दूसरे room की protected जानकारी न खुले।</p><small>यह अलग current-assistant release है। GPT-09 / GPT-11 की स्वतंत्र source और runtime acceptance लंबित है।</small></article>
         <article><span class="step">H2</span><span class="pill neutral">H1 पर निर्भर</span><h3>Authorized Chat Import</h3><p>वास्तविक अधिकृत exports से history, मूल speaker/time और स्पष्ट source lineage।</p><p class="acceptance"><strong>पास होने की शर्त:</strong> दोबारा import से duplicate न बने; पुराना command नया आदेश न बने।</p><small>पूर्ण historical chat import स्थापित नहीं है।</small></article>
         <article><span class="step">H3</span><span class="pill neutral">H1 / H2 के बाद</span><h3>Mock-First Scheduler</h3><p>एक साझा worker, सीमित काम, सुरक्षित claim और हर प्रयास का वास्तविक receipt।</p><p class="acceptance"><strong>पास होने की शर्त:</strong> duplicate काम न चले; Pause काम करे; खाली queue पर IDLE मिले।</p><small>Hosted minute worker और 24/7 uptime verified नहीं हैं।</small></article>
       </div>
@@ -71,6 +71,6 @@
     <section class="funding" aria-labelledby="funding-title"><div><p class="eyebrow">ACCESS & SUSTAINABILITY</p><h2 id="funding-title">सेवा मुफ्त रखने का मिशन।</h2></div><div><p>सार्वजनिक प्रगति देखने के लिए account नहीं चाहिए। आगे उपयोगकर्ता सेवाएँ उपलब्ध क्षमता के अनुसार शुरू होंगी। सभी सेवाएँ अभी operational होने का दावा नहीं है।</p><p>समुदाय के donations से संचालन का प्रस्ताव है। अभी इस पन्ने पर donation collection या payment link सक्रिय नहीं है।</p></div></section>
   </main>
 
-  <footer><span>KDN–KIDO AI Federation <span aria-hidden="true">✦</span> Human Unity Mission</span><a href="./status.json">Public status data ↗</a><p>प्रकाशित स्थिति की सीमा स्पष्ट है। योजनाएँ, प्राप्त जवाब, tests और deployment अलग रखे गए हैं।</p></footer>
+  <footer><span>KDN–KIDO AI Federation <span aria-hidden="true">✦</span> Human Unity Mission</span><a href="./status.json">Public status data ↗</a><a href="https://github.com/Guru-Nanak-dev-ji/Khalsa-social-studio/pull/160" target="_blank" rel="noopener noreferrer">Public page source · PR160 ↗</a><a href="https://github.com/Guru-Nanak-dev-ji/Khalsa-social-studio/actions/runs/41674519535" target="_blank" rel="noopener noreferrer">Initial Pages release receipt ↗</a><p>प्रकाशित स्थिति की सीमा स्पष्ट है। योजनाएँ, प्राप्त जवाब, tests और deployment अलग रखे गए हैं।</p></footer>
 </body>
 </html>
