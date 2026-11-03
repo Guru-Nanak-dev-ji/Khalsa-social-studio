@@ -1,9 +1,13 @@
 {
   "schema": "kdn.public-progress/1",
-  "observedAt": "2026-11-03T16:16:56Z",
-  "revision": "2026-11-03-v1",
-  "publication": "NOT_DEPLOYED",
-  "releaseReceipt": null,
+  "observedAt": "2026-11-03T16:30:42Z",
+  "revision": "2026-11-03-v2",
+  "publication": "DEPLOYED",
+  "releaseReceipt": {
+    "publicUrl": "https://not4you.world/federation/",
+    "sourceCommit": "fa625bc31fa6ec8c6034cc9c8724d0d92685705b",
+    "verifiedAt": "2026-11-03T16:30:42Z"
+  },
   "rooms": [
     {
       "id": "GPT-01",
@@ -91,12 +95,12 @@
       "acked": "UNKNOWN",
       "tested": "MOCK_PASS",
       "deployed": "NOT_IMPLEMENTED",
-      "summary": "मौजूदा HUM source की समीक्षा और अलग चार-file package के 8 स्थानीय mock tests PASS। यह H1 integration या live scheduler का PASS नहीं है।",
+      "summary": "Public progress page की own-domain release और 10 public-feed tests PASS दर्ज हैं। पुराने अलग package के 8 pure-function mock tests का receipt अलग है। ये परिणाम H1 की स्वतंत्र runtime acceptance नहीं हैं।",
       "evidence": {
-        "sourceLabel": "Strategic Review §33",
+        "sourceLabel": "Strategic Review §33 + Public page PR160",
         "kind": "LOCAL_TEST_RECEIPT",
-        "observedAt": "2026-11-03T16:16:56Z",
-        "scope": "पहले दर्ज pure-function mock परिणाम; H1 runtime अलग है।"
+        "observedAt": "2026-11-03T16:30:42Z",
+        "scope": "TESTED का 8-mock status पुराने package का है; H1 स्वतंत्र QA लंबित है।"
       },
       "testEvidence": {
         "suite": "SEPARATE_FOUR_FILE_MOCK",
@@ -169,15 +173,15 @@
       "stage": "DESIGN",
       "posted": "POSTED",
       "received": "RECEIVED",
-      "acked": "UNKNOWN",
+      "acked": "ACKED",
       "tested": "NOT_RUN",
       "deployed": "NOT_IMPLEMENTED",
-      "summary": "H1, H2, H3 और domain navigation की acceptance matrix मिली है। इसमें दिए सभी runtime cases अभी NOT RUN हैं।",
+      "summary": "Human Master Command का स्वयं लिखा ACK मिला। Public page के PUB01–08 acceptance cases दिए गए हैं; अभी NOT RUN। H1 की स्वतंत्र runtime acceptance अलग से लंबित है।",
       "evidence": {
-        "sourceLabel": "QA · H1/H2/H3 Acceptance V1",
-        "kind": "REVIEW_REPORT",
-        "observedAt": "2026-11-03T16:16:56Z",
-        "scope": "QA design review मिला; tests के वास्तविक परिणाम बाकी।"
+        "sourceLabel": "QA · Master ACK / PUB01–08",
+        "kind": "AUTHOR_ACK",
+        "observedAt": "2026-11-03T16:30:42Z",
+        "scope": "अपना command ACK मिला; public और H1 acceptance में कोई runtime PASS नहीं जोड़ा गया।"
       },
       "testEvidence": null
     },
@@ -191,12 +195,12 @@
       "acked": "ACKED",
       "tested": "NOT_RUN",
       "deployed": "NOT_IMPLEMENTED",
-      "summary": "GPT-05 §33 और H1 handover का स्वयं लिखा ACK मिला। File-level private-reader प्रस्ताव तैयार है; H1 implementation अभी नहीं हुई।",
+      "summary": "Human Master Command और पुराने H1 handover का स्वयं लिखा ACK मिला। V3.9 candidate के 5 serializer unit tests author-reported PASS; candidate uncommitted और undeployed है। अलग private HUM v4 release इस room का deployment ACK नहीं है।",
       "evidence": {
-        "sourceLabel": "Engineering V3.8 · §31.1–31.6",
+        "sourceLabel": "Engineering V3.9",
         "kind": "AUTHOR_ACK",
-        "observedAt": "2026-11-03T16:16:56Z",
-        "scope": "ACK पुराने H1 handover का है; इस public update का नहीं।"
+        "observedAt": "2026-11-03T16:30:42Z",
+        "scope": "Fields GPT-10 candidate / स्वतंत्र H1 acceptance तक सीमित हैं; private v4 release अलग है।"
       },
       "testEvidence": null
     },
@@ -207,15 +211,15 @@
       "stage": "DESIGN",
       "posted": "POSTED",
       "received": "RECEIVED",
-      "acked": "UNKNOWN",
+      "acked": "ACKED",
       "tested": "NOT_RUN",
       "deployed": "NOT_IMPLEMENTED",
-      "summary": "Exact H1 design की समीक्षा पूरी है। Access, cursor और audit प्रस्तावों का उत्तर मिला; कुल स्थिति PARTIAL है। Runtime security PASS नहीं।",
+      "summary": "V1.32 में Human Master Command का स्वयं लिखा ACK मिला। तीन diagnostics और candidate checks दर्ज हैं। इन्हें दस-test security PASS या पूर्ण H1 runtime acceptance नहीं माना गया है।",
       "evidence": {
-        "sourceLabel": "Security · ONLINE LOOP V1.31",
-        "kind": "REVIEW_REPORT",
-        "observedAt": "2026-11-03T16:16:56Z",
-        "scope": "Design disposition मिला; actual ingress और policy binding बाकी।"
+        "sourceLabel": "Security · ONLINE LOOP V1.32",
+        "kind": "AUTHOR_ACK",
+        "observedAt": "2026-11-03T16:30:42Z",
+        "scope": "अपना command ACK और सीमित checks; स्वतंत्र H1 source/runtime acceptance लंबित है।"
       },
       "testEvidence": null
     }

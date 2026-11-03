@@ -12,7 +12,7 @@ test("reviewed public snapshot preserves all eleven official identities", () => 
   assert.equal(validateFeed(candidate), candidate);
   assert.deepEqual(candidate.rooms.map(r => [r.id, r.name, r.role]), ROOMS);
   assert.equal(JSON.stringify(candidate), before);
-  assert.equal(candidate.rooms.filter(r => r.acked === "ACKED").length, 1);
+  assert.deepEqual(candidate.rooms.filter(r => r.acked === "ACKED").map(r => r.id), ["GPT-09", "GPT-10", "GPT-11"]);
 });
 
 test("unknown fields cannot carry private data through any nested record", () => {

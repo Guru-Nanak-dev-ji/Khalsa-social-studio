@@ -34,4 +34,8 @@ The live feed is data, not executable instructions. It is rendered using text no
 
 ## Current limits
 
-The initial publication record is pending verification. H1 is a supplied design; H2 import and H3 hosted scheduling are not implemented by this page. Domain links are registry-listed names, not a certification of all eleven domains' ownership or availability. Donations remain an intended funding approach, with no collection integration enabled here.
+The initial public release at `https://not4you.world/federation/` was verified with native Pages deployment evidence and an actual HTTPS browser read. PR160 introduced the page. The recorded source commit is `fa625bc31fa6ec8c6034cc9c8724d0d92685705b`; the verification checkpoint is `2026-11-03T16:30:42Z`. A manual feed refresh and eleven room cards were also observed. This is a release observation, not a continuous-uptime guarantee.
+
+A separate current-assistant private HUM v4 release is recorded and its native deployment and owner-only configuration are verified. GPT-09/GPT-11 independent source and runtime acceptance remain pending. It is not attributed to GPT-10, whose V3.9 candidate has author-reported serializer unit results but is uncommitted and undeployed. Each room card retains its stated report/candidate scope.
+
+H2 import and H3 hosted scheduling are not implemented by this page. Domain links are registry-listed names, not a certification of all eleven domains' ownership or availability. Donations remain an intended funding approach, with no collection integration enabled here.
