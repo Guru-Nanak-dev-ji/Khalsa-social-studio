@@ -77,7 +77,9 @@ async function refresh() {
     $("#checked-at").textContent = dateLabel(new Date().toISOString());
     $("#feed-message").className = "feed-message";
     $("#feed-message").textContent = "सार्वजनिक feed पढ़ी गई। नीचे की स्थितियाँ दर्ज प्रमाण के समय की हैं; यह live room attendance नहीं है।";
-  } catch {
+  } catch (error) {
+    const diagnostic = error instanceof SyntaxError ? "Public feed JSON could not be parsed" : error instanceof Error ? error.message : "Unknown refresh error";
+    console.warn("Public progress refresh failed:", diagnostic);
     $("#feed-message").className = "feed-message error";
     $("#feed-message").textContent = snapshot ? "नई feed उपलब्ध या मान्य नहीं है। पिछला समय सहित snapshot दिख रहा है; नई गतिविधि की पुष्टि नहीं हुई।" : "Public feed अभी उपलब्ध या मान्य नहीं है। Rooms की स्थिति अज्ञात है; दोबारा कोशिश करें।";
     if (snapshot) render();

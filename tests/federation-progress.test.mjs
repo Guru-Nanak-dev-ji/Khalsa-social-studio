@@ -76,6 +76,7 @@ test("direct updater objects cannot hide private fields on a custom prototype", 
 
 test("public release needs an exact target, commit and separate verification timestamp", () => {
   const candidate = copy(); candidate.publication = "DEPLOYED";
+  candidate.releaseReceipt = null;
   assert.throws(() => validateFeed(candidate), /releaseReceipt/);
   candidate.releaseReceipt = { publicUrl: "https://not4you.world/federation/", sourceCommit: "a".repeat(40), verifiedAt: "2026-11-03T17:00:00Z" };
   assert.equal(validateFeed(candidate), candidate);
