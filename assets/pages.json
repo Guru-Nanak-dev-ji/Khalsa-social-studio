@@ -1498,6 +1498,17 @@
 "group": "main",
 "status": "published",
 "topic": "सेवा"
+},
+{
+"id": "federation",
+"icon": "🧠",
+"name": "Federation प्रगति",
+"sub": "11 rooms की स्थिति, वास्तविक replies और अगले काम",
+"cat": "t",
+"href": "./federation.html",
+"group": "auto",
+"status": "published",
+"topic": "साधन"
 }
 ]
 }
