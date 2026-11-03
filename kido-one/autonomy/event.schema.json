@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "KIDO ONE append-only event envelope v0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "event_id",
+    "event_type",
+    "project_id",
+    "actor_id",
+    "actor_kind",
+    "source_uri",
+    "occurred_at",
+    "idempotency_key",
+    "payload",
+    "policy_version"
+  ],
+  "properties": {
+    "event_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "event_type": {
+      "enum": [
+        "COMMAND_RECEIVED",
+        "DECISION_RECORDED",
+        "CONFLICT_RAISED",
+        "CONFLICT_RESOLVED",
+        "TASK_CREATED",
+        "TASK_ASSIGNED",
+        "TASK_RESULT_RECORDED",
+        "EVIDENCE_ATTACHED",
+        "PUBLISH_SCOPE_APPROVED",
+        "PUBLISH_REQUESTED",
+        "PUBLISH_POLICY_DENIED",
+        "PUBLISH_EXECUTED_VERIFIED",
+        "AUTOMATION_PAUSED"
+      ]
+    },
+    "project_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "actor_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "actor_kind": {
+      "enum": [
+        "HUMAN",
+        "AI",
+        "SERVICE"
+      ]
+    },
+    "source_uri": {
+      "type": "string",
+      "minLength": 1
+    },
+    "occurred_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "idempotency_key": {
+      "type": "string",
+      "minLength": 1
+    },
+    "policy_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "approval_ref": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "conflict_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "payload": {
+      "type": "object"
+    },
+    "previous_hash": {
+      "type": "string"
+    },
+    "event_hash": {
+      "type": "string"
+    }
+  }
+}

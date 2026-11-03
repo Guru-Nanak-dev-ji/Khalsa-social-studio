@@ -1,0 +1,7 @@
+'use strict';
+const {test}=require('node:test'),assert=require('node:assert/strict');
+const {createProviderRegistry,mockProvider}=require('../kido-one/autonomy/provider-registry.cjs');
+test('mock AI provider stays dry-run only',async()=>{const r=createProviderRegistry();r.register('local',mockProvider('local'));const out=await r.prepare({role:'DRAFT',available:['local'],taskId:'T-1'});assert.equal(out.status,'DRY_RUN_PLAN');assert.equal(out.adapterResult.externalCalls,0);assert.equal(out.adapterResult.executed,false);});
+test('unknown provider or live adapter is denied',async()=>{const r=createProviderRegistry();assert.throws(()=>r.register('unknown',mockProvider('unknown')),/UNSUPPORTED/);r.register('openai',{describe:()=>({liveEnabled:true}),dryRun:async()=>({executed:false,externalCalls:0})});await assert.rejects(r.prepare({role:'REASON',available:['openai'],maxCostTier:'VARIABLE'}),/LIVE_ADAPTER_FORBIDDEN/);});
+test('unconnected provider is reported, not called',async()=>{const r=createProviderRegistry();assert.equal((await r.prepare({role:'REVIEW',available:['grok'],maxCostTier:'VARIABLE'})).status,'ADAPTER_NOT_CONNECTED');});
+test('contract rejects provider claiming real execution',async()=>{const r=createProviderRegistry();r.register('local',{describe:()=>({liveEnabled:false}),dryRun:async()=>({executed:true,externalCalls:1})});await assert.rejects(r.prepare({role:'DRAFT',available:['local']}),/DRY_RUN_CONTRACT_VIOLATION/);});
