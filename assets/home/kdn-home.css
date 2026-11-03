@@ -8,3 +8,18 @@
 .kdn-home:focus-visible{outline:3px solid #f6e7b0;outline-offset:2px}
 @media (pointer:coarse){.kdn-home{min-height:44px}}
 @media print{.kdn-home{display:none}}
+/* Home (index + identical entry pages) mobile fixes; scoped via :has(#world-shell) so other pages are untouched */
+@media (max-width:768px){
+ body:has(#world-shell){font-size:16px;line-height:1.6}
+ body:has(#world-shell) p,body:has(#world-shell) li,body:has(#world-shell) #popup p,body:has(#world-shell) .quiz-option,body:has(#world-shell) .help-box{font-size:16px;line-height:1.6}
+ body:has(#world-shell) button,body:has(#world-shell) .gold-button,body:has(#world-shell) .world-footer button,body:has(#world-shell) .lifelines button,body:has(#world-shell) .entry-controls button{min-height:44px;min-width:44px;font-size:max(14px,1em)}
+ body:has(#world-shell) .entry-controls,body:has(#world-shell) .lifelines,body:has(#world-shell) .realm-cta,body:has(#world-shell) .world-footer>div{gap:12px;flex-wrap:wrap}
+ body:has(#world-shell) #popup{width:100vw;max-width:100vw;max-height:70dvh;margin:auto 0 0;border-radius:20px 20px 0 0;animation:none}
+ body:has(#world-shell) #popup::backdrop{background:transparent;backdrop-filter:none}
+ body:has(#world-shell) #popup .close{min-width:44px;min-height:44px}
+ body:has(#world-shell) .baaz,body:has(#world-shell) .falcon-sky,body:has(#world-shell) .falcon-flight{display:none!important}
+ body:has(#world-shell) .realm-render canvas{display:none!important}
+}
+@media (prefers-reduced-motion:reduce){
+ body:has(#world-shell) .realm-render canvas,body:has(#world-shell) .falcon-flight{display:none!important}
+}
