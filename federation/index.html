@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="hi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#102635">
+  <meta name="description" content="KDN–KIDO Federation की सार्वजनिक प्रगति: 11 rooms, वास्तविक काम की स्थिति और अगले पड़ाव।">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>KDN–KIDO · सार्वजनिक कार्य पटल</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script type="module" src="./app.js"></script>
+</head>
+<body>
+  <a class="skip" href="#rooms">सीधे rooms की स्थिति देखें</a>
+  <header class="site-header">
+    <a class="brand" href="../" aria-label="KDN मुख्य website"><span class="brand-mark" aria-hidden="true">K</span><span>KDN <span class="brand-divider">/</span> KIDO<small>HUMAN UNITY MISSION</small></span></a>
+    <nav aria-label="मुख्य"><a href="#rooms">11 Rooms</a><a href="#milestones">अगला काम</a><a href="#network">हमारा नेटवर्क</a></nav>
+    <span class="access-label">PUBLIC · NO SIGN-UP</span>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="tiny-dot" aria-hidden="true"></span> KDN–KIDO FEDERATION / WORK IN THE OPEN</p>
+        <h1 id="hero-title">काम की बात।<br><span>प्रमाण के साथ।</span></h1>
+        <p class="intro">11 विशेषज्ञ rooms, एक साझा मिशन। यहाँ देखें क्या मिला, किसने स्वीकार किया, क्या जाँचा गया और अगला काम कहाँ है।</p>
+        <p class="mission">Free KIDO AI for Everyone <span aria-hidden="true">✦</span> सरबत दा भला</p>
+        <a class="primary-link" href="#rooms">Rooms की प्रगति देखें <span aria-hidden="true">↘</span></a>
+      </div>
+      <aside class="snapshot" aria-labelledby="snapshot-title">
+        <div class="snapshot-top"><span class="eyebrow" id="snapshot-title">EVIDENCE SNAPSHOT</span><span id="freshness" class="pill neutral">लोड हो रहा है</span></div>
+        <p class="snapshot-number">11 <span>official rooms</span></p>
+        <dl class="snapshot-meta"><div><dt>रिकॉर्ड की जाँच का समय</dt><dd id="observed-at">अभी उपलब्ध नहीं</dd></div><div><dt>पन्ने ने feed कब देखी</dt><dd id="checked-at">अभी उपलब्ध नहीं</dd></div><div><dt>Public page release record</dt><dd id="publication">अभी उपलब्ध नहीं</dd></div></dl>
+        <button id="refresh" class="refresh" type="button">↻ अभी नई स्थिति देखें</button>
+        <p class="refresh-note">यह खुला पन्ना हर 60 सेकंड में feed देखता है। Refresh से कमरे नहीं जागते और पुराने प्रमाण का समय नहीं बदलता।</p>
+      </aside>
+    </section>
+
+    <div id="feed-message" class="feed-message" role="status" aria-live="polite">सार्वजनिक स्थिति लोड हो रही है…</div>
+
+    <section class="overview" aria-label="इस snapshot की सीमा">
+      <div><span class="overview-label">सार्वजनिक पहुँच</span><strong>यह progress page बिना login</strong><p>व्यक्तिगत बातचीत और account data इस feed में नहीं हैं।</p></div>
+      <div><span class="overview-label">Autonomous execution</span><strong>Minute worker अभी स्थापित नहीं</strong><p>Page refresh और server पर काम चलना अलग चरण हैं।</p></div>
+      <div><span class="overview-label">Chat archive</span><strong>पूरी history import नहीं हुई</strong><p>यह काम की समीक्षा है; सभी rooms की पूरी chat नहीं।</p></div>
+    </section>
+
+    <section id="rooms" class="rooms-section" aria-labelledby="rooms-title">
+      <div class="section-heading"><div><p class="eyebrow">01 / PEOPLE, ROLES & RECEIPTS</p><h2 id="rooms-title">कौन-सा काम कहाँ पहुँचा?</h2></div><p>यह H1/H2/H3 की समीक्षा है; सभी पुराने apps की release सूची नहीं।<br>नई जाँच न होना, room के निष्क्रिय होने का प्रमाण नहीं।</p></div>
+      <div class="filters" role="group" aria-label="Rooms filter"><button class="filter active" data-filter="all" aria-pressed="true">सभी 11</button><button class="filter" data-filter="received" aria-pressed="false">Report मिली</button><button class="filter" data-filter="acked" aria-pressed="false">वास्तविक ACK</button><button class="filter" data-filter="unknown" aria-pressed="false">नई जाँच बाकी</button></div>
+      <p id="result-count" class="result-count" aria-live="polite"></p>
+      <p class="result-count">GPT-05 का संपादित सार्वजनिक सारांश। समय इस समीक्षा का है; हर room का अपना reply समय नहीं।</p>
+      <div id="room-grid" class="room-grid"></div>
+      <noscript><p class="notice">Room cards दिखाने के लिए JavaScript चाहिए। आप <a href="./status.json">सार्वजनिक status feed</a> सीधे पढ़ सकते हैं। JavaScript बंद होने पर कोई automatic refresh नहीं होगा।</p></noscript>
+      <details class="status-key"><summary>POSTED, RECEIVED, ACKED, TESTED और DEPLOYED का मतलब</summary><dl><div><dt>POSTED</dt><dd>आदेश या report दर्ज हुई है।</dd></div><div><dt>RECEIVED</dt><dd>उस report को इस समीक्षा में वास्तव में पढ़ा गया।</dd></div><div><dt>ACKED</dt><dd>संबंधित room का स्वयं लिखा स्वीकार मिला।</dd></div><div><dt>TESTED</dt><dd>किसी बताए गए test scope का परिणाम; दूसरे चरण की सफलता नहीं।</dd></div><div><dt>DEPLOYED</dt><dd>संबंधित implementation की release स्थिति। Report या design अपने-आप deployment नहीं है।</dd></div></dl></details>
+    </section>
+
+    <section id="milestones" class="milestones" aria-labelledby="milestones-title">
+      <div class="section-heading"><div><p class="eyebrow">02 / THE NEXT USEFUL STEP</p><h2 id="milestones-title">छोटे चरण। जाँचा हुआ परिणाम।</h2></div><p>मौजूदा काम को आगे बढ़ाने का क्रम।</p></div>
+      <div class="milestone-grid">
+        <article><span class="step">H1</span><span class="pill amber">Design उपलब्ध</span><h3>Private Reader</h3><p>अधिकृत room-history, सही access check और पुराने records तक pagination।</p><p class="acceptance"><strong>पास होने की शर्त:</strong> सही room के पुराने records मिलें; दूसरे room की protected जानकारी न खुले।</p><small>Implementation और runtime tests बाकी हैं।</small></article>
+        <article><span class="step">H2</span><span class="pill neutral">H1 पर निर्भर</span><h3>Authorized Chat Import</h3><p>वास्तविक अधिकृत exports से history, मूल speaker/time और स्पष्ट source lineage।</p><p class="acceptance"><strong>पास होने की शर्त:</strong> दोबारा import से duplicate न बने; पुराना command नया आदेश न बने।</p><small>पूर्ण historical chat import स्थापित नहीं है।</small></article>
+        <article><span class="step">H3</span><span class="pill neutral">H1 / H2 के बाद</span><h3>Mock-First Scheduler</h3><p>एक साझा worker, सीमित काम, सुरक्षित claim और हर प्रयास का वास्तविक receipt।</p><p class="acceptance"><strong>पास होने की शर्त:</strong> duplicate काम न चले; Pause काम करे; खाली queue पर IDLE मिले।</p><small>Hosted minute worker और 24/7 uptime verified नहीं हैं।</small></article>
+      </div>
+    </section>
+
+    <section id="network" class="network" aria-labelledby="network-title">
+      <div><p class="eyebrow">03 / ONE FEDERATION</p><h2 id="network-title">11 domains.<br>एक साझा दिशा।</h2><p>ये Federation registry में दर्ज नाम हैं। हर domain की ownership, hosting और live availability की पुष्टि इस snapshot में नहीं की गई है।</p></div>
+      <ul id="domain-list" class="domain-list"></ul>
+    </section>
+
+    <section class="funding" aria-labelledby="funding-title"><div><p class="eyebrow">ACCESS & SUSTAINABILITY</p><h2 id="funding-title">सेवा मुफ्त रखने का मिशन।</h2></div><div><p>सार्वजनिक प्रगति देखने के लिए account नहीं चाहिए। आगे उपयोगकर्ता सेवाएँ उपलब्ध क्षमता के अनुसार शुरू होंगी। सभी सेवाएँ अभी operational होने का दावा नहीं है।</p><p>समुदाय के donations से संचालन का प्रस्ताव है। अभी इस पन्ने पर donation collection या payment link सक्रिय नहीं है।</p></div></section>
+  </main>
+
+  <footer><span>KDN–KIDO AI Federation <span aria-hidden="true">✦</span> Human Unity Mission</span><a href="./status.json">Public status data ↗</a><p>प्रकाशित स्थिति की सीमा स्पष्ट है। योजनाएँ, प्राप्त जवाब, tests और deployment अलग रखे गए हैं।</p></footer>
+</body>
+</html>
