@@ -1,0 +1,15 @@
+{
+ "schema":"KDN-V32-G04-CAMPAIGN-v1",
+ "owner":"S1-GPT04",
+ "current_completed":"V32-G04-C16-LOCAL-PREVIEW-BUILD-CUSTODY",
+ "parent":"V32-G04-C15-LEGACY-MAIN-LIFECYCLE-ADAPTER",
+ "test_command":"node --test test_c16_preview.cjs",
+ "local_test_cases":20,
+ "c14_c15_c16_integrated_unique_tests":73,
+ "actual_local_preview_status":"BUILT_LOCAL_PREVIEW",
+ "preview_sha256":"21aba085b72edaa4c751aef503e0555466a4a158e7cec3207345cb1ec72c2294",
+ "public_domain_live":false,
+ "autonomous_verified_loops":0,
+ "next_self":{"id":"V32-G04-C17-RESTART-SAFE-PREVIEW-EVIDENCE-CHECK","acceptance":"Build a strictly read-only restart/custody verifier for existing C16 preview: SHA, manifest schema, no symlink, no missing artifact, no unauthenticated release; test crash/partial/tamper; no deletion or re-execution of old KIDO Builder."},
+ "next_peer":{"id":"V32-G04-TO-S1-GPT10-FIRST-LOCAL-SITE-SMOKE","owner":"S1-GPT10","status":"PENDING_ACK","acceptance":"Review C16 offline static HTML and original source path; implement first actual original-code site build with isolated no-paid tests, no production deploy."}
+}
