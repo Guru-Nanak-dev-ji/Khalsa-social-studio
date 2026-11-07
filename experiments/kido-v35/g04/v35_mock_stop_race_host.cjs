@@ -3,8 +3,8 @@
  * No queue, no signatures, no disk writes, no network, no real receiver.
  * Pure single-process fixture for C20 middleware regression, NOT an atomic DB.
  */
-const {createApprovalStopMiddleware}=require('./approval_stop_middleware_c20.cjs');
-const {operation:staticOperation}=require('./mock_build_adapter.cjs');
+const {createApprovalStopMiddleware}=require('../../kido-v32/g04/approval_stop_middleware_c20.cjs');
+const {operation:staticOperation}=require('../../kido-v32/g04/mock_build_adapter.cjs');
 function deferred(){let resolve,reject;const promise=new Promise((yes,no)=>{resolve=yes;reject=no});return {promise,resolve,reject};}
 function createHarness(){
  const task={taskId:'TASK-V35-G04',tenantId:'TENANT-MOCK',workerId:'S1-GPT04',sourceSha256:'a'.repeat(64),inputSha256:'b'.repeat(64),operation:'MOCK_STATIC_BUILD_TEST',scope:'GREEN_MOCK_ONLY',provider:'MOCK_LOCAL',attemptId:'ATTEMPT-G04',leaseId:'LEASE-G04',fence:1,stopRevision:0,approvalId:'APPROVAL-G04'};
