@@ -1,0 +1,17 @@
+{
+  "schema": "KDN-V32-G04-CAMPAIGN-v1",
+  "owner": "S1-GPT04",
+  "current_completed": "V32-G04-C14-BOUNDED-STOP-LIFECYCLE",
+  "parent_completed": "V32-G04-C13-RECONSTRUCT-AND-COMBINED-MOCK-INTEGRATION",
+  "status": "LOCAL_TESTS_PASS",
+  "test_command": "node --test test_c14_bounded.cjs",
+  "test_cases_unique": 23,
+  "autonomous_cross_platform_loops_certified": 0,
+  "peer_ack": "PENDING",
+  "next_self": {
+    "id": "V32-G04-C15-LEGACY-MAIN-LIFECYCLE-ADAPTER",
+    "acceptance": "Use verified pinned GitHub main.cjs historical task fields, create a pure zero-provider adapter to C14 mock task contract; negative tests for fake fields, duplicate mapping, paid routing; do not invoke original KidoApp or contact provider."
+  },
+  "next_peer": {"id": "V32-G04-TO-GPT03-TRUSTED-HOST-OPERATION-BOUNDARY", "owner": "S1-GPT03", "status":"PENDING_ACK"},
+  "limitations":["cooperative abort only; cannot terminate malicious/untrusted operation", "terminal timeout is UNKNOWN_COMMIT, cannot auto retry", "host STOP/lease/signatures and original live adapter are not connected"]
+}
