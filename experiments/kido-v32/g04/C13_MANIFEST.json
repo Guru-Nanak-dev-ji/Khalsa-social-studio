@@ -1,0 +1,34 @@
+{
+  "schema": "KDN-V32-G04-C13",
+  "untrusted_mock_only": true,
+  "files": {
+    "approval_stop_middleware.cjs": {
+      "bytes": 7962,
+      "sha256": "0cdd9e3eeff2760959282ad0c5b2154207424698497120ab8710a9000cb39921"
+    },
+    "mock_build_adapter.cjs": {
+      "bytes": 1552,
+      "sha256": "3146a5150c8d07be3dddd977cbe9e3e0b151559114b6934afe5a3541dad8087f"
+    },
+    "mock_host_ports.cjs": {
+      "bytes": 4121,
+      "sha256": "4298173e4fabafd2939526b1a9097dc9e2422243a96010f24e70f067723613cd"
+    },
+    "test_mock_build_adapter.cjs": {
+      "bytes": 2243,
+      "sha256": "3f63a1f3afb3a84388a4c9c8c2b827462abd1c83d4182a39dd5c0cef38a8bc3c"
+    },
+    "test_integrated_middleware.cjs": {
+      "bytes": 5464,
+      "sha256": "58212138201a089f0f097f02c96fa9607ffd88a81e34fef2c75991652919b5d1"
+    },
+    "c13_test.log": {
+      "bytes": 5550,
+      "sha256": "fb909e35a8b588a2f6e731853f6ccaf52a497fe5244b3864f53e9877d457200c"
+    },
+    "C13_NEXT_TASK.json": {
+      "bytes": 1062,
+      "sha256": "a73a5107970d07d06f35883af9a197f738d4225421bc865ca578d7a4d0897c1a"
+    }
+  }
+}
