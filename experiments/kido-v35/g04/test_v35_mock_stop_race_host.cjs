@@ -1,0 +1,27 @@
+'use strict';
+const {test}=require('node:test'),a=require('node:assert/strict');
+const {createHarness,deferred}=require('./v35_mock_stop_race_host.cjs');
+const {GateDenied}=require('./approval_stop_middleware_c20.cjs');
+async function bad(f,code){await a.rejects(f,e=>e instanceof GateDenied&&e.code===code)}
+test('01 normal GREEN static build commits exactly once',async()=>{const h=createHarness();const r=await h.run();a.equal(r.realWorkerAckVerified,false);a.equal(r.autonomousLoopsCertified,0);a.equal(h.stats().attempts,1);a.equal(h.stats().subscriptions,0)});
+test('02 red scope cannot invoke operation',async()=>{const h=createHarness();h.task.scope='RED';let n=0;await bad(()=>h.run(()=>{n++}),'FORBIDDEN_SCOPE_PROVIDER_OR_OPERATION');a.equal(n,0)});
+test('03 paid provider cannot pass entry gate',async()=>{const h=createHarness();h.task.provider='OPENAI';await bad(()=>h.run(),'FORBIDDEN_SCOPE_PROVIDER_OR_OPERATION');a.equal(h.stats().attempts,0)});
+test('04 STOP before task blocks preflight',async()=>{const h=createHarness();h.stop();await bad(()=>h.run(),'STOP_ACTIVE_OR_STALE');a.equal(h.stats().attempts,0)});
+test('05 STOP while operation awaits aborts without commit',async()=>{const h=createHarness(),g=deferred(),started=deferred();const p=h.run(async({signal})=>{started.resolve();await g.promise;return {signalAborted:signal.aborted}});await started.promise;h.stop();g.resolve();await bad(()=>p,'STOP_DURING_WORK');a.equal(h.stats().attempts,0)});
+test('06 STOP at pending atomic terminal disallows commit',async()=>{const h=createHarness(),barrier=deferred(),enter=deferred();h.setCommitBarrier(async()=>{enter.resolve();await barrier.promise});const p=h.run();await enter.promise;h.stop();barrier.resolve();await bad(()=>p,'TERMINAL_COMMIT_OUTCOME_UNKNOWN_RECONCILE');a.equal(h.stats().receipt,null)});
+test('07 lease expiration before start denies',async()=>{const h=createHarness();h.expire();await bad(()=>h.run(),'GRANT_EXPIRED_OR_TOO_LONG');a.equal(h.stats().attempts,0)});
+test('08 changed fence before preflight denies',async()=>{const h=createHarness();h.rotateFence();await bad(()=>h.run(),'LEASE_NOT_ATOMICALLY_CURRENT')});
+test('09 changed fence during mock operation denies before terminal',async()=>{const h=createHarness(),g=deferred(),ready=deferred();const p=h.run(async()=>{ready.resolve();await g.promise;return {ok:1}});await ready.promise;h.rotateFence();g.resolve();await bad(()=>p,'LEASE_NOT_ATOMICALLY_CURRENT');a.equal(h.stats().attempts,0)});
+test('10 revoked grant before run denies',async()=>{const h=createHarness();h.disableApproval();await bad(()=>h.run(),'GRANT_NOT_VERIFIED_BY_HOST')});
+test('11 revoked grant during operation denies',async()=>{const h=createHarness(),g=deferred(),ready=deferred();const p=h.run(async()=>{ready.resolve();await g.promise;return {ok:1}});await ready.promise;h.disableApproval();g.resolve();await bad(()=>p,'GRANT_NOT_VERIFIED_BY_HOST')});
+test('12 rotated issuer key denies',async()=>{const h=createHarness();h.rotateIssuerKey();await bad(()=>h.run(),'ISSUER_TO_KEY_BINDING_FAILED')});
+test('13 replay after committed result cannot commit twice',async()=>{const h=createHarness();await h.run();await bad(()=>h.run(),'TERMINAL_COMMIT_OUTCOME_UNKNOWN_RECONCILE');a.equal(h.stats().attempts,2);a.ok(h.stats().receipt)});
+test('14 lost terminal response requires reconciliation, no retry',async()=>{const h=createHarness();h.loseCommitResponse();await bad(()=>h.run(),'TERMINAL_COMMIT_OUTCOME_UNKNOWN_RECONCILE');a.equal(h.stats().attempts,1);a.ok(h.stats().receipt)});
+test('15 STOP after local CAS but before response flags UNKNOWN',async()=>{const h=createHarness();h.afterCommit(()=>h.stop());await bad(()=>h.run(),'STOP_AFTER_COMMIT_UNKNOWN_OUTCOME');a.ok(h.stats().receipt)});
+test('16 concurrent same-task mock runs only one local commit',async()=>{const h=createHarness();const r=await Promise.allSettled([h.run(),h.run()]);a.equal(r.filter(x=>x.status==='fulfilled').length,1);a.equal(r.filter(x=>x.status==='rejected').length,1);a.ok(h.stats().receipt)});
+test('17 no lingering STOP subscribers after success',async()=>{const h=createHarness();await h.run();a.equal(h.stats().subscriptions,0)});
+test('18 no lingering STOP subscribers after denial',async()=>{const h=createHarness(),g=deferred(),ready=deferred();const p=h.run(async()=>{ready.resolve();await g.promise;return 1});await ready.promise;h.stop();g.resolve();await bad(()=>p,'STOP_DURING_WORK');a.equal(h.stats().subscriptions,0)});
+test('19 returned receipt never claims connected remote ACK',async()=>{const h=createHarness();const r=await h.run();a.equal(r.realWorkerAckVerified,false);a.equal(r.autonomousLoopsCertified,0)});
+test('20 C20 contract never executes Termux original commander',async()=>{const h=createHarness();const r=await h.run();a.equal(r.status,'HOST_ATOMIC_COMMIT_CLAIMED_NOT_INDEPENDENTLY_ATTESTED')});
+test('21 input snapshot stays synthetic and bounded',()=>{const h=createHarness();a.equal(h.task.scope,'GREEN_MOCK_ONLY');a.equal(h.task.provider,'MOCK_LOCAL')});
+test('22 attempting to set public deploy on task schema fails',async()=>{const h=createHarness();h.task.deploy=true;await bad(()=>h.run(),'INVALID_TASK_ENVELOPE')});
