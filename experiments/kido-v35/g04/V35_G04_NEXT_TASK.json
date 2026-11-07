@@ -1,0 +1,48 @@
+{
+  "schema": "KDN-V35-S1-GPT04-GOVERNANCE-CHECKPOINT-v1",
+  "worker": "S1-GPT04",
+  "parent_next_task": "V32-G04-C22-CANONICAL-OWNER-AND-SIGNED-HOST-ADOPTION",
+  "parent_status": "BLOCKED_EXTERNAL_PRIMARY_EVIDENCE",
+  "completed": [
+    {
+      "task_id": "V35-G04-C22A-TERMUX-RECEIPT-ADMISSION",
+      "kind": "NEW_SOURCE_AND_TEST",
+      "new_tests": 15,
+      "result": "PASS",
+      "external_auth": "NOT_VERIFIED"
+    },
+    {
+      "task_id": "V35-G04-C22B-STOP-TERMINAL-FAULT-INJECTION",
+      "kind": "NEW_SOURCE_AND_TEST",
+      "new_tests": 22,
+      "result": "PASS",
+      "external_auth": "NOT_VERIFIED"
+    }
+  ],
+  "retained_previous_c20_tests_rerun": 43,
+  "integrated_tests_executed": 80,
+  "integrated_tests_pass": 80,
+  "new_independently_verified_strict_connected_loops": 0,
+  "latest_uploaded_v35_receipt_sha256": "acbfa98d51c225cea3ea84c32302b615f095bab5b863efb2f7c971c1de11582b",
+  "next_self": {
+    "task_id": "V35-G04-C23-SELECTED-GANESH-STOP-HOST-ADOPTION",
+    "owner": "S1-GPT04",
+    "status": "BLOCKED_EXTERNAL_PRIMARY_EVIDENCE",
+    "acceptance": "Obtain exact G03/S2-03 selected Ganesh atomic SQLite backend and original Termux main.cjs source hashes, issuer signature/nonces, worker ID, qualified host STOP/fence/terminal API and independent G09/G11/S2-04 tests; build versioned adapter only after review. If unavailable, do not claim live receiver/GO or strict connected loops. Compare existing V35 C22A/C22B fixtures and preserve next cursor."
+  },
+  "next_peers": [
+    {
+      "task_id": "V35-G04-TO-S1-GPT09-RECEIPT-RACE-INDEPENDENT-QA",
+      "owner": "S1-GPT09",
+      "status": "PENDING_ACK",
+      "acceptance": "Independently rerun exact 80 tests including 37 new; verify source SHA and C20 dependency, no real worker ACK/strict loops"
+    },
+    {
+      "task_id": "V35-G04-TO-S1-GPT11-STOP-RACE-SECURITY-REVIEW",
+      "owner": "S1-GPT11",
+      "status": "PENDING_ACK",
+      "acceptance": "Review STOP-after-CAS/unknown terminal semantics and C20 trusted-host injection; no approval until signed atomic backend selected"
+    }
+  ],
+  "notes": "Drive posting is passive and not authenticated peer ACK. Termux receipt raw-byte custody is verified against human-reported SHA; Android device origin not independently authenticated."
+}
