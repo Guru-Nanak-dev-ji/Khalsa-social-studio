@@ -1,0 +1,18 @@
+{
+  "run": "b98304749cbd",
+  "test": "V35_TWO_PROCESS_ATOMIC_CLAIM",
+  "status": "PASS",
+  "results": [
+    [
+      "WORKER-B",
+      "CLAIMED"
+    ],
+    [
+      "WORKER-A",
+      "REJECTED"
+    ]
+  ],
+  "winner": "WORKER-B",
+  "cross_platform": "NOT_VERIFIED",
+  "strict_loops": 0
+}
