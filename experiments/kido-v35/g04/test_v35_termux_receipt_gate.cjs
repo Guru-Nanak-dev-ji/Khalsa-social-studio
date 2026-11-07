@@ -1,7 +1,7 @@
 'use strict';
 const {test}=require('node:test'),a=require('node:assert/strict'),fs=require('node:fs'),os=require('node:os'),path=require('node:path'),cp=require('node:child_process');
 const {admitBytes,readPinnedFile,EXPECTED}=require('./v35_termux_receipt_gate.cjs');
-const p='/mnt/data/receipt-b98304749cbd.json',raw=fs.readFileSync(p);
+const p=path.join(__dirname,'fixtures','receipt-b98304749cbd.json'),raw=fs.readFileSync(p);
 function bad(x,code){a.throws(x,e=>e.code===code);}
 test('01 real uploaded receipt raw SHA pin and local single winner',()=>{const x=admitBytes(raw);a.equal(x.sha256,EXPECTED);a.equal(x.uniqueClaimWinner,'WORKER-B');a.equal(x.bytes,284)});
 test('02 uploaded receipt is not a connected worker ACK',()=>{const x=admitBytes(raw);a.equal(x.realReceiverAck,false);a.equal(x.verifiedPhoneExecution,false);a.equal(x.independentlyCertifiedStrictLoops,0)});
@@ -15,6 +15,6 @@ test('09 empty receipt denied',()=>bad(()=>admitBytes(Buffer.alloc(0)),'RECEIPT_
 test('10 exact receipt read-only from actual uploaded file',()=>a.equal(readPinnedFile(p).sha256,EXPECTED));
 test('11 missing local file denied',()=>bad(()=>readPinnedFile('/definitely/not/a/receipt.json'),'RECEIPT_NOT_READABLE'));
 test('12 symlink file cannot be read as proof',()=>{if(!fs.constants.O_NOFOLLOW)return;const d=fs.mkdtempSync(path.join(os.tmpdir(),'kido-v35-r-'));try{const s=path.join(d,'symlink');fs.symlinkSync(p,s);bad(()=>readPinnedFile(s),'RECEIPT_NOT_READABLE')}finally{fs.rmSync(d,{recursive:true,force:true})}});
-test('13 directory is not receipt file',()=>bad(()=>readPinnedFile('/mnt/data'),'NOT_A_BOUNDED_REGULAR_FILE'));
+test('13 directory is not receipt file',()=>bad(()=>readPinnedFile(__dirname),'NOT_A_BOUNDED_REGULAR_FILE'));
 test('14 CLI exit0 produces machine-readable no-ACK result',()=>{const q=cp.spawnSync(process.execPath,[path.join(__dirname,'v35_termux_receipt_gate.cjs'),p],{encoding:'utf8',timeout:5000});a.equal(q.status,0,q.stderr);const x=JSON.parse(q.stdout);a.equal(x.realReceiverAck,false);a.equal(x.independentlyCertifiedStrictLoops,0)});
 test('15 CLI invalid path exits2 without claiming success',()=>{const q=cp.spawnSync(process.execPath,[path.join(__dirname,'v35_termux_receipt_gate.cjs'),'/no/file'],{encoding:'utf8',timeout:5000});a.equal(q.status,2);a.match(q.stderr,/RECEIPT_NOT_READABLE/)});
