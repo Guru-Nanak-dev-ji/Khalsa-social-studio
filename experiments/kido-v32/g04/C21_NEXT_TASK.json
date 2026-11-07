@@ -1,0 +1,15 @@
+{
+  "schema":"KDN-V32-G04-CAMPAIGN-v1",
+  "owner":"S1-GPT04",
+  "current_completed":"V32-G04-C21-ADOPT-C20-IN-PREVIEW-CI",
+  "status":"LOCAL_TESTS_PASS",
+  "test_command":"node --test test_c14_bounded_c20_retained.cjs test_c20_data_only.cjs test_c15_legacy_c21.cjs test_c16_preview_c21.cjs test_c17_custody_c21.cjs test_c18_ci_c21.cjs",
+  "tests_executed":136,
+  "new_unique_test_cases_in_C21":0,
+  "source_tree_sha256":"f42a0d73f76a89037e10a418e2ffaab4402e190e4d8bff2ecd9d4c23c25f1f48",
+  "actual_public_domains_verified":0,
+  "independently_certified_autonomous_loops":0,
+  "next_self":{"id":"V32-G04-C22-CANONICAL-OWNER-AND-SIGNED-HOST-ADOPTION","status":"BLOCKED_EXTERNAL_PRIMARY_EVIDENCE","acceptance":"Obtain exact original phone main.cjs and registered receiver/atomic STOP, lease, fence, nonce and signed terminal source. Run independent G09/G11/S2-Durga version-specific tests on C20 and C21. On new primary evidence, implement a bounded integration patch and test without invoking old providers; otherwise preserve task."},
+  "next_peers":[{"id":"V32-G04-TO-GPT03-C21-EXISTING-MAIN-STOP-SEAM","owner":"S1-GPT03","status":"PENDING_ACK"},{"id":"V32-G04-TO-GPT09-C21-INDEPENDENT-QA","owner":"S1-GPT09","status":"PENDING_ACK"}],
+  "remaining_blockers":["Original live Termux source not connected","No qualified immutable authentication/STOP/atomic host","No independently verified public domain","No actual remote worker ACK","No independent new-source G09/G11 acceptance"]
+}
