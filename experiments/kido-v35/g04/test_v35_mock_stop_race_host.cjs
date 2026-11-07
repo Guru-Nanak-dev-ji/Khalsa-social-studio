@@ -1,7 +1,7 @@
 'use strict';
 const {test}=require('node:test'),a=require('node:assert/strict');
 const {createHarness,deferred}=require('./v35_mock_stop_race_host.cjs');
-const {GateDenied}=require('./approval_stop_middleware_c20.cjs');
+const {GateDenied}=require('../../kido-v32/g04/approval_stop_middleware_c20.cjs');
 async function bad(f,code){await a.rejects(f,e=>e instanceof GateDenied&&e.code===code)}
 test('01 normal GREEN static build commits exactly once',async()=>{const h=createHarness();const r=await h.run();a.equal(r.realWorkerAckVerified,false);a.equal(r.autonomousLoopsCertified,0);a.equal(h.stats().attempts,1);a.equal(h.stats().subscriptions,0)});
 test('02 red scope cannot invoke operation',async()=>{const h=createHarness();h.task.scope='RED';let n=0;await bad(()=>h.run(()=>{n++}),'FORBIDDEN_SCOPE_PROVIDER_OR_OPERATION');a.equal(n,0)});
