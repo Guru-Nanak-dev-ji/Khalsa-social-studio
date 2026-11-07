@@ -1,0 +1,22 @@
+{
+ "schema":"KDN-V32-G04-CAMPAIGN-v1",
+ "owner":"S1-GPT04",
+ "current_completed":"V32-G04-C18-OFFLINE-CI-BUILD-VERIFY",
+ "parent":"V32-G04-C17-RESTART-SAFE-PREVIEW-EVIDENCE-CHECK",
+ "test_command":"node --test test_c18_ci.cjs",
+ "unique_test_cases":20,
+ "integrated_current_v32_cases":116,
+ "source_tree_sha256":"059a1eea301fca465fa0ebcabcf70862d560d0ab963f4c2d7925acf2e35785c7",
+ "preview_status":"LOCAL_MOCK_BUILD_SMOKE_PASS",
+ "verified_live_public_domains":0,
+ "verified_autonomous_cross_worker_loops":0,
+ "next_self":{"id":"V32-G04-C19-GREEN-STOP-DETERMINISTIC-NEGATIVE-MATRIX","acceptance":"Implement deterministic adversarial policy/STOP mutation test matrix against existing C14+C15 without creating another engine, cross-process identity or any paid calls; source and executable tests with independent replay request."},
+ "next_peer":{"id":"V32-G04-TO-S1-GPT09-OFFLINE-CI-REPLAY","owner":"S1-GPT09","status":"PENDING_ACK","acceptance":"Independently rerun exact C18 CI and 116 tests; compare source hashes, check no-network/public GO and qualified-host limitations."},
+ "future_tasks":[
+  "V32-G04-C20-OUTPUT-CUSTODY-CONCURRENT-RESTART-NO-OVERWRITE",
+  "V32-G04-C21-QUALIFIED-STOP-HOST-PORT-CONTRACT",
+  "V32-G04-C22-SIGNED-ISSUER-KEY-ADOPTION",
+  "V32-G04-C23-LEGACY-TERMUX-LIVE-SOURCE-RECONCILIATION",
+  "V32-G04-C24-REAL-REGISTERED-RECEIVER-AND-PEER-ACK-PILOT"
+ ]
+}
