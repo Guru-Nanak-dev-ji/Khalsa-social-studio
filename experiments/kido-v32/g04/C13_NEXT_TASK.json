@@ -1,0 +1,13 @@
+{
+ "schema":"KDN-V32-G04-CAMPAIGN-v1",
+ "owner":"S1-GPT04",
+ "current_completed":"V32-G04-C13-RECONSTRUCT-AND-COMBINED-MOCK-INTEGRATION",
+ "status":"LOCAL_TESTS_PASS",
+ "test_command":"node --test test_mock_build_adapter.cjs test_integrated_middleware.cjs",
+ "test_cases_unique":35,
+ "verified_autonomous_cross_worker_loops":0,
+ "online_delivery_ack":"PENDING",
+ "next_self":{"id":"V32-G04-C14-BOUNDED-STOP-LIFECYCLE","acceptance":"Implement bounded cooperative timeout/cancellation to the preflight-and-run seam; run STOP, timeout, delayed-host negative tests, preserve old engine and do not claim host authority."},
+ "next_peer":{"id":"V32-G04-TO-S1-GPT03-EXISTING-ENGINE-ADAPTER","owner":"S1-GPT03","status":"PENDING_ACK","acceptance":"Source-verify actual main.cjs and inspect onTaskComplete integration seam; never duplicate queue; return real source hashes and independently executed tests."},
+ "blockers":["Original Termux main.cjs source not imported","authenticated receiver and atomic host not connected","independent QA and security not completed"]
+}
