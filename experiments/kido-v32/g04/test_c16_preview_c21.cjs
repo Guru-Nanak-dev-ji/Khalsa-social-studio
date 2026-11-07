@@ -1,0 +1,26 @@
+'use strict';
+const {test}=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');const os=require('node:os');const path=require('node:path');const crypto=require('node:crypto');
+const {buildPreview,fixedInputs,mockAuthorityPorts,PAGE_SHA,verifyExisting}=require('./local_preview_build_c21.cjs');
+const {mapLegacyTask}=require('./legacy_main_mock_adapter_c21.cjs');const {PAGE}=require('./mock_build_adapter.cjs');
+async function withRoot(fn){const root=fs.mkdtempSync(path.join(os.tmpdir(),'kido-v32-g04-c16-'));try{return await fn(root)}finally{fs.rmSync(root,{recursive:true,force:true})}}
+const run=(root,options={})=>buildPreview(root,{...fixedInputs(),...options});
+test('01 real HTML index produced inside exclusive local folder',()=>withRoot(async root=>{const r=await run(root);assert.equal(r.status,'BUILT_LOCAL_PREVIEW');assert.equal(fs.readFileSync(path.join(r.path,'index.html'),'utf8'),PAGE)}));
+test('02 HTML includes responsive viewport',()=>assert.match(PAGE,/viewport/));
+test('03 HTML uses original KIDO mission in static mock',()=>assert.match(PAGE,/Free KIDO AI for Everyone/));
+test('04 expected sha is real page bytes',()=>assert.equal(PAGE_SHA,crypto.createHash('sha256').update(PAGE).digest('hex')));
+test('05 manifest source bound and no live domains',()=>withRoot(async root=>{const r=await run(root);const m=JSON.parse(fs.readFileSync(path.join(r.path,'manifest.json')));assert.equal(m.publicationAllowed,false);assert.equal(m.autonomousLoopsCertified,0);assert.equal(m.hostAuthority,'SYNTHETIC_ONLY')}));
+test('06 duplicate build verifies, never overwrites',()=>withRoot(async root=>{const a=await run(root);const b=await run(root);assert.equal(a.path,b.path);assert.equal(b.status,'EXISTS_VERIFIED_NO_OVERWRITE')}));
+test('07 tampered HTML fails subsequent build',()=>withRoot(async root=>{const a=await run(root);fs.writeFileSync(path.join(a.path,'index.html'),'tampered');await assert.rejects(()=>run(root),/EXISTING_PREVIEW_HASH_OR_RECEIPT_CONFLICT/)}));
+test('08 tampered manifest fails subsequent build',()=>withRoot(async root=>{const a=await run(root);fs.writeFileSync(path.join(a.path,'manifest.json'),'{}');await assert.rejects(()=>run(root),/EXISTING_PREVIEW_HASH_OR_RECEIPT_CONFLICT/)}));
+test('09 symlink root rejected',()=>withRoot(async root=>{const x=root+'-link';fs.symlinkSync(root,x);try{await assert.rejects(()=>run(x),/ROOT_SYMLINK_OR_NOT_DIR/)}finally{fs.unlinkSync(x)}}));
+test('10 relative root rejected',()=>assert.rejects(()=>run('relative-root'),/ABSOLUTE_TRUSTED_PREVIEW_ROOT_REQUIRED/));
+test('11 wrong active legacy id denied before disk write',()=>withRoot(async root=>{const x=fixedInputs();x.host.activeTaskId='t-other-123';await assert.rejects(()=>run(root,x),e=>e.code==='LEGACY_ACTIVE_SELECTION_MISMATCH');assert.equal(fs.readdirSync(root).length,0)}));
+test('12 old RUNNING task with nonzero provider calls rejected',()=>withRoot(async root=>{const x=fixedInputs();x.legacy.status='RUNNING';x.legacy.requestCount=1;await assert.rejects(()=>run(root,x),e=>e.code==='LEGACY_NOT_PRISTINE_SELECTED_TASK')}));
+test('13 stopped port blocks file write',()=>withRoot(async root=>{const x=fixedInputs(),t=mapLegacyTask(x.legacy,x.host).task,old=mockAuthorityPorts(t),ports={...old,readAuthority:async()=>({stop:{active:true,revision:0},issuers:{},tenantId:t.tenantId,scope:t.scope,workerId:t.workerId})};await assert.rejects(()=>run(root,{ports}),/STOP_ACTIVE_OR_STALE/);assert.equal(fs.readdirSync(root).length,0)}));
+test('14 provider or paid scope never accepted',()=>withRoot(async root=>{const x=fixedInputs();x.host.sourceBlobSha='f'.repeat(40);await assert.rejects(()=>run(root,x),e=>e.code==='HISTORICAL_SOURCE_NOT_PINNED')}));
+test('15 missing local fixture host denied',()=>withRoot(async root=>assert.rejects(()=>buildPreview(root,{}),/LEGACY_AND_HOST_INPUT_REQUIRED/)));
+test('16 symlink final output not followed',()=>withRoot(async root=>{const dest=path.join(root,'kido-v32-c16-'+PAGE_SHA.slice(0,16));fs.symlinkSync(root,dest);await assert.rejects(()=>run(root),/EXISTING_OUTPUT_NOT_DIR/)}));
+test('17 preexisting empty directory not overwritten',()=>withRoot(async root=>{fs.mkdirSync(path.join(root,'kido-v32-c16-'+PAGE_SHA.slice(0,16)));await assert.rejects(()=>run(root),/ENOENT/)}));
+test('18 build output remains no external ACK',()=>withRoot(async root=>{const r=await run(root);assert.equal(r.autonomousLoopsCertified,0);assert.equal(r.publicDomainLive,false)}));
+test('19 offline builder only uses static imported PAGE',()=>assert.equal(PAGE.indexOf('<script'),-1));
+test('20 fail-closed when host commits incompatible digest',()=>withRoot(async root=>{const x=fixedInputs(),t=mapLegacyTask(x.legacy,x.host).task,old=mockAuthorityPorts(t);const ports={...old,commitTerminal:async r=>({committed:true,receiptId:'RECEIPT-LOCAL-C16',resultSha256:'f'.repeat(64),stopRevision:0,fence:1})};await assert.rejects(()=>run(root,{ports}),e=>e.code==='TERMINAL_ATOMIC_COMMIT_REJECTED');assert.equal(fs.readdirSync(root).length,0)}));
