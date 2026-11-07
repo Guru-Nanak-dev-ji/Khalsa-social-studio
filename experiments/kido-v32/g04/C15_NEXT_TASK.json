@@ -1,0 +1,13 @@
+{
+ "schema":"KDN-V32-G04-CAMPAIGN-v1",
+ "owner":"S1-GPT04",
+ "current_completed":"V32-G04-C15-LEGACY-MAIN-LIFECYCLE-ADAPTER",
+ "old_next":"V32-G04-C14-BOUNDED-STOP-LIFECYCLE",
+ "test_command":"node --test test_c15_legacy.cjs",
+ "test_cases_unique":30,
+ "scope":"historical_main.cjs_GitHub_32cdb35_blob_not_attested_live_phone",
+ "native_runtime_activation":false,
+ "autonomous_loops_certified":0,
+ "next_self":{"id":"V32-G04-C16-LOCAL-PREVIEW-BUILD-CUSTODY","acceptance":"Implement an offline deterministic HTML build CLI using current C14/C15/C12 GREEN mock admission, safe no-symlink output dir, atomic new-build publish and manifest; test repeat/restart/STOP/no-network boundaries; no public deployment."},
+ "next_peer":{"id":"V32-G04-TO-GPT03-MAIN-SELECTED-TASK-SEAM","owner":"S1-GPT03","status":"PENDING_ACK","acceptance":"Reconcile historical main.cjs SHA Git blob and actual Termux main.cjs current source, integrate only at owner-approved mock seam; no old provider call and no duplicate engine."}
+}
