@@ -1,0 +1,34 @@
+{
+  "schema_version": "v41.1",
+  "mode": "DESIGN_CONTRACT_NO_LIVE_AUTHORITY",
+  "workspace": "KIDO Workspace V4",
+  "shared_requirements": {
+    "languages": ["en", "hi", "pa"],
+    "mobile_first": true,
+    "accessibility": ["keyboard", "focus_visible", "screen_reader_labels", "semantic_landmarks"],
+    "privacy": "data_minimization_and_purpose_limitation",
+    "security": ["least_privilege", "audit_receipts", "stop_gate", "no_public_credentials"]
+  },
+  "public_ai_registry": {
+    "required_public_fields": ["public_ai_id", "model", "capabilities", "version", "owner_operator", "permission_scope", "safety_status", "activity_receipt_url"],
+    "forbidden_public_fields": ["password", "token", "secret", "api_key", "credential", "private_key", "resident_sensitive_identity"],
+    "provider_neutral": true,
+    "local_first_option_required": true
+  },
+  "modules": {
+    "MyWorld": {"route": "/world", "kind": "hub", "dependencies": ["WorkspaceV4", "PrivacyGate", "SecurityGate"]},
+    "MyTube": {"route": "/tube", "kind": "media", "dependencies": ["MyWorld", "PrivacyGate"]},
+    "MyBook": {"route": "/book", "kind": "knowledge", "dependencies": ["MyWorld", "PrivacyGate"]},
+    "MyInsta": {"route": "/insta", "kind": "community_media", "dependencies": ["MyWorld", "PrivacyGate", "ModerationAppeals"]},
+    "MyCity": {"route": "/city", "kind": "civic", "dependencies": ["MyWorld", "PublicAudit"]},
+    "MyDistrict": {"route": "/district", "kind": "civic", "dependencies": ["MyCity", "PublicAudit"]},
+    "MyTehsil": {"route": "/tehsil", "kind": "civic", "dependencies": ["MyDistrict", "PublicAudit"]},
+    "MyCourt": {"route": "/court", "kind": "legal_information_not_legal_representation", "dependencies": ["MyWorld", "PrivacyGate", "ModerationAppeals"]},
+    "MyLake": {"route": "/lake", "kind": "environmental_seva", "dependencies": ["MyWorld", "MyLakePermission", "MyLakeEnvironmentalSafety", "MyLakeCostPlan"], "pilot": "Bathinda", "requires_local_permission": true, "requires_environmental_review": true, "requires_cost_plan": true},
+    "MySeva": {"route": "/seva", "kind": "volunteer_service", "dependencies": ["MyWorld", "PublicAudit"]},
+    "MyAI": {"route": "/ai", "kind": "ai_registry_gateway", "dependencies": ["AIRegistry", "PrivacyGate", "SecurityGate"], "public_ai_id_required": true},
+    "MyAssembly": {"route": "/assembly", "kind": "public_assembly", "dependencies": ["WorkspaceV4", "PrivacyGate", "ModerationAppeals", "PublicAudit"], "features": ["proposal", "discussion", "amendment", "moderation", "appeal", "public_audit"]},
+    "MyVote": {"route": "/vote", "kind": "non_government_civic_vote", "dependencies": ["MyAssembly", "IdentityVerification", "DuplicateVoteGuard", "PrivacyGate", "ModerationAppeals", "PublicAudit"], "non_governmental": true, "human_votes_separate_from_ai_opinion": true, "duplicate_vote_prevention": true, "appeals_required": true, "public_audit_required": true},
+    "MyPoints": {"route": "/points", "kind": "non_cash_reputation_points", "dependencies": ["MyWorld", "PrivacyGate", "PublicAudit"], "cash_value": false}
+  }
+}
