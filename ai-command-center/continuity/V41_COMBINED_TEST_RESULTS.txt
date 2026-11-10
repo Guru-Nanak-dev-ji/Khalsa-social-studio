@@ -1,0 +1,19 @@
+KIDO V41 continuity + MyWorld contract combined test run
+DATE_UTC: 2026-11-10
+RESULT: 39 PASS / 0 FAIL / 0 SKIP
+
+BREAKDOWN:
+- 22 continuity/DAG/successor/AI-registry tests
+- 17 MyWorld technical-contract tests
+
+SOURCE_SHA256:
+v41_continuity.py 7a45a6f7583e6b655cd8e762a5f7554fa9ee694c49de0a579ef86053bae8d262
+v41_myworld_contracts.json 430a7d22c0bf77a56de3937ba122720318c0d2b3933a47692d3899cee6bdc3be
+test_v41_myworld_contracts.py 88d21309871a64739360bbd79a54bbc75afea5674a46e553c4f8413d1f61db85
+combined_tests.log ea24cb6bb10f969a7b8484727dcabd322540020295ee5f89d5c6d53499642741
+
+SCOPE:
+Local deterministic tests only. No production deployment, DNS change, paid API, live worker activation, credential exposure, government election claim, or authenticated successor ACK.
+
+SUCCESSOR:
+S2-05 identity verified from its own report; attributable successor ACK not observed; status PENDING_ACK_NOT_ASSIGNED.
