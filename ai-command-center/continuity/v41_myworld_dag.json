@@ -1,0 +1,13 @@
+{
+  "schema_version": "v41.1",
+  "mode": "DESIGN_ONLY_NO_RUNTIME_AUTHORITY",
+  "core": "WorkspaceV4",
+  "modules": ["MyWorld", "MyTube", "MyBook", "MyInsta", "MyCity", "MyDistrict", "MyTehsil", "MyCourt", "MyLake", "MySeva", "MyAI", "MyAssembly", "MyVote", "MyPoints"],
+  "non_government_vote": true,
+  "vote_gates": ["IdentityVerification", "DuplicateVoteGuard", "PrivacyGate", "ModerationAppeals", "PublicAudit"],
+  "mylake_gates": ["MyLakePermission", "MyLakeEnvironmentalSafety", "MyLakeCostPlan"],
+  "successor_policy": "verified Seat2 identity + attributable ACK before handover; no count merging",
+  "predecessor_next_task": "V27-G05-N07-CANONICAL-OWNER-ADOPTION-AND-REAL-HANDOFF-ADMISSION",
+  "candidate_successor": "S2-05",
+  "candidate_status": "PENDING_ACK_NOT_ASSIGNED"
+}
