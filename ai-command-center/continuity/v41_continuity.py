@@ -12,7 +12,6 @@ MYWORLD_MODULES = (
     "MyVote", "MyPoints",
 )
 
-# Design-only DAG. It grants no runtime or production authority.
 DEFAULT_DAG: Dict[str, List[str]] = {
     "WorkspaceV4": [],
     "I18N_HI_PA_EN": ["WorkspaceV4"],
@@ -162,5 +161,4 @@ def assert_public_ai_record_safe(record: Mapping[str, object]) -> None:
 
 
 def myvote_is_government_election() -> bool:
-    # V40 explicitly defines the prototype as non-governmental civic participation.
     return False
